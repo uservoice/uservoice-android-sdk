@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="uv_post_an_idea">Post an idea</string>
+    <string name="uv_contact_us">Contact us</string>
+    <string name="uv_browse_forum">Browse forum</string>
+    <string name="uv_browse_knowledge_base">Browse knowledge base</string>
+</resources>

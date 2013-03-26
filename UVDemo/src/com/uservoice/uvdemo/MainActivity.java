@@ -1,12 +1,16 @@
 package com.uservoice.uvdemo;
 
+import java.lang.reflect.Field;
+
 import com.uservoice.uservoicesdk.Config;
 import com.uservoice.uservoicesdk.UserVoice;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewConfiguration;
 
 public class MainActivity extends Activity {
 
@@ -15,6 +19,17 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		// hack to always show the overflow menu in the action bar
+	    try {
+	        ViewConfiguration config = ViewConfiguration.get(this);
+	        Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+	        if(menuKeyField != null) {
+	            menuKeyField.setAccessible(true);
+	            menuKeyField.setBoolean(config, false);
+	        }
+	    } catch (Exception ex) {
+	        // Ignore
+	    }
 	}
 
 	@Override
@@ -24,9 +39,17 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
-	public void launchFeedback(View view) {
+	public void launchFeedback() {
 		Config config = new Config("feedback.uservoice.com", "8L66hVQUQ45TOLl0dA70YA", "a5e6da1827538a27755a4f4de0602e82533aff73");
 		UserVoice.launchUserVoice(config, this);
+	}
+	
+	public void launchFeedback(MenuItem menuItem) {
+		launchFeedback();
+	}
+
+	public void launchFeedback(View view) {
+		launchFeedback();
 	}
 
 }
