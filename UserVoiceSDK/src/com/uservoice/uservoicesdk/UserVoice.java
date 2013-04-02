@@ -1,9 +1,9 @@
 package com.uservoice.uservoicesdk;
 
-import com.uservoice.uservoicesdk.activity.UserVoiceActivity;
-
 import android.content.Context;
 import android.content.Intent;
+
+import com.uservoice.uservoicesdk.activity.UserVoiceActivity;
 
 public class UserVoice {
 	
@@ -32,7 +32,8 @@ public class UserVoice {
 		
 	}
 
-	public static String version() {
+	public static String getVersion() {
+		// TODO get this from the package version maybe
 		return "0.0.1";
 	}
 

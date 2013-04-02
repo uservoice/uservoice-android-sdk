@@ -1,14 +1,11 @@
 package com.uservoice.uservoicesdk.model;
 
-import static com.uservoice.uservoicesdk.rest.RestMethod.GET;
-
 import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.uservoice.uservoicesdk.rest.Callback;
-import com.uservoice.uservoicesdk.rest.RestTask;
 import com.uservoice.uservoicesdk.rest.RestTaskCallback;
 
 public class Article extends BaseModel {
@@ -17,21 +14,21 @@ public class Article extends BaseModel {
 	private String answerHtml;
 	
 	public static void loadAll(final Callback<List<Article>> callback) {
-        new RestTask(GET, apiPath("/articles.json"), null, new RestTaskCallback(callback) {
+        doGet(apiPath("/articles.json"), new RestTaskCallback(callback) {
             @Override
             public void onComplete(JSONObject result) {
                 callback.onModel(deserializeList(result, "articles", Article.class));
             }
-        }).execute();
+        });
 	}
 	
 	public static void loadForTopic(int topicId, final Callback<List<Article>> callback) {
-		new RestTask(GET, apiPath("/topics/%i/articles.json", topicId), null, new RestTaskCallback(callback) {
+		doGet(apiPath("/topics/%d/articles.json", topicId), new RestTaskCallback(callback) {
 			@Override
 			public void onComplete(JSONObject result) {
                 callback.onModel(deserializeList(result, "articles", Article.class));
 			}
-		}).execute();
+		});
 	}
 	
 	@Override

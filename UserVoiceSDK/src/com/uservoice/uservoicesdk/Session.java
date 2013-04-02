@@ -3,7 +3,9 @@ package com.uservoice.uservoicesdk;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 
+import com.uservoice.uservoicesdk.model.AccessToken;
 import com.uservoice.uservoicesdk.model.RequestToken;
+import com.uservoice.uservoicesdk.model.User;
 
 public class Session {
 	
@@ -20,6 +22,8 @@ public class Session {
 	private Config config;
 	private OAuthConsumer oauthConsumer;
 	private RequestToken requestToken;
+	private AccessToken accessToken;
+	private User user;
 	
 	public Config getConfig() {
 		return config;
@@ -43,4 +47,21 @@ public class Session {
 		}
 		return oauthConsumer;
 	}
+	
+	public AccessToken getAccessToken() {
+		return accessToken;
+	}
+	
+	public void setAccessToken(AccessToken accessToken) {
+		this.accessToken = accessToken;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 }

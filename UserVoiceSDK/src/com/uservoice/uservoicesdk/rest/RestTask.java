@@ -5,6 +5,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import oauth.signpost.OAuthConsumer;
@@ -30,6 +31,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 
 import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.UserVoice;
+import com.uservoice.uservoicesdk.model.AccessToken;
 
 public class RestTask extends AsyncTask<String,String,RestResult> {
 	private String urlPath;
@@ -49,7 +52,13 @@ public class RestTask extends AsyncTask<String,String,RestResult> {
 	    try {
 	        HttpUriRequest request = createRequest();
 	        OAuthConsumer consumer = Session.getInstance().getOAuthConsumer();
+	        AccessToken accessToken = Session.getInstance().getAccessToken();
+	        if (accessToken != null) {
+	        	consumer.setTokenWithSecret(accessToken.getKey(), accessToken.getSecret());
+	        }
 	        consumer.sign(request);
+	        request.setHeader("Accept-Language", Locale.getDefault().getLanguage());
+	        request.setHeader("API-Client", String.format("uservoice-android-%s", UserVoice.getVersion()));
             HttpClient client = new DefaultHttpClient();
             HttpResponse response = client.execute(request);
             HttpEntity responseEntity = response.getEntity();
