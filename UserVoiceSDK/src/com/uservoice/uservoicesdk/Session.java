@@ -4,6 +4,7 @@ import oauth.signpost.OAuthConsumer;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 
 import com.uservoice.uservoicesdk.model.AccessToken;
+import com.uservoice.uservoicesdk.model.ClientConfig;
 import com.uservoice.uservoicesdk.model.RequestToken;
 import com.uservoice.uservoicesdk.model.User;
 
@@ -24,6 +25,7 @@ public class Session {
 	private RequestToken requestToken;
 	private AccessToken accessToken;
 	private User user;
+	private ClientConfig clientConfig;
 	
 	public Config getConfig() {
 		return config;
@@ -62,6 +64,14 @@ public class Session {
 	
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public ClientConfig getClientConfig() {
+		return clientConfig;
+	}
+	
+	public void setClientConfig(ClientConfig clientConfig) {
+		this.clientConfig = clientConfig;
 	}
 
 }

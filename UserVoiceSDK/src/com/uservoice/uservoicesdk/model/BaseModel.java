@@ -1,8 +1,11 @@
 package com.uservoice.uservoicesdk.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,6 +13,8 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
+import com.uservoice.uservoicesdk.Config;
+import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.rest.RestMethod;
 import com.uservoice.uservoicesdk.rest.RestTask;
 import com.uservoice.uservoicesdk.rest.RestTaskCallback;
@@ -29,47 +34,68 @@ public class BaseModel {
 		return id;
 	}
 	
-	protected String stringOrNull(JSONObject object, String key) throws JSONException {
+	protected String getString(JSONObject object, String key) throws JSONException {
 		return object.isNull(key) ? null : object.getString(key);
 	}
+	
+	protected Date getDate(JSONObject object, String key) throws JSONException {
+		String dateString = getString(object, key);
+		try {
+			return javax.xml.datatype.DatatypeFactory.newInstance().newXMLGregorianCalendar(dateString).toGregorianCalendar().getTime();
+		} catch (DatatypeConfigurationException e) {
+			throw new JSONException("Could not parse date: " + dateString);
+		}
+	}
+	
+	protected static Session getSession() {
+		return Session.getInstance();
+	}
+	
+	protected static Config getConfig() {
+		return getSession().getConfig();
+	}
+	
+	protected static ClientConfig getClientConfig() {
+		return getSession().getClientConfig();
+	}
 
-	public static String apiPath(String path, Object... args) {
+	protected static String apiPath(String path, Object... args) {
 		return "/api/v1" + String.format(path, args);
 	}
 	
-	public static void doGet(String path, RestTaskCallback callback) {
+	protected static void doGet(String path, RestTaskCallback callback) {
 		doGet(path, null, callback);
 	}
 	
-	public static void doPost(String path, RestTaskCallback callback) {
+	protected static void doPost(String path, RestTaskCallback callback) {
 		doPost(path, null, callback);
 	}
 	
-	public static void doDelete(String path, RestTaskCallback callback) {
+	protected static void doDelete(String path, RestTaskCallback callback) {
 		doDelete(path, null, callback);
 	}
 	
-	public static void doPut(String path, RestTaskCallback callback) {
+	protected static void doPut(String path, RestTaskCallback callback) {
 		doPut(path, null, callback);
 	}
 	
-	public static void doGet(String path, Map<String,String> params, RestTaskCallback callback) {
+	protected static void doGet(String path, Map<String,String> params, RestTaskCallback callback) {
 		new RestTask(RestMethod.GET, path, params, callback).execute();
 	}
 	
-	public static void doPost(String path, Map<String,String> params, RestTaskCallback callback) {
+	protected static void doPost(String path, Map<String,String> params, RestTaskCallback callback) {
 		new RestTask(RestMethod.POST, path, params, callback).execute();
 	}
 	
-	public static void doDelete(String path, Map<String,String> params, RestTaskCallback callback) {
+	protected static void doDelete(String path, Map<String,String> params, RestTaskCallback callback) {
 		new RestTask(RestMethod.DELETE, path, params, callback).execute();
 	}
 	
-	public static void doPut(String path, Map<String,String> params, RestTaskCallback callback) {
+	protected static void doPut(String path, Map<String,String> params, RestTaskCallback callback) {
 		new RestTask(RestMethod.PUT, path, params, callback).execute();
 	}
 	
-	public static <T extends BaseModel> List<T> deserializeList(JSONObject object, String rootKey, Class<T> modelClass) {
+	protected static <T extends BaseModel> List<T> deserializeList(JSONObject object, String rootKey, Class<T> modelClass) {
 		try {
 			JSONArray array = object.getJSONArray(rootKey);
 			List<T> list = new ArrayList<T>(array.length());
@@ -94,7 +120,7 @@ public class BaseModel {
 		}
 	}
 	
-	public static <T extends BaseModel> T deserializeObject(JSONObject object, String rootKey, Class<T> modelClass) {
+	protected static <T extends BaseModel> T deserializeObject(JSONObject object, String rootKey, Class<T> modelClass) {
 		try {
 			JSONObject singleObject = object.getJSONObject(rootKey);
 			T model = modelClass.newInstance();
@@ -111,6 +137,32 @@ public class BaseModel {
 			return null;
 		} catch (InstantiationException e) {
 			Log.e(TAG, "Reflection failed trying to instantiate " + modelClass + " " + e.getMessage());
+			return null;
+		}
+	}
+	
+	protected static List<BaseModel> deserializeHeterogenousList(JSONObject object, String rootKey) {
+		try {
+			JSONArray array = object.getJSONArray(rootKey);
+			List<BaseModel> list = new ArrayList<BaseModel>(array.length());
+			for (int i = 0; i < array.length(); i++) {
+				JSONObject o = array.getJSONObject(i);
+				String type = o.getString("type");
+				BaseModel model;
+				
+				if (type.equals("suggestion"))
+					model = new Suggestion();
+				else if (type.equals("article"))
+					model = new Article();
+				else
+					continue;
+				
+				model.load(o);
+				list.add(model);
+			}
+			return list;
+		} catch (JSONException e) {
+			Log.e(TAG, "JSON deserialization failure " + e.getMessage() + " JSON: " + object.toString());
 			return null;
 		}
 	}

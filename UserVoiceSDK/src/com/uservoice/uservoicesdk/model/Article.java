@@ -1,6 +1,8 @@
 package com.uservoice.uservoicesdk.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,11 +33,27 @@ public class Article extends BaseModel {
 		});
 	}
 	
+	public static void loadInstantAnswers(String query, final Callback<List<BaseModel>> callback) {
+		Map<String,String> params = new HashMap<String,String>();
+		params.put("per_page", "3");
+		params.put("forum_id", String.valueOf(getConfig().getForumId()));
+		params.put("query", query);
+		if (getConfig().getTopicId() != -1) {
+			params.put("topic_id", String.valueOf(getConfig().getTopicId()));
+		}
+		doGet(apiPath("/instant_answers/search.json"), params, new RestTaskCallback(callback) {
+			@Override
+			public void onComplete(JSONObject result) {
+				callback.onModel(deserializeHeterogenousList(result, "instant_answers"));
+			}
+		});
+	}
+	
 	@Override
 	public void load(JSONObject object) throws JSONException {
 		super.load(object);
-		question = stringOrNull(object, "question");
-		answerHtml = stringOrNull(object, "answer_html");
+		question = getString(object, "question");
+		answerHtml = getString(object, "answer_html");
 	}
 	
 	public String getQuestion() {

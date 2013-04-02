@@ -33,9 +33,9 @@ public class User extends BaseModel {
 	@Override
 	public void load(JSONObject object) throws JSONException {
 		super.load(object);
-		name = stringOrNull(object, "name");
-		email = stringOrNull(object, "email");
-		avatarUrl = stringOrNull(object, "avatar_url");
+		name = getString(object, "name");
+		email = getString(object, "email");
+		avatarUrl = getString(object, "avatar_url");
 	}
 	
 	public String getName() {

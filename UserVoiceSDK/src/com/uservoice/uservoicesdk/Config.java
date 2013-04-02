@@ -11,8 +11,8 @@ public class Config {
 	private String name;
 	private String guid;
 	private Map<String, String> customFields;
-	private int topicId;
-	private int forumId;
+	private int topicId = -1;
+	private int forumId = -1;
 	private boolean showForum = true;
 	private boolean showPostIdea = true;
 	private boolean showContactUs = true;
@@ -81,6 +81,8 @@ public class Config {
 	}
 
 	public int getForumId() {
+		if (forumId == -1)
+			return Session.getInstance().getClientConfig().getDefaultForumId();
 		return forumId;
 	}
 
