@@ -25,6 +25,7 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.net.Uri;
@@ -94,7 +95,11 @@ public class RestTask extends AsyncTask<String,String,RestResult> {
     	if (result.isError()) {
     		callback.onError(result);
     	} else {
-    		callback.onComplete(result.getObject());
+    		try {
+				callback.onComplete(result.getObject());
+			} catch (JSONException e) {
+				callback.onError(new RestResult(e, result.getStatusCode(), result.getObject()));
+			}
     	}
         super.onPostExecute(result);
     }

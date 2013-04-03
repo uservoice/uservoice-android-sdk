@@ -18,7 +18,7 @@ public class Article extends BaseModel {
 	public static void loadAll(final Callback<List<Article>> callback) {
         doGet(apiPath("/articles.json"), new RestTaskCallback(callback) {
             @Override
-            public void onComplete(JSONObject result) {
+            public void onComplete(JSONObject result) throws JSONException {
                 callback.onModel(deserializeList(result, "articles", Article.class));
             }
         });
@@ -27,7 +27,7 @@ public class Article extends BaseModel {
 	public static void loadForTopic(int topicId, final Callback<List<Article>> callback) {
 		doGet(apiPath("/topics/%d/articles.json", topicId), new RestTaskCallback(callback) {
 			@Override
-			public void onComplete(JSONObject result) {
+			public void onComplete(JSONObject result) throws JSONException {
                 callback.onModel(deserializeList(result, "articles", Article.class));
 			}
 		});
@@ -43,7 +43,7 @@ public class Article extends BaseModel {
 		}
 		doGet(apiPath("/instant_answers/search.json"), params, new RestTaskCallback(callback) {
 			@Override
-			public void onComplete(JSONObject result) {
+			public void onComplete(JSONObject result) throws JSONException {
 				callback.onModel(deserializeHeterogenousList(result, "instant_answers"));
 			}
 		});

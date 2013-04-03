@@ -28,8 +28,8 @@ public class UserVoice {
 		
 	}
 	
-	public static void setExternalId(String identifier, String scope) {
-		
+	public static void setExternalId(String scope, String id) {
+		Session.getInstance().setExternalId(scope, id);
 	}
 
 	public static String getVersion() {

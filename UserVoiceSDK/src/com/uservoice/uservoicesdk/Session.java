@@ -1,5 +1,8 @@
 package com.uservoice.uservoicesdk;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 
@@ -26,6 +29,7 @@ public class Session {
 	private AccessToken accessToken;
 	private User user;
 	private ClientConfig clientConfig;
+	private Map<String,String> externalIds = new HashMap<String,String>();
 	
 	public Config getConfig() {
 		return config;
@@ -72,6 +76,14 @@ public class Session {
 	
 	public void setClientConfig(ClientConfig clientConfig) {
 		this.clientConfig = clientConfig;
+	}
+	
+	public void setExternalId(String scope, String id) {
+		externalIds.put(scope, id);
+	}
+	
+	public Map<String, String> getExternalIds() {
+		return externalIds;
 	}
 
 }

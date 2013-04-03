@@ -14,11 +14,12 @@ public class ClientConfig extends BaseModel {
 	private boolean whiteLabel;
 	private int defaultForumId;
 	private List<CustomField> customFields;
+	private String defaultSort;
 	
 	public static void loadClientConfig(final Callback<ClientConfig> callback) {
 		doGet(apiPath("/client.json"), new RestTaskCallback(callback) {
 			@Override
-			public void onComplete(JSONObject result) {
+			public void onComplete(JSONObject result) throws JSONException {
 				callback.onModel(deserializeObject(result, "client", ClientConfig.class));
 			}
 		});
@@ -33,6 +34,7 @@ public class ClientConfig extends BaseModel {
 		whiteLabel = object.getBoolean("white_label");
 		defaultForumId = object.getJSONObject("forum").getInt("id");
 		customFields = deserializeList(object, "custom_fields", CustomField.class);
+		defaultSort = getString(object.getJSONObject("subdomain"), "default_sort");
 	}
 	
 	public boolean isTicketSystemEnabled() {
@@ -53,5 +55,9 @@ public class ClientConfig extends BaseModel {
 	
 	public List<CustomField> getCustomFields() {
 		return customFields;
+	}
+	
+	public String getSuggestionSort() {
+		return defaultSort.equals("new") ? "newest" : (defaultSort.equals("hot") ? "hot" : "votes");
 	}
 }

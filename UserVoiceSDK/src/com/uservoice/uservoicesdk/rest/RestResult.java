@@ -2,7 +2,6 @@ package com.uservoice.uservoicesdk.rest;
 
 import org.json.JSONObject;
 
-
 public class RestResult {
 	
 	private Exception exception;
@@ -18,6 +17,12 @@ public class RestResult {
 		this.exception = exception;
 	}
 	
+	public RestResult(Exception exception, int statusCode, JSONObject object) {
+		this.exception = exception;
+		this.statusCode = statusCode;
+		this.object = object;
+	}
+
 	public boolean isError() {
 		return exception != null || statusCode > 400;
 	}
@@ -32,5 +37,9 @@ public class RestResult {
 	
 	public int getStatusCode() {
 		return statusCode;
+	}
+
+	public String getMessage() {
+		return String.format("%s -- %s", exception == null ? String.valueOf(statusCode) : exception.getMessage(), object);
 	}
 }

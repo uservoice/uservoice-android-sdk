@@ -17,7 +17,7 @@ public class Forum extends BaseModel {
 	public static void loadForum(int forumId, final Callback<Forum> callback) {
 		doGet(apiPath("/forums/%d.json", forumId), new RestTaskCallback(callback) {
 			@Override
-			public void onComplete(JSONObject object) {
+			public void onComplete(JSONObject object) throws JSONException {
 				callback.onModel(deserializeObject(object, "forum", Forum.class));
 			}
 		});
@@ -27,9 +27,10 @@ public class Forum extends BaseModel {
 	public void load(JSONObject object) throws JSONException {
 		super.load(object);
 		name = getString(object, "name");
-		numberOfOpenSuggestions = object.getInt("open_suggestion_count");
-		numberOfVotesAllowed = object.getInt("votes_allowed");
-		categories = deserializeList(object, "categories", Category.class);
+		JSONObject topic = object.getJSONArray("topics").getJSONObject(0);
+		numberOfOpenSuggestions = topic.getInt("open_suggestions_count");
+		numberOfVotesAllowed = topic.getInt("votes_allowed");
+		categories = deserializeList(topic, "categories", Category.class);
 	}
 	
 	public String getName() {

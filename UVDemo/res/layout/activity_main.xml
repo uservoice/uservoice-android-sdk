@@ -12,14 +12,14 @@
         android:id="@+id/launchButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignLeft="@+id/suggestion_title"
+        android:layout_below="@+id/suggestion_title"
         android:layout_marginTop="22dp"
         android:onClick="launchFeedback"
         android:text="Help" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/suggestion_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"

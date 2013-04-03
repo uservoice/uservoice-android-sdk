@@ -20,7 +20,7 @@ public class Comment extends BaseModel {
 	public static void loadComments(Suggestion suggestion, final Callback<List<Comment>> callback) {
 		doGet(apiPath("/forums/%d/suggestions/%d/comments.json", suggestion.getForumId(), suggestion.getId()), new RestTaskCallback(callback) {
 			@Override
-			public void onComplete(JSONObject object) {
+			public void onComplete(JSONObject object) throws JSONException {
 				callback.onModel(deserializeList(object, "comments", Comment.class));
 			}
 		});
@@ -31,7 +31,7 @@ public class Comment extends BaseModel {
 		params.put("comment[text]", text);
 		doPost(apiPath("/forums/%d/suggestions/%d/comments.json", suggestion.getForumId(), suggestion.getId()), params, new RestTaskCallback(callback) {
 			@Override
-			public void onComplete(JSONObject object) {
+			public void onComplete(JSONObject object) throws JSONException {
 				callback.onModel(deserializeObject(object, "comment", Comment.class));
 			}
 		});

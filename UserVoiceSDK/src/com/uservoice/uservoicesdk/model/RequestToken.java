@@ -14,7 +14,7 @@ public class RequestToken extends BaseModel {
 	public static void getRequestToken(final Callback<RequestToken> callback) {
 		doGet(apiPath("/oauth/request_token.json"), new RestTaskCallback(callback) {
 			@Override
-			public void onComplete(JSONObject result) {
+			public void onComplete(JSONObject result) throws JSONException {
 				callback.onModel(deserializeObject(result, "token", RequestToken.class));
 			}
 		});

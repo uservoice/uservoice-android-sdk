@@ -4,6 +4,7 @@ import com.uservoice.uservoicesdk.R;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 
 public class UserVoiceActivity extends Activity {
@@ -12,6 +13,9 @@ public class UserVoiceActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_uservoice);
+		
+		Intent intent = new Intent(this, ForumActivity.class);
+		startActivity(intent);
 	}
 
 	@Override
