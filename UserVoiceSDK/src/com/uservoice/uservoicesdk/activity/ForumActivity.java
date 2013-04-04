@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 
@@ -39,7 +40,12 @@ public class ForumActivity extends ListActivity {
 				textView.setText(String.valueOf(model.getNumberOfVotes()));
 				
 				textView = (TextView) view.findViewById(R.id.suggestion_status);
-				textView.setText(model.getStatus());
+				if (model.getStatus() == null) {
+					textView.setVisibility(View.GONE);
+				} else {
+					textView.setVisibility(View.VISIBLE);
+					textView.setText(Html.fromHtml(String.format("<font color='%s'>%s</font>", model.getStatusColor(), model.getStatus())));
+				}
 			}
 		});
 		

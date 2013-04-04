@@ -33,6 +33,7 @@ public class Suggestion extends BaseModel {
 	public static void loadSuggestions(Forum forum, int page, final Callback<List<Suggestion>> callback) {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("page", String.valueOf(page));
+		params.put("per_page", "20");
 		params.put("filter", "public");
 		params.put("sort", getClientConfig().getSuggestionSort());
 		doGet(apiPath("/forums/%d/suggestions.json", forum.getId()), params, new RestTaskCallback(callback) {

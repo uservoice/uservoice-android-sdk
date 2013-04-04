@@ -41,7 +41,6 @@ public class MainActivity extends Activity {
 	
 	public void launchFeedback() {
 		Config config = new Config("feedback.uservoice.com", "8L66hVQUQ45TOLl0dA70YA", "a5e6da1827538a27755a4f4de0602e82533aff73");
-		config.setForumId(102595);
 		UserVoice.launchUserVoice(config, this);
 	}
 	
