@@ -13,7 +13,6 @@ public class UserVoiceActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_uservoice);
-		
 		Intent intent = new Intent(this, ForumActivity.class);
 		startActivity(intent);
 	}
