@@ -50,7 +50,7 @@ public abstract class ModelAdapter<T> extends ArrayAdapter<T> {
 	
 	@Override
 	public int getCount() {
-		return super.getCount() + (loading ? 1 : 0);
+		return super.getCount() + (super.getCount() > 0 && loading ? 1 : 0);
 	}
 	
 	@Override

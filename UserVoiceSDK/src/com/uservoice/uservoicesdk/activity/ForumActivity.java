@@ -86,8 +86,7 @@ public class ForumActivity extends ListActivity implements OnScrollListener {
 	private void loadMoreSuggestions() {
 		if (forum == null || Session.getInstance().getClientConfig() == null) return;
 		if (getModelAdapter().isLoading()) return;
-		if (suggestions.size() > 0)
-			getModelAdapter().setLoading(true);
+		getModelAdapter().setLoading(true);
 		Suggestion.loadSuggestions(forum, pageToLoad, new DefaultCallback<List<Suggestion>>(this) {
 			@Override
 			public void onModel(List<Suggestion> theSuggestions) {
