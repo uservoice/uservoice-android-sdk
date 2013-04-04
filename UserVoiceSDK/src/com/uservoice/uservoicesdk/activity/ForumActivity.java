@@ -16,6 +16,7 @@ import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.model.ClientConfig;
 import com.uservoice.uservoicesdk.model.Forum;
 import com.uservoice.uservoicesdk.model.Suggestion;
+import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.ui.DefaultCallback;
 import com.uservoice.uservoicesdk.ui.ModelAdapter;
 
@@ -23,8 +24,6 @@ public class ForumActivity extends ListActivity implements OnScrollListener {
 	
 	private List<Suggestion> suggestions;
 	private Forum forum;
-	private int pageToLoad = 1;
-	private boolean moreToLoad = true;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +49,16 @@ public class ForumActivity extends ListActivity implements OnScrollListener {
 					textView.setVisibility(View.VISIBLE);
 					textView.setText(Html.fromHtml(String.format("<font color='%s'>%s</font>", model.getStatusColor(), model.getStatus())));
 				}
+			}
+
+			@Override
+			public void loadPage(int page, Callback<List<Suggestion>> callback) {
+				Suggestion.loadSuggestions(forum, page, callback);
+			}
+
+			@Override
+			public int getTotalNumberOfObjects() {
+				return forum.getNumberOfOpenSuggestions();
 			}
 		});
 		
@@ -78,23 +87,8 @@ public class ForumActivity extends ListActivity implements OnScrollListener {
 			@Override
 			public void onModel(Forum model) {
 				forum = model;
-				loadMoreSuggestions();
-			}
-		});
-	}
-	
-	private void loadMoreSuggestions() {
-		if (forum == null || Session.getInstance().getClientConfig() == null) return;
-		if (getModelAdapter().isLoading()) return;
-		getModelAdapter().setLoading(true);
-		Suggestion.loadSuggestions(forum, pageToLoad, new DefaultCallback<List<Suggestion>>(this) {
-			@Override
-			public void onModel(List<Suggestion> theSuggestions) {
-				suggestions.addAll(theSuggestions);
-				pageToLoad += 1;
-				if (suggestions.size() == forum.getNumberOfOpenSuggestions())
-					moreToLoad = false;
-				getModelAdapter().setLoading(false);
+				setTitle(forum.getName());
+				getModelAdapter().loadMore();
 			}
 		});
 	}
@@ -106,8 +100,8 @@ public class ForumActivity extends ListActivity implements OnScrollListener {
 
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-		if (moreToLoad && firstVisibleItem + visibleItemCount >= totalItemCount) {
-			loadMoreSuggestions();
+		if (firstVisibleItem + visibleItemCount >= totalItemCount && forum != null && Session.getInstance().getClientConfig() != null) {
+			getModelAdapter().loadMore();
 		}
 	}
 
