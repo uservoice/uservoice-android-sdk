@@ -7,6 +7,8 @@ import android.app.ListActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.TextView;
 
 import com.uservoice.uservoicesdk.R;
@@ -17,10 +19,12 @@ import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.ui.DefaultCallback;
 import com.uservoice.uservoicesdk.ui.ModelAdapter;
 
-public class ForumActivity extends ListActivity {
+public class ForumActivity extends ListActivity implements OnScrollListener {
 	
 	private List<Suggestion> suggestions;
 	private Forum forum;
+	private int pageToLoad = 1;
+	private boolean moreToLoad = true;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,8 @@ public class ForumActivity extends ListActivity {
 				}
 			}
 		});
+		
+		getListView().setOnScrollListener(this);
 		
 		loadClientConfig();
 	}
@@ -78,11 +84,18 @@ public class ForumActivity extends ListActivity {
 	}
 	
 	private void loadMoreSuggestions() {
-		Suggestion.loadSuggestions(forum, 1, new DefaultCallback<List<Suggestion>>(this) {
+		if (forum == null || Session.getInstance().getClientConfig() == null) return;
+		if (getModelAdapter().isLoading()) return;
+		if (suggestions.size() > 0)
+			getModelAdapter().setLoading(true);
+		Suggestion.loadSuggestions(forum, pageToLoad, new DefaultCallback<List<Suggestion>>(this) {
 			@Override
 			public void onModel(List<Suggestion> theSuggestions) {
 				suggestions.addAll(theSuggestions);
-				getModelAdapter().notifyDataSetChanged();
+				pageToLoad += 1;
+				if (suggestions.size() == forum.getNumberOfOpenSuggestions())
+					moreToLoad = false;
+				getModelAdapter().setLoading(false);
 			}
 		});
 	}
@@ -90,5 +103,16 @@ public class ForumActivity extends ListActivity {
 	@SuppressWarnings("unchecked")
 	protected ModelAdapter<Suggestion> getModelAdapter() {
 		return (ModelAdapter<Suggestion>) getListAdapter();
+	}
+
+	@Override
+	public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+		if (moreToLoad && firstVisibleItem + visibleItemCount >= totalItemCount) {
+			loadMoreSuggestions();
+		}
+	}
+
+	@Override
+	public void onScrollStateChanged(AbsListView view, int scrollState) {
 	}
 }

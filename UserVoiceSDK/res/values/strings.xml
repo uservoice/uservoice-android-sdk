@@ -6,5 +6,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_new">NewActivity</string>
     <string name="votes">votes</string>
+    <string name="loading">Loading...</string>
 
 </resources>
