@@ -6,9 +6,12 @@ import java.util.List;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.uservoice.uservoicesdk.R;
@@ -28,8 +31,6 @@ public class ForumActivity extends ListActivity implements OnScrollListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		// setContentView(R.layout.forum_activity);
 		
 		suggestions = new ArrayList<Suggestion>();
 		
@@ -55,6 +56,11 @@ public class ForumActivity extends ListActivity implements OnScrollListener {
 			public void loadPage(int page, Callback<List<Suggestion>> callback) {
 				Suggestion.loadSuggestions(forum, page, callback);
 			}
+			
+			@Override
+			public void search(String query, Callback<List<Suggestion>> callback) {
+				Suggestion.searchSuggestions(forum, query, callback);
+			}
 
 			@Override
 			public int getTotalNumberOfObjects() {
@@ -65,6 +71,42 @@ public class ForumActivity extends ListActivity implements OnScrollListener {
 		getListView().setOnScrollListener(this);
 		
 		loadClientConfig();
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.forum, menu);
+		
+		menu.findItem(R.id.menu_search).setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+			@Override
+			public boolean onMenuItemActionExpand(MenuItem item) {
+				getModelAdapter().setSearchActive(true);
+				return true;
+			}
+			
+			@Override
+			public boolean onMenuItemActionCollapse(MenuItem item) {
+				getModelAdapter().setSearchActive(false);
+				return true;
+			}
+		});
+		
+		SearchView search = (SearchView) menu.findItem(R.id.menu_search).getActionView();
+		search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+				getModelAdapter().performSearch(query);
+				return true;
+			}
+			
+			@Override
+			public boolean onQueryTextChange(String query) {
+				getModelAdapter().performSearch(query);
+				return true;
+			}
+		});
+		
+		return true;
 	}
 	
 	private void loadClientConfig() {
@@ -87,6 +129,7 @@ public class ForumActivity extends ListActivity implements OnScrollListener {
 			@Override
 			public void onModel(Forum model) {
 				forum = model;
+				// TODO move these to onCreate once we do the init manager
 				setTitle(forum.getName());
 				getModelAdapter().loadMore();
 			}

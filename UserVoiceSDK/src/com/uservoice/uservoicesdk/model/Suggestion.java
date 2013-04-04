@@ -47,7 +47,7 @@ public class Suggestion extends BaseModel {
 	public static void searchSuggestions(Forum forum, String query, final Callback<List<Suggestion>> callback) {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("query", query);
-		doGet(apiPath("/forum/%d/suggestions.json", forum.getId()), params, new RestTaskCallback(callback) {
+		doGet(apiPath("/forums/%d/suggestions/search.json", forum.getId()), params, new RestTaskCallback(callback) {
 			@Override
 			public void onComplete(JSONObject object) throws JSONException {
 				callback.onModel(deserializeList(object, "suggestions", Suggestion.class));
@@ -91,7 +91,8 @@ public class Suggestion extends BaseModel {
 			category = deserializeObject(object, "category", Category.class);
 		numberOfComments = object.getInt("comments_count");
 		numberOfVotes = object.getInt("vote_count");
-		creatorName = getString(object.getJSONObject("creator"), "name");
+		if (!object.isNull("creator"))
+			creatorName = getString(object.getJSONObject("creator"), "name");
 		if (!object.isNull("votes_for"))
 			numberOfVotesByCurrentUser = object.getInt("votes_for");
 		if (!object.isNull("votes_remaining"))

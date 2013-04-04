@@ -6,6 +6,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_new">NewActivity</string>
     <string name="votes">votes</string>
-    <string name="loading">Loading...</string>
+    <string name="loading">Loading&#8230;</string>
+    <string name="post_idea">Post idea</string>
+    <string name="menu_search">Search</string>
 
 </resources>

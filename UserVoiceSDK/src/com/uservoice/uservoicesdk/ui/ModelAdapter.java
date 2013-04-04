@@ -1,19 +1,20 @@
 package com.uservoice.uservoicesdk.ui;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Filter;
-import android.widget.Filterable;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.rest.Callback;
 
-public abstract class ModelAdapter<T> extends BaseAdapter implements Filterable {
+public abstract class ModelAdapter<T> extends BaseAdapter {
 
 	private static final int MODEL = 0;
 	private static final int LOADING = 1;
@@ -22,9 +23,11 @@ public abstract class ModelAdapter<T> extends BaseAdapter implements Filterable 
 	private final int layoutId;
 	private boolean loading;
 	private LayoutInflater inflater;
-//	private List<T> searchResults;
+	private List<T> searchResults = new ArrayList<T>();
 	private List<T> objects;
 	private int page = 1;
+	private boolean searchActive;
+	private Timer timer;
 
 	public ModelAdapter(Context context, int layoutId, List<T> objects) {
 		this.context = context;
@@ -42,23 +45,21 @@ public abstract class ModelAdapter<T> extends BaseAdapter implements Filterable 
 		}
 		
 		if (type == MODEL) {
-			T model = objects.get(position);
+			T model = getObjects().get(position);
 			customizeLayout(view, model);
 		}
 		
 		return view;
 	}
 	
-	protected abstract void customizeLayout(View view, T model);
-
 	@Override
 	public int getItemViewType(int position) {
-		return position == objects.size() ? LOADING : MODEL;
+		return position == getObjects().size() ? LOADING : MODEL;
 	}
 	
 	@Override
 	public int getCount() {
-		return objects.size() + (!objects.isEmpty() && loading ? 1 : 0);
+		return getObjects().size() + ((!getObjects().isEmpty() || searchActive) && loading ? 1 : 0);
 	}
 	
 	@Override
@@ -72,7 +73,7 @@ public abstract class ModelAdapter<T> extends BaseAdapter implements Filterable 
 	}
 	
 	public void loadMore() {
-		if (loading || objects.size() == getTotalNumberOfObjects()) return;
+		if (loading || searchActive || objects.size() == getTotalNumberOfObjects()) return;
 		loading = true;
 		notifyDataSetChanged();
 		loadPage(page, new DefaultCallback<List<T>>(context) {
@@ -86,41 +87,72 @@ public abstract class ModelAdapter<T> extends BaseAdapter implements Filterable 
 		});
 	}
 	
+	public abstract void search(String query, Callback<List<T>> callback);
 	public abstract void loadPage(int page, Callback<List<T>> callback);
 	public abstract int getTotalNumberOfObjects();
+	protected abstract void customizeLayout(View view, T model);
+
+	@Override
+	public Object getItem(int position) {
+		return position < getObjects().size() ? getObjects().get(position) : null;
+	}
 	
-	public void setLoading(boolean loading) {
-		this.loading = loading;
+	private List<T> getObjects() {
+		return searchActive && (loading || !searchResults.isEmpty()) ? searchResults : objects;
+	}
+	
+	public void performSearch(String query) {
+		if (query.isEmpty()) {
+			searchResults = new ArrayList<T>();
+			loading = false;
+			notifyDataSetChanged();
+		} else {
+			loading = true;
+			notifyDataSetChanged();
+			if (timer != null) {
+				timer.cancel();
+				timer = null;
+			}
+			timer = new Timer();
+			timer.schedule(new SearchTask(query), 200);
+		}
+	}
+	
+	public void setSearchActive(boolean searchActive) {
+		this.searchActive = searchActive;
+		loading = false;
 		notifyDataSetChanged();
 	}
 	
-	public boolean isLoading() {
-		return loading;
-	}
-	
-	@Override
-	public Object getItem(int position) {
-		return position < objects.size() ? objects.get(position) : null;
-	}
-	
-	@Override
-	public Filter getFilter() {
-		return new ModelFilter();
-	}
-	
-	private class ModelFilter extends Filter {
+	private class SearchTask extends TimerTask {
+		
+		private final String query;
+		private boolean stop;
 
+		public SearchTask(String query) {
+			this.query = query;
+		}
+		
 		@Override
-		protected FilterResults performFiltering(CharSequence constraint) {
-			// TODO Auto-generated method stub
-			return null;
+		public boolean cancel() {
+			stop = true;
+			return true;
 		}
 
 		@Override
-		protected void publishResults(CharSequence constraint, FilterResults results) {
-			// TODO Auto-generated method stub
-			
+		public void run() {
+			search(query, new DefaultCallback<List<T>>(context) {
+				@Override
+				public void onModel(List<T> model) {
+					if (!stop) {
+						searchResults = model;
+						loading = false;
+						notifyDataSetChanged();
+						timer = null;
+					}
+				}
+			});
 		}
+		
 	}
-	    
 }
