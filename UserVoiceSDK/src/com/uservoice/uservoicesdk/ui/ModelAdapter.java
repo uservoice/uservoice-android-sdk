@@ -59,7 +59,7 @@ public abstract class ModelAdapter<T> extends BaseAdapter {
 	
 	@Override
 	public int getCount() {
-		return getObjects().size() + ((!getObjects().isEmpty() || searchActive) && loading ? 1 : 0);
+		return getObjects().size() + (loading ? 1 : 0);
 	}
 	
 	@Override
