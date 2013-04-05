@@ -1,6 +1,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     
-    <item android:id="@+id/action_contact_us" android:orderInCategory="2" android:showAsAction="ifRoom" android:title="Contact us"></item><item android:id="@+id/action_new_idea" android:showAsAction="ifRoom" android:orderInCategory="2" android:title="New idea"></item><item android:id="@+id/action_search" android:showAsAction="ifRoom" android:orderInCategory="3" android:title="Search"></item>
+    <item android:id="@+id/action_search"
+          android:showAsAction="always"
+          android:icon="@android:drawable/ic_menu_search"
+          android:title="@string/menu_search" />
+    
+    <item android:id="@+id/action_contact_us"
+          android:showAsAction="ifRoom"
+          android:icon="@android:drawable/ic_menu_send"
+          android:title="@string/uv_contact_us" />
+    
+    <item android:id="@+id/action_new_idea"
+          android:showAsAction="ifRoom"
+          android:icon="@android:drawable/ic_menu_add"
+          android:title="@string/post_idea" />
     
 
 </menu>

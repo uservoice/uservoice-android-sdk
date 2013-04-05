@@ -1,20 +1,23 @@
 package com.uservoice.uservoicesdk.activity;
 
-import com.uservoice.uservoicesdk.R;
-
-import android.os.Bundle;
-import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 
-public class UserVoiceActivity extends Activity {
+import com.uservoice.uservoicesdk.R;
+import com.uservoice.uservoicesdk.ui.WelcomeAdapter;
+
+public class UserVoiceActivity extends ListActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_uservoice);
-		Intent intent = new Intent(this, ForumActivity.class);
-		startActivity(intent);
+		
+		getListView().addHeaderView(getLayoutInflater().inflate(R.layout.contact_layout, null));
+		getListView().setPadding(10, 0, 10, 0);
+		setListAdapter(new WelcomeAdapter(this));
+		showForum();
 	}
 
 	@Override
@@ -22,6 +25,10 @@ public class UserVoiceActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.uv_main, menu);
 		return true;
+	}
+	
+	public void showForum() {
+		startActivity(new Intent(this, ForumActivity.class));
 	}
 
 }

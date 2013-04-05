@@ -9,7 +9,6 @@ import com.uservoice.uservoicesdk.Config;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.RequestToken;
-import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.model.Ticket;
 import com.uservoice.uservoicesdk.model.User;
 import com.uservoice.uservoicesdk.rest.Callback;

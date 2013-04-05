@@ -8,6 +8,7 @@ import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 
 import com.uservoice.uservoicesdk.model.AccessToken;
 import com.uservoice.uservoicesdk.model.ClientConfig;
+import com.uservoice.uservoicesdk.model.Forum;
 import com.uservoice.uservoicesdk.model.RequestToken;
 import com.uservoice.uservoicesdk.model.User;
 
@@ -29,6 +30,7 @@ public class Session {
 	private AccessToken accessToken;
 	private User user;
 	private ClientConfig clientConfig;
+	private Forum forum;
 	private Map<String,String> externalIds = new HashMap<String,String>();
 	
 	public Config getConfig() {
@@ -84,6 +86,14 @@ public class Session {
 	
 	public Map<String, String> getExternalIds() {
 		return externalIds;
+	}
+	
+	public Forum getForum() {
+		return forum;
+	}
+	
+	public void setForum(Forum forum) {
+		this.forum = forum;
 	}
 
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/contact_us_text"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="Need help? Start by entering a question or idea here..."
+        android:inputType="textMultiLine"
+        android:background="#FFFFFF" >
+
+        <requestFocus />
+    </EditText>
+
+</LinearLayout>

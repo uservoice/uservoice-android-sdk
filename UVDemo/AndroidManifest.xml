@@ -23,6 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
         <activity android:name="com.uservoice.uservoicesdk.activity.UserVoiceActivity" />
         <activity android:name="com.uservoice.uservoicesdk.activity.ForumActivity" />
     </application>
