@@ -17,8 +17,10 @@ public class Comment extends BaseModel {
 	private String avatarUrl;
 	private Date createdAt;
 	
-	public static void loadComments(Suggestion suggestion, final Callback<List<Comment>> callback) {
-		doGet(apiPath("/forums/%d/suggestions/%d/comments.json", suggestion.getForumId(), suggestion.getId()), new RestTaskCallback(callback) {
+	public static void loadComments(Suggestion suggestion, int page, final Callback<List<Comment>> callback) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("page", String.valueOf(page));
+		doGet(apiPath("/forums/%d/suggestions/%d/comments.json", suggestion.getForumId(), suggestion.getId()), params, new RestTaskCallback(callback) {
 			@Override
 			public void onComplete(JSONObject object) throws JSONException {
 				callback.onModel(deserializeList(object, "comments", Comment.class));

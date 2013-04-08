@@ -10,6 +10,7 @@ import com.uservoice.uservoicesdk.model.AccessToken;
 import com.uservoice.uservoicesdk.model.ClientConfig;
 import com.uservoice.uservoicesdk.model.Forum;
 import com.uservoice.uservoicesdk.model.RequestToken;
+import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.model.User;
 
 public class Session {
@@ -32,6 +33,7 @@ public class Session {
 	private ClientConfig clientConfig;
 	private Forum forum;
 	private Map<String,String> externalIds = new HashMap<String,String>();
+	private Suggestion suggestion;
 	
 	public Config getConfig() {
 		return config;
@@ -94,6 +96,14 @@ public class Session {
 	
 	public void setForum(Forum forum) {
 		this.forum = forum;
+	}
+	
+	public Suggestion getSuggestion() {
+		return suggestion;
+	}
+	
+	public void setSuggestion(Suggestion suggestion) {
+		this.suggestion = suggestion;
 	}
 
 }

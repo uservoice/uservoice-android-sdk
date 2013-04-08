@@ -4,14 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ListFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.activity.SuggestionActivity;
 import com.uservoice.uservoicesdk.model.ClientConfig;
 import com.uservoice.uservoicesdk.model.Forum;
 import com.uservoice.uservoicesdk.model.Suggestion;
@@ -77,6 +81,16 @@ public class ForumFragment extends ListFragment {
 
 			@Override
 			public void onScrollStateChanged(AbsListView view, int scrollState) {
+			}
+		});
+		
+		getListView().setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Suggestion suggestion = (Suggestion) getModelAdapter().getItem(position);
+				Session.getInstance().setSuggestion(suggestion);
+				Intent intent = new Intent(getActivity(), SuggestionActivity.class);
+				getActivity().startActivity(intent);
 			}
 		});
 	}

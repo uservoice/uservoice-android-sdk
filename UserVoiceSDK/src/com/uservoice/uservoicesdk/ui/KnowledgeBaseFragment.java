@@ -28,7 +28,7 @@ public class KnowledgeBaseFragment extends ListFragment {
 
 			@Override
 			protected void loadPage(int page, Callback<List<Topic>> callback) {
-				Topic.loadTopics(callback);
+//				Topic.loadTopics(callback);
 			}
 		});
 	}
