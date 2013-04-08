@@ -21,7 +21,7 @@ import com.uservoice.uservoicesdk.model.Forum;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.ui.DefaultCallback;
-import com.uservoice.uservoicesdk.ui.ModelAdapter;
+import com.uservoice.uservoicesdk.ui.PaginatedAdapter;
 
 public class ForumActivity extends ListActivity implements OnScrollListener {
 	
@@ -34,7 +34,7 @@ public class ForumActivity extends ListActivity implements OnScrollListener {
 		
 		suggestions = new ArrayList<Suggestion>();
 		
-		setListAdapter(new ModelAdapter<Suggestion>(this, R.layout.suggestion_item, suggestions) {
+		setListAdapter(new PaginatedAdapter<Suggestion>(this, R.layout.suggestion_item, suggestions) {
 			@Override
 			protected void customizeLayout(View view, Suggestion model) {
 				TextView textView = (TextView) view.findViewById(R.id.suggestion_title);
@@ -137,8 +137,8 @@ public class ForumActivity extends ListActivity implements OnScrollListener {
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected ModelAdapter<Suggestion> getModelAdapter() {
-		return (ModelAdapter<Suggestion>) getListAdapter();
+	protected PaginatedAdapter<Suggestion> getModelAdapter() {
+		return (PaginatedAdapter<Suggestion>) getListAdapter();
 	}
 
 	@Override

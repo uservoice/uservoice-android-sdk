@@ -1,17 +1,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     
     <item android:id="@+id/action_search"
-          android:showAsAction="always"
+          android:showAsAction="always|collapseActionView"
           android:icon="@android:drawable/ic_menu_search"
-          android:title="@string/menu_search" />
+          android:title="@string/menu_search"
+          android:actionViewClass="android.widget.SearchView" />
     
     <item android:id="@+id/action_contact_us"
-          android:showAsAction="ifRoom"
+          android:showAsAction="always"
           android:icon="@android:drawable/ic_menu_send"
           android:title="@string/uv_contact_us" />
     
     <item android:id="@+id/action_new_idea"
-          android:showAsAction="ifRoom"
+          android:showAsAction="always"
           android:icon="@android:drawable/ic_menu_add"
           android:title="@string/post_idea" />
     

@@ -26,6 +26,7 @@
         
         <activity android:name="com.uservoice.uservoicesdk.activity.UserVoiceActivity" />
         <activity android:name="com.uservoice.uservoicesdk.activity.ForumActivity" />
-    </application>
+        <activity android:name="com.uservoice.uservoicesdk.activity.TabActivity" />
+        </application>
 
 </manifest>
