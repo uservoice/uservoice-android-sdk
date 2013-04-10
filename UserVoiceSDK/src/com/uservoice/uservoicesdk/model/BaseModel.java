@@ -12,6 +12,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
+import android.text.Html;
+
 import com.uservoice.uservoicesdk.Config;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.rest.RestMethod;
@@ -32,7 +34,7 @@ public class BaseModel {
 	}
 	
 	protected String getString(JSONObject object, String key) throws JSONException {
-		return object.isNull(key) ? null : object.getString(key);
+		return object.isNull(key) ? null : Html.fromHtml(object.getString(key)).toString();
 	}
 	
 	@SuppressLint("SimpleDateFormat")
