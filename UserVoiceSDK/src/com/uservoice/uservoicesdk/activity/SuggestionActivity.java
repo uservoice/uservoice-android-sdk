@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ListActivity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.model.Comment;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.rest.Callback;
+import com.uservoice.uservoicesdk.ui.DownloadImageTask;
+import com.uservoice.uservoicesdk.ui.ImageCache;
 import com.uservoice.uservoicesdk.ui.PaginatedAdapter;
 
 public class SuggestionActivity extends ListActivity {
@@ -29,7 +32,7 @@ public class SuggestionActivity extends ListActivity {
 		headerView = getLayoutInflater().inflate(R.layout.suggestion_layout, null);
 		getListView().addHeaderView(headerView);
 		
-		setListAdapter(new PaginatedAdapter<Comment>(this, android.R.layout.simple_list_item_1, new ArrayList<Comment>()) {
+		setListAdapter(new PaginatedAdapter<Comment>(this, R.layout.comment_item, new ArrayList<Comment>()) {
 
 			@Override
 			protected void search(String query, Callback<List<Comment>> callback) {
@@ -42,8 +45,17 @@ public class SuggestionActivity extends ListActivity {
 
 			@Override
 			protected void customizeLayout(View view, Comment model) {
-				TextView textView = (TextView) view.findViewById(android.R.id.text1);
+				TextView textView = (TextView) view.findViewById(R.id.comment_text);
 				textView.setText(model.getText());
+
+				textView = (TextView) view.findViewById(R.id.comment_name);
+				textView.setText(model.getUserName());
+
+				textView = (TextView) view.findViewById(R.id.comment_date);
+				textView.setText(DateFormat.getDateInstance().format(model.getCreatedAt()));
+				
+				ImageView avatar = (ImageView) view.findViewById(R.id.comment_avatar);
+				ImageCache.getInstance().loadImage(model.getAvatarUrl(), avatar);
 			}
 
 			@Override
@@ -84,6 +96,9 @@ public class SuggestionActivity extends ListActivity {
 		}
 		
 		getTextView(R.id.suggestion_details_vote_count).setText(String.format("%d votes ¥ %d comments", suggestion.getNumberOfVotes(), suggestion.getNumberOfComments()));
+		
+		ImageView avatar = (ImageView) headerView.findViewById(R.id.suggestion_details_admin_avatar);
+		ImageCache.getInstance().loadImage(suggestion.getAdminResponseAvatarUrl(), avatar);
 	}
 	
 	private TextView getTextView(int id) {
