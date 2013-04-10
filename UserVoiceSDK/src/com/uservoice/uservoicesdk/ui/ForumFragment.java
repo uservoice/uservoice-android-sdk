@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
@@ -71,18 +70,8 @@ public class ForumFragment extends ListFragment {
 	@Override
 	public void onStart() {
 		super.onStart();
-		getListView().setOnScrollListener(new AbsListView.OnScrollListener() {
-			@Override
-			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-				if (firstVisibleItem + visibleItemCount >= totalItemCount && forum != null && Session.getInstance().getClientConfig() != null) {
-					getModelAdapter().loadMore();
-				}
-			}
-
-			@Override
-			public void onScrollStateChanged(AbsListView view, int scrollState) {
-			}
-		});
+		if (forum != null)
+			getListView().setOnScrollListener(new PaginationScrollListener(getModelAdapter()));
 		
 		getListView().setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -115,8 +104,9 @@ public class ForumFragment extends ListFragment {
 			@Override
 			public void onModel(Forum model) {
 				forum = model;
-				if (getView() != null)
-					getModelAdapter().loadMore();
+				if (getView() != null) {
+					getListView().setOnScrollListener(new PaginationScrollListener(getModelAdapter()));
+				}
 			}
 		});
 	}

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ListActivity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -17,9 +16,9 @@ import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.model.Comment;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.rest.Callback;
-import com.uservoice.uservoicesdk.ui.DownloadImageTask;
 import com.uservoice.uservoicesdk.ui.ImageCache;
 import com.uservoice.uservoicesdk.ui.PaginatedAdapter;
+import com.uservoice.uservoicesdk.ui.PaginationScrollListener;
 
 public class SuggestionActivity extends ListActivity {
 	
@@ -65,8 +64,7 @@ public class SuggestionActivity extends ListActivity {
 		});
 		
 		updateView();
-		
-		getModelAdapter().loadMore();
+		getListView().setOnScrollListener(new PaginationScrollListener(getModelAdapter()));
 	}
 	
 	
