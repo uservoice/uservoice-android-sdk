@@ -14,8 +14,8 @@ import com.uservoice.uservoicesdk.rest.Callback;
 
 public abstract class ExpandableModelAdapter<A,B> extends BaseExpandableListAdapter {
 	
-	private static int LOADING = 1;
-	private static int MODEL = 2;
+	private static int LOADING = 0;
+	private static int MODEL = 1;
 
 	private List<A> objects;
 	private LayoutInflater inflater;

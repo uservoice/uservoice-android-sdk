@@ -5,7 +5,8 @@
     android:gravity="center_horizontal|center_vertical"
     android:orientation="horizontal"
     android:paddingTop="5dp"
-    android:paddingBottom="5dp" >
+    android:paddingBottom="5dp"
+    android:minHeight="?android:attr/listPreferredItemHeight" >
 
     <TextView
         android:id="@+id/suggestion_details_title"
