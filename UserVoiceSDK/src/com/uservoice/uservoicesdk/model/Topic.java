@@ -1,5 +1,6 @@
 package com.uservoice.uservoicesdk.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONException;
@@ -16,7 +17,13 @@ public class Topic extends BaseModel {
 		doGet(apiPath("/topics.json"), new RestTaskCallback(callback) {
 			@Override
 			public void onComplete(JSONObject object) throws JSONException {
-				callback.onModel(deserializeList(object, "topics", Topic.class));
+				List<Topic> allTopics = deserializeList(object, "topics", Topic.class);
+				List<Topic> topicsWithArticles = new ArrayList<Topic>(allTopics.size());
+				for (Topic topic : allTopics) {
+					if (topic.getNumberOfArticles() > 0)
+						topicsWithArticles.add(topic);
+				}
+				callback.onModel(topicsWithArticles);
 			}
 		});
 	}
