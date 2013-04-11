@@ -37,6 +37,10 @@ public class BaseModel {
 		return object.isNull(key) ? null : Html.fromHtml(object.getString(key)).toString();
 	}
 	
+	protected String getHtml(JSONObject object, String key) throws JSONException {
+		return object.isNull(key) ? null : object.getString(key);
+	}
+	
 	@SuppressLint("SimpleDateFormat")
 	protected Date getDate(JSONObject object, String key) throws JSONException {
 		String dateString = getString(object, key);

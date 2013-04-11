@@ -53,7 +53,7 @@ public class Article extends BaseModel {
 	public void load(JSONObject object) throws JSONException {
 		super.load(object);
 		question = getString(object, "question");
-		answerHtml = getString(object, "answer_html");
+		answerHtml = getHtml(object, "answer_html");
 	}
 	
 	public String getQuestion() {

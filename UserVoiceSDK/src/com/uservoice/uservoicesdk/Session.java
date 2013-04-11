@@ -7,6 +7,7 @@ import oauth.signpost.OAuthConsumer;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 
 import com.uservoice.uservoicesdk.model.AccessToken;
+import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.ClientConfig;
 import com.uservoice.uservoicesdk.model.Forum;
 import com.uservoice.uservoicesdk.model.RequestToken;
@@ -34,6 +35,7 @@ public class Session {
 	private Forum forum;
 	private Map<String,String> externalIds = new HashMap<String,String>();
 	private Suggestion suggestion;
+	private Article article;
 	
 	public Config getConfig() {
 		return config;
@@ -104,6 +106,14 @@ public class Session {
 	
 	public void setSuggestion(Suggestion suggestion) {
 		this.suggestion = suggestion;
+	}
+	
+	public Article getArticle() {
+		return article;
+	}
+	
+	public void setArticle(Article article) {
+		this.article = article;
 	}
 
 }

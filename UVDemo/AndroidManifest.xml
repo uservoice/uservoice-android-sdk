@@ -28,6 +28,7 @@
         <activity android:name="com.uservoice.uservoicesdk.activity.ForumActivity" />
         <activity android:name="com.uservoice.uservoicesdk.activity.TabActivity" />
         <activity android:name="com.uservoice.uservoicesdk.activity.SuggestionActivity" />
-        </application>
+        <activity android:name="com.uservoice.uservoicesdk.activity.ArticleActivity" />
+    </application>
 
 </manifest>
