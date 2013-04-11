@@ -1,12 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?><LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#f2faff"
-    android:paddingTop="10dp"
+    android:orientation="vertical"
     android:paddingBottom="10dp"
     android:paddingLeft="10dp"
-    android:paddingRight="10dp" >
+    android:paddingRight="10dp"
+    android:paddingTop="10dp" >
 
     <TextView
         android:id="@+id/suggestion_details_title"
@@ -19,17 +20,17 @@
         android:id="@+id/suggestion_details_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="2dp"
         android:text="under review"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:paddingTop="2dp" />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/suggestion_details_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="10dp"
         android:text="Badges are cool, and we&apos;d like to give them out to our active users."
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:paddingTop="10dp" />
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
         android:id="@+id/suggestion_details_creator"
@@ -47,27 +48,27 @@
         android:layout_height="wrap_content"
         android:background="@drawable/admin_response"
         android:orientation="vertical" >
-        
+
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ADMIN RESPONSE"
-            android:textSize="10sp" 
             android:background="#696b6e"
-            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
             android:paddingLeft="10dp"
             android:paddingRight="2dp"
-            android:paddingBottom="2dp"
-            android:textColor="#FFFFFF" />
+            android:paddingTop="2dp"
+            android:text="ADMIN RESPONSE"
+            android:textColor="#FFFFFF"
+            android:textSize="10sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:paddingBottom="10dp" >
+            android:paddingTop="10dp" >
 
             <ImageView
                 android:id="@+id/suggestion_details_admin_avatar"
@@ -99,31 +100,49 @@
                         android:layout_alignParentRight="true"
                         android:text="Feb 12, 2013"
                         android:textSize="12sp" />
-
                 </RelativeLayout>
 
                 <TextView
                     android:id="@+id/suggestion_details_admin_response_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
                     android:text="Hey,\n\nWe are looking into this. Please check back and leave additional comments and we will be in touch!\n\nChristian"
-                    android:textSize="12sp"
-                    android:paddingTop="10dp" />
-
+                    android:textSize="12sp" />
             </LinearLayout>
-
         </LinearLayout>
-
     </LinearLayout>
+
+    <TableLayout
+        android:id="@+id/TableLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+		<TableRow>
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Vote" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Comment" />
+        </TableRow>
+    </TableLayout>
 
     <TextView
         android:id="@+id/suggestion_details_vote_count"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
+        android:paddingTop="10dp"
         android:text="29 votes • 26 comments"
         android:textSize="12sp"
-        android:textStyle="bold"
-        android:paddingTop="10dp" />
+        android:textStyle="bold" />
 
 </LinearLayout>
