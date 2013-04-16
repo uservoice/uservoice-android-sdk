@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AbsListView;
-import android.widget.AbsListView.OnScrollListener;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -22,8 +24,9 @@ import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.ui.DefaultCallback;
 import com.uservoice.uservoicesdk.ui.PaginatedAdapter;
+import com.uservoice.uservoicesdk.ui.PaginationScrollListener;
 
-public class ForumActivity extends ListActivity implements OnScrollListener {
+public class ForumActivity extends ListActivity {
 	
 	private List<Suggestion> suggestions;
 	private Forum forum;
@@ -68,7 +71,22 @@ public class ForumActivity extends ListActivity implements OnScrollListener {
 			}
 		});
 		
-		getListView().setOnScrollListener(this);
+		getListView().setOnScrollListener(new PaginationScrollListener(getModelAdapter()) {
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+				if (forum != null)
+					super.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
+			}
+		});
+		
+		getListView().setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Suggestion suggestion = (Suggestion) getModelAdapter().getItem(position);
+				Session.getInstance().setSuggestion(suggestion);
+				startActivity(new Intent(ForumActivity.this, SuggestionActivity.class));
+			}
+		});
 		
 		loadClientConfig();
 	}
@@ -139,16 +157,5 @@ public class ForumActivity extends ListActivity implements OnScrollListener {
 	@SuppressWarnings("unchecked")
 	protected PaginatedAdapter<Suggestion> getModelAdapter() {
 		return (PaginatedAdapter<Suggestion>) getListAdapter();
-	}
-
-	@Override
-	public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-		if (firstVisibleItem + visibleItemCount >= totalItemCount && forum != null && Session.getInstance().getClientConfig() != null) {
-			getModelAdapter().loadMore();
-		}
-	}
-
-	@Override
-	public void onScrollStateChanged(AbsListView view, int scrollState) {
 	}
 }

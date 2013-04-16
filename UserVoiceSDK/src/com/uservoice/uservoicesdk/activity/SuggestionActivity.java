@@ -31,6 +31,8 @@ public class SuggestionActivity extends ListActivity {
 		headerView = getLayoutInflater().inflate(R.layout.suggestion_layout, null);
 		getListView().addHeaderView(headerView);
 		
+		setTitle("Idea");
+		
 		setListAdapter(new PaginatedAdapter<Comment>(this, R.layout.comment_item, new ArrayList<Comment>()) {
 
 			@Override
