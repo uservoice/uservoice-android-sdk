@@ -4,6 +4,8 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.ui.WelcomeAdapter;
@@ -14,10 +16,14 @@ public class UserVoiceActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		getListView().addHeaderView(getLayoutInflater().inflate(R.layout.contact_layout, null));
+		setTitle("Help");
 		getListView().setPadding(10, 0, 10, 0);
 		setListAdapter(new WelcomeAdapter(this));
-		showForum();
+		getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			}
+		});
 	}
 
 	@Override

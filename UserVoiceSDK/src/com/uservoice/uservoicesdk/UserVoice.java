@@ -1,21 +1,16 @@
 package com.uservoice.uservoicesdk;
 
-import com.uservoice.uservoicesdk.activity.ForumActivity;
-import com.uservoice.uservoicesdk.activity.TabActivity;
-
 import android.content.Context;
 import android.content.Intent;
+
+import com.uservoice.uservoicesdk.activity.UserVoiceActivity;
 
 public class UserVoice {
 	
 	public static void launchUserVoice(Config config, Context context) {
 		Session.getInstance().setConfig(config);
-//		Intent intent = new Intent(context, UserVoiceActivity.class);
-		Intent intent = new Intent(context, TabActivity.class);
-//		Intent intent = new Intent(context, ForumActivity.class);
+		Intent intent = new Intent(context, UserVoiceActivity.class);
 		context.startActivity(intent);
-//		ContactDialog dialog = new ContactDialog(context);
-//		dialog.show();
 	}
 	
 	public static void launchForum(Config config, Context context) {

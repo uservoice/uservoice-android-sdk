@@ -21,6 +21,7 @@ public class WelcomeAdapter extends BaseAdapter {
 	private static int FORUM = 1;
 	private static int TOPIC = 2;
 	private static int LOADING = 3;
+	private static int CONTACT = 4;
 	
 	private List<Topic> topics;
 	private LayoutInflater inflater;
@@ -48,7 +49,6 @@ public class WelcomeAdapter extends BaseAdapter {
 			@Override
 			public void onModel(Forum model) {
 				Session.getInstance().setForum(model);
-				notifyDataSetChanged();
 			}
 		});
 	}
@@ -65,7 +65,7 @@ public class WelcomeAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		return 4 + (topics == null ? 0 : topics.size());
+		return 4 + (topics == null ? 1 : topics.size());
 	}
 
 	@Override
@@ -91,33 +91,40 @@ public class WelcomeAdapter extends BaseAdapter {
 				view = inflater.inflate(R.layout.header_item, null);
 			else if (type == TOPIC)
 				view = inflater.inflate(android.R.layout.simple_list_item_1, null);
+			else if (type == CONTACT)
+				view = inflater.inflate(android.R.layout.simple_list_item_1, null);
 		}
 		
 		if (type == FORUM) {
 			TextView textView = (TextView) view.findViewById(android.R.id.text1);
-			textView.setText(Session.getInstance().getForum().getName());
+			textView.setText("Feedback Forum");
 		} else if (type == HEADER) {
 			TextView textView = (TextView) view.findViewById(R.id.text);
-			textView.setText(position == 0 ? "FEEDBACK FORUM" : "KNOWLEDGE BASE");
+			textView.setText(position == 0 ? "FEEDBACK & SUPPORT" : "KNOWLEDGE BASE");
 		} else if (type == TOPIC) {
 			Topic topic = position - 3 < topics.size() ? topics.get(position - 3) : null;
 			TextView textView = (TextView) view.findViewById(android.R.id.text1);
 			textView.setText(topic == null ? "All Articles" : topic.getName());
+		} else if (type == CONTACT) {
+			TextView textView = (TextView) view.findViewById(android.R.id.text1);
+			textView.setText("Contact Us");
 		}
 		return view;
 	}
 	
 	@Override
 	public int getViewTypeCount() {
-		return 4;
+		return 5;
 	}
 	
 	@Override
 	public int getItemViewType(int position) {
-		if (position == 0 || position == 2)
+		if (position == 0 || position == 3)
 			return HEADER;
 		if (position == 1)
-			return Session.getInstance().getForum() == null ? LOADING : FORUM;
+			return CONTACT;
+		if (position == 2)
+			return FORUM;
 		if (topics != null)
 			return TOPIC;
 		return LOADING;
