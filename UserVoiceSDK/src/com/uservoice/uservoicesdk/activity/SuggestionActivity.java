@@ -18,7 +18,7 @@ import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.model.Comment;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.rest.Callback;
-import com.uservoice.uservoicesdk.ui.CommentDialogFragment;
+import com.uservoice.uservoicesdk.ui.SigninDialogFragment;
 import com.uservoice.uservoicesdk.ui.ImageCache;
 import com.uservoice.uservoicesdk.ui.PaginatedAdapter;
 import com.uservoice.uservoicesdk.ui.PaginationScrollListener;
@@ -74,9 +74,9 @@ public class SuggestionActivity extends ListActivity {
 		findViewById(R.id.comment_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(SuggestionActivity.this, CommentActivity.class));
-//				DialogFragment dialog = new CommentDialogFragment();
-//				dialog.show(getFragmentManager(), "CommentDialogFragment");
+//				startActivity(new Intent(SuggestionActivity.this, CommentActivity.class));
+				DialogFragment dialog = new SigninDialogFragment();
+				dialog.show(getFragmentManager(), "CommentDialogFragment");
 			}
 		});
 	}
