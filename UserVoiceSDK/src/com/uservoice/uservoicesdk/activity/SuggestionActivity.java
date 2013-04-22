@@ -4,7 +4,9 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.DialogFragment;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -16,6 +18,7 @@ import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.model.Comment;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.rest.Callback;
+import com.uservoice.uservoicesdk.ui.CommentDialogFragment;
 import com.uservoice.uservoicesdk.ui.ImageCache;
 import com.uservoice.uservoicesdk.ui.PaginatedAdapter;
 import com.uservoice.uservoicesdk.ui.PaginationScrollListener;
@@ -67,8 +70,16 @@ public class SuggestionActivity extends ListActivity {
 		
 		updateView();
 		getListView().setOnScrollListener(new PaginationScrollListener(getModelAdapter()));
+		
+		findViewById(R.id.comment_button).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(SuggestionActivity.this, CommentActivity.class));
+//				DialogFragment dialog = new CommentDialogFragment();
+//				dialog.show(getFragmentManager(), "CommentDialogFragment");
+			}
+		});
 	}
-	
 	
 	private void updateView() {
 		Suggestion suggestion = Session.getInstance().getSuggestion();

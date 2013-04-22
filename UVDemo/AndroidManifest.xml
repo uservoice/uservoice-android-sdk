@@ -29,6 +29,7 @@
         <activity android:name="com.uservoice.uservoicesdk.activity.TabActivity" />
         <activity android:name="com.uservoice.uservoicesdk.activity.SuggestionActivity" />
         <activity android:name="com.uservoice.uservoicesdk.activity.ArticleActivity" />
-    </application>
+        <activity android:name="com.uservoice.uservoicesdk.activity.CommentActivity" />
+        </application>
 
 </manifest>

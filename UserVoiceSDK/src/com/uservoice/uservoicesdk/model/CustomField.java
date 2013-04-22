@@ -16,10 +16,12 @@ public class CustomField extends BaseModel {
 		super.load(object);
 		name = getString(object, "name");
 		predefinedValues = new ArrayList<String>();
-		JSONArray values = object.getJSONArray("possible_values");
-		for (int i = 0; i < values.length(); i++) {
-			JSONObject value = values.getJSONObject(i);
-			predefinedValues.add(getString(value, "value"));
+		if (object.has("possible_values")) {
+			JSONArray values = object.getJSONArray("possible_values");
+			for (int i = 0; i < values.length(); i++) {
+				JSONObject value = values.getJSONObject(i);
+				predefinedValues.add(getString(value, "value"));
+			}
 		}
 	}
 	

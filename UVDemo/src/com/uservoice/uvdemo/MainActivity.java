@@ -40,7 +40,8 @@ public class MainActivity extends Activity {
 	}
 	
 	public void launchFeedback() {
-		Config config = new Config("feedback.uservoice.com", "8L66hVQUQ45TOLl0dA70YA", "a5e6da1827538a27755a4f4de0602e82533aff73");
+//		Config config = new Config("feedback.uservoice.com", "8L66hVQUQ45TOLl0dA70YA", "a5e6da1827538a27755a4f4de0602e82533aff73");
+		Config config = new Config("demo.uservoice.com", "pZJocTBPbg5FN4bAwczDLQ", "Q7UKcxRYLlSJN4CxegUYI6t0uprdsSAGthRIDvYmI");
 		UserVoice.launchUserVoice(config, this);
 	}
 	
