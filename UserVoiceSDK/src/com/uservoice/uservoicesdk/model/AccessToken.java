@@ -20,7 +20,7 @@ public class AccessToken extends BaseModel {
 		params.put("email", email);
 		params.put("password", password);
 		params.put("request_token", Session.getInstance().getRequestToken().getKey());
-		doGet(apiPath("/oauth/authorize.json"), new RestTaskCallback(callback) {
+		doPost(apiPath("/oauth/authorize.json"), params, new RestTaskCallback(callback) {
 			@Override
 			public void onComplete(JSONObject result) throws JSONException {
 				callback.onModel(deserializeObject(result, "token", AccessToken.class));
