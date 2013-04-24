@@ -1,13 +1,16 @@
 package com.uservoice.uservoicesdk.ui;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -20,6 +23,7 @@ import com.uservoice.uservoicesdk.model.User;
 import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.rest.RestResult;
 
+@SuppressLint("ValidFragment")
 public class SigninDialogFragment extends DialogFragment {
 	
 	private EditText emailField;
@@ -30,6 +34,7 @@ public class SigninDialogFragment extends DialogFragment {
 	private String email;
 	private String name;
 	private Runnable callback;
+	private Runnable requestTokenCallback;
 	
 	public SigninDialogFragment() {}
 	
@@ -41,11 +46,12 @@ public class SigninDialogFragment extends DialogFragment {
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		
 		RequestToken.getRequestToken(new DefaultCallback<RequestToken>(getActivity()) {
 			@Override
 			public void onModel(RequestToken requestToken) {
 				Session.getInstance().setRequestToken(requestToken);
+				if (requestTokenCallback != null)
+					requestTokenCallback.run();
 			}
 		});
 		
@@ -89,7 +95,7 @@ public class SigninDialogFragment extends DialogFragment {
 		final AlertDialog dialog = builder.create();
 		dialog.setOnShowListener(new DialogInterface.OnShowListener() {
 			@Override
-			public void onShow(DialogInterface di) {				
+			public void onShow(DialogInterface di) {
 				Button positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
 				positiveButton.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -97,6 +103,8 @@ public class SigninDialogFragment extends DialogFragment {
 						signIn();
 					}
 				});
+				InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+		        imm.showSoftInput(emailField, InputMethodManager.SHOW_IMPLICIT);
 			}
 		});
 		return dialog;
@@ -130,21 +138,31 @@ public class SigninDialogFragment extends DialogFragment {
 				callback.run();
 			}
 		};
-		if (nameField.getVisibility() == View.VISIBLE) {
-			User.findOrCreate(emailField.getText().toString(), nameField.getText().toString(), userCallback);
+		Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				if (nameField.getVisibility() == View.VISIBLE) {
+					User.findOrCreate(emailField.getText().toString(), nameField.getText().toString(), userCallback);
+				} else {
+					AccessToken.authorize(emailField.getText().toString(), passwordField.getText().toString(), new Callback<AccessToken>() {
+						@Override
+						public void onModel(AccessToken accessToken) {
+							Session.getInstance().setAccessToken(accessToken);
+							User.loadCurrentUser(userCallback);
+						}
+
+						@Override
+						public void onError(RestResult error) {
+							Toast.makeText(activity, "Incorrect email or password", Toast.LENGTH_SHORT).show();
+						}
+					});
+				}
+			}
+		};
+		if (Session.getInstance().getRequestToken() != null) {
+			runnable.run();
 		} else {
-			AccessToken.authorize(emailField.getText().toString(), passwordField.getText().toString(), new Callback<AccessToken>() {
-				@Override
-				public void onModel(AccessToken accessToken) {
-					Session.getInstance().setAccessToken(accessToken);
-					User.loadCurrentUser(userCallback);
-				}
-	
-				@Override
-				public void onError(RestResult error) {
-					Toast.makeText(activity, "Incorrect email or password", Toast.LENGTH_SHORT).show();
-				}
-			});
+			requestTokenCallback = runnable;
 		}
 	}
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.DialogFragment;
 
 import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.model.RequestToken;
 import com.uservoice.uservoicesdk.model.User;
 import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.rest.RestResult;
@@ -55,11 +56,17 @@ public class SigninManager {
 	}
 	
 	private void createUser() {
-		User.findOrCreate(email, name, new DefaultCallback<User>(activity) {
+		RequestToken.getRequestToken(new DefaultCallback<RequestToken>(activity) {
 			@Override
-			public void onModel(User model) {
-				Session.getInstance().setUser(model);
-				callback.run();
+			public void onModel(RequestToken model) {
+				Session.getInstance().setRequestToken(model);
+				User.findOrCreate(email, name, new DefaultCallback<User>(activity) {
+					@Override
+					public void onModel(User model) {
+						Session.getInstance().setUser(model);
+						callback.run();
+					}
+				});
 			}
 		});
 	}
