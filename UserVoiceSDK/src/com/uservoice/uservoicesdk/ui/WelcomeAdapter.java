@@ -65,11 +65,16 @@ public class WelcomeAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		return 4 + (topics == null ? 1 : topics.size());
+		return 4 + (topics == null ? 1 : topics.size() + 1);
 	}
 
 	@Override
 	public Object getItem(int position) {
+		if (position == 2) {
+			return Session.getInstance().getForum();
+		} else if (position > 4 && position - 4 < topics.size()) {
+			return topics.get(position - 4);
+		}
 		return null;
 	}
 
@@ -102,7 +107,7 @@ public class WelcomeAdapter extends BaseAdapter {
 			TextView textView = (TextView) view.findViewById(R.id.text);
 			textView.setText(position == 0 ? "FEEDBACK & SUPPORT" : "KNOWLEDGE BASE");
 		} else if (type == TOPIC) {
-			Topic topic = position - 3 < topics.size() ? topics.get(position - 3) : null;
+			Topic topic = position - 4 < topics.size() ? topics.get(position - 4) : null;
 			TextView textView = (TextView) view.findViewById(android.R.id.text1);
 			textView.setText(topic == null ? "All Articles" : topic.getName());
 		} else if (type == CONTACT) {

@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.uservoice.uservoicesdk.R;
+import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.model.Topic;
 import com.uservoice.uservoicesdk.ui.WelcomeAdapter;
 
 public class UserVoiceActivity extends ListActivity {
@@ -26,8 +28,10 @@ public class UserVoiceActivity extends ListActivity {
 					// Show contact us
 				} else if (position == 2) {
 					startActivity(new Intent(UserVoiceActivity.this, ForumActivity.class));
-				} else {
-					// kb
+				} else if (position > 3) {
+					Topic topic = (Topic) getListAdapter().getItem(position);
+					Session.getInstance().setTopic(topic);
+					startActivity(new Intent(UserVoiceActivity.this, TopicActivity.class));
 				}
 			}
 		});

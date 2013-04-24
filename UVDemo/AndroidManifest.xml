@@ -30,6 +30,7 @@
         <activity android:name="com.uservoice.uservoicesdk.activity.SuggestionActivity" />
         <activity android:name="com.uservoice.uservoicesdk.activity.ArticleActivity" />
         <activity android:name="com.uservoice.uservoicesdk.activity.CommentActivity" />
-        </application>
+        <activity android:name="com.uservoice.uservoicesdk.activity.TopicActivity" />
+    </application>
 
 </manifest>
