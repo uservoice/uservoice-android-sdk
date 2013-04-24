@@ -80,7 +80,7 @@ public class User extends BaseModel {
 	
 	public static void sendForgotPassword(String email, final Callback<User> callback) {
 		Map<String,String> params = new HashMap<String,String>();
-		params.put("email", email);
+		params.put("user[email]", email);
 		doGet(apiPath("/users/forgot_password.json"), params, new RestTaskCallback(callback) {
 			@Override
 			public void onComplete(JSONObject result) throws JSONException {
