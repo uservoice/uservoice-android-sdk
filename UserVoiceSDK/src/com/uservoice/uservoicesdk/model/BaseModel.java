@@ -101,6 +101,8 @@ public class BaseModel {
 	}
 	
 	protected static <T extends BaseModel> List<T> deserializeList(JSONObject object, String rootKey, Class<T> modelClass) throws JSONException {
+		if (!object.has(rootKey))
+			return null;
 		try {
 			JSONArray array = object.getJSONArray(rootKey);
 			List<T> list = new ArrayList<T>(array.length());
@@ -120,6 +122,8 @@ public class BaseModel {
 	}
 	
 	protected static <T extends BaseModel> T deserializeObject(JSONObject object, String rootKey, Class<T> modelClass) throws JSONException {
+		if (!object.has(rootKey))
+			return null;
 		try {
 			JSONObject singleObject = object.getJSONObject(rootKey);
 			T model = modelClass.newInstance();
@@ -137,6 +141,8 @@ public class BaseModel {
 	}
 	
 	protected static List<BaseModel> deserializeHeterogenousList(JSONObject object, String rootKey) throws JSONException {
+		if (!object.has(rootKey))
+			return null;
 		JSONArray array = object.getJSONArray(rootKey);
 		List<BaseModel> list = new ArrayList<BaseModel>(array.length());
 		for (int i = 0; i < array.length(); i++) {
