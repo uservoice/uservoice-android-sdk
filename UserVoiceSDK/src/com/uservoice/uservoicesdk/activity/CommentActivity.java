@@ -31,13 +31,17 @@ public class CommentActivity extends Activity {
 		Suggestion suggestion = Session.getInstance().getSuggestion();
 		EditText editText = (EditText) findViewById(R.id.comment_edit_text);
 		String text = editText.getText().toString();
-		Comment.createComment(suggestion, text, new DefaultCallback<Comment>(this) {
-			@Override
-			public void onModel(Comment comment) {
-				Toast.makeText(CommentActivity.this, "Your comment has been posted", Toast.LENGTH_SHORT).show();
-				finish();
-			}
-		});
+		if (text.trim().isEmpty()) {
+			finish();
+		} else {
+			Comment.createComment(suggestion, text, new DefaultCallback<Comment>(this) {
+				@Override
+				public void onModel(Comment comment) {
+					Toast.makeText(CommentActivity.this, "Your comment has been posted", Toast.LENGTH_SHORT).show();
+					finish();
+				}
+			});
+		}
 	}
 	
 	@Override
