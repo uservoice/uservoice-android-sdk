@@ -1,5 +1,6 @@
 package com.uservoice.uservoicesdk.ui;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -65,19 +66,24 @@ public class SigninDialogFragment extends DialogFragment {
 			}
 		});
 		builder.setView(view);
-		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+		builder.setNegativeButton("Cancel", null);
+		builder.setPositiveButton("Sign in", null);
+
+		// the crap you have to do to have a button that doesn't always close the dialog
+		final AlertDialog dialog = builder.create();
+		dialog.setOnShowListener(new DialogInterface.OnShowListener() {
 			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// nothing to do
+			public void onShow(DialogInterface di) {
+				Button positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+				positiveButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						signIn();
+					}
+				});
 			}
 		});
-		builder.setPositiveButton("Sign in", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				signIn();
-			}
-		});
-		return builder.create();
+		return dialog;
 	}
 	
 	private void discoverUser() {
@@ -99,26 +105,27 @@ public class SigninDialogFragment extends DialogFragment {
 	}
 	
 	private void signIn() {
+		final Activity activity = getActivity();
 		AccessToken.authorize(email.getText().toString(), password.getText().toString(), new Callback<AccessToken>() {
 			@Override
 			public void onModel(AccessToken accessToken) {
 				Session.getInstance().setAccessToken(accessToken);
-				dismiss();
 				// run success callback
 			}
 
 			@Override
 			public void onError(RestResult error) {
-				Toast.makeText(getActivity(), "Incorrect email or password", Toast.LENGTH_SHORT).show();
+				Toast.makeText(activity, "Incorrect email or password", Toast.LENGTH_SHORT).show();
 			}
 		});
 	}
 
 	private void sendForgotPassword() {
+		final Activity activity = getActivity();
 		User.sendForgotPassword(email.getText().toString(), new DefaultCallback<User>(getActivity()) {
 			@Override
 			public void onModel(User model) {
-				Toast.makeText(getActivity(), "Forgot password email sent", Toast.LENGTH_SHORT).show();
+				Toast.makeText(activity, "Forgot password email sent", Toast.LENGTH_SHORT).show();
 			}
 		});
 	}
