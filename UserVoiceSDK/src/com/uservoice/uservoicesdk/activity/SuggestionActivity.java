@@ -23,6 +23,8 @@ import com.uservoice.uservoicesdk.ui.PaginationScrollListener;
 import com.uservoice.uservoicesdk.ui.SigninManager;
 
 public class SuggestionActivity extends ListActivity {
+
+	private static int POST_COMMENT = 1;
 	
 	private View headerView;
 
@@ -76,7 +78,7 @@ public class SuggestionActivity extends ListActivity {
 				SigninManager.signIn(SuggestionActivity.this, new Runnable() {
 					@Override
 					public void run() {
-						startActivity(new Intent(SuggestionActivity.this, CommentActivity.class));
+						startActivityForResult(new Intent(SuggestionActivity.this, CommentActivity.class), POST_COMMENT);
 					}
 				});
 			}
@@ -112,6 +114,13 @@ public class SuggestionActivity extends ListActivity {
 		
 		ImageView avatar = (ImageView) headerView.findViewById(R.id.suggestion_details_admin_avatar);
 		ImageCache.getInstance().loadImage(suggestion.getAdminResponseAvatarUrl(), avatar);
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == POST_COMMENT) {
+			getModelAdapter().reload();
+		}
 	}
 	
 	private TextView getTextView(int id) {
