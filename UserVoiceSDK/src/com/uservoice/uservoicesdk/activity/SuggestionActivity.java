@@ -21,6 +21,7 @@ import com.uservoice.uservoicesdk.ui.ImageCache;
 import com.uservoice.uservoicesdk.ui.PaginatedAdapter;
 import com.uservoice.uservoicesdk.ui.PaginationScrollListener;
 import com.uservoice.uservoicesdk.ui.SigninManager;
+import com.uservoice.uservoicesdk.ui.VoteDialogFragment;
 
 public class SuggestionActivity extends ListActivity {
 
@@ -79,6 +80,19 @@ public class SuggestionActivity extends ListActivity {
 					@Override
 					public void run() {
 						startActivityForResult(new Intent(SuggestionActivity.this, CommentActivity.class), POST_COMMENT);
+					}
+				});
+			}
+		});
+		
+		findViewById(R.id.vote_button).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				SigninManager.signIn(SuggestionActivity.this, new Runnable() {
+					@Override
+					public void run() {
+						VoteDialogFragment dialog = new VoteDialogFragment();
+						dialog.show(getFragmentManager(), "VoteDialogFragment");
 					}
 				});
 			}
