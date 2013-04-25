@@ -38,6 +38,7 @@ public class CommentActivity extends Activity {
 				@Override
 				public void onModel(Comment comment) {
 					Toast.makeText(CommentActivity.this, "Your comment has been posted", Toast.LENGTH_SHORT).show();
+					Session.getInstance().setComment(comment);
 					finish();
 				}
 			});

@@ -98,10 +98,4 @@ public abstract class PaginatedAdapter<T> extends ModelAdapter<T> {
 		
 	}
 
-	public void reload() {
-		loading = false;
-		page = 1;
-		searchResults = new ArrayList<T>();
-		loadMore();
-	}
 }

@@ -26,7 +26,6 @@
         
         <activity android:name="com.uservoice.uservoicesdk.activity.UserVoiceActivity" />
         <activity android:name="com.uservoice.uservoicesdk.activity.ForumActivity" />
-        <activity android:name="com.uservoice.uservoicesdk.activity.TabActivity" />
         <activity android:name="com.uservoice.uservoicesdk.activity.SuggestionActivity" />
         <activity android:name="com.uservoice.uservoicesdk.activity.ArticleActivity" />
         <activity android:name="com.uservoice.uservoicesdk.activity.CommentActivity" />

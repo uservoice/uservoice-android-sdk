@@ -74,6 +74,11 @@ public abstract class ModelAdapter<T> extends BaseAdapter {
 		return objects;
 	}
 	
+	public void add(int location, T object) {
+		objects.add(location, object);
+		notifyDataSetChanged();
+	}
+	
 	protected abstract void customizeLayout(View view, T model);
 	protected abstract void loadPage(int page, Callback<List<T>> callback);
 }

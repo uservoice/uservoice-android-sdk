@@ -9,6 +9,7 @@ import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 import com.uservoice.uservoicesdk.model.AccessToken;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.ClientConfig;
+import com.uservoice.uservoicesdk.model.Comment;
 import com.uservoice.uservoicesdk.model.Forum;
 import com.uservoice.uservoicesdk.model.RequestToken;
 import com.uservoice.uservoicesdk.model.Suggestion;
@@ -38,6 +39,7 @@ public class Session {
 	private Suggestion suggestion;
 	private Article article;
 	private Topic topic;
+	private Comment comment;
 	
 	public Config getConfig() {
 		return config;
@@ -124,6 +126,14 @@ public class Session {
 	
 	public void setTopic(Topic topic) {
 		this.topic = topic;
+	}
+	
+	public Comment getComment() {
+		return comment;
+	}
+	
+	public void setComment(Comment comment) {
+		this.comment = comment;
 	}
 
 }

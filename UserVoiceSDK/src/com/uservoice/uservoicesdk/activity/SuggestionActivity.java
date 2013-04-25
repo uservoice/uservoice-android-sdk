@@ -119,7 +119,9 @@ public class SuggestionActivity extends ListActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == POST_COMMENT) {
-			getModelAdapter().reload();
+			Comment comment = Session.getInstance().getComment();
+			Session.getInstance().setComment(null);
+			getModelAdapter().add(0, comment);
 		}
 	}
 	
