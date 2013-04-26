@@ -5,6 +5,7 @@ import java.util.Map;
 
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
+import android.content.Context;
 
 import com.uservoice.uservoicesdk.model.AccessToken;
 import com.uservoice.uservoicesdk.model.Article;
@@ -68,10 +69,15 @@ public class Session {
 		return accessToken;
 	}
 	
+	public void setAccessToken(Context context, AccessToken accessToken) {
+		this.accessToken = accessToken;
+		accessToken.persist(context, "access_token");
+	}
+	
 	public void setAccessToken(AccessToken accessToken) {
 		this.accessToken = accessToken;
 	}
-	
+
 	public User getUser() {
 		return user;
 	}

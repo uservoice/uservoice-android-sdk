@@ -1,4 +1,4 @@
-package com.uservoice.uservoicesdk.ui;
+package com.uservoice.uservoicesdk;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.model.AccessToken;
+import com.uservoice.uservoicesdk.model.AccessTokenResult;
 import com.uservoice.uservoicesdk.model.RequestToken;
 import com.uservoice.uservoicesdk.model.User;
 import com.uservoice.uservoicesdk.rest.Callback;
@@ -130,25 +131,32 @@ public class SigninDialogFragment extends DialogFragment {
 	
 	private void signIn() {
 		final Activity activity = getActivity();
-		final Callback<User> userCallback = new DefaultCallback<User>(getActivity()) {
-			@Override
-			public void onModel(User model) {
-				Session.getInstance().setUser(model);
-				dismiss();
-				callback.run();
-			}
-		};
 		Runnable runnable = new Runnable() {
 			@Override
 			public void run() {
 				if (nameField.getVisibility() == View.VISIBLE) {
-					User.findOrCreate(emailField.getText().toString(), nameField.getText().toString(), userCallback);
+					User.findOrCreate(emailField.getText().toString(), nameField.getText().toString(), new DefaultCallback<AccessTokenResult<User>>(getActivity()) {
+						@Override
+						public void onModel(AccessTokenResult<User> model) {
+							Session.getInstance().setUser(model.getModel());
+							Session.getInstance().setAccessToken(activity, model.getAccessToken());
+							dismiss();
+							callback.run();
+						}
+					});
 				} else {
 					AccessToken.authorize(emailField.getText().toString(), passwordField.getText().toString(), new Callback<AccessToken>() {
 						@Override
 						public void onModel(AccessToken accessToken) {
-							Session.getInstance().setAccessToken(accessToken);
-							User.loadCurrentUser(userCallback);
+							Session.getInstance().setAccessToken(activity, accessToken);
+							User.loadCurrentUser(new DefaultCallback<User>(getActivity()) {
+								@Override
+								public void onModel(User model) {
+									Session.getInstance().setUser(model);
+									dismiss();
+									callback.run();
+								}
+							});
 						}
 
 						@Override

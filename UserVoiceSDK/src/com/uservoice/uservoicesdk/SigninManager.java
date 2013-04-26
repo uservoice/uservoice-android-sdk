@@ -1,13 +1,15 @@
-package com.uservoice.uservoicesdk.ui;
+package com.uservoice.uservoicesdk;
 
 import android.app.Activity;
 import android.app.DialogFragment;
 
-import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.model.AccessTokenResult;
 import com.uservoice.uservoicesdk.model.RequestToken;
 import com.uservoice.uservoicesdk.model.User;
 import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.rest.RestResult;
+import com.uservoice.uservoicesdk.ui.DefaultCallback;
+import com.uservoice.uservoicesdk.ui.SigninDialogFragment;
 
 public class SigninManager {
 	
@@ -60,10 +62,11 @@ public class SigninManager {
 			@Override
 			public void onModel(RequestToken model) {
 				Session.getInstance().setRequestToken(model);
-				User.findOrCreate(email, name, new DefaultCallback<User>(activity) {
+				User.findOrCreate(email, name, new DefaultCallback<AccessTokenResult<User>>(activity) {
 					@Override
-					public void onModel(User model) {
-						Session.getInstance().setUser(model);
+					public void onModel(AccessTokenResult<User> model) {
+						Session.getInstance().setUser(model.getModel());
+						Session.getInstance().setAccessToken(activity, model.getAccessToken());
 						callback.run();
 					}
 				});

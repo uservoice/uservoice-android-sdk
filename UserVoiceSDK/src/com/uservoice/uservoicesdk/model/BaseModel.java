@@ -12,6 +12,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.text.Html;
 
 import com.uservoice.uservoicesdk.Config;
@@ -31,6 +34,35 @@ public class BaseModel {
 	
 	public int getId() {
 		return id;
+	}
+	
+	public boolean persist(Context context, String key) {
+		JSONObject object = new JSONObject();
+		JSONObject container = new JSONObject();
+		try {
+			save(object);
+			container.put(key, object);
+		} catch (JSONException e) {
+			return false;
+		}
+		SharedPreferences prefs = context.getSharedPreferences("uv", 0);
+		Editor edit = prefs.edit();
+		edit.putString(key, container.toString());
+		return edit.commit();
+	}
+	
+	public static <T extends BaseModel> T load(Context context, String key, Class<T> modelClass) {
+		try {
+			SharedPreferences prefs = context.getSharedPreferences("uv", 0);
+			JSONObject container = new JSONObject(prefs.getString(key, "{}"));
+			return deserializeObject(container, key, modelClass);
+		} catch (JSONException e) {
+			return null;
+		}
+	}
+	
+	public void save(JSONObject object) throws JSONException {
+		object.put("id", id);
 	}
 	
 	protected String getString(JSONObject object, String key) throws JSONException {

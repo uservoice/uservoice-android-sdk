@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.uservoice.uservoicesdk.InitManager;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
-import com.uservoice.uservoicesdk.model.ClientConfig;
 import com.uservoice.uservoicesdk.model.Forum;
 import com.uservoice.uservoicesdk.model.Topic;
 
@@ -30,18 +30,16 @@ public class WelcomeAdapter extends BaseAdapter {
 	public WelcomeAdapter(Context context) {
 		this.context = context;
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		loadClientConfig();
-		loadTopics();
-	}
-	
-	private void loadClientConfig() {
-		ClientConfig.loadClientConfig(new DefaultCallback<ClientConfig>(context) {
+		
+		new InitManager(context, new Runnable() {
 			@Override
-			public void onModel(ClientConfig model) {
-				Session.getInstance().setClientConfig(model);
+			public void run() {
+				notifyDataSetChanged();
+				// this has to be deferred only because we fall back to clientconfig forum_id 
 				loadForum();
 			}
-		});
+		}).init();
+		loadTopics();
 	}
 	
 	private void loadForum() {
@@ -49,6 +47,7 @@ public class WelcomeAdapter extends BaseAdapter {
 			@Override
 			public void onModel(Forum model) {
 				Session.getInstance().setForum(model);
+				notifyDataSetChanged();
 			}
 		});
 	}
@@ -65,7 +64,12 @@ public class WelcomeAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		return 4 + (topics == null ? 1 : topics.size() + 1);
+		if (Session.getInstance().getClientConfig() == null) {
+			return 1;
+		} else {
+			// TODO change based on enabled features
+			return 4 + (topics == null ? 1 : topics.size() + 1);
+		}
 	}
 
 	@Override
@@ -124,12 +128,16 @@ public class WelcomeAdapter extends BaseAdapter {
 	
 	@Override
 	public int getItemViewType(int position) {
+		if (Session.getInstance().getClientConfig() == null)
+			return LOADING;
+		
+		// TODO change based on enabled features
 		if (position == 0 || position == 3)
 			return HEADER;
 		if (position == 1)
 			return CONTACT;
 		if (position == 2)
-			return FORUM;
+			return Session.getInstance().getForum() == null ? LOADING : FORUM;
 		if (topics != null)
 			return TOPIC;
 		return LOADING;

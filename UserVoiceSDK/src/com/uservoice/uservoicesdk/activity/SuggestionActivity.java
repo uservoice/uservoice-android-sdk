@@ -12,15 +12,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.uservoice.uservoicesdk.ImageCache;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.SigninManager;
 import com.uservoice.uservoicesdk.model.Comment;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.rest.Callback;
-import com.uservoice.uservoicesdk.ui.ImageCache;
 import com.uservoice.uservoicesdk.ui.PaginatedAdapter;
 import com.uservoice.uservoicesdk.ui.PaginationScrollListener;
-import com.uservoice.uservoicesdk.ui.SigninManager;
 import com.uservoice.uservoicesdk.ui.VoteDialogFragment;
 
 public class SuggestionActivity extends ListActivity {
@@ -134,8 +134,10 @@ public class SuggestionActivity extends ListActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == POST_COMMENT) {
 			Comment comment = Session.getInstance().getComment();
-			Session.getInstance().setComment(null);
-			getModelAdapter().add(0, comment);
+			if (comment != null) {
+				Session.getInstance().setComment(null);
+				getModelAdapter().add(0, comment);
+			}
 		}
 	}
 	

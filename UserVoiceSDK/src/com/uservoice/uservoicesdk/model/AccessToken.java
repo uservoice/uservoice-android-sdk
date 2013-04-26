@@ -41,4 +41,9 @@ public class AccessToken extends BaseModel {
 	public String getSecret() {
 		return secret;
 	}
+	
+	public void save(JSONObject object) throws JSONException {
+		object.put("oauth_token", key);
+		object.put("oauth_token_secret", secret);
+	}
 }
