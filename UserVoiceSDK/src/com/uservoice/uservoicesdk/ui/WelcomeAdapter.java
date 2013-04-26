@@ -1,5 +1,6 @@
 package com.uservoice.uservoicesdk.ui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.uservoice.uservoicesdk.Config;
 import com.uservoice.uservoicesdk.InitManager;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
@@ -17,15 +19,17 @@ import com.uservoice.uservoicesdk.model.Topic;
 
 public class WelcomeAdapter extends BaseAdapter {
 	
-	private static int HEADER = 0;
-	private static int FORUM = 1;
-	private static int TOPIC = 2;
-	private static int LOADING = 3;
-	private static int CONTACT = 4;
+	private static int FEEDBACK_HEADER = 0;
+	private static int KB_HEADER = 1;
+	private static int FORUM = 2;
+	private static int TOPIC = 3;
+	private static int LOADING = 4;
+	private static int CONTACT = 5;
 	
 	private List<Topic> topics;
 	private LayoutInflater inflater;
 	private final Context context;
+	private List<Integer> staticRows;
 	
 	public WelcomeAdapter(Context context) {
 		this.context = context;
@@ -61,30 +65,58 @@ public class WelcomeAdapter extends BaseAdapter {
 			}
 		});
 	}
+	
+	private void computeStaticRows() {
+		if (staticRows == null) {
+			staticRows = new ArrayList<Integer>();
+			Config config = Session.getInstance().getConfig();
+			if (config.shouldShowContactUs() || config.shouldShowForum())
+				staticRows.add(FEEDBACK_HEADER);
+			if (config.shouldShowContactUs())
+				staticRows.add(CONTACT);
+			if (config.shouldShowForum())
+				staticRows.add(FORUM);
+			if (config.shouldShowKnowledgeBase())
+				staticRows.add(KB_HEADER);
+		}
+	}
 
 	@Override
 	public int getCount() {
 		if (Session.getInstance().getClientConfig() == null) {
 			return 1;
 		} else {
-			// TODO change based on enabled features
-			return 4 + (topics == null ? 1 : topics.size() + 1);
+			computeStaticRows();
+			return staticRows.size() + (topics == null ? 1 : topics.size() + 1);
 		}
 	}
 
 	@Override
 	public Object getItem(int position) {
-		if (position == 2) {
+		computeStaticRows();
+		if (position < staticRows.size() && staticRows.get(position) == FORUM)
 			return Session.getInstance().getForum();
-		} else if (position > 4 && position - 4 < topics.size()) {
-			return topics.get(position - 4);
-		}
+		else if (topics != null && position >= staticRows.size() && position - staticRows.size() < topics.size()) 
+			return topics.get(position - staticRows.size());
 		return null;
 	}
 
 	@Override
 	public long getItemId(int position) {
 		return position;
+	}
+	
+	@Override
+	public boolean isEnabled(int position) {
+		if (Session.getInstance().getClientConfig() == null)
+			return false;
+		computeStaticRows();
+		if (position < staticRows.size()) {
+			int type = staticRows.get(position);
+			if (type == FEEDBACK_HEADER || type == KB_HEADER || type == LOADING)
+				return false;
+		}
+		return true;
 	}
 
 	@Override
@@ -96,7 +128,7 @@ public class WelcomeAdapter extends BaseAdapter {
 				view = inflater.inflate(R.layout.loading_item, null);
 			else if (type == FORUM)
 				view = inflater.inflate(android.R.layout.simple_list_item_1, null);
-			else if (type == HEADER)
+			else if (type == FEEDBACK_HEADER || type == KB_HEADER)
 				view = inflater.inflate(R.layout.header_item, null);
 			else if (type == TOPIC)
 				view = inflater.inflate(android.R.layout.simple_list_item_1, null);
@@ -107,9 +139,12 @@ public class WelcomeAdapter extends BaseAdapter {
 		if (type == FORUM) {
 			TextView textView = (TextView) view.findViewById(android.R.id.text1);
 			textView.setText("Feedback Forum");
-		} else if (type == HEADER) {
+		} else if (type == FEEDBACK_HEADER) {
 			TextView textView = (TextView) view.findViewById(R.id.text);
-			textView.setText(position == 0 ? "FEEDBACK & SUPPORT" : "KNOWLEDGE BASE");
+			textView.setText("FEEDBACK & SUPPORT");
+		} else if (type == KB_HEADER) {
+			TextView textView = (TextView) view.findViewById(R.id.text);
+			textView.setText("KNOWLEDGE BASE");
 		} else if (type == TOPIC) {
 			Topic topic = position - 4 < topics.size() ? topics.get(position - 4) : null;
 			TextView textView = (TextView) view.findViewById(android.R.id.text1);
@@ -123,24 +158,21 @@ public class WelcomeAdapter extends BaseAdapter {
 	
 	@Override
 	public int getViewTypeCount() {
-		return 5;
+		return 6;
 	}
 	
 	@Override
 	public int getItemViewType(int position) {
 		if (Session.getInstance().getClientConfig() == null)
 			return LOADING;
-		
-		// TODO change based on enabled features
-		if (position == 0 || position == 3)
-			return HEADER;
-		if (position == 1)
-			return CONTACT;
-		if (position == 2)
-			return Session.getInstance().getForum() == null ? LOADING : FORUM;
-		if (topics != null)
-			return TOPIC;
-		return LOADING;
+		computeStaticRows();
+		if (position < staticRows.size()) {
+			int type = staticRows.get(position);
+			if (type == FORUM && Session.getInstance().getForum() == null)
+				return LOADING;
+			return type;
+		}
+		return topics == null ? LOADING : TOPIC;
 	}
 
 }

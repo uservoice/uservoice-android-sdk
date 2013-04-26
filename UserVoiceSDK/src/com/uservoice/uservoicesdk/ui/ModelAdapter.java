@@ -46,6 +46,11 @@ public abstract class ModelAdapter<T> extends BaseAdapter {
 	}
 	
 	@Override
+	public boolean isEnabled(int position) {
+		return getItemViewType(position) == MODEL;
+	}
+	
+	@Override
 	public int getItemViewType(int position) {
 		return position == getObjects().size() ? LOADING : MODEL;
 	}

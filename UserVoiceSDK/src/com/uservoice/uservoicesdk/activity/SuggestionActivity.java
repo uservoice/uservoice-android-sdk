@@ -64,6 +64,11 @@ public class SuggestionActivity extends ListActivity {
 				ImageView avatar = (ImageView) view.findViewById(R.id.comment_avatar);
 				ImageCache.getInstance().loadImage(model.getAvatarUrl(), avatar);
 			}
+			
+			@Override
+			public boolean isEnabled(int position) {
+				return false;
+			}
 
 			@Override
 			protected void loadPage(int page, Callback<List<Comment>> callback) {
