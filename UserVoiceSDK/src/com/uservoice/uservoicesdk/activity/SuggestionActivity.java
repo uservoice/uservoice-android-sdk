@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -99,7 +100,7 @@ public class SuggestionActivity extends ListActivity {
 		});
 	}
 	
-	private void updateView() {
+	public void updateView() {
 		Suggestion suggestion = Session.getInstance().getSuggestion();
 		
 		getTextView(R.id.suggestion_details_title).setText(suggestion.getTitle());
@@ -124,10 +125,25 @@ public class SuggestionActivity extends ListActivity {
 			getTextView(R.id.suggestion_details_admin_response_text).setText(suggestion.getAdminResponseText());
 		}
 		
-		getTextView(R.id.suggestion_details_vote_count).setText(String.format("%d votes ¥ %d comments", suggestion.getNumberOfVotes(), suggestion.getNumberOfComments()));
-		
 		ImageView avatar = (ImageView) headerView.findViewById(R.id.suggestion_details_admin_avatar);
 		ImageCache.getInstance().loadImage(suggestion.getAdminResponseAvatarUrl(), avatar);
+		updateVotes();
+	}
+	
+	public void updateVotes() {
+		Suggestion suggestion = Session.getInstance().getSuggestion();
+		getTextView(R.id.suggestion_details_vote_count).setText(String.format("%d votes ¥ %d comments", suggestion.getNumberOfVotes(), suggestion.getNumberOfComments()));
+		Button button = (Button) findViewById(R.id.vote_button);
+		button.setText(pluralize(suggestion.getNumberOfVotesByCurrentUser(), "Vote", "1 Vote", "%d Votes"));
+	}
+	
+	private String pluralize(int count, String zero, String one, String format) {
+		if (count == 0)
+			return zero;
+		else if (count == 1)
+			return one;
+		else
+			return String.format(format, count);
 	}
 	
 	@Override
