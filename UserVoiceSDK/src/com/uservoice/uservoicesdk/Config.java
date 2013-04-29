@@ -91,6 +91,8 @@ public class Config {
 	}
 
 	public boolean shouldShowForum() {
+		if (Session.getInstance().getClientConfig() != null && Session.getInstance().getClientConfig().isFeedbackEnabled())
+			return false;
 		return showForum;
 	}
 
@@ -99,6 +101,8 @@ public class Config {
 	}
 
 	public boolean shouldShowPostIdea() {
+		if (Session.getInstance().getClientConfig() != null && Session.getInstance().getClientConfig().isFeedbackEnabled())
+			return false;
 		return showPostIdea;
 	}
 
@@ -107,6 +111,8 @@ public class Config {
 	}
 
 	public boolean shouldShowContactUs() {
+		if (Session.getInstance().getClientConfig() != null && Session.getInstance().getClientConfig().isTicketSystemEnabled())
+			return false;
 		return showContactUs;
 	}
 
@@ -115,6 +121,8 @@ public class Config {
 	}
 
 	public boolean shouldShowKnowledgeBase() {
+		if (Session.getInstance().getClientConfig() != null && Session.getInstance().getClientConfig().isTicketSystemEnabled())
+			return false;
 		return showKnowledgeBase;
 	}
 
