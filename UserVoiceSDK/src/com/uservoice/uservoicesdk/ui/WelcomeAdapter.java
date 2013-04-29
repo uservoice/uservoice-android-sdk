@@ -94,7 +94,7 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> {
 			return loading ? 1 : searchResults.size();
 		} else {
 			computeStaticRows();
-			return staticRows.size() + (topics == null ? 1 : topics.size() + 1);
+			return staticRows.size() + (Session.getInstance().getConfig().shouldShowKnowledgeBase() ? (topics == null ? 1 : topics.size() + 1) : 0);
 		}
 	}
 
