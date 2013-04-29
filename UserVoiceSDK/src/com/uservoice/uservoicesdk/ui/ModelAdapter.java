@@ -2,25 +2,22 @@ package com.uservoice.uservoicesdk.ui;
 
 import java.util.List;
 
-import com.uservoice.uservoicesdk.R;
-import com.uservoice.uservoicesdk.rest.Callback;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 
-public abstract class ModelAdapter<T> extends BaseAdapter {
+import com.uservoice.uservoicesdk.R;
+import com.uservoice.uservoicesdk.rest.Callback;
+
+public abstract class ModelAdapter<T> extends SearchAdapter<T> {
 	
 	protected static final int MODEL = 0;
 	protected static final int LOADING = 1;
 	
-	protected final Context context;
 	protected final int layoutId;
 	protected LayoutInflater inflater;
 	protected List<T> objects;
-	protected boolean loading;
 
 	public ModelAdapter(Context context, int layoutId, List<T> objects) {
 		this.context = context;

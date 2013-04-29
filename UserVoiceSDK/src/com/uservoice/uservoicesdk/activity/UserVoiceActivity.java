@@ -4,8 +4,10 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.SearchView;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
@@ -39,13 +41,46 @@ public class UserVoiceActivity extends ListActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.uv_main, menu);
+		
+		menu.findItem(R.id.action_search).setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+			@Override
+			public boolean onMenuItemActionExpand(MenuItem item) {
+				getModelAdapter().setSearchActive(true);
+				return true;
+			}
+			
+			@Override
+			public boolean onMenuItemActionCollapse(MenuItem item) {
+				getModelAdapter().setSearchActive(false);
+				return true;
+			}
+		});
+		
+		SearchView search = (SearchView) menu.findItem(R.id.action_search).getActionView();
+		search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+				getModelAdapter().performSearch(query);
+				return true;
+			}
+			
+			@Override
+			public boolean onQueryTextChange(String query) {
+				getModelAdapter().performSearch(query);
+				return true;
+			}
+		});
+		
 		return true;
 	}
 	
 	public void showForum() {
 		startActivity(new Intent(this, ForumActivity.class));
+	}
+	
+	private WelcomeAdapter getModelAdapter() {
+		return (WelcomeAdapter) getListAdapter();
 	}
 
 }

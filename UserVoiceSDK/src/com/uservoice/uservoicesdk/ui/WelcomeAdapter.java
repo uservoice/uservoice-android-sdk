@@ -7,17 +7,20 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.uservoice.uservoicesdk.Config;
 import com.uservoice.uservoicesdk.InitManager;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.model.Article;
+import com.uservoice.uservoicesdk.model.BaseModel;
 import com.uservoice.uservoicesdk.model.Forum;
+import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.model.Topic;
+import com.uservoice.uservoicesdk.rest.Callback;
 
-public class WelcomeAdapter extends BaseAdapter {
+public class WelcomeAdapter extends SearchAdapter<BaseModel> {
 	
 	private static int FEEDBACK_HEADER = 0;
 	private static int KB_HEADER = 1;
@@ -25,6 +28,8 @@ public class WelcomeAdapter extends BaseAdapter {
 	private static int TOPIC = 3;
 	private static int LOADING = 4;
 	private static int CONTACT = 5;
+	private static int RESULT_ARTICLE = 6;
+	private static int RESULT_IDEA = 7;
 	
 	private List<Topic> topics;
 	private LayoutInflater inflater;
@@ -85,6 +90,8 @@ public class WelcomeAdapter extends BaseAdapter {
 	public int getCount() {
 		if (Session.getInstance().getClientConfig() == null) {
 			return 1;
+		} else if (searchActive) {
+			return loading ? 1 : searchResults.size();
 		} else {
 			computeStaticRows();
 			return staticRows.size() + (topics == null ? 1 : topics.size() + 1);
@@ -93,6 +100,8 @@ public class WelcomeAdapter extends BaseAdapter {
 
 	@Override
 	public Object getItem(int position) {
+		if (searchActive)
+			return loading ? null : searchResults.get(position);
 		computeStaticRows();
 		if (position < staticRows.size() && staticRows.get(position) == FORUM)
 			return Session.getInstance().getForum();
@@ -108,6 +117,8 @@ public class WelcomeAdapter extends BaseAdapter {
 	
 	@Override
 	public boolean isEnabled(int position) {
+		if (searchActive)
+			return !loading;
 		if (Session.getInstance().getClientConfig() == null)
 			return false;
 		computeStaticRows();
@@ -134,6 +145,10 @@ public class WelcomeAdapter extends BaseAdapter {
 				view = inflater.inflate(android.R.layout.simple_list_item_1, null);
 			else if (type == CONTACT)
 				view = inflater.inflate(android.R.layout.simple_list_item_1, null);
+			else if (type == RESULT_ARTICLE)
+				view = inflater.inflate(android.R.layout.simple_list_item_1, null);
+			else if (type == RESULT_IDEA)
+				view = inflater.inflate(android.R.layout.simple_list_item_1, null);
 		}
 		
 		if (type == FORUM) {
@@ -146,25 +161,44 @@ public class WelcomeAdapter extends BaseAdapter {
 			TextView textView = (TextView) view.findViewById(R.id.text);
 			textView.setText("KNOWLEDGE BASE");
 		} else if (type == TOPIC) {
-			Topic topic = position - 4 < topics.size() ? topics.get(position - 4) : null;
+			Topic topic = (Topic) getItem(position);
 			TextView textView = (TextView) view.findViewById(android.R.id.text1);
 			textView.setText(topic == null ? "All Articles" : topic.getName());
 		} else if (type == CONTACT) {
 			TextView textView = (TextView) view.findViewById(android.R.id.text1);
 			textView.setText("Contact Us");
+		} else if (type == RESULT_ARTICLE) {
+			TextView textView = (TextView) view.findViewById(android.R.id.text1);
+			Article article = (Article) searchResults.get(position);
+			textView.setText(article.getQuestion());
+		} else if (type == RESULT_IDEA) {
+			TextView textView = (TextView) view.findViewById(android.R.id.text1);
+			Suggestion suggestion = (Suggestion) searchResults.get(position);
+			textView.setText(suggestion.getTitle());
 		}
 		return view;
 	}
 	
 	@Override
 	public int getViewTypeCount() {
-		return 6;
+		return 8;
 	}
 	
 	@Override
 	public int getItemViewType(int position) {
 		if (Session.getInstance().getClientConfig() == null)
 			return LOADING;
+		if (searchActive) {
+			if (loading)
+				return LOADING;
+			BaseModel model = searchResults.get(position);
+			if (model instanceof Article)
+				return RESULT_ARTICLE;
+			else if (model instanceof Suggestion)
+				return RESULT_IDEA;
+			else
+				return LOADING;
+		}
 		computeStaticRows();
 		if (position < staticRows.size()) {
 			int type = staticRows.get(position);
@@ -173,6 +207,11 @@ public class WelcomeAdapter extends BaseAdapter {
 			return type;
 		}
 		return topics == null ? LOADING : TOPIC;
+	}
+
+	@Override
+	protected void search(String query, Callback<List<BaseModel>> callback) {
+		Article.loadInstantAnswers(query, callback);
 	}
 
 }
