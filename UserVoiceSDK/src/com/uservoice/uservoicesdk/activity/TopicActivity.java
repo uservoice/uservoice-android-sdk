@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
+import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.Topic;
@@ -23,7 +24,7 @@ public class TopicActivity extends ListActivity {
 		
 		setTitle(topic == null ? "All Articles" : topic.getName());
 		getListView().setPadding(10, 0, 10, 0);
-		setListAdapter(new LoadAllAdapter<Article>(this, android.R.layout.simple_list_item_1, new ArrayList<Article>()) {
+		setListAdapter(new LoadAllAdapter<Article>(this, R.layout.article_item, new ArrayList<Article>()) {
 			@Override
 			protected void loadPage(int page, Callback<List<Article>> callback) {
 				if (topic == null) {
@@ -35,7 +36,7 @@ public class TopicActivity extends ListActivity {
 			
 			@Override
 			protected void customizeLayout(View view, Article model) {
-				TextView text = (TextView) view.findViewById(android.R.id.text1);
+				TextView text = (TextView) view.findViewById(R.id.article_name);
 				text.setText(model.getQuestion());
 			}
 		});

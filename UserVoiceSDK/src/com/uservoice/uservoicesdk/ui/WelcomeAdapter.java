@@ -28,8 +28,8 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> {
 	private static int TOPIC = 3;
 	private static int LOADING = 4;
 	private static int CONTACT = 5;
-	private static int RESULT_ARTICLE = 6;
-	private static int RESULT_IDEA = 7;
+	private static int ARTICLE = 6;
+	private static int SUGGESTION = 7;
 	
 	private List<Topic> topics;
 	private LayoutInflater inflater;
@@ -142,13 +142,13 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> {
 			else if (type == FEEDBACK_HEADER || type == KB_HEADER)
 				view = inflater.inflate(R.layout.header_item, null);
 			else if (type == TOPIC)
-				view = inflater.inflate(android.R.layout.simple_list_item_1, null);
+				view = inflater.inflate(R.layout.topic_item, null);
 			else if (type == CONTACT)
 				view = inflater.inflate(android.R.layout.simple_list_item_1, null);
-			else if (type == RESULT_ARTICLE)
-				view = inflater.inflate(android.R.layout.simple_list_item_1, null);
-			else if (type == RESULT_IDEA)
-				view = inflater.inflate(android.R.layout.simple_list_item_1, null);
+			else if (type == ARTICLE)
+				view = inflater.inflate(R.layout.article_item, null);
+			else if (type == SUGGESTION)
+				view = inflater.inflate(R.layout.suggestion_result_item, null);
 		}
 		
 		if (type == FORUM) {
@@ -162,17 +162,24 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> {
 			textView.setText("KNOWLEDGE BASE");
 		} else if (type == TOPIC) {
 			Topic topic = (Topic) getItem(position);
-			TextView textView = (TextView) view.findViewById(android.R.id.text1);
+			TextView textView = (TextView) view.findViewById(R.id.topic_name);
 			textView.setText(topic == null ? "All Articles" : topic.getName());
+			textView = (TextView) view.findViewById(R.id.article_count);
+			if (topic == null) {
+				textView.setVisibility(View.GONE);
+			} else {
+				textView.setVisibility(View.VISIBLE);
+				textView.setText(String.format("%d articles", topic.getNumberOfArticles()));
+			}
 		} else if (type == CONTACT) {
 			TextView textView = (TextView) view.findViewById(android.R.id.text1);
 			textView.setText("Contact Us");
-		} else if (type == RESULT_ARTICLE) {
-			TextView textView = (TextView) view.findViewById(android.R.id.text1);
+		} else if (type == ARTICLE) {
+			TextView textView = (TextView) view.findViewById(R.id.article_name);
 			Article article = (Article) searchResults.get(position);
 			textView.setText(article.getQuestion());
-		} else if (type == RESULT_IDEA) {
-			TextView textView = (TextView) view.findViewById(android.R.id.text1);
+		} else if (type == SUGGESTION) {
+			TextView textView = (TextView) view.findViewById(R.id.suggestion_title);
 			Suggestion suggestion = (Suggestion) searchResults.get(position);
 			textView.setText(suggestion.getTitle());
 		}
@@ -193,9 +200,9 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> {
 				return LOADING;
 			BaseModel model = searchResults.get(position);
 			if (model instanceof Article)
-				return RESULT_ARTICLE;
+				return ARTICLE;
 			else if (model instanceof Suggestion)
-				return RESULT_IDEA;
+				return SUGGESTION;
 			else
 				return LOADING;
 		}
