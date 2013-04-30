@@ -124,6 +124,8 @@ public class ForumActivity extends ListActivity {
 			}
 		});
 		
+		menu.findItem(R.id.new_idea).setVisible(Session.getInstance().getConfig().shouldShowPostIdea());
+		
 		return true;
 	}
 	
