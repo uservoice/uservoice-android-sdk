@@ -41,7 +41,7 @@ public class ForumActivity extends ListActivity {
 			@Override
 			protected void customizeLayout(View view, Suggestion model) {
 				TextView textView = (TextView) view.findViewById(R.id.suggestion_title);
-				textView.setText(model.getTitle());
+				textView.setText(searchActive ? highlightResult(model.getTitle()) : model.getTitle());
 				
 				textView = (TextView) view.findViewById(R.id.suggestion_vote_count);
 				textView.setText(String.valueOf(model.getNumberOfVotes()));

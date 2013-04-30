@@ -201,11 +201,11 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> {
 		} else if (type == ARTICLE) {
 			TextView textView = (TextView) view.findViewById(R.id.article_name);
 			Article article = (Article) getItem(position);
-			textView.setText(article.getQuestion());
+			textView.setText(searchActive ? highlightResult(article.getQuestion()) : article.getQuestion());
 		} else if (type == SUGGESTION) {
 			TextView textView = (TextView) view.findViewById(R.id.suggestion_title);
 			Suggestion suggestion = (Suggestion) getItem(position);
-			textView.setText(suggestion.getTitle());
+			textView.setText(highlightResult(suggestion.getTitle()));
 		}
 		return view;
 	}
@@ -242,6 +242,7 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> {
 
 	@Override
 	protected void search(String query, Callback<List<BaseModel>> callback) {
+		currentQuery = query;
 		Article.loadInstantAnswers(query, callback);
 	}
 
