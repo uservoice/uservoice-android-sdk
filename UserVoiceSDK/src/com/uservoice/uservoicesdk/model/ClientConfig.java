@@ -15,6 +15,7 @@ public class ClientConfig extends BaseModel {
 	private int defaultForumId;
 	private List<CustomField> customFields;
 	private String defaultSort;
+	private String subdomain;
 	
 	public static void loadClientConfig(final Callback<ClientConfig> callback) {
 		doGet(apiPath("/client.json"), new RestTaskCallback(callback) {
@@ -35,6 +36,7 @@ public class ClientConfig extends BaseModel {
 		defaultForumId = object.getJSONObject("forum").getInt("id");
 		customFields = deserializeList(object, "custom_fields", CustomField.class);
 		defaultSort = getString(object.getJSONObject("subdomain"), "default_sort");
+		subdomain = getString(object.getJSONObject("subdomain"), "key");
 	}
 	
 	public boolean isTicketSystemEnabled() {
@@ -59,5 +61,9 @@ public class ClientConfig extends BaseModel {
 	
 	public String getSuggestionSort() {
 		return defaultSort.equals("new") ? "newest" : (defaultSort.equals("hot") ? "hot" : "votes");
+	}
+	
+	public String getSubdomain() {
+		return subdomain;
 	}
 }

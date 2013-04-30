@@ -1,5 +1,7 @@
 package com.uservoice.uservoicesdk;
 
+import java.util.Map;
+
 import android.content.Context;
 import android.content.Intent;
 
@@ -31,10 +33,50 @@ public class UserVoice {
 	public static void setExternalId(String scope, String id) {
 		Session.getInstance().setExternalId(scope, id);
 	}
-
+	
 	public static String getVersion() {
 		// TODO get this from the package version maybe
 		return "0.0.1";
 	}
-
+	
+	
+	public enum Event {
+		VIEW_FORUM("m"),
+		VIEW_TOPIC("c"),
+		VIEW_KB("k"),
+		VIEW_CHANNEL("o"),
+		VIEW_IDEA("i"),
+		VIEW_ARTICLE("f"),
+		AUTHENTICATE("u"),
+		SEARCH_IDEAS("s"),
+		SEARCH_ARTICLES("r"),
+		VOTE_IDEA("v"),
+		VOTE_ARTICLE("z"),
+		SUBMIT_TICKET("t"),
+		SUBMIT_IDEA("d"),
+		SUBSCRIBE_IDEA("b"),
+		IDENTIFY("x");
+		
+		private final String code;
+		
+		private Event(String code) {
+			this.code = code;
+		}
+		
+		@Override
+		public String toString() {
+			return code;
+		}
+	}
+	
+	public static void track(Event event, Map<String,Object> props) {
+		
+	}
+	
+	public static void track(String event, Map<String,Object> props) {
+	}
+	
+	public static void track(String event) {
+		
+	}
 }
