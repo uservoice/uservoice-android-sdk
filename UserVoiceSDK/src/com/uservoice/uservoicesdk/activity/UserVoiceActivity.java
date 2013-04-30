@@ -11,6 +11,8 @@ import android.widget.SearchView;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.model.Article;
+import com.uservoice.uservoicesdk.model.Forum;
 import com.uservoice.uservoicesdk.model.Topic;
 import com.uservoice.uservoicesdk.ui.WelcomeAdapter;
 
@@ -26,14 +28,15 @@ public class UserVoiceActivity extends ListActivity {
 		getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				if (position == 1) {
-					// Show contact us
-				} else if (position == 2) {
+				Object obj = getListAdapter().getItem(position);
+				if (obj instanceof Forum) {
 					startActivity(new Intent(UserVoiceActivity.this, ForumActivity.class));
-				} else if (position > 3) {
-					Topic topic = (Topic) getListAdapter().getItem(position);
-					Session.getInstance().setTopic(topic);
+				} else if (obj instanceof Topic) {
+					Session.getInstance().setTopic((Topic) obj);
 					startActivity(new Intent(UserVoiceActivity.this, TopicActivity.class));
+				} else if (obj instanceof Article) {
+					Session.getInstance().setArticle((Article) obj);
+					startActivity(new Intent(UserVoiceActivity.this, ArticleActivity.class));
 				}
 			}
 		});

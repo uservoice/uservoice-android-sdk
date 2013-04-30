@@ -32,6 +32,7 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> {
 	private static int SUGGESTION = 7;
 	
 	private List<Topic> topics;
+	private List<Article> articles;
 	private LayoutInflater inflater;
 	private final Context context;
 	private List<Integer> staticRows;
@@ -51,6 +52,10 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> {
 		loadTopics();
 	}
 	
+	private boolean shouldShowArticles() {
+		return Session.getInstance().getConfig().getTopicId() != -1 || (topics != null && topics.isEmpty());
+	}
+	
 	private void loadForum() {
 		Forum.loadForum(Session.getInstance().getConfig().getForumId(), new DefaultCallback<Forum>(context) {
 			@Override
@@ -62,13 +67,30 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> {
 	}
 	
 	private void loadTopics() {
-		Topic.loadTopics(new DefaultCallback<List<Topic>>(context) {
+		final DefaultCallback<List<Article>> articlesCallback = new DefaultCallback<List<Article>>(context) {
 			@Override
-			public void onModel(List<Topic> model) {
-				topics = model;
+			public void onModel(List<Article> model) {
+				topics = new ArrayList<Topic>();
+				articles = model;
 				notifyDataSetChanged();
 			}
-		});
+		};
+		
+		if (Session.getInstance().getConfig().getTopicId() != -1) {
+			Article.loadForTopic(Session.getInstance().getConfig().getTopicId(), articlesCallback);
+		} else {
+			Topic.loadTopics(new DefaultCallback<List<Topic>>(context) {
+				@Override
+				public void onModel(List<Topic> model) {
+					topics = model;
+					if (topics.isEmpty()) {
+						Article.loadAll(articlesCallback);
+					} else {
+						notifyDataSetChanged();
+					}
+				}
+			});
+		}
 	}
 	
 	private void computeStaticRows() {
@@ -94,7 +116,7 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> {
 			return loading ? 1 : searchResults.size();
 		} else {
 			computeStaticRows();
-			return staticRows.size() + (Session.getInstance().getConfig().shouldShowKnowledgeBase() ? (topics == null ? 1 : topics.size() + 1) : 0);
+			return staticRows.size() + (Session.getInstance().getConfig().shouldShowKnowledgeBase() ? (topics == null ? 1 : (shouldShowArticles() ? articles.size() : topics.size() + 1)) : 0);
 		}
 	}
 
@@ -105,8 +127,10 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> {
 		computeStaticRows();
 		if (position < staticRows.size() && staticRows.get(position) == FORUM)
 			return Session.getInstance().getForum();
-		else if (topics != null && position >= staticRows.size() && position - staticRows.size() < topics.size()) 
+		else if (topics != null && !shouldShowArticles() && position >= staticRows.size() && position - staticRows.size() < topics.size()) 
 			return topics.get(position - staticRows.size());
+		else if (articles != null && shouldShowArticles() && position >= staticRows.size() && position - staticRows.size() < articles.size())
+			return articles.get(position - staticRows.size());
 		return null;
 	}
 
@@ -176,11 +200,11 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> {
 			textView.setText("Contact Us");
 		} else if (type == ARTICLE) {
 			TextView textView = (TextView) view.findViewById(R.id.article_name);
-			Article article = (Article) searchResults.get(position);
+			Article article = (Article) getItem(position);
 			textView.setText(article.getQuestion());
 		} else if (type == SUGGESTION) {
 			TextView textView = (TextView) view.findViewById(R.id.suggestion_title);
-			Suggestion suggestion = (Suggestion) searchResults.get(position);
+			Suggestion suggestion = (Suggestion) getItem(position);
 			textView.setText(suggestion.getTitle());
 		}
 		return view;
@@ -213,7 +237,7 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> {
 				return LOADING;
 			return type;
 		}
-		return topics == null ? LOADING : TOPIC;
+		return topics == null ? LOADING : (shouldShowArticles() ? ARTICLE : TOPIC);
 	}
 
 	@Override
