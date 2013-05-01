@@ -1,5 +1,7 @@
 package com.uservoice.uservoicesdk;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Config {
@@ -17,6 +19,7 @@ public class Config {
 	private boolean showPostIdea = true;
 	private boolean showContactUs = true;
 	private boolean showKnowledgeBase = true;
+	private Map<String,Object> userTraits = new HashMap<String,Object>();
 	
 	public Config(String site, String key, String secret) {
 		this.site = site;
@@ -128,5 +131,49 @@ public class Config {
 
 	public void setShowKnowledgeBase(boolean showKnowledgeBase) {
 		this.showKnowledgeBase = showKnowledgeBase;
+	}
+	
+	public void putUserTrait(String key, String value) {
+		userTraits.put(key, value);
+	}
+	
+	public void putUserTrait(String key, int value) {
+		userTraits.put(key, value);
+	}
+	
+	public void putUserTrait(String key, boolean value) {
+		userTraits.put(key, value);
+	}
+	
+	public void putUserTrait(String key, float value) {
+		userTraits.put(key, value);
+	}
+	
+	public void putUserTrait(String key, Date value) {
+		userTraits.put(key, value.getTime() / 1000);
+	}
+	
+	public void putAccountTrait(String key, String value) {
+		putUserTrait("account_" + key, value);
+	}
+	
+	public void putAccountTrait(String key, int value) {
+		putUserTrait("account_" + key, value);
+	}
+	
+	public void putAccountTrait(String key, boolean value) {
+		putUserTrait("account_" + key, value);
+	}
+	
+	public void putAccountTrait(String key, float value) {
+		putUserTrait("account_" + key, value);
+	}
+
+	public void putAccountTrait(String key, Date value) {
+		putUserTrait("account_" + key, value);
+	}
+	
+	public Map<String, Object> getUserTraits() {
+		return userTraits;
 	}
 }

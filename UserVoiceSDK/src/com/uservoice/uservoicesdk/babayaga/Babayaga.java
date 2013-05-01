@@ -1,26 +1,14 @@
 package com.uservoice.uservoicesdk.babayaga;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.TimeZone;
-
-import org.json.JSONObject;
-
-import android.annotation.SuppressLint;
-import android.util.Base64;
-
-import com.uservoice.uservoicesdk.Session;
 
 public class Babayaga {
 	
-	private static String DOMAIN = "by.uservoice.com";
-	private static String CHANNEL = "d";
+	static String DOMAIN = "by.uservoice.com";
+	static String CHANNEL = "d";
 	
 	private static String uvts;
-	private static Map<String,Object> props;
+	private static Map<String,Object> traits;
 
 	public enum Event {
 		VIEW_FORUM("m"),
@@ -45,8 +33,7 @@ public class Babayaga {
 			this.code = code;
 		}
 		
-		@Override
-		public String toString() {
+		public String getCode() {
 			return code;
 		}
 	}
@@ -55,40 +42,16 @@ public class Babayaga {
 		Babayaga.uvts = uvts;
 	}
 	
-	@SuppressLint("DefaultLocale")
-	private static String getTzOffset() {
-		int offset = TimeZone.getDefault().getOffset(new Date().getTime());
-		return String.format("%s%02d:%02d", offset > 0 ? "-" : "+", Math.floor(Math.abs(offset) / 60.0), Math.abs(offset) % 60);
+	public static void setUserTraits(Map<String,Object> traits) {
+		Babayaga.traits = traits;
 	}
 	
-	public static void sendTrack(String event, Map<String,Object> eventProps) {
-		Map<String,Object> data = new HashMap<String,Object>();
-		if (props != null && !props.isEmpty()) {
-			Map<String,Object> copy = new HashMap<String,Object>(props);
-			copy.put("o", getTzOffset());
-			data.put("u", copy);
-		}
-		if (eventProps != null && !eventProps.isEmpty()) {
-			data.put("e", eventProps);
-		}
-		String subdomain = Session.getInstance().getClientConfig().getSubdomain();
-		StringBuilder url = new StringBuilder(String.format("http://%s/t/%s/%s/%s", DOMAIN, subdomain, CHANNEL, event));
-		if (uvts != null) {
-			url.append("/");
-			url.append(uvts);
-		}
-		url.append("/track.js?_=");
-		url.append(new Date().getTime());
-		url.append("&c=_");
-		if (!data.isEmpty()) {
-			url.append("&d=");
-			try {
-				url.append(URLEncoder.encode(Base64.encodeToString(new JSONObject(data).toString().getBytes(), Base64.DEFAULT), "UTF-8"));
-			} catch (UnsupportedEncodingException e) {
-				throw new RuntimeException(e);
-			}
-		}
-		new BabayagaTask(url.toString()).execute();
+
+	public static void track(Event event, Map<String,Object> eventProps) {
+	}
+	
+	public static void track(String event, Map<String,Object> eventProps) {
+		new BabayagaTask(event, uvts, traits, eventProps).execute();
 	}
 
 }
