@@ -1,13 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <plurals name="comments">
+        <item quantity="one">1 comment</item>
+        <item quantity="other">%d comments</item>
+    </plurals>
+    
+    <plurals name="votes">
+        <item quantity="one">vote</item>
+        <item quantity="other">votes</item>
+    </plurals>
+    
+    <plurals name="votes_capitalized">
+        <item quantity="one">Vote</item>
+        <item quantity="other">Votes</item>
+    </plurals>
+    
+    <plurals name="articles">
+        <item quantity="one">article</item>
+        <item quantity="other">articles</item>
+    </plurals>
+
     <string name="app_name">UserVoice SDK</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_new">NewActivity</string>
-    <string name="votes">votes</string>
     <string name="loading">Loading&#8230;</string>
     <string name="post_idea">Post idea</string>
     <string name="menu_search">Search</string>
+    <string name="email_address">Email address</string>
+    <string name="display_name">Display name</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot password</string>
+    <string name="comment_verb">Comment</string>
+    <string name="vote_verb">Vote</string>
+    <string name="msg_comment_posted">Your comment has been posted</string>
+    <string name="title_idea">Idea</string>
+    <string name="posted_by_format">Posted by %1$s on %2$s</string>
+    <string name="all_articles">All Articles</string>
+    <string name="portal_title">Help</string>
+    <string name="network_error">There was an error connecting to UserVoice</string>
+    <string name="signin_dialog_title">Sign in</string>
+    <string name="signin_dialog_ok">Sign in</string>
+    <string name="failed_signin_error">Incorrect email or password</string>
+    <string name="msg_forgot_password">Forgot password email sent</string>
+    <string name="vote_dialog_title">Vote</string>
+    <string name="remove_votes">Remove Votes</string>
+    <string name="feedback_forum">Feedback Forum</string>
+    <string name="knowledge_base">KNOWLEDGE BASE</string>
+    <string name="admin_response">ADMIN RESPONSE</string>
 
 </resources>

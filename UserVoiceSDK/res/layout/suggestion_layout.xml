@@ -119,19 +119,20 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 		<TableRow>
+
         <Button
             android:id="@+id/vote_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Vote" />
+            android:text="@string/vote_verb" />
 
         <Button
             android:id="@+id/comment_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Comment" />
+            android:text="@string/comment_verb" />
         </TableRow>
     </TableLayout>
 

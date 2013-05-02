@@ -46,6 +46,9 @@ public class ForumActivity extends ListActivity {
 				textView = (TextView) view.findViewById(R.id.suggestion_vote_count);
 				textView.setText(String.valueOf(model.getNumberOfVotes()));
 				
+				textView = (TextView) view.findViewById(R.id.suggestion_votes_label);
+				textView.setText(getResources().getQuantityString(R.plurals.votes, model.getNumberOfVotes()));
+
 				textView = (TextView) view.findViewById(R.id.suggestion_status);
 				if (model.getStatus() == null) {
 					textView.setVisibility(View.GONE);

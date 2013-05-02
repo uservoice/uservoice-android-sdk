@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import com.uservoice.uservoicesdk.ui.PaginatedAdapter;
 import com.uservoice.uservoicesdk.ui.PaginationScrollListener;
 import com.uservoice.uservoicesdk.ui.VoteDialogFragment;
 
+@SuppressLint("DefaultLocale")
 public class SuggestionActivity extends ListActivity {
 
 	private static int POST_COMMENT = 1;
@@ -37,7 +39,7 @@ public class SuggestionActivity extends ListActivity {
 		headerView = getLayoutInflater().inflate(R.layout.suggestion_layout, null);
 		getListView().addHeaderView(headerView);
 		
-		setTitle("Idea");
+		setTitle(R.string.title_idea);
 		
 		setListAdapter(new PaginatedAdapter<Comment>(this, R.layout.comment_item, new ArrayList<Comment>()) {
 
@@ -119,7 +121,7 @@ public class SuggestionActivity extends ListActivity {
 		}
 		
 		getTextView(R.id.suggestion_details_text).setText(suggestion.getText());
-		getTextView(R.id.suggestion_details_creator).setText(String.format("Posted by %s on %s", suggestion.getCreatorName(), DateFormat.getDateInstance().format(suggestion.getCreatedAt())));
+		getTextView(R.id.suggestion_details_creator).setText(String.format(getString(R.string.posted_by_format), suggestion.getCreatorName(), DateFormat.getDateInstance().format(suggestion.getCreatedAt())));
 		
 		if (suggestion.getAdminResponseText() == null) {
 			headerView.findViewById(R.id.suggestion_details_admin_response).setVisibility(View.GONE);
@@ -137,18 +139,20 @@ public class SuggestionActivity extends ListActivity {
 	
 	public void updateVotes() {
 		Suggestion suggestion = Session.getInstance().getSuggestion();
-		getTextView(R.id.suggestion_details_vote_count).setText(String.format("%d votes ¥ %d comments", suggestion.getNumberOfVotes(), suggestion.getNumberOfComments()));
+		getTextView(R.id.suggestion_details_vote_count).setText(String.format("%s ¥ %s", getQuantityString(R.plurals.votes, suggestion.getNumberOfVotes()), getQuantityString(R.plurals.comments, suggestion.getNumberOfComments())));
 		Button button = (Button) findViewById(R.id.vote_button);
-		button.setText(pluralize(suggestion.getNumberOfVotesByCurrentUser(), "Vote", "1 Vote", "%d Votes"));
+		button.setText(buttonName(suggestion.getNumberOfVotesByCurrentUser(), R.string.vote_verb, R.plurals.votes_capitalized));
 	}
 	
-	private String pluralize(int count, String zero, String one, String format) {
+	private String getQuantityString(int id, int count) {
+		return String.format("%d %s", count, getResources().getQuantityString(id, count));
+	}
+	
+	private String buttonName(int count, int verb, int plural) {
 		if (count == 0)
-			return zero;
-		else if (count == 1)
-			return one;
+			return getString(verb);
 		else
-			return String.format(format, count);
+			return getQuantityString(plural, count);
 	}
 	
 	@Override

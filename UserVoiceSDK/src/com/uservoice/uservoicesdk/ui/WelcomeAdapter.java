@@ -180,20 +180,20 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> implements AdapterV
 		
 		if (type == FORUM) {
 			TextView textView = (TextView) view.findViewById(android.R.id.text1);
-			textView.setText("Feedback Forum");
+			textView.setText(R.string.feedback_forum);
 		} else if (type == KB_HEADER) {
 			TextView textView = (TextView) view.findViewById(R.id.text);
-			textView.setText("KNOWLEDGE BASE");
+			textView.setText(R.string.knowledge_base);
 		} else if (type == TOPIC) {
 			Topic topic = (Topic) getItem(position);
 			TextView textView = (TextView) view.findViewById(R.id.topic_name);
-			textView.setText(topic == null ? "All Articles" : topic.getName());
+			textView.setText(topic == null ? context.getString(R.string.all_articles) : topic.getName());
 			textView = (TextView) view.findViewById(R.id.article_count);
 			if (topic == null) {
 				textView.setVisibility(View.GONE);
 			} else {
 				textView.setVisibility(View.VISIBLE);
-				textView.setText(String.format("%d articles", topic.getNumberOfArticles()));
+				textView.setText(String.format("%d %s", topic.getNumberOfArticles(), context.getResources().getQuantityString(R.plurals.articles, topic.getNumberOfArticles())));
 			}
 		} else if (type == CONTACT) {
 			TextView textView = (TextView) view.findViewById(android.R.id.text1);

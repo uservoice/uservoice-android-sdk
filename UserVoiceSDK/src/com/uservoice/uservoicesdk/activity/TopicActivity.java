@@ -22,7 +22,7 @@ public class TopicActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		final Topic topic = Session.getInstance().getTopic();
 		
-		setTitle(topic == null ? "All Articles" : topic.getName());
+		setTitle(topic == null ? getString(R.string.all_articles) : topic.getName());
 		getListView().setPadding(10, 0, 10, 0);
 		setListAdapter(new LoadAllAdapter<Article>(this, R.layout.article_item, new ArrayList<Article>()) {
 			@Override

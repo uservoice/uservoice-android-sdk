@@ -37,7 +37,7 @@ public class CommentActivity extends Activity {
 			Comment.createComment(suggestion, text, new DefaultCallback<Comment>(this) {
 				@Override
 				public void onModel(Comment comment) {
-					Toast.makeText(CommentActivity.this, "Your comment has been posted", Toast.LENGTH_SHORT).show();
+					Toast.makeText(CommentActivity.this, R.string.msg_comment_posted, Toast.LENGTH_SHORT).show();
 					Session.getInstance().setComment(comment);
 					finish();
 				}

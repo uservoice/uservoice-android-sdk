@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Email address"
+        android:hint="@string/email_address"
         android:inputType="textEmailAddress" >
 
         <requestFocus />
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Display name"
+        android:hint="@string/display_name"
         android:inputType="textNoSuggestions|textPersonName" />
 
     <LinearLayout
@@ -34,14 +34,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword" />
 
         <Button
             android:id="@+id/signin_forgot_password"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Forgot password"
+            android:text="@string/forgot_password"
             android:textSize="14sp" />
     </LinearLayout>
 

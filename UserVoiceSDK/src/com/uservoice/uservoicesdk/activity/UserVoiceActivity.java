@@ -15,7 +15,7 @@ public class UserVoiceActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		setTitle("Help");
+		setTitle(R.string.portal_title);
 		getListView().setPadding(10, 0, 10, 0);
 		setListAdapter(new WelcomeAdapter(this));
 		getListView().setOnItemClickListener(getModelAdapter());

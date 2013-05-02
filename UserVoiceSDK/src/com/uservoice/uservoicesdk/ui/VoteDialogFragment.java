@@ -1,5 +1,6 @@
 package com.uservoice.uservoicesdk.ui;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -7,23 +8,25 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Html;
 
+import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.activity.SuggestionActivity;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.model.User;
 
+@SuppressLint("DefaultLocale")
 public class VoteDialogFragment extends DialogFragment {
 	
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setTitle("Vote");
+		builder.setTitle(R.string.vote_dialog_title);
 		final Suggestion suggestion = Session.getInstance().getSuggestion();
 		CharSequence[] options;
 		if (suggestion.getNumberOfVotesByCurrentUser() == 0) {
-			options = new CharSequence[] {voteOption(1, "1 Vote"), voteOption(2, "2 Votes"), voteOption(3, "3 Votes")};
+			options = new CharSequence[] {voteOption(1), voteOption(2), voteOption(3)};
 		} else {
-			options = new CharSequence[] {voteOption(1, "1 Vote"), voteOption(2, "2 Votes"), voteOption(3, "3 Votes"), Html.fromHtml("<font color='red'>Remove Votes</font>")};
+			options = new CharSequence[] {voteOption(1), voteOption(2), voteOption(3), Html.fromHtml(String.format("<font color='red'>%s</font>", getString(R.string.remove_votes)))};
 		}
 
 		builder.setSingleChoiceItems(options, suggestion.getNumberOfVotesByCurrentUser() - 1, new DialogInterface.OnClickListener() {
@@ -42,8 +45,9 @@ public class VoteDialogFragment extends DialogFragment {
 		return builder.create();
 	}
 	
-	private CharSequence voteOption(int votes, String string) {
+	private CharSequence voteOption(int votes) {
 		User user = Session.getInstance().getUser();
+		String string = String.format("%d %s", votes, getResources().getQuantityString(R.plurals.votes_capitalized, votes));
 		if (user.getNumberOfVotesRemaining() < votes)
 			return Html.fromHtml(String.format("<font color='#CCC'>%s</font>", string));
 		else

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.util.Log;
 
+import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.rest.RestResult;
 
@@ -20,7 +21,7 @@ public abstract class DefaultCallback<T> extends Callback<T> {
 	@Override
 	public void onError(RestResult error) {
 		Log.e(TAG, error.getMessage());
-		new AlertDialog.Builder(context).setTitle("There was an error connecting to UserVoice").show();
+		new AlertDialog.Builder(context).setTitle(R.string.network_error).show();
 	}
 
 }
