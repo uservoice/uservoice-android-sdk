@@ -10,6 +10,7 @@ import android.webkit.WebView;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.model.Article;
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -30,5 +31,7 @@ public class ArticleActivity extends Activity {
 		webview.getSettings().setJavaScriptEnabled(true);
 		webview.getSettings().setPluginState(PluginState.ON);
 		webview.loadUrl(String.format("data:text/html;charset=utf-8,%s", Uri.encode(html)));
+		
+		Babayaga.track(Babayaga.Event.VIEW_ARTICLE);
 	}
 }

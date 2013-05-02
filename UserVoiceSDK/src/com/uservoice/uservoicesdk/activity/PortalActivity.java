@@ -3,13 +3,15 @@ package com.uservoice.uservoicesdk.activity;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.SearchView;
 
 import com.uservoice.uservoicesdk.R;
+import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.ui.PortalAdapter;
+import com.uservoice.uservoicesdk.ui.SearchExpandListener;
+import com.uservoice.uservoicesdk.ui.SearchQueryListener;
 
-public class PortalActivity extends ListActivity {
+public class PortalActivity extends ListActivity implements SearchActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -19,45 +21,20 @@ public class PortalActivity extends ListActivity {
 		getListView().setPadding(10, 0, 10, 0);
 		setListAdapter(new PortalAdapter(this));
 		getListView().setOnItemClickListener(getModelAdapter());
+		
+		Babayaga.track(Babayaga.Event.VIEW_CHANNEL);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.uv_main, menu);
-		
-		menu.findItem(R.id.action_search).setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
-			@Override
-			public boolean onMenuItemActionExpand(MenuItem item) {
-				getModelAdapter().setSearchActive(true);
-				return true;
-			}
-			
-			@Override
-			public boolean onMenuItemActionCollapse(MenuItem item) {
-				getModelAdapter().setSearchActive(false);
-				return true;
-			}
-		});
-		
+		menu.findItem(R.id.action_search).setOnActionExpandListener(new SearchExpandListener(this));
 		SearchView search = (SearchView) menu.findItem(R.id.action_search).getActionView();
-		search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-			@Override
-			public boolean onQueryTextSubmit(String query) {
-				getModelAdapter().performSearch(query);
-				return true;
-			}
-			
-			@Override
-			public boolean onQueryTextChange(String query) {
-				getModelAdapter().performSearch(query);
-				return true;
-			}
-		});
-		
+		search.setOnQueryTextListener(new SearchQueryListener(this));
 		return true;
 	}
 	
-	private PortalAdapter getModelAdapter() {
+	public PortalAdapter getModelAdapter() {
 		return (PortalAdapter) getListAdapter();
 	}
 

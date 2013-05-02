@@ -3,6 +3,7 @@ package com.uservoice.uservoicesdk;
 import android.app.Activity;
 import android.app.DialogFragment;
 
+import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.model.AccessTokenResult;
 import com.uservoice.uservoicesdk.model.RequestToken;
 import com.uservoice.uservoicesdk.model.User;
@@ -67,6 +68,7 @@ public class SigninManager {
 					public void onModel(AccessTokenResult<User> model) {
 						Session.getInstance().setUser(model.getModel());
 						Session.getInstance().setAccessToken(activity, model.getAccessToken());
+						Babayaga.track(Babayaga.Event.IDENTIFY);
 						callback.run();
 					}
 				});

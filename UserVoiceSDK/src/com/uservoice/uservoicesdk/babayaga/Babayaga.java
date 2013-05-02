@@ -2,6 +2,8 @@ package com.uservoice.uservoicesdk.babayaga;
 
 import java.util.Map;
 
+import android.util.Log;
+
 public class Babayaga {
 	
 	static String DOMAIN = "by.uservoice.com";
@@ -45,12 +47,17 @@ public class Babayaga {
 	public static void setUserTraits(Map<String,Object> traits) {
 		Babayaga.traits = traits;
 	}
-	
+
+	public static void track(Event event) {
+		track(event, null);
+	}
 
 	public static void track(Event event, Map<String,Object> eventProps) {
+		track(event.getCode(), eventProps);
 	}
 	
 	public static void track(String event, Map<String,Object> eventProps) {
+		Log.d("by", event);
 		new BabayagaTask(event, uvts, traits, eventProps).execute();
 	}
 

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.Topic;
 import com.uservoice.uservoicesdk.rest.Callback;
@@ -52,6 +53,8 @@ public class TopicActivity extends ListActivity {
 				startActivity(new Intent(TopicActivity.this, ArticleActivity.class));
 			}
 		});
+		
+		Babayaga.track(Babayaga.Event.VIEW_TOPIC);
 	}
 	
 	@Override

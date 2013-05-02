@@ -19,6 +19,7 @@ import com.uservoice.uservoicesdk.activity.ArticleActivity;
 import com.uservoice.uservoicesdk.activity.ForumActivity;
 import com.uservoice.uservoicesdk.activity.SuggestionActivity;
 import com.uservoice.uservoicesdk.activity.TopicActivity;
+import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.BaseModel;
 import com.uservoice.uservoicesdk.model.Forum;
@@ -249,6 +250,8 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 	@Override
 	protected void search(String query, Callback<List<BaseModel>> callback) {
 		currentQuery = query;
+		Babayaga.track(Babayaga.Event.SEARCH_ARTICLES);
+		Babayaga.track(Babayaga.Event.SEARCH_IDEAS);
 		Article.loadInstantAnswers(query, callback);
 	}
 	

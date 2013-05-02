@@ -18,6 +18,7 @@ import com.uservoice.uservoicesdk.ImageCache;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.SigninManager;
+import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.model.Comment;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.rest.Callback;
@@ -105,6 +106,8 @@ public class SuggestionActivity extends ListActivity {
 				});
 			}
 		});
+		
+		Babayaga.track(Babayaga.Event.VIEW_IDEA);
 	}
 	
 	public void updateView() {

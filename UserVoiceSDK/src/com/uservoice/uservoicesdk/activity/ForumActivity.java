@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.model.ClientConfig;
 import com.uservoice.uservoicesdk.model.Forum;
 import com.uservoice.uservoicesdk.model.Suggestion;
@@ -25,8 +26,10 @@ import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.ui.DefaultCallback;
 import com.uservoice.uservoicesdk.ui.PaginatedAdapter;
 import com.uservoice.uservoicesdk.ui.PaginationScrollListener;
+import com.uservoice.uservoicesdk.ui.SearchExpandListener;
+import com.uservoice.uservoicesdk.ui.SearchQueryListener;
 
-public class ForumActivity extends ListActivity {
+public class ForumActivity extends ListActivity implements SearchActivity {
 	
 	private List<Suggestion> suggestions;
 	private Forum forum;
@@ -67,6 +70,7 @@ public class ForumActivity extends ListActivity {
 			
 			@Override
 			public void search(String query, Callback<List<Suggestion>> callback) {
+				Babayaga.track(Babayaga.Event.SEARCH_IDEAS);
 				Suggestion.searchSuggestions(forum, query, callback);
 			}
 
@@ -93,44 +97,18 @@ public class ForumActivity extends ListActivity {
 			}
 		});
 		
+		Babayaga.track(Babayaga.Event.VIEW_FORUM);
+		
 		loadClientConfig();
 	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.forum, menu);
-		
-		menu.findItem(R.id.menu_search).setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
-			@Override
-			public boolean onMenuItemActionExpand(MenuItem item) {
-				getModelAdapter().setSearchActive(true);
-				return true;
-			}
-			
-			@Override
-			public boolean onMenuItemActionCollapse(MenuItem item) {
-				getModelAdapter().setSearchActive(false);
-				return true;
-			}
-		});
-		
+		menu.findItem(R.id.menu_search).setOnActionExpandListener(new SearchExpandListener(this));
 		SearchView search = (SearchView) menu.findItem(R.id.menu_search).getActionView();
-		search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-			@Override
-			public boolean onQueryTextSubmit(String query) {
-				getModelAdapter().performSearch(query);
-				return true;
-			}
-			
-			@Override
-			public boolean onQueryTextChange(String query) {
-				getModelAdapter().performSearch(query);
-				return true;
-			}
-		});
-		
+		search.setOnQueryTextListener(new SearchQueryListener(this));
 		menu.findItem(R.id.new_idea).setVisible(Session.getInstance().getConfig().shouldShowPostIdea());
-		
 		return true;
 	}
 	
@@ -175,7 +153,7 @@ public class ForumActivity extends ListActivity {
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected PaginatedAdapter<Suggestion> getModelAdapter() {
+	public PaginatedAdapter<Suggestion> getModelAdapter() {
 		return (PaginatedAdapter<Suggestion>) getListAdapter();
 	}
 }

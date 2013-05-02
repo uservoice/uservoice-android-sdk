@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.model.AccessToken;
 import com.uservoice.uservoicesdk.model.AccessTokenResult;
 import com.uservoice.uservoicesdk.model.RequestToken;
@@ -140,6 +141,7 @@ public class SigninDialogFragment extends DialogFragment {
 						public void onModel(AccessTokenResult<User> model) {
 							Session.getInstance().setUser(model.getModel());
 							Session.getInstance().setAccessToken(activity, model.getAccessToken());
+							Babayaga.track(Babayaga.Event.AUTHENTICATE);
 							dismiss();
 							callback.run();
 						}
@@ -153,6 +155,7 @@ public class SigninDialogFragment extends DialogFragment {
 								@Override
 								public void onModel(User model) {
 									Session.getInstance().setUser(model);
+									Babayaga.track(Babayaga.Event.AUTHENTICATE);
 									dismiss();
 									callback.run();
 								}
