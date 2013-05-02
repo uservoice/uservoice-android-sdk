@@ -1,19 +1,12 @@
 package com.uservoice.uservoicesdk.activity;
 
 import android.app.ListActivity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.SearchView;
 
 import com.uservoice.uservoicesdk.R;
-import com.uservoice.uservoicesdk.Session;
-import com.uservoice.uservoicesdk.model.Article;
-import com.uservoice.uservoicesdk.model.Forum;
-import com.uservoice.uservoicesdk.model.Topic;
 import com.uservoice.uservoicesdk.ui.WelcomeAdapter;
 
 public class UserVoiceActivity extends ListActivity {
@@ -25,21 +18,7 @@ public class UserVoiceActivity extends ListActivity {
 		setTitle("Help");
 		getListView().setPadding(10, 0, 10, 0);
 		setListAdapter(new WelcomeAdapter(this));
-		getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Object obj = getListAdapter().getItem(position);
-				if (obj instanceof Forum) {
-					startActivity(new Intent(UserVoiceActivity.this, ForumActivity.class));
-				} else if (obj instanceof Topic) {
-					Session.getInstance().setTopic((Topic) obj);
-					startActivity(new Intent(UserVoiceActivity.this, TopicActivity.class));
-				} else if (obj instanceof Article) {
-					Session.getInstance().setArticle((Article) obj);
-					startActivity(new Intent(UserVoiceActivity.this, ArticleActivity.class));
-				}
-			}
-		});
+		getListView().setOnItemClickListener(getModelAdapter());
 	}
 
 	@Override
@@ -76,10 +55,6 @@ public class UserVoiceActivity extends ListActivity {
 		});
 		
 		return true;
-	}
-	
-	public void showForum() {
-		startActivity(new Intent(this, ForumActivity.class));
 	}
 	
 	private WelcomeAdapter getModelAdapter() {

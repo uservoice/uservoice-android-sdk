@@ -4,15 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.uservoice.uservoicesdk.Config;
 import com.uservoice.uservoicesdk.InitManager;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.activity.ArticleActivity;
+import com.uservoice.uservoicesdk.activity.ForumActivity;
+import com.uservoice.uservoicesdk.activity.SuggestionActivity;
+import com.uservoice.uservoicesdk.activity.TopicActivity;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.BaseModel;
 import com.uservoice.uservoicesdk.model.Forum;
@@ -20,7 +26,7 @@ import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.model.Topic;
 import com.uservoice.uservoicesdk.rest.Callback;
 
-public class WelcomeAdapter extends SearchAdapter<BaseModel> {
+public class WelcomeAdapter extends SearchAdapter<BaseModel> implements AdapterView.OnItemClickListener {
 	
 	private static int FEEDBACK_HEADER = 0;
 	private static int KB_HEADER = 1;
@@ -244,6 +250,22 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> {
 	protected void search(String query, Callback<List<BaseModel>> callback) {
 		currentQuery = query;
 		Article.loadInstantAnswers(query, callback);
+	}
+	
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		int type = getItemViewType(position);
+		if (type == FORUM) {
+			context.startActivity(new Intent(context, ForumActivity.class));
+		} else if (type == TOPIC) {
+			Session.getInstance().setTopic((Topic) getItem(position));
+			context.startActivity(new Intent(context, TopicActivity.class));
+		} else if (type == ARTICLE) {
+			Session.getInstance().setArticle((Article) getItem(position));
+			context.startActivity(new Intent(context, ArticleActivity.class));
+		} else if (type == SUGGESTION) {
+			Session.getInstance().setSuggestion((Suggestion) getItem(position));
+			context.startActivity(new Intent(context, SuggestionActivity.class));
+		}
 	}
 
 }
