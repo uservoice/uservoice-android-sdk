@@ -28,14 +28,13 @@ import com.uservoice.uservoicesdk.rest.Callback;
 
 public class WelcomeAdapter extends SearchAdapter<BaseModel> implements AdapterView.OnItemClickListener {
 	
-	private static int FEEDBACK_HEADER = 0;
-	private static int KB_HEADER = 1;
-	private static int FORUM = 2;
-	private static int TOPIC = 3;
-	private static int LOADING = 4;
-	private static int CONTACT = 5;
-	private static int ARTICLE = 6;
-	private static int SUGGESTION = 7;
+	private static int KB_HEADER = 0;
+	private static int FORUM = 1;
+	private static int TOPIC = 2;
+	private static int LOADING = 3;
+	private static int CONTACT = 4;
+	private static int ARTICLE = 5;
+	private static int SUGGESTION = 6;
 	
 	private List<Topic> topics;
 	private List<Article> articles;
@@ -103,8 +102,6 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> implements AdapterV
 		if (staticRows == null) {
 			staticRows = new ArrayList<Integer>();
 			Config config = Session.getInstance().getConfig();
-			if (config.shouldShowContactUs() || config.shouldShowForum())
-				staticRows.add(FEEDBACK_HEADER);
 			if (config.shouldShowContactUs())
 				staticRows.add(CONTACT);
 			if (config.shouldShowForum())
@@ -154,7 +151,7 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> implements AdapterV
 		computeStaticRows();
 		if (position < staticRows.size()) {
 			int type = staticRows.get(position);
-			if (type == FEEDBACK_HEADER || type == KB_HEADER || type == LOADING)
+			if (type == KB_HEADER || type == LOADING)
 				return false;
 		}
 		return true;
@@ -169,7 +166,7 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> implements AdapterV
 				view = inflater.inflate(R.layout.loading_item, null);
 			else if (type == FORUM)
 				view = inflater.inflate(android.R.layout.simple_list_item_1, null);
-			else if (type == FEEDBACK_HEADER || type == KB_HEADER)
+			else if (type == KB_HEADER)
 				view = inflater.inflate(R.layout.header_item, null);
 			else if (type == TOPIC)
 				view = inflater.inflate(R.layout.topic_item, null);
@@ -184,9 +181,6 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> implements AdapterV
 		if (type == FORUM) {
 			TextView textView = (TextView) view.findViewById(android.R.id.text1);
 			textView.setText("Feedback Forum");
-		} else if (type == FEEDBACK_HEADER) {
-			TextView textView = (TextView) view.findViewById(R.id.text);
-			textView.setText("FEEDBACK & SUPPORT");
 		} else if (type == KB_HEADER) {
 			TextView textView = (TextView) view.findViewById(R.id.text);
 			textView.setText("KNOWLEDGE BASE");
@@ -218,7 +212,7 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> implements AdapterV
 	
 	@Override
 	public int getViewTypeCount() {
-		return 8;
+		return 7;
 	}
 	
 	@Override
