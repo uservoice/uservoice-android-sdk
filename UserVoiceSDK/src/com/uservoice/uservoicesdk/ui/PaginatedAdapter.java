@@ -31,6 +31,6 @@ public abstract class PaginatedAdapter<T> extends ModelAdapter<T> {
 	protected abstract int getTotalNumberOfObjects();
 	
 	protected List<T> getObjects() {
-		return searchActive && (loading || !searchResults.isEmpty()) ? searchResults : objects;
+		return shouldShowSearchResults() ? searchResults : objects;
 	}
 }

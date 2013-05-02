@@ -23,8 +23,10 @@ public abstract class SearchAdapter<T> extends BaseAdapter {
 	protected boolean loading;
 	protected Context context;
 	protected String currentQuery;
+	protected String pendingQuery;
 	
 	public void performSearch(String query) {
+		pendingQuery = query;
 		if (query.isEmpty()) {
 			searchResults = new ArrayList<T>();
 			loading = false;
@@ -76,6 +78,10 @@ public abstract class SearchAdapter<T> extends BaseAdapter {
 				}
 			});
 		}
+	}
+	
+	protected boolean shouldShowSearchResults() {
+		return searchActive && pendingQuery != null && !pendingQuery.isEmpty();
 	}
 	
 	protected CharSequence highlightResult(String item) {

@@ -115,7 +115,7 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> implements AdapterV
 	public int getCount() {
 		if (Session.getInstance().getClientConfig() == null) {
 			return 1;
-		} else if (searchActive) {
+		} else if (shouldShowSearchResults()) {
 			return loading ? 1 : searchResults.size();
 		} else {
 			computeStaticRows();
@@ -125,7 +125,7 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> implements AdapterV
 
 	@Override
 	public Object getItem(int position) {
-		if (searchActive)
+		if (shouldShowSearchResults())
 			return loading ? null : searchResults.get(position);
 		computeStaticRows();
 		if (position < staticRows.size() && staticRows.get(position) == FORUM)
@@ -144,7 +144,7 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> implements AdapterV
 	
 	@Override
 	public boolean isEnabled(int position) {
-		if (searchActive)
+		if (shouldShowSearchResults())
 			return !loading;
 		if (Session.getInstance().getClientConfig() == null)
 			return false;
@@ -201,7 +201,7 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> implements AdapterV
 		} else if (type == ARTICLE) {
 			TextView textView = (TextView) view.findViewById(R.id.article_name);
 			Article article = (Article) getItem(position);
-			textView.setText(searchActive ? highlightResult(article.getQuestion()) : article.getQuestion());
+			textView.setText(shouldShowSearchResults() ? highlightResult(article.getQuestion()) : article.getQuestion());
 		} else if (type == SUGGESTION) {
 			TextView textView = (TextView) view.findViewById(R.id.suggestion_title);
 			Suggestion suggestion = (Suggestion) getItem(position);
@@ -219,7 +219,7 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> implements AdapterV
 	public int getItemViewType(int position) {
 		if (Session.getInstance().getClientConfig() == null)
 			return LOADING;
-		if (searchActive) {
+		if (shouldShowSearchResults()) {
 			if (loading)
 				return LOADING;
 			BaseModel model = searchResults.get(position);
