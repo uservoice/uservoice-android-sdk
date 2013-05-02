@@ -1,9 +1,12 @@
 package com.uservoice.uservoicesdk;
 
+import java.util.Map;
+
 import android.content.Context;
 import android.content.Intent;
 
 import com.uservoice.uservoicesdk.activity.PortalActivity;
+import com.uservoice.uservoicesdk.babayaga.Babayaga;
 
 public class UserVoice {
 	
@@ -30,6 +33,14 @@ public class UserVoice {
 	
 	public static void setExternalId(String scope, String id) {
 		Session.getInstance().setExternalId(scope, id);
+	}
+	
+	public static void track(String event, Map<String, Object> properties) {
+		Babayaga.track(event, properties);
+	}
+	
+	public static void track(String event) {
+		track(event, null);
 	}
 	
 	public static String getVersion() {

@@ -2,8 +2,6 @@ package com.uservoice.uservoicesdk.babayaga;
 
 import java.util.Map;
 
-import android.util.Log;
-
 public class Babayaga {
 	
 	static String DOMAIN = "by.uservoice.com";
