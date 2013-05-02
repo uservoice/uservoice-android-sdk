@@ -58,7 +58,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="2dp"
             android:paddingTop="2dp"
-            android:text="ADMIN RESPONSE"
+            android:text="@string/admin_response"
             android:textColor="#FFFFFF"
             android:textSize="10sp" />
 
