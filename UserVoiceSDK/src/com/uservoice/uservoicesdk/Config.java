@@ -27,18 +27,6 @@ public class Config {
 		this.secret = secret;
 	}
 	
-	public Config(String site, String key, String secret, String ssoToken) {
-		this(site, key, secret);
-		this.ssoToken = ssoToken;
-	}
-	
-	public Config(String site, String key, String secret, String email, String name, String guid) {
-		this(site, key, secret);
-		this.email = email;
-		this.name = name;
-		this.guid = guid;
-	}
-	
 	public String getSite() {
 		return site;
 	}
@@ -131,6 +119,15 @@ public class Config {
 
 	public void setShowKnowledgeBase(boolean showKnowledgeBase) {
 		this.showKnowledgeBase = showKnowledgeBase;
+	}
+	
+	public void identifyUser(String id, String name, String email) {
+		guid = id;
+		this.name = name;
+		this.email = email;
+		putUserTrait("id", id);
+		putUserTrait("name", name);
+		putUserTrait("email", email);
 	}
 	
 	public void putUserTrait(String key, String value) {
