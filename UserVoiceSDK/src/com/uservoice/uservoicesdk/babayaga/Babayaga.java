@@ -2,6 +2,10 @@ package com.uservoice.uservoicesdk.babayaga;
 
 import java.util.Map;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+
 public class Babayaga {
 	
 	static String DOMAIN = "by.uservoice.com";
@@ -9,6 +13,7 @@ public class Babayaga {
 	
 	private static String uvts;
 	private static Map<String,Object> traits;
+	private static SharedPreferences prefs;
 
 	public enum Event {
 		VIEW_FORUM("m"),
@@ -40,6 +45,9 @@ public class Babayaga {
 	
 	public static void setUvts(String uvts) {
 		Babayaga.uvts = uvts;
+		Editor edit = prefs.edit();
+		edit.putString("uvts", uvts);
+		edit.commit();
 	}
 	
 	public static void setUserTraits(Map<String,Object> traits) {
@@ -56,6 +64,13 @@ public class Babayaga {
 	
 	public static void track(String event, Map<String,Object> eventProps) {
 		new BabayagaTask(event, uvts, traits, eventProps).execute();
+	}
+
+	public static void init(Context context) {
+		prefs = context.getSharedPreferences("uv", 0);
+		if (prefs.contains("uvts")) {
+			uvts = prefs.getString("uvts", null);
+		}
 	}
 
 }

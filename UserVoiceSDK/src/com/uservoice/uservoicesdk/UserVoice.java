@@ -10,25 +10,23 @@ import com.uservoice.uservoicesdk.babayaga.Babayaga;
 
 public class UserVoice {
 	
-	public static void launchUserVoice(Config config, Context context) {
-		Session.getInstance().setConfig(config);
-		Intent intent = new Intent(context, PortalActivity.class);
-		context.startActivity(intent);
+	public static void launchUserVoice(Context context) {
+		context.startActivity(new Intent(context, PortalActivity.class));
 	}
 	
 	public static void launchForum(Config config, Context context) {
-		Session.getInstance().setConfig(config);
-		
 	}
 	
 	public static void launchContactUs(Config config, Context context) {
-		Session.getInstance().setConfig(config);
-		
 	}
 	
 	public static void launchNewIdea(Config config, Context context) {
+	}
+	
+	public static void init(Config config, Context context) {
+		Babayaga.init(context);
+		Babayaga.setUserTraits(config.getUserTraits());
 		Session.getInstance().setConfig(config);
-		
 	}
 	
 	public static void setExternalId(String scope, String id) {
