@@ -56,8 +56,8 @@ public class BabayagaTask extends AsyncTask<String,String,Void> {
 			if (eventProps != null && !eventProps.isEmpty()) {
 				data.put("e", eventProps);
 			}
-			String subdomain = Session.getInstance().getClientConfig().getSubdomain();
-			StringBuilder url = new StringBuilder(String.format("http://%s/t/%s/%s/%s", Babayaga.DOMAIN, subdomain, Babayaga.CHANNEL, event));
+			String subdomainId = Session.getInstance().getClientConfig().getSubdomainId();
+			StringBuilder url = new StringBuilder(String.format("http://%s/t/%s/%s/%s", Babayaga.DOMAIN, subdomainId, Babayaga.CHANNEL, event));
 			if (uvts != null) {
 				url.append("/");
 				url.append(uvts);

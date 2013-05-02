@@ -57,7 +57,6 @@ public class Babayaga {
 	}
 	
 	public static void track(String event, Map<String,Object> eventProps) {
-		Log.d("by", event);
 		new BabayagaTask(event, uvts, traits, eventProps).execute();
 	}
 
