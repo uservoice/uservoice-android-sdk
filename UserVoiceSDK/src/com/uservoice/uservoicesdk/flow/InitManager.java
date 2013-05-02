@@ -1,7 +1,9 @@
-package com.uservoice.uservoicesdk;
+package com.uservoice.uservoicesdk.flow;
 
 import android.content.Context;
 
+import com.uservoice.uservoicesdk.Config;
+import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.model.AccessToken;
 import com.uservoice.uservoicesdk.model.AccessTokenResult;
 import com.uservoice.uservoicesdk.model.BaseModel;

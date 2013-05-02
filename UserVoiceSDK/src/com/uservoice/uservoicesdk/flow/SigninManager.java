@@ -1,16 +1,17 @@
-package com.uservoice.uservoicesdk;
+package com.uservoice.uservoicesdk.flow;
 
 import android.app.Activity;
 import android.app.DialogFragment;
 
+import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
+import com.uservoice.uservoicesdk.dialog.SigninDialogFragment;
 import com.uservoice.uservoicesdk.model.AccessTokenResult;
 import com.uservoice.uservoicesdk.model.RequestToken;
 import com.uservoice.uservoicesdk.model.User;
 import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.rest.RestResult;
 import com.uservoice.uservoicesdk.ui.DefaultCallback;
-import com.uservoice.uservoicesdk.ui.SigninDialogFragment;
 
 public class SigninManager {
 	

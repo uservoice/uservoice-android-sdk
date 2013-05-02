@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.uservoice.uservoicesdk.Config;
-import com.uservoice.uservoicesdk.InitManager;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.activity.ArticleActivity;
@@ -20,6 +19,7 @@ import com.uservoice.uservoicesdk.activity.ForumActivity;
 import com.uservoice.uservoicesdk.activity.SuggestionActivity;
 import com.uservoice.uservoicesdk.activity.TopicActivity;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
+import com.uservoice.uservoicesdk.flow.InitManager;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.BaseModel;
 import com.uservoice.uservoicesdk.model.Forum;

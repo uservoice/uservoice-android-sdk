@@ -14,17 +14,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.uservoice.uservoicesdk.ImageCache;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
-import com.uservoice.uservoicesdk.SigninManager;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
+import com.uservoice.uservoicesdk.dialog.VoteDialogFragment;
+import com.uservoice.uservoicesdk.flow.SigninManager;
+import com.uservoice.uservoicesdk.image.ImageCache;
 import com.uservoice.uservoicesdk.model.Comment;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.ui.PaginatedAdapter;
 import com.uservoice.uservoicesdk.ui.PaginationScrollListener;
-import com.uservoice.uservoicesdk.ui.VoteDialogFragment;
 
 @SuppressLint("DefaultLocale")
 public class SuggestionActivity extends ListActivity {

@@ -1,4 +1,4 @@
-package com.uservoice.uservoicesdk.ui;
+package com.uservoice.uservoicesdk.dialog;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -24,6 +24,7 @@ import com.uservoice.uservoicesdk.model.RequestToken;
 import com.uservoice.uservoicesdk.model.User;
 import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.rest.RestResult;
+import com.uservoice.uservoicesdk.ui.DefaultCallback;
 
 @SuppressLint("ValidFragment")
 public class SigninDialogFragment extends DialogFragment {

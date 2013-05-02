@@ -1,4 +1,4 @@
-package com.uservoice.uservoicesdk.ui;
+package com.uservoice.uservoicesdk.dialog;
 
 import android.app.AlertDialog;
 import android.content.Context;

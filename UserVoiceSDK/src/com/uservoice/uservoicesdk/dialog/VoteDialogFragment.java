@@ -1,4 +1,4 @@
-package com.uservoice.uservoicesdk.ui;
+package com.uservoice.uservoicesdk.dialog;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -13,6 +13,7 @@ import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.activity.SuggestionActivity;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.model.User;
+import com.uservoice.uservoicesdk.ui.DefaultCallback;
 
 @SuppressLint("DefaultLocale")
 public class VoteDialogFragment extends DialogFragment {
