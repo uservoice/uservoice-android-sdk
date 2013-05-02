@@ -7,9 +7,9 @@ import android.view.MenuItem;
 import android.widget.SearchView;
 
 import com.uservoice.uservoicesdk.R;
-import com.uservoice.uservoicesdk.ui.WelcomeAdapter;
+import com.uservoice.uservoicesdk.ui.PortalAdapter;
 
-public class UserVoiceActivity extends ListActivity {
+public class PortalActivity extends ListActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +17,7 @@ public class UserVoiceActivity extends ListActivity {
 		
 		setTitle(R.string.portal_title);
 		getListView().setPadding(10, 0, 10, 0);
-		setListAdapter(new WelcomeAdapter(this));
+		setListAdapter(new PortalAdapter(this));
 		getListView().setOnItemClickListener(getModelAdapter());
 	}
 
@@ -57,8 +57,8 @@ public class UserVoiceActivity extends ListActivity {
 		return true;
 	}
 	
-	private WelcomeAdapter getModelAdapter() {
-		return (WelcomeAdapter) getListAdapter();
+	private PortalAdapter getModelAdapter() {
+		return (PortalAdapter) getListAdapter();
 	}
 
 }

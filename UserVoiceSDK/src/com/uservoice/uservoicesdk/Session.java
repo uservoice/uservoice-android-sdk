@@ -1,6 +1,7 @@
 package com.uservoice.uservoicesdk;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import oauth.signpost.OAuthConsumer;
@@ -36,6 +37,8 @@ public class Session {
 	private User user;
 	private ClientConfig clientConfig;
 	private Forum forum;
+	private List<Topic> topics;
+	private List<Article> articles;
 	private Map<String,String> externalIds = new HashMap<String,String>();
 	private Suggestion suggestion;
 	private Article article;
@@ -142,4 +145,19 @@ public class Session {
 		this.comment = comment;
 	}
 
+	public void setTopics(List<Topic> topics) {
+		this.topics = topics;
+	}
+	
+	public List<Topic> getTopics() {
+		return topics;
+	}
+	
+	public List<Article> getArticles() {
+		return articles;
+	}
+	
+	public void setArticles(List<Article> articles) {
+		this.articles = articles;
+	}
 }

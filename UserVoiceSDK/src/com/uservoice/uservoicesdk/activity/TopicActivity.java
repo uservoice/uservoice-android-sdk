@@ -6,6 +6,7 @@ import java.util.List;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
@@ -20,6 +21,8 @@ import com.uservoice.uservoicesdk.ui.LoadAllAdapter;
 public class TopicActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		
 		final Topic topic = Session.getInstance().getTopic();
 		
 		setTitle(topic == null ? getString(R.string.all_articles) : topic.getName());
@@ -49,5 +52,18 @@ public class TopicActivity extends ListActivity {
 				startActivity(new Intent(TopicActivity.this, ArticleActivity.class));
 			}
 		});
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+        case android.R.id.home:
+            Intent parentActivityIntent = new Intent(this, PortalActivity.class);
+            parentActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(parentActivityIntent);
+            finish();
+            return true;
+	    }
+	    return super.onOptionsItemSelected(item);
 	}
 }

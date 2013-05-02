@@ -3,13 +3,13 @@ package com.uservoice.uservoicesdk;
 import android.content.Context;
 import android.content.Intent;
 
-import com.uservoice.uservoicesdk.activity.UserVoiceActivity;
+import com.uservoice.uservoicesdk.activity.PortalActivity;
 
 public class UserVoice {
 	
 	public static void launchUserVoice(Config config, Context context) {
 		Session.getInstance().setConfig(config);
-		Intent intent = new Intent(context, UserVoiceActivity.class);
+		Intent intent = new Intent(context, PortalActivity.class);
 		context.startActivity(intent);
 	}
 	

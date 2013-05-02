@@ -10,9 +10,9 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AbsListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -34,6 +34,8 @@ public class ForumActivity extends ListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		suggestions = new ArrayList<Suggestion>();
 		
@@ -130,6 +132,19 @@ public class ForumActivity extends ListActivity {
 		menu.findItem(R.id.new_idea).setVisible(Session.getInstance().getConfig().shouldShowPostIdea());
 		
 		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+        case android.R.id.home:
+            Intent parentActivityIntent = new Intent(this, PortalActivity.class);
+            parentActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(parentActivityIntent);
+            finish();
+            return true;
+	    }
+	    return super.onOptionsItemSelected(item);
 	}
 	
 	private void loadClientConfig() {

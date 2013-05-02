@@ -26,7 +26,7 @@ import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.model.Topic;
 import com.uservoice.uservoicesdk.rest.Callback;
 
-public class WelcomeAdapter extends SearchAdapter<BaseModel> implements AdapterView.OnItemClickListener {
+public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterView.OnItemClickListener {
 	
 	private static int KB_HEADER = 0;
 	private static int FORUM = 1;
@@ -36,13 +36,11 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> implements AdapterV
 	private static int ARTICLE = 5;
 	private static int SUGGESTION = 6;
 	
-	private List<Topic> topics;
-	private List<Article> articles;
 	private LayoutInflater inflater;
 	private final Context context;
 	private List<Integer> staticRows;
 	
-	public WelcomeAdapter(Context context) {
+	public PortalAdapter(Context context) {
 		this.context = context;
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
@@ -57,8 +55,16 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> implements AdapterV
 		loadTopics();
 	}
 	
+	private List<Topic> getTopics() {
+		return Session.getInstance().getTopics();
+	}
+	
+	private List<Article> getArticles() {
+		return Session.getInstance().getArticles();
+	}
+	
 	private boolean shouldShowArticles() {
-		return Session.getInstance().getConfig().getTopicId() != -1 || (topics != null && topics.isEmpty());
+		return Session.getInstance().getConfig().getTopicId() != -1 || (getTopics() != null && getTopics().isEmpty());
 	}
 	
 	private void loadForum() {
@@ -75,8 +81,8 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> implements AdapterV
 		final DefaultCallback<List<Article>> articlesCallback = new DefaultCallback<List<Article>>(context) {
 			@Override
 			public void onModel(List<Article> model) {
-				topics = new ArrayList<Topic>();
-				articles = model;
+				Session.getInstance().setTopics(new ArrayList<Topic>());
+				Session.getInstance().setArticles(model);
 				notifyDataSetChanged();
 			}
 		};
@@ -87,8 +93,8 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> implements AdapterV
 			Topic.loadTopics(new DefaultCallback<List<Topic>>(context) {
 				@Override
 				public void onModel(List<Topic> model) {
-					topics = model;
-					if (topics.isEmpty()) {
+					Session.getInstance().setTopics(model);
+					if (getTopics().isEmpty()) {
 						Article.loadAll(articlesCallback);
 					} else {
 						notifyDataSetChanged();
@@ -119,7 +125,7 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> implements AdapterV
 			return loading ? 1 : searchResults.size();
 		} else {
 			computeStaticRows();
-			return staticRows.size() + (Session.getInstance().getConfig().shouldShowKnowledgeBase() ? (topics == null ? 1 : (shouldShowArticles() ? articles.size() : topics.size() + 1)) : 0);
+			return staticRows.size() + (Session.getInstance().getConfig().shouldShowKnowledgeBase() ? (getTopics() == null ? 1 : (shouldShowArticles() ? getArticles().size() : getTopics().size() + 1)) : 0);
 		}
 	}
 
@@ -130,10 +136,10 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> implements AdapterV
 		computeStaticRows();
 		if (position < staticRows.size() && staticRows.get(position) == FORUM)
 			return Session.getInstance().getForum();
-		else if (topics != null && !shouldShowArticles() && position >= staticRows.size() && position - staticRows.size() < topics.size()) 
-			return topics.get(position - staticRows.size());
-		else if (articles != null && shouldShowArticles() && position >= staticRows.size() && position - staticRows.size() < articles.size())
-			return articles.get(position - staticRows.size());
+		else if (getTopics() != null && !shouldShowArticles() && position >= staticRows.size() && position - staticRows.size() < getTopics().size()) 
+			return getTopics().get(position - staticRows.size());
+		else if (getArticles() != null && shouldShowArticles() && position >= staticRows.size() && position - staticRows.size() < getArticles().size())
+			return getArticles().get(position - staticRows.size());
 		return null;
 	}
 
@@ -237,7 +243,7 @@ public class WelcomeAdapter extends SearchAdapter<BaseModel> implements AdapterV
 				return LOADING;
 			return type;
 		}
-		return topics == null ? LOADING : (shouldShowArticles() ? ARTICLE : TOPIC);
+		return getTopics() == null ? LOADING : (shouldShowArticles() ? ARTICLE : TOPIC);
 	}
 
 	@Override
