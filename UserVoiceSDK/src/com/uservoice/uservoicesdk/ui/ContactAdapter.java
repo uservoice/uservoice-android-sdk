@@ -139,7 +139,7 @@ public class ContactAdapter extends BaseAdapter {
 	@Override
 	public boolean isEnabled(int position) {
 		int type = getItemViewType(position);
-		return type == INSTANT_ANSWER;
+		return type == INSTANT_ANSWER || type == MORE_RESULTS;
 	}
 
 	@SuppressLint("CutPasteId")
@@ -223,29 +223,26 @@ public class ContactAdapter extends BaseAdapter {
 				detail.setText(String.format("%s - %s", details[0], details[1]));
 			else
 				detail.setText(details[0]);
-		} else if (type == EMAIL_FIELD) {
+		} else if (type == EMAIL_FIELD || type == NAME_FIELD || type == CUSTOM_TEXT_FIELD) {
 			TextView title = (TextView) view.findViewById(R.id.header_text);
-			title.setText(R.string.your_email_address);
 			EditText field = (EditText) view.findViewById(R.id.text_field);
-			field.setHint(R.string.email_address);
-			field.setInputType(EditorInfo.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-			// TODO set saved value
-		} else if (type == NAME_FIELD) {
-			TextView title = (TextView) view.findViewById(R.id.header_text);
-			title.setText(R.string.your_name);
-			EditText field = (EditText) view.findViewById(R.id.text_field);
-			field.setHint(R.string.name);
-			field.setInputType(EditorInfo.TYPE_TEXT_VARIATION_PERSON_NAME);
-			// TODO set saved value
-		} else if (type == CUSTOM_TEXT_FIELD) {
-			CustomField customField = (CustomField) getItem(position);
-			String value = Session.getInstance().getConfig().getCustomFields().get(customField.getName());
-			TextView title = (TextView) view.findViewById(R.id.header_text);
-			title.setText(customField.getName());
-			EditText field = (EditText) view.findViewById(R.id.text_field);
-			field.setHint(R.string.value);
-			field.setInputType(EditorInfo.TYPE_TEXT_VARIATION_SHORT_MESSAGE);
-			field.setText(value);
+			if (type == EMAIL_FIELD) {
+				title.setText(R.string.your_email_address);
+				field.setHint(R.string.email_address);
+				field.setInputType(EditorInfo.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+			} else if (type == NAME_FIELD) {
+				title.setText(R.string.your_name);
+				field.setHint(R.string.name);
+				field.setInputType(EditorInfo.TYPE_TEXT_VARIATION_PERSON_NAME);
+				// TODO set saved value
+			} else if (type == CUSTOM_TEXT_FIELD) {
+				CustomField customField = (CustomField) getItem(position);
+				String value = Session.getInstance().getConfig().getCustomFields().get(customField.getName());
+				title.setText(customField.getName());
+				field.setHint(R.string.value);
+				field.setInputType(EditorInfo.TYPE_TEXT_VARIATION_SHORT_MESSAGE);
+				field.setText(value);
+			}
 		} else if (type == CUSTOM_PREDEFINED_FIELD) {
 			CustomField customField = (CustomField) getItem(position);
 			String value = Session.getInstance().getConfig().getCustomFields().get(customField.getName());
