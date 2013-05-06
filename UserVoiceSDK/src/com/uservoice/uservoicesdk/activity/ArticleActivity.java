@@ -22,9 +22,9 @@ public class ArticleActivity extends Activity {
 		
 		setContentView(R.layout.article_layout);
 		Article article = Session.getInstance().getArticle();
-		System.out.println(article.getAnswerHtml());
+		System.out.println(article.getHtml());
 		String styles = "iframe, img { width: 100%; }";
-	    String html = String.format("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"http://uservoice.com/stylesheets/vendor/typeset.css\"/><style>%s</style></head><body class=\"typeset\" style=\"font-family: sans-serif; margin: 1em\"><h3>%s</h3>%s</body></html>", styles, article.getQuestion(), article.getAnswerHtml());
+	    String html = String.format("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"http://uservoice.com/stylesheets/vendor/typeset.css\"/><style>%s</style></head><body class=\"typeset\" style=\"font-family: sans-serif; margin: 1em\"><h3>%s</h3>%s</body></html>", styles, article.getTitle(), article.getHtml());
 
 		WebView webview = (WebView) findViewById(R.id.webview);
 		webview.setWebChromeClient(new WebChromeClient());

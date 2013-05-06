@@ -45,8 +45,19 @@
     <string name="vote_dialog_title">Vote</string>
     <string name="remove_votes">Remove Votes</string>
     <string name="feedback_forum">Feedback Forum</string>
-    <string name="knowledge_base">KNOWLEDGE BASE</string>
-    <string name="admin_response">ADMIN RESPONSE</string>
+    <string name="knowledge_base">Knowledge Base</string>
+    <string name="admin_response">Admin Response</string>
     <string name="menu_post_comment">Post</string>
-
+    <string name="next">Next</string>
+    <string name="none_of_these_help">None of these help</string>
+    <string name="send_message">Send message</string>
+    <string name="do_any_of_these_help">Do any of these help?</string>
+    <string name="more_results">More results&#8230;</string>
+    <string name="your_email_address">Your email address</string>
+    <string name="your_name">Your name</string>
+    <string name="name">Name</string>
+    <string name="select_one">Select one</string>
+    <string name="value">Value</string>
+    <string name="article">Article</string>
+    <string name="idea">Idea</string>
 </resources>

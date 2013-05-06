@@ -15,6 +15,7 @@ import com.uservoice.uservoicesdk.Config;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.activity.ArticleActivity;
+import com.uservoice.uservoicesdk.activity.ContactActivity;
 import com.uservoice.uservoicesdk.activity.ForumActivity;
 import com.uservoice.uservoicesdk.activity.SuggestionActivity;
 import com.uservoice.uservoicesdk.activity.TopicActivity;
@@ -174,7 +175,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 			else if (type == FORUM)
 				view = inflater.inflate(android.R.layout.simple_list_item_1, null);
 			else if (type == KB_HEADER)
-				view = inflater.inflate(R.layout.header_item, null);
+				view = inflater.inflate(android.R.layout.preference_category, null);
 			else if (type == TOPIC)
 				view = inflater.inflate(R.layout.topic_item, null);
 			else if (type == CONTACT)
@@ -189,7 +190,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 			TextView textView = (TextView) view.findViewById(android.R.id.text1);
 			textView.setText(R.string.feedback_forum);
 		} else if (type == KB_HEADER) {
-			TextView textView = (TextView) view.findViewById(R.id.text);
+			TextView textView = (TextView) view.findViewById(android.R.id.title);
 			textView.setText(R.string.knowledge_base);
 		} else if (type == TOPIC) {
 			Topic topic = (Topic) getItem(position);
@@ -208,7 +209,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 		} else if (type == ARTICLE) {
 			TextView textView = (TextView) view.findViewById(R.id.article_name);
 			Article article = (Article) getItem(position);
-			textView.setText(shouldShowSearchResults() ? highlightResult(article.getQuestion()) : article.getQuestion());
+			textView.setText(shouldShowSearchResults() ? highlightResult(article.getTitle()) : article.getTitle());
 		} else if (type == SUGGESTION) {
 			TextView textView = (TextView) view.findViewById(R.id.suggestion_title);
 			Suggestion suggestion = (Suggestion) getItem(position);
@@ -257,7 +258,9 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 	
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		int type = getItemViewType(position);
-		if (type == FORUM) {
+		if (type == CONTACT) {
+			context.startActivity(new Intent(context, ContactActivity.class));
+		} else if (type == FORUM) {
 			context.startActivity(new Intent(context, ForumActivity.class));
 		} else if (type == TOPIC) {
 			Session.getInstance().setTopic((Topic) getItem(position));

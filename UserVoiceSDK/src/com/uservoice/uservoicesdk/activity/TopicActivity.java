@@ -41,7 +41,7 @@ public class TopicActivity extends ListActivity {
 			@Override
 			protected void customizeLayout(View view, Article model) {
 				TextView text = (TextView) view.findViewById(R.id.article_name);
-				text.setText(model.getQuestion());
+				text.setText(model.getTitle());
 			}
 		});
 		

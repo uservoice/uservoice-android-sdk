@@ -12,7 +12,7 @@ public class Config {
 	private String email;
 	private String name;
 	private String guid;
-	private Map<String, String> customFields;
+	private Map<String, String> customFields = new HashMap<String,String>();
 	private int topicId = -1;
 	private int forumId = -1;
 	private boolean showForum = true;

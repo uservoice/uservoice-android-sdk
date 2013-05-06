@@ -12,8 +12,9 @@ import com.uservoice.uservoicesdk.rest.RestTaskCallback;
 
 public class Article extends BaseModel {
 	
-	private String question;
-	private String answerHtml;
+	private String title;
+	private String html;
+	private String topicName;
 	
 	public static void loadAll(final Callback<List<Article>> callback) {
         doGet(apiPath("/articles.json"), new RestTaskCallback(callback) {
@@ -52,15 +53,23 @@ public class Article extends BaseModel {
 	@Override
 	public void load(JSONObject object) throws JSONException {
 		super.load(object);
-		question = getString(object, "question");
-		answerHtml = getHtml(object, "answer_html");
+		title = getString(object, "question");
+		html = getHtml(object, "answer_html");
+		JSONObject topic = object.getJSONObject("topic");
+		if (topic != null) {
+			topicName = topic.getString("name");
+		}
 	}
 	
-	public String getQuestion() {
-		return question;
+	public String getTitle() {
+		return title;
 	}
 	
-	public String getAnswerHtml() {
-		return answerHtml;
+	public String getHtml() {
+		return html;
+	}
+	
+	public String getTopicName() {
+		return topicName;
 	}
 }
