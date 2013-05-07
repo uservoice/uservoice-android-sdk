@@ -16,5 +16,6 @@ public class ContactActivity extends ListActivity {
 		
 		setListAdapter(new ContactAdapter(this));
 		getListView().setOnHierarchyChangeListener((ContactAdapter) getListAdapter());
+		getListView().setOnItemClickListener((ContactAdapter) getListAdapter());
 	}
 }

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -23,13 +24,14 @@ import android.widget.Toast;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.dialog.ArticleDialogFragment;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.BaseModel;
 import com.uservoice.uservoicesdk.model.CustomField;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.model.Ticket;
 
-public class ContactAdapter extends BaseAdapter implements ViewGroup.OnHierarchyChangeListener {
+public class ContactAdapter extends BaseAdapter implements ViewGroup.OnHierarchyChangeListener, OnItemClickListener {
 	
 	private int TEXT = 0;
 	private int BUTTON = 1;
@@ -305,5 +307,17 @@ public class ContactAdapter extends BaseAdapter implements ViewGroup.OnHierarchy
 
 	@Override
 	public void onChildViewRemoved(View parent, View child) {
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		int type = getItemViewType(position);
+		if (type == INSTANT_ANSWER) {
+			BaseModel instantAnswer = (BaseModel) getItem(position);
+			if (instantAnswer instanceof Article) {
+				ArticleDialogFragment fragment = new ArticleDialogFragment((Article) instantAnswer);
+				fragment.show(context.getFragmentManager(), "ArticleDialogFragment");
+			}
+		}
 	}
 }
