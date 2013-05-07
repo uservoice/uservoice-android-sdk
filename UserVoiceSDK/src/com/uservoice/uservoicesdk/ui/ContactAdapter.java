@@ -296,5 +296,4 @@ public class ContactAdapter extends BaseAdapter {
 		}
 		return view;
 	}
-
 }

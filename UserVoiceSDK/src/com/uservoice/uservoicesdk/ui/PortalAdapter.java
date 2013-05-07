@@ -40,6 +40,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 	
 	private LayoutInflater inflater;
 	private final Context context;
+	private boolean configLoaded = false;
 	private List<Integer> staticRows;
 	
 	public PortalAdapter(Context context) {
@@ -49,6 +50,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 		new InitManager(context, new Runnable() {
 			@Override
 			public void run() {
+				configLoaded = true;
 				notifyDataSetChanged();
 				// this has to be deferred only because we fall back to clientconfig forum_id 
 				loadForum();
@@ -121,7 +123,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 
 	@Override
 	public int getCount() {
-		if (Session.getInstance().getClientConfig() == null) {
+		if (!configLoaded) {
 			return 1;
 		} else if (shouldShowSearchResults()) {
 			return loading ? 1 : searchResults.size();
@@ -154,7 +156,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 	public boolean isEnabled(int position) {
 		if (shouldShowSearchResults())
 			return !loading;
-		if (Session.getInstance().getClientConfig() == null)
+		if (!configLoaded)
 			return false;
 		computeStaticRows();
 		if (position < staticRows.size()) {
@@ -225,7 +227,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 	
 	@Override
 	public int getItemViewType(int position) {
-		if (Session.getInstance().getClientConfig() == null)
+		if (!configLoaded)
 			return LOADING;
 		if (shouldShowSearchResults()) {
 			if (loading)
