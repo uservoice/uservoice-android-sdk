@@ -9,6 +9,7 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -36,6 +37,7 @@ public class SuggestionActivity extends ListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		headerView = getLayoutInflater().inflate(R.layout.suggestion_layout, null);
 		getListView().addHeaderView(headerView);
@@ -108,6 +110,15 @@ public class SuggestionActivity extends ListActivity {
 		});
 		
 		Babayaga.track(Babayaga.Event.VIEW_IDEA);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+	    }
+	    return super.onOptionsItemSelected(item);
 	}
 	
 	public void updateView() {

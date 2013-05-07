@@ -37,7 +37,6 @@ public class ForumActivity extends ListActivity implements SearchActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		suggestions = new ArrayList<Suggestion>();
@@ -114,11 +113,7 @@ public class ForumActivity extends ListActivity implements SearchActivity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-	    switch (item.getItemId()) {
-        case android.R.id.home:
-            Intent parentActivityIntent = new Intent(this, PortalActivity.class);
-            parentActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(parentActivityIntent);
+	    if (item.getItemId() == android.R.id.home) {
             finish();
             return true;
 	    }
