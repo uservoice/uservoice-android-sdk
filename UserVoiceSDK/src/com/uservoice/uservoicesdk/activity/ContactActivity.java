@@ -1,9 +1,9 @@
 package com.uservoice.uservoicesdk.activity;
 
-import com.uservoice.uservoicesdk.ui.ContactAdapter;
-
 import android.app.ListActivity;
 import android.os.Bundle;
+
+import com.uservoice.uservoicesdk.ui.ContactAdapter;
 
 public class ContactActivity extends ListActivity {
 
@@ -15,5 +15,6 @@ public class ContactActivity extends ListActivity {
 		getListView().setPadding(10, 0, 10, 0);
 		
 		setListAdapter(new ContactAdapter(this));
+		getListView().setOnHierarchyChangeListener((ContactAdapter) getListAdapter());
 	}
 }

@@ -29,7 +29,7 @@ import com.uservoice.uservoicesdk.model.CustomField;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.model.Ticket;
 
-public class ContactAdapter extends BaseAdapter {
+public class ContactAdapter extends BaseAdapter implements ViewGroup.OnHierarchyChangeListener {
 	
 	private int TEXT = 0;
 	private int BUTTON = 1;
@@ -295,5 +295,15 @@ public class ContactAdapter extends BaseAdapter {
 				field.setSelection(customField.getPredefinedValues().indexOf(value));
 		}
 		return view;
+	}
+
+	@Override
+	public void onChildViewAdded(View parent, View child) {
+		if (emailField != null)
+			emailField.requestFocus();
+	}
+
+	@Override
+	public void onChildViewRemoved(View parent, View child) {
 	}
 }
