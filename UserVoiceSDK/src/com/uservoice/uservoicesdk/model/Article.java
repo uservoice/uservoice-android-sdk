@@ -55,8 +55,8 @@ public class Article extends BaseModel {
 		super.load(object);
 		title = getString(object, "question");
 		html = getHtml(object, "answer_html");
-		JSONObject topic = object.getJSONObject("topic");
-		if (topic != null) {
+		if (!object.isNull("topic")) {
+			JSONObject topic = object.getJSONObject("topic");
 			topicName = topic.getString("name");
 		}
 	}

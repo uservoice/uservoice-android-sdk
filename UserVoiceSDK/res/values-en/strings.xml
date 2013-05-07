@@ -60,4 +60,5 @@
     <string name="value">Value</string>
     <string name="article">Article</string>
     <string name="idea">Idea</string>
+    <string name="msg_ticket_created">Your message has been sent</string>
 </resources>

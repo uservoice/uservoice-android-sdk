@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
@@ -25,6 +27,7 @@ import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.BaseModel;
 import com.uservoice.uservoicesdk.model.CustomField;
 import com.uservoice.uservoicesdk.model.Suggestion;
+import com.uservoice.uservoicesdk.model.Ticket;
 
 public class ContactAdapter extends BaseAdapter {
 	
@@ -45,12 +48,14 @@ public class ContactAdapter extends BaseAdapter {
 	
 	private State state = State.INIT;
 	private List<BaseModel> instantAnswers;
-	private Context context;
+	private Activity context;
 	private LayoutInflater inflater;
 	private EditText textField;
 	private Map<String,String> customFieldValues;
+	private EditText emailField;
+	private EditText nameField;
 	
-	public ContactAdapter(Context context) {
+	public ContactAdapter(Activity context) {
 		this.context = context;
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		customFieldValues = new HashMap<String,String>(Session.getInstance().getConfig().getCustomFields());
@@ -138,8 +143,18 @@ public class ContactAdapter extends BaseAdapter {
 			state = State.DETAILS;
 			notifyDataSetChanged();
 		} else {
-			// submit ticket
+			submitTicket();
 		}
+	}
+	
+	private void submitTicket() {
+		Ticket.createTicket(textField.getText().toString(), emailField.getText().toString(), nameField.getText().toString(), customFieldValues, new DefaultCallback<Ticket>(context) {
+			@Override
+			public void onModel(Ticket model) {
+				Toast.makeText(context, R.string.msg_ticket_created, Toast.LENGTH_SHORT).show();
+				context.finish();
+			}
+		});
 	}
 	
 	@Override
@@ -234,10 +249,13 @@ public class ContactAdapter extends BaseAdapter {
 			final EditText field = (EditText) view.findViewById(R.id.text_field);
 			if (type == EMAIL_FIELD) {
 				title.setText(R.string.your_email_address);
+				emailField = field;
 				field.setHint(R.string.email_address);
 				field.setInputType(EditorInfo.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+				// TODO set saved value
 			} else if (type == NAME_FIELD) {
 				title.setText(R.string.your_name);
+				nameField = field;
 				field.setHint(R.string.name);
 				field.setInputType(EditorInfo.TYPE_TEXT_VARIATION_PERSON_NAME);
 				// TODO set saved value

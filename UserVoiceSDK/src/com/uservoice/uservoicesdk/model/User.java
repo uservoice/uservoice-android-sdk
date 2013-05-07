@@ -101,8 +101,8 @@ public class User extends BaseModel {
 		email = getString(object, "email");
 		avatarUrl = getString(object, "avatar_url");
 
-		JSONArray visibleForums = object.getJSONArray("visible_forums");
-		if (visibleForums != null) {
+		if (!object.isNull("visible_forums")) {
+			JSONArray visibleForums = object.getJSONArray("visible_forums");
 			for (int i = 0; i < visibleForums.length(); i++) {
 				JSONObject forum = visibleForums.getJSONObject(i);
 				if (forum.getInt("id") == Session.getInstance().getConfig().getForumId()) {
