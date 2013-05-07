@@ -1,7 +1,9 @@
 package com.uservoice.uservoicesdk.ui;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -9,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,10 +48,12 @@ public class ContactAdapter extends BaseAdapter {
 	private Context context;
 	private LayoutInflater inflater;
 	private EditText textField;
+	private Map<String,String> customFieldValues;
 	
 	public ContactAdapter(Context context) {
 		this.context = context;
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		customFieldValues = new HashMap<String,String>(Session.getInstance().getConfig().getCustomFields());
 	}
 	
 	private List<Integer> getRows() {
@@ -225,7 +231,7 @@ public class ContactAdapter extends BaseAdapter {
 				detail.setText(details[0]);
 		} else if (type == EMAIL_FIELD || type == NAME_FIELD || type == CUSTOM_TEXT_FIELD) {
 			TextView title = (TextView) view.findViewById(R.id.header_text);
-			EditText field = (EditText) view.findViewById(R.id.text_field);
+			final EditText field = (EditText) view.findViewById(R.id.text_field);
 			if (type == EMAIL_FIELD) {
 				title.setText(R.string.your_email_address);
 				field.setHint(R.string.email_address);
@@ -236,20 +242,39 @@ public class ContactAdapter extends BaseAdapter {
 				field.setInputType(EditorInfo.TYPE_TEXT_VARIATION_PERSON_NAME);
 				// TODO set saved value
 			} else if (type == CUSTOM_TEXT_FIELD) {
-				CustomField customField = (CustomField) getItem(position);
-				String value = Session.getInstance().getConfig().getCustomFields().get(customField.getName());
+				final CustomField customField = (CustomField) getItem(position);
+				String value = customFieldValues.get(customField.getName());
 				title.setText(customField.getName());
 				field.setHint(R.string.value);
 				field.setInputType(EditorInfo.TYPE_TEXT_VARIATION_SHORT_MESSAGE);
 				field.setText(value);
+				field.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+					@Override
+					public void onFocusChange(View v, boolean hasFocus) {
+						if (!hasFocus) {
+							customFieldValues.put(customField.getName(), field.getText().toString());
+						}
+					}
+				});
 			}
 		} else if (type == CUSTOM_PREDEFINED_FIELD) {
-			CustomField customField = (CustomField) getItem(position);
-			String value = Session.getInstance().getConfig().getCustomFields().get(customField.getName());
+			final CustomField customField = (CustomField) getItem(position);
+			String value = customFieldValues.get(customField.getName());
 			TextView title = (TextView) view.findViewById(R.id.header_text);
 			title.setText(customField.getName());
 			Spinner field = (Spinner) view.findViewById(R.id.select_field);
-			field.setSelection(customField.getPredefinedValues().indexOf(value));
+			field.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+				@Override
+				public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+					customFieldValues.put(customField.getName(), customField.getPredefinedValues().get(position));
+				}
+
+				@Override
+				public void onNothingSelected(AdapterView<?> parent) {}
+			});
+			field.setAdapter(new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, customField.getPredefinedValues()));
+			if (value != null && customField.getPredefinedValues().contains(value))
+				field.setSelection(customField.getPredefinedValues().indexOf(value));
 		}
 		return view;
 	}

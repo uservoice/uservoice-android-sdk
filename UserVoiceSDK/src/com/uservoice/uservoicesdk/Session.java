@@ -12,6 +12,7 @@ import com.uservoice.uservoicesdk.model.AccessToken;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.ClientConfig;
 import com.uservoice.uservoicesdk.model.Comment;
+import com.uservoice.uservoicesdk.model.CustomField;
 import com.uservoice.uservoicesdk.model.Forum;
 import com.uservoice.uservoicesdk.model.RequestToken;
 import com.uservoice.uservoicesdk.model.Suggestion;
@@ -44,6 +45,7 @@ public class Session {
 	private Article article;
 	private Topic topic;
 	private Comment comment;
+	private CustomField customField;
 	
 	public Config getConfig() {
 		return config;
@@ -159,5 +161,13 @@ public class Session {
 	
 	public void setArticles(List<Article> articles) {
 		this.articles = articles;
+	}
+	
+	public void setCustomField(CustomField customField) {
+		this.customField = customField;
+	}
+	
+	public CustomField getCustomField() {
+		return customField;
 	}
 }
