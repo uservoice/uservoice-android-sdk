@@ -2,8 +2,8 @@
 <resources>
     
     <plurals name="comments">
-        <item quantity="one">1 comment</item>
-        <item quantity="other">%d comments</item>
+        <item quantity="one">comment</item>
+        <item quantity="other">comments</item>
     </plurals>
     
     <plurals name="votes">
@@ -52,7 +52,6 @@
     <string name="none_of_these_help">None of these help</string>
     <string name="send_message">Send message</string>
     <string name="do_any_of_these_help">Do any of these help?</string>
-    <string name="more_results">More results&#8230;</string>
     <string name="your_email_address">Your email address</string>
     <string name="your_name">Your name</string>
     <string name="name">Name</string>

@@ -38,11 +38,10 @@ public class ContactAdapter extends BaseAdapter implements ViewGroup.OnHierarchy
 	private int HEADING = 2;
 	private int LOADING = 3;
 	private int INSTANT_ANSWER = 4;
-	private int MORE_RESULTS = 5;
-	private int EMAIL_FIELD = 6;
-	private int NAME_FIELD = 7;
-	private int CUSTOM_TEXT_FIELD = 8;
-	private int CUSTOM_PREDEFINED_FIELD = 9;
+	private int EMAIL_FIELD = 5;
+	private int NAME_FIELD = 6;
+	private int CUSTOM_TEXT_FIELD = 7;
+	private int CUSTOM_PREDEFINED_FIELD = 8;
 	
 	private enum State {
 		INIT, INIT_LOADING, INSTANT_ANSWERS, DETAILS, DETAILS_LOADING
@@ -76,7 +75,7 @@ public class ContactAdapter extends BaseAdapter implements ViewGroup.OnHierarchy
 			if (instantAnswers.size() > 1)
 				rows.add(INSTANT_ANSWER);
 			if (instantAnswers.size() > 2)
-				rows.add(MORE_RESULTS);
+				rows.add(INSTANT_ANSWER);
 		}
 		if (state == State.DETAILS || state == State.DETAILS_LOADING) {
 			rows.add(EMAIL_FIELD);
@@ -121,7 +120,7 @@ public class ContactAdapter extends BaseAdapter implements ViewGroup.OnHierarchy
 	
 	@Override
 	public int getViewTypeCount() {
-		return 10;
+		return 9;
 	}
 	
 	private void onButtonTapped() {
@@ -162,7 +161,7 @@ public class ContactAdapter extends BaseAdapter implements ViewGroup.OnHierarchy
 	@Override
 	public boolean isEnabled(int position) {
 		int type = getItemViewType(position);
-		return type == INSTANT_ANSWER || type == MORE_RESULTS;
+		return type == INSTANT_ANSWER;
 	}
 
 	@SuppressLint("CutPasteId")
@@ -192,10 +191,6 @@ public class ContactAdapter extends BaseAdapter implements ViewGroup.OnHierarchy
 				view = inflater.inflate(R.layout.contact_text_item, null);
 				textField = (EditText) view.findViewById(R.id.text);
 				// TODO maybe attach listener to reload IAs after edit
-			} else if (type == MORE_RESULTS) {
-				view = inflater.inflate(android.R.layout.simple_list_item_1, null);
-				TextView textView = (TextView) view.findViewById(android.R.id.text1);
-				textView.setText(R.string.more_results);
 			} else if (type == EMAIL_FIELD || type == NAME_FIELD || type == CUSTOM_TEXT_FIELD) {
 				view = inflater.inflate(R.layout.text_field_item, null);
 			} else if (type == CUSTOM_PREDEFINED_FIELD) {
