@@ -25,6 +25,8 @@ import android.widget.Toast;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.babayaga.Babayaga;
+import com.uservoice.uservoicesdk.babayaga.Babayaga.Event;
 import com.uservoice.uservoicesdk.dialog.ArticleDialogFragment;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.BaseModel;
@@ -151,6 +153,7 @@ public class ContactAdapter extends BaseAdapter implements ViewGroup.OnHierarchy
 		Ticket.createTicket(textField.getText().toString(), emailField.getText().toString(), nameField.getText().toString(), customFieldValues, new DefaultCallback<Ticket>(context) {
 			@Override
 			public void onModel(Ticket model) {
+				Babayaga.track(Event.SUBMIT_TICKET);
 				Toast.makeText(context, R.string.msg_ticket_created, Toast.LENGTH_SHORT).show();
 				context.finish();
 			}
