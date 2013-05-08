@@ -8,6 +8,7 @@ import java.util.Map;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,7 @@ public class ContactAdapter extends BaseAdapter implements ViewGroup.OnHierarchy
 	private int CUSTOM_PREDEFINED_FIELD = 8;
 	
 	private enum State {
-		INIT, INIT_LOADING, INSTANT_ANSWERS, DETAILS, DETAILS_LOADING
+		INIT, INIT_LOADING, INSTANT_ANSWERS, DETAILS
 	}
 	
 	private State state = State.INIT;
@@ -65,10 +66,8 @@ public class ContactAdapter extends BaseAdapter implements ViewGroup.OnHierarchy
 	private List<Integer> getRows() {
 		List<Integer> rows = new ArrayList<Integer>();
 		rows.add(TEXT);
-		if (state == State.DETAILS_LOADING || (state != State.INIT && state != State.INIT_LOADING && !instantAnswers.isEmpty()))
+		if (state != State.INIT && state != State.INIT_LOADING && !instantAnswers.isEmpty())
 			rows.add(HEADING);
-		if (state == State.DETAILS_LOADING)
-			rows.add(LOADING);
 		if (state == State.INSTANT_ANSWERS || state == State.DETAILS) {
 			if (instantAnswers.size() > 0)
 				rows.add(INSTANT_ANSWER);
@@ -77,7 +76,7 @@ public class ContactAdapter extends BaseAdapter implements ViewGroup.OnHierarchy
 			if (instantAnswers.size() > 2)
 				rows.add(INSTANT_ANSWER);
 		}
-		if (state == State.DETAILS || state == State.DETAILS_LOADING) {
+		if (state == State.DETAILS) {
 			rows.add(EMAIL_FIELD);
 			rows.add(NAME_FIELD);
 			for (CustomField customField : Session.getInstance().getClientConfig().getCustomFields()) {
@@ -102,7 +101,7 @@ public class ContactAdapter extends BaseAdapter implements ViewGroup.OnHierarchy
 		if (type == INSTANT_ANSWER) {
 			return instantAnswers.get(position - 2);
 		} else if (type == CUSTOM_PREDEFINED_FIELD || type == CUSTOM_TEXT_FIELD) {
-			int offset = state == State.DETAILS_LOADING ? 5 : ((instantAnswers.isEmpty() ? 3 : 4) + Math.min(3, instantAnswers.size()));
+			int offset = (instantAnswers.isEmpty() ? 3 : 4) + Math.min(3, instantAnswers.size());
 			return Session.getInstance().getClientConfig().getCustomFields().get(position - offset);
 		}
 		return null;
@@ -190,6 +189,16 @@ public class ContactAdapter extends BaseAdapter implements ViewGroup.OnHierarchy
 			} else if (type == TEXT) {
 				view = inflater.inflate(R.layout.contact_text_item, null);
 				textField = (EditText) view.findViewById(R.id.text);
+				textField.setOnKeyListener(new View.OnKeyListener() {
+					@Override
+					public boolean onKey(View v, int keyCode, KeyEvent event) {
+						if (state != State.INIT) {
+							state = State.INIT;
+							notifyDataSetChanged();
+						}
+						return false;
+					}
+				});
 				// TODO maybe attach listener to reload IAs after edit
 			} else if (type == EMAIL_FIELD || type == NAME_FIELD || type == CUSTOM_TEXT_FIELD) {
 				view = inflater.inflate(R.layout.text_field_item, null);
@@ -212,7 +221,6 @@ public class ContactAdapter extends BaseAdapter implements ViewGroup.OnHierarchy
 				button.setText(R.string.none_of_these_help);
 				break;
 			case DETAILS:
-			case DETAILS_LOADING:
 				button.setText(R.string.send_message);
 				break;
 			}
@@ -296,12 +304,18 @@ public class ContactAdapter extends BaseAdapter implements ViewGroup.OnHierarchy
 
 	@Override
 	public void onChildViewAdded(View parent, View child) {
-		if (emailField != null)
+		if (state == State.DETAILS)
 			emailField.requestFocus();
+		else
+			textField.requestFocus();
 	}
 
 	@Override
 	public void onChildViewRemoved(View parent, View child) {
+		if (state == State.DETAILS)
+			emailField.requestFocus();
+		else
+			textField.requestFocus();
 	}
 
 	@Override
