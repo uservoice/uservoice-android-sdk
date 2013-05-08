@@ -157,6 +157,13 @@ public class ContactAdapter extends BaseAdapter implements ViewGroup.OnHierarchy
 		});
 	}
 	
+	public void notHelpful() {
+		if (state == State.INSTANT_ANSWERS) {
+			state = State.DETAILS;
+			notifyDataSetChanged();
+		}
+	}
+	
 	@Override
 	public boolean isEnabled(int position) {
 		int type = getItemViewType(position);

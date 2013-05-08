@@ -9,7 +9,9 @@ import android.os.Bundle;
 import android.webkit.WebView;
 
 import com.uservoice.uservoicesdk.R;
+import com.uservoice.uservoicesdk.activity.ContactActivity;
 import com.uservoice.uservoicesdk.model.Article;
+import com.uservoice.uservoicesdk.ui.ContactAdapter;
 import com.uservoice.uservoicesdk.ui.WebViews;
 
 @SuppressLint("ValidFragment")
@@ -33,6 +35,9 @@ public class ArticleDialogFragment extends DialogFragment {
 		builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				ContactActivity activity = (ContactActivity) getActivity();
+				ContactAdapter adapter = (ContactAdapter) activity.getListAdapter();
+				adapter.notHelpful();
 			}
 		});
 		
