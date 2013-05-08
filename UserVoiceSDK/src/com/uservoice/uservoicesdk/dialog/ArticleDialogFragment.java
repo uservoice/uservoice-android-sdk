@@ -36,9 +36,11 @@ public class ArticleDialogFragment extends DialogFragment {
 			}
 		});
 		
-		builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(R.string.very_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				HelpfulDialogFragment helpfulDialog = new HelpfulDialogFragment();
+				helpfulDialog.show(getActivity().getFragmentManager(), "HelpfulDialogFragment");
 			}
 		});
 		

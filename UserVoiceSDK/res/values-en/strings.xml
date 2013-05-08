@@ -62,5 +62,7 @@
     <string name="msg_ticket_created">Your message has been sent</string>
     <string name="article_instant_answer_question">Is this article helpful?</string>
     <string name="no">No</string>
-    <string name="yes">Yes!</string>
+    <string name="yes">Yes</string>
+    <string name="very_yes">Yes!</string>
+    <string name="helpful_article_message_question">Do you still want to send a message?</string>
 </resources>
