@@ -7,7 +7,7 @@
           android:actionViewClass="android.widget.SearchView" />
     
     <item android:id="@+id/new_idea"
-          android:title="@string/post_idea"
+          android:title="@string/submit_idea"
           android:icon="@android:drawable/ic_menu_add"
           android:showAsAction="ifRoom" />
 </menu>

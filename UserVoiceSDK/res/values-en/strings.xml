@@ -24,9 +24,10 @@
     <string name="app_name">UserVoice SDK</string>
     <string name="action_settings">Settings</string>
     <string name="loading">Loading&#8230;</string>
-    <string name="post_idea">Post idea</string>
+    <string name="submit_idea">Submit idea</string>
     <string name="menu_search">Search</string>
     <string name="email_address">Email address</string>
+    <string name="email_address_hint">your@email.com (required)</string>
     <string name="display_name">Display name</string>
     <string name="password">Password</string>
     <string name="forgot_password">Forgot password</string>
@@ -54,16 +55,20 @@
     <string name="do_any_of_these_help">Do any of these help?</string>
     <string name="your_email_address">Your email address</string>
     <string name="your_name">Your name</string>
-    <string name="name">Name</string>
+    <string name="name_hint">“Anonymous”</string>
     <string name="select_one">Select one</string>
     <string name="value">Value</string>
     <string name="article">Article</string>
     <string name="idea">Idea</string>
     <string name="msg_ticket_created">Your message has been sent</string>
+    <string name="msg_idea_created">Your idea has been created</string>
     <string name="article_instant_answer_question">Is this article helpful?</string>
     <string name="suggestion_instant_answer_question">Is this idea helpful?</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
     <string name="very_yes">Yes!</string>
     <string name="helpful_article_message_question">Do you still want to send a message?</string>
+    <string name="idea_description_heading">Describe your idea in more detail</string>
+    <string name="category">Category</string>
+    <string name="idea_description_hint">(optional)</string>
 </resources>

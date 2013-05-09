@@ -5,8 +5,8 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 
 import com.uservoice.uservoicesdk.R;
-import com.uservoice.uservoicesdk.activity.ContactActivity;
-import com.uservoice.uservoicesdk.ui.ContactAdapter;
+import com.uservoice.uservoicesdk.activity.InstantAnswersActivity;
+import com.uservoice.uservoicesdk.ui.InstantAnswersAdapter;
 
 public class InstantAnswerDialogFragment extends DialogFragment {
 
@@ -14,8 +14,8 @@ public class InstantAnswerDialogFragment extends DialogFragment {
 		builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				ContactActivity activity = (ContactActivity) getActivity();
-				ContactAdapter adapter = (ContactAdapter) activity.getListAdapter();
+				InstantAnswersActivity activity = (InstantAnswersActivity) getActivity();
+				InstantAnswersAdapter adapter = (InstantAnswersAdapter) activity.getListAdapter();
 				adapter.notHelpful();
 			}
 		});

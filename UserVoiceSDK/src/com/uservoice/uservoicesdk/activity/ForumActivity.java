@@ -116,6 +116,9 @@ public class ForumActivity extends ListActivity implements SearchActivity {
 	    if (item.getItemId() == android.R.id.home) {
             finish();
             return true;
+	    } else if (item.getItemId() == R.id.new_idea) {
+	    	startActivity(new Intent(this, PostIdeaActivity.class));
+	    	return true;
 	    }
 	    return super.onOptionsItemSelected(item);
 	}

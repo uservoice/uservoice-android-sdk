@@ -1,12 +1,13 @@
 package com.uservoice.uservoicesdk.activity;
 
-import com.uservoice.uservoicesdk.ui.ContactAdapter;
 import com.uservoice.uservoicesdk.ui.InstantAnswersAdapter;
+import com.uservoice.uservoicesdk.ui.PostIdeaAdapter;
 
-public class ContactActivity extends InstantAnswersActivity {
+public class PostIdeaActivity extends InstantAnswersActivity {
 
 	@Override
 	protected InstantAnswersAdapter createAdapter() {
-		return new ContactAdapter(this);
+		return new PostIdeaAdapter(this);
 	}
+
 }
