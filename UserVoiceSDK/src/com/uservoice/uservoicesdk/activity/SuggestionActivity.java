@@ -8,10 +8,8 @@ import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,6 +24,7 @@ import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.ui.PaginatedAdapter;
 import com.uservoice.uservoicesdk.ui.PaginationScrollListener;
+import com.uservoice.uservoicesdk.ui.Utils;
 
 @SuppressLint("DefaultLocale")
 public class SuggestionActivity extends ListActivity {
@@ -123,50 +122,7 @@ public class SuggestionActivity extends ListActivity {
 	
 	public void updateView() {
 		Suggestion suggestion = Session.getInstance().getSuggestion();
-		
-		getTextView(R.id.suggestion_details_title).setText(suggestion.getTitle());
-		
-		TextView status = getTextView(R.id.suggestion_details_status);
-		if (suggestion.getStatus() != null) {
-			status.setVisibility(View.VISIBLE);
-			status.setText(Html.fromHtml(String.format("<font color='%s'>%s</font>", suggestion.getStatusColor(), suggestion.getStatus())));
-		} else {
-			status.setVisibility(View.GONE);
-		}
-		
-		getTextView(R.id.suggestion_details_text).setText(suggestion.getText());
-		getTextView(R.id.suggestion_details_creator).setText(String.format(getString(R.string.posted_by_format), suggestion.getCreatorName(), DateFormat.getDateInstance().format(suggestion.getCreatedAt())));
-		
-		if (suggestion.getAdminResponseText() == null) {
-			headerView.findViewById(R.id.suggestion_details_admin_response).setVisibility(View.GONE);
-		} else {
-			headerView.findViewById(R.id.suggestion_details_admin_response).setVisibility(View.VISIBLE);
-			getTextView(R.id.suggestion_details_admin_name).setText(suggestion.getAdminResponseUserName());
-			getTextView(R.id.suggestion_details_admin_response_date).setText(DateFormat.getDateInstance().format(suggestion.getAdminResponseCreatedAt()));
-			getTextView(R.id.suggestion_details_admin_response_text).setText(suggestion.getAdminResponseText());
-		}
-		
-		ImageView avatar = (ImageView) headerView.findViewById(R.id.suggestion_details_admin_avatar);
-		ImageCache.getInstance().loadImage(suggestion.getAdminResponseAvatarUrl(), avatar);
-		updateVotes();
-	}
-	
-	public void updateVotes() {
-		Suggestion suggestion = Session.getInstance().getSuggestion();
-		getTextView(R.id.suggestion_details_vote_count).setText(String.format("%s ¥ %s", getQuantityString(R.plurals.votes, suggestion.getNumberOfVotes()), getQuantityString(R.plurals.comments, suggestion.getNumberOfComments())));
-		Button button = (Button) findViewById(R.id.vote_button);
-		button.setText(buttonName(suggestion.getNumberOfVotesByCurrentUser(), R.string.vote_verb, R.plurals.votes_capitalized));
-	}
-	
-	private String getQuantityString(int id, int count) {
-		return String.format("%d %s", count, getResources().getQuantityString(id, count));
-	}
-	
-	private String buttonName(int count, int verb, int plural) {
-		if (count == 0)
-			return getString(verb);
-		else
-			return getQuantityString(plural, count);
+		Utils.displaySuggestion(headerView, suggestion);
 	}
 	
 	@Override
@@ -179,11 +135,6 @@ public class SuggestionActivity extends ListActivity {
 			}
 		}
 	}
-	
-	private TextView getTextView(int id) {
-		return (TextView) headerView.findViewById(id);
-	}
-
 
 	@SuppressWarnings("unchecked")
 	protected PaginatedAdapter<Comment> getModelAdapter() {

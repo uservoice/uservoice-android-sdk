@@ -28,6 +28,7 @@ import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.babayaga.Babayaga.Event;
 import com.uservoice.uservoicesdk.dialog.ArticleDialogFragment;
+import com.uservoice.uservoicesdk.dialog.SuggestionDialogFragment;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.BaseModel;
 import com.uservoice.uservoicesdk.model.CustomField;
@@ -336,6 +337,9 @@ public class ContactAdapter extends BaseAdapter implements ViewGroup.OnHierarchy
 			if (instantAnswer instanceof Article) {
 				ArticleDialogFragment fragment = new ArticleDialogFragment((Article) instantAnswer);
 				fragment.show(context.getFragmentManager(), "ArticleDialogFragment");
+			} else if (instantAnswer instanceof Suggestion) {
+				SuggestionDialogFragment fragment = new SuggestionDialogFragment((Suggestion) instantAnswer);
+				fragment.show(context.getFragmentManager(), "SuggestionDialogFragment");
 			}
 		}
 	}

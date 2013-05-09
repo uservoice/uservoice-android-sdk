@@ -38,7 +38,7 @@ public class VoteDialogFragment extends DialogFragment {
 					public void onModel(Suggestion model) {
 						Session.getInstance().setSuggestion(model);
 						dialog.dismiss();
-						((SuggestionActivity)getActivity()).updateVotes();
+						((SuggestionActivity)getActivity()).updateView();
 					}
 				});
 			}

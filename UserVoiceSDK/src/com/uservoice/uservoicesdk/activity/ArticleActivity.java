@@ -9,7 +9,7 @@ import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.model.Article;
-import com.uservoice.uservoicesdk.ui.WebViews;
+import com.uservoice.uservoicesdk.ui.Utils;
 
 public class ArticleActivity extends Activity {
 
@@ -21,7 +21,7 @@ public class ArticleActivity extends Activity {
 		setContentView(R.layout.article_layout);
 		Article article = Session.getInstance().getArticle();
 		WebView webView = (WebView) findViewById(R.id.webview);
-		WebViews.displayArticle(webView, article);
+		Utils.displayArticle(webView, article);
 		
 		Babayaga.track(Babayaga.Event.VIEW_ARTICLE);
 	}
