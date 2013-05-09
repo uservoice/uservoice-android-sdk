@@ -3,6 +3,7 @@ package com.uservoice.uservoicesdk.activity;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 
 import com.uservoice.uservoicesdk.ui.ContactAdapter;
 
@@ -19,6 +20,7 @@ public class ContactActivity extends ListActivity {
 		setListAdapter(new ContactAdapter(this));
 		getListView().setOnHierarchyChangeListener((ContactAdapter) getListAdapter());
 		getListView().setOnItemClickListener((ContactAdapter) getListAdapter());
+		getListView().setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
 	}
 	
 	@Override

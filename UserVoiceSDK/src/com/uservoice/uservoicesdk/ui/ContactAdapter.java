@@ -8,7 +8,8 @@ import java.util.Map;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.view.KeyEvent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -200,17 +201,23 @@ public class ContactAdapter extends BaseAdapter implements ViewGroup.OnHierarchy
 			} else if (type == TEXT) {
 				view = inflater.inflate(R.layout.contact_text_item, null);
 				textField = (EditText) view.findViewById(R.id.text);
-				textField.setOnKeyListener(new View.OnKeyListener() {
+				textField.addTextChangedListener(new TextWatcher() {
 					@Override
-					public boolean onKey(View v, int keyCode, KeyEvent event) {
+					public void onTextChanged(CharSequence s, int start, int before, int count) {
 						if (state != State.INIT) {
 							state = State.INIT;
 							notifyDataSetChanged();
 						}
-						return false;
+					}
+					
+					@Override
+					public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+					}
+					
+					@Override
+					public void afterTextChanged(Editable s) {
 					}
 				});
-				// TODO maybe attach listener to reload IAs after edit
 			} else if (type == EMAIL_FIELD || type == NAME_FIELD || type == CUSTOM_TEXT_FIELD) {
 				view = inflater.inflate(R.layout.text_field_item, null);
 			} else if (type == CUSTOM_PREDEFINED_FIELD) {
