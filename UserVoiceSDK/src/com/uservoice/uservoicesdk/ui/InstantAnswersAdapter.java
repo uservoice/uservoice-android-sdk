@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -285,8 +286,17 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 			state = State.DETAILS;
 			notifyDataSetChanged();
 		} else if (state == State.DETAILS) {
-			Session.getInstance().persistIdentity(nameField.getText().toString(), emailField.getText().toString());
-			doSubmit();
+			String name = nameField.getText().toString();
+			String email = emailField.getText().toString();
+			if (email.isEmpty()) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(context);
+				builder.setTitle(R.string.error);
+				builder.setMessage(R.string.msg_user_identity_validation);
+				builder.create().show();
+			} else {
+				Session.getInstance().persistIdentity(name, email);
+				doSubmit();
+			}
 		}
 	}
 

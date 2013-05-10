@@ -77,4 +77,6 @@
     <string name="contact_us">Contact us</string>
     <string name="close">Close</string>
     <string name="new_comment">New comment</string>
+    <string name="error">Error</string>
+    <string name="msg_user_identity_validation">Please enter your email address</string>
 </resources>
