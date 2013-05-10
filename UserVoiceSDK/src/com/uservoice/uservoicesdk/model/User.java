@@ -13,7 +13,6 @@ import com.uservoice.uservoicesdk.rest.RestTaskCallback;
 
 public class User extends BaseModel {
 
-	private String avatarUrl;
 	private String name;
 	private String email;
 	private int numberOfVotesRemaining;
@@ -99,7 +98,6 @@ public class User extends BaseModel {
 		super.load(object);
 		name = getString(object, "name");
 		email = getString(object, "email");
-		avatarUrl = getString(object, "avatar_url");
 
 		if (!object.isNull("visible_forums")) {
 			JSONArray visibleForums = object.getJSONArray("visible_forums");
@@ -119,10 +117,6 @@ public class User extends BaseModel {
 
 	public String getEmail() {
 		return email;
-	}
-
-	public String getAvatarUrl() {
-		return avatarUrl;
 	}
 
 	public int getNumberOfVotesRemaining() {

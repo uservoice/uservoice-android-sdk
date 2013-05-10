@@ -138,12 +138,17 @@ public class ForumActivity extends ListActivity implements SearchActivity {
 	}
 	
 	private void loadForum() {
-		if (forum != null) return;
+		if (Session.getInstance().getForum() != null) {
+			forum = Session.getInstance().getForum();
+			setTitle(forum.getName());
+			getModelAdapter().loadMore();
+			return;
+		}
 		Forum.loadForum(Session.getInstance().getConfig().getForumId(), new DefaultCallback<Forum>(this) {
 			@Override
 			public void onModel(Forum model) {
+				Session.getInstance().setForum(model);
 				forum = model;
-				// TODO move these to onCreate once we do the init manager
 				setTitle(forum.getName());
 				getModelAdapter().loadMore();
 			}
