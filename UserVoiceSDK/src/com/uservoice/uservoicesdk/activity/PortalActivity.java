@@ -18,6 +18,7 @@ public class PortalActivity extends ListActivity implements SearchActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		setTitle(R.string.portal_title);
 		getListView().setDivider(null);
@@ -48,6 +49,15 @@ public class PortalActivity extends ListActivity implements SearchActivity {
 	
 	public PortalAdapter getModelAdapter() {
 		return (PortalAdapter) getListAdapter();
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    if (item.getItemId() == android.R.id.home) {
+	        finish();
+	        return true;
+	    }
+	    return super.onOptionsItemSelected(item);
 	}
 
 }
