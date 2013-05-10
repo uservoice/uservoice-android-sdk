@@ -207,7 +207,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 			}
 		} else if (type == CONTACT) {
 			TextView textView = (TextView) view.findViewById(android.R.id.text1);
-			textView.setText("Contact Us");
+			textView.setText(R.string.contact_us);
 		} else if (type == ARTICLE) {
 			TextView textView = (TextView) view.findViewById(R.id.article_name);
 			Article article = (Article) getItem(position);

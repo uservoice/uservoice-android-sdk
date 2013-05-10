@@ -74,4 +74,5 @@
     <string name="idea_text_heading">I suggest you&#8230;</string>
     <string name="idea_text_hint">Enter your idea&#8230;</string>
     <string name="idea_form_help">When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you\'ll get notified.</string>
+    <string name="contact_us">Contact us</string>
 </resources>

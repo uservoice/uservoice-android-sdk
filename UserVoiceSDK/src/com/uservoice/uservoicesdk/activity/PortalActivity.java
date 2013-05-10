@@ -1,8 +1,10 @@
 package com.uservoice.uservoicesdk.activity;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.SearchView;
 
 import com.uservoice.uservoicesdk.R;
@@ -27,11 +29,20 @@ public class PortalActivity extends ListActivity implements SearchActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.uv_main, menu);
+		getMenuInflater().inflate(R.menu.portal, menu);
 		menu.findItem(R.id.action_search).setOnActionExpandListener(new SearchExpandListener(this));
 		SearchView search = (SearchView) menu.findItem(R.id.action_search).getActionView();
 		search.setOnQueryTextListener(new SearchQueryListener(this));
 		return true;
+	}
+	
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		if (item.getItemId() == R.id.action_contact) {
+			startActivity(new Intent(this, ContactActivity.class));
+			return true;
+		}
+		return super.onMenuItemSelected(featureId, item);
 	}
 	
 	public PortalAdapter getModelAdapter() {

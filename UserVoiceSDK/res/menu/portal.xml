@@ -6,4 +6,9 @@
           android:title="@string/menu_search"
           android:actionViewClass="android.widget.SearchView" />
 
+    <item android:id="@+id/action_contact"
+          android:showAsAction="always"
+          android:icon="@drawable/uv_contact"
+          android:title="@string/contact_us" />
+
 </menu>
