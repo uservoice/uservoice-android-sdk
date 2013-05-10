@@ -165,7 +165,7 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 				view = inflater.inflate(R.layout.instant_answer_item, null);
 			} else if (type == SPACE) {
 				view = new LinearLayout(context);
-				view.setPadding(0, 40, 0, 0);
+				view.setPadding(0, 30, 0, 0);
 			} else if (type == TEXT) {
 				view = inflater.inflate(R.layout.contact_text_item, null);
 				textField = (EditText) view.findViewById(R.id.text);
@@ -233,6 +233,7 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 				detail.setText(String.format("%s - %s", details[0], details[1]));
 			else
 				detail.setText(details[0]);
+			view.findViewById(R.id.divider).setVisibility(getRows().lastIndexOf(INSTANT_ANSWER) == position ? View.GONE : View.VISIBLE);
 		} else if (type == EMAIL_FIELD || type == NAME_FIELD) {
 			TextView title = (TextView) view.findViewById(R.id.header_text);
 			final EditText field = (EditText) view.findViewById(R.id.text_field);
