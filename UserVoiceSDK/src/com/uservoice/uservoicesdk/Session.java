@@ -7,6 +7,8 @@ import java.util.Map;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 
 import com.uservoice.uservoicesdk.model.AccessToken;
 import com.uservoice.uservoicesdk.model.Article;
@@ -31,6 +33,7 @@ public class Session {
 	
 	private Session() {}
 	
+	private Context context;
 	private Config config;
 	private OAuthConsumer oauthConsumer;
 	private RequestToken requestToken;
@@ -53,6 +56,35 @@ public class Session {
 	
 	public void setConfig(Config config) {
 		this.config = config;
+		if (config.getEmail() != null) {
+			persistIdentity(config.getName(), config.getEmail());
+		}
+	}
+	
+	public void setContext(Context context) {
+		this.context = context;
+	}
+	
+	public void persistIdentity(String name, String email) {
+		SharedPreferences prefs = context.getSharedPreferences("uv", 0);
+		Editor edit = prefs.edit();
+		edit.putString("user_name", name);
+		edit.putString("user_email", email);
+		edit.commit();
+	}
+	
+	public String getName() {
+		if (user != null)
+			return user.getName();
+		SharedPreferences prefs = context.getSharedPreferences("uv", 0);
+		return prefs.getString("user_name", null);
+	}
+	
+	public String getEmail() {
+		if (user != null)
+			return user.getEmail();
+		SharedPreferences prefs = context.getSharedPreferences("uv", 0);
+		return prefs.getString("user_email", null);
 	}
 	
 	public RequestToken getRequestToken() {
@@ -89,6 +121,7 @@ public class Session {
 	
 	public void setUser(User user) {
 		this.user = user;
+		persistIdentity(user.getName(), user.getEmail());
 	}
 	
 	public ClientConfig getClientConfig() {

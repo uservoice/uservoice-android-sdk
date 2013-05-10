@@ -26,6 +26,7 @@ public class UserVoice {
 	public static void init(Config config, Context context) {
 		Babayaga.init(context);
 		Babayaga.setUserTraits(config.getUserTraits());
+		Session.getInstance().setContext(context);
 		Session.getInstance().setConfig(config);
 	}
 	

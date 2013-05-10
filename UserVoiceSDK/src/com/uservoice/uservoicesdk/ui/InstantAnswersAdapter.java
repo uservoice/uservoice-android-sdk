@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.uservoice.uservoicesdk.R;
+import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.dialog.ArticleDialogFragment;
 import com.uservoice.uservoicesdk.dialog.SuggestionDialogFragment;
 import com.uservoice.uservoicesdk.model.Article;
@@ -242,13 +243,13 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 				emailField = field;
 				field.setHint(R.string.email_address_hint);
 				field.setInputType(EditorInfo.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-				// TODO set saved value
+				field.setText(Session.getInstance().getEmail());
 			} else if (type == NAME_FIELD) {
 				title.setText(R.string.your_name);
 				nameField = field;
 				field.setHint(R.string.name_hint);
 				field.setInputType(EditorInfo.TYPE_TEXT_VARIATION_PERSON_NAME);
-				// TODO set saved value
+				field.setText(Session.getInstance().getName());
 			}
 		}
 		return view;
@@ -284,6 +285,7 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 			state = State.DETAILS;
 			notifyDataSetChanged();
 		} else if (state == State.DETAILS) {
+			Session.getInstance().persistIdentity(nameField.getText().toString(), emailField.getText().toString());
 			doSubmit();
 		}
 	}
