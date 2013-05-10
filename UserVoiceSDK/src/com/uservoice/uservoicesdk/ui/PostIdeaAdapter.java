@@ -17,6 +17,7 @@ import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.babayaga.Babayaga.Event;
+import com.uservoice.uservoicesdk.flow.SigninManager;
 import com.uservoice.uservoicesdk.model.Category;
 import com.uservoice.uservoicesdk.model.Suggestion;
 
@@ -93,13 +94,18 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
 
 	@Override
 	protected void doSubmit() {
-		Category category = (Category) categorySelect.getSelectedItem();
-		Suggestion.createSuggestion(Session.getInstance().getForum(), category, textField.getText().toString(), descriptionField.getText().toString(), 1, new DefaultCallback<Suggestion>(context) {
+		SigninManager.signIn(context, emailField.getText().toString(), nameField.getText().toString(), new Runnable() {
 			@Override
-			public void onModel(Suggestion model) {
-				Babayaga.track(Event.SUBMIT_IDEA);
-				Toast.makeText(context, R.string.msg_idea_created, Toast.LENGTH_SHORT).show();
-				context.finish();
+			public void run() {
+				Category category = (Category) categorySelect.getSelectedItem();
+				Suggestion.createSuggestion(Session.getInstance().getForum(), category, textField.getText().toString(), descriptionField.getText().toString(), 1, new DefaultCallback<Suggestion>(context) {
+					@Override
+					public void onModel(Suggestion model) {
+						Babayaga.track(Event.SUBMIT_IDEA);
+						Toast.makeText(context, R.string.msg_idea_created, Toast.LENGTH_SHORT).show();
+						context.finish();
+					}
+				});
 			}
 		});
 	}
