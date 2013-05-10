@@ -14,19 +14,21 @@ import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.ui.DefaultCallback;
 
 public class CommentActivity extends Activity {
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.comment_layout);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		setTitle(R.string.new_comment);
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.comment, menu);
 		return true;
 	}
-	
+
 	public void postComment() {
 		Suggestion suggestion = Session.getInstance().getSuggestion();
 		EditText editText = (EditText) findViewById(R.id.comment_edit_text);
@@ -44,15 +46,18 @@ public class CommentActivity extends Activity {
 			});
 		}
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-	    if (item.getItemId() == R.id.post_comment) {
-	    	postComment();
-	    	return true;
-	    } else {
-            return super.onOptionsItemSelected(item);
-	    }
+		if (item.getItemId() == R.id.post_comment) {
+			postComment();
+			return true;
+		}
+		if (item.getItemId() == android.R.id.home) {
+			finish();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 }

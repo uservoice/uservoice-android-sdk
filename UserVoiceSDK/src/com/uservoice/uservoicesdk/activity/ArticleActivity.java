@@ -20,6 +20,7 @@ public class ArticleActivity extends Activity {
 
 		setContentView(R.layout.article_layout);
 		Article article = Session.getInstance().getArticle();
+		setTitle(article.getTitle());
 		WebView webView = (WebView) findViewById(R.id.webview);
 		Utils.displayArticle(webView, article);
 		

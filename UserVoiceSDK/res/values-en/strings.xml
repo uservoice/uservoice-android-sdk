@@ -76,4 +76,5 @@
     <string name="idea_form_help">When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you\'ll get notified.</string>
     <string name="contact_us">Contact us</string>
     <string name="close">Close</string>
+    <string name="new_comment">New comment</string>
 </resources>
