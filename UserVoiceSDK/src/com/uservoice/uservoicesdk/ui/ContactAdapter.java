@@ -58,7 +58,8 @@ public class ContactAdapter extends InstantAnswersAdapter {
 	public Object getItem(int position) {
 		int type = getItemViewType(position);
 		if (type == CUSTOM_PREDEFINED_FIELD || type == CUSTOM_TEXT_FIELD) {
-			int offset = (instantAnswers.isEmpty() ? 5 : 6) + Math.min(3, instantAnswers.size());
+			List<Integer> rows = getRows();
+			int offset = Math.min(rows.contains(CUSTOM_PREDEFINED_FIELD) ? rows.indexOf(CUSTOM_PREDEFINED_FIELD) : rows.size(), rows.contains(CUSTOM_TEXT_FIELD) ? rows.indexOf(CUSTOM_TEXT_FIELD) : rows.size());
 			return Session.getInstance().getClientConfig().getCustomFields().get(position - offset);
 		} else {
 			return super.getItem(position);

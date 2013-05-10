@@ -17,6 +17,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.uservoice.uservoicesdk.R;
@@ -68,8 +69,10 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 	protected List<Integer> getRows() {
 		List<Integer> rows = new ArrayList<Integer>();
 		rows.add(TEXT);
-		if (state != State.INIT && state != State.INIT_LOADING && !instantAnswers.isEmpty())
+		if (state != State.INIT && state != State.INIT_LOADING && !instantAnswers.isEmpty()) {
+			rows.add(SPACE);
 			rows.add(HEADING);
+		}
 		if (state == State.INSTANT_ANSWERS || state == State.DETAILS) {
 			if (instantAnswers.size() > 0)
 				rows.add(INSTANT_ANSWER);
@@ -164,7 +167,7 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 			} else if (type == INSTANT_ANSWER) {
 				view = inflater.inflate(R.layout.instant_answer_item, null);
 			} else if (type == SPACE) {
-				view = new View(context);
+				view = new LinearLayout(context);
 				view.setPadding(0, 40, 0, 0);
 			} else if (type == TEXT) {
 				view = inflater.inflate(R.layout.contact_text_item, null);
@@ -252,12 +255,12 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 		}
 		return view;
 	}
-
+	
 	@Override
 	public Object getItem(int position) {
 		int type = getItemViewType(position);
 		if (type == INSTANT_ANSWER) {
-			return instantAnswers.get(position - 2);
+			return instantAnswers.get(position - getRows().indexOf(INSTANT_ANSWER) + 1);
 		}
 		return null;
 	}
