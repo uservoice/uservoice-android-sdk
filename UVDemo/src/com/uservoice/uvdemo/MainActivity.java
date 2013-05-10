@@ -44,16 +44,24 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
-	public void launchFeedback() {
-		UserVoice.launchUserVoice(this);
-	}
-	
 	public void launchFeedback(MenuItem menuItem) {
-		launchFeedback();
+		UserVoice.launchUserVoice(this);
 	}
 
 	public void launchFeedback(View view) {
-		launchFeedback();
+		UserVoice.launchUserVoice(this);
+	}
+	
+	public void launchForum(View view) {
+		UserVoice.launchForum(this);
+	}
+	
+	public void launchContactUs(View view) {
+		UserVoice.launchContactUs(this);
+	}
+	
+	public void launchPostIdea(View view) {
+		UserVoice.launchPostIdea(this);
 	}
 
 }

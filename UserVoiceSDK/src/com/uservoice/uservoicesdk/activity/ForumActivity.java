@@ -19,7 +19,7 @@ import android.widget.TextView;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
-import com.uservoice.uservoicesdk.model.ClientConfig;
+import com.uservoice.uservoicesdk.flow.InitManager;
 import com.uservoice.uservoicesdk.model.Forum;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.rest.Callback;
@@ -38,6 +38,7 @@ public class ForumActivity extends ListActivity implements SearchActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
+		setTitle(R.string.feedback_forum);
 		
 		suggestions = new ArrayList<Suggestion>();
 		
@@ -98,7 +99,12 @@ public class ForumActivity extends ListActivity implements SearchActivity {
 		
 		Babayaga.track(Babayaga.Event.VIEW_FORUM);
 		
-		loadClientConfig();
+		new InitManager(this, new Runnable() {
+			@Override
+			public void run() {
+				loadForum();
+			}
+		}).init();
 	}
 	
 	@Override
@@ -121,20 +127,6 @@ public class ForumActivity extends ListActivity implements SearchActivity {
 	    	return true;
 	    }
 	    return super.onOptionsItemSelected(item);
-	}
-	
-	private void loadClientConfig() {
-		if (Session.getInstance().getClientConfig() != null) {
-			loadForum();
-			return;
-		}
-		ClientConfig.loadClientConfig(new DefaultCallback<ClientConfig>(this) {
-			@Override
-			public void onModel(ClientConfig model) {
-				Session.getInstance().setClientConfig(model);
-				loadForum();
-			}
-		});
 	}
 	
 	private void loadForum() {

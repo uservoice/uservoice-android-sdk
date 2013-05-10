@@ -5,7 +5,10 @@ import java.util.Map;
 import android.content.Context;
 import android.content.Intent;
 
+import com.uservoice.uservoicesdk.activity.ContactActivity;
+import com.uservoice.uservoicesdk.activity.ForumActivity;
 import com.uservoice.uservoicesdk.activity.PortalActivity;
+import com.uservoice.uservoicesdk.activity.PostIdeaActivity;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
 
 public class UserVoice {
@@ -14,13 +17,16 @@ public class UserVoice {
 		context.startActivity(new Intent(context, PortalActivity.class));
 	}
 	
-	public static void launchForum(Config config, Context context) {
+	public static void launchForum(Context context) {
+		context.startActivity(new Intent(context, ForumActivity.class));
 	}
 	
-	public static void launchContactUs(Config config, Context context) {
+	public static void launchContactUs(Context context) {
+		context.startActivity(new Intent(context, ContactActivity.class));
 	}
 	
-	public static void launchNewIdea(Config config, Context context) {
+	public static void launchPostIdea(Context context) {
+		context.startActivity(new Intent(context, PostIdeaActivity.class));
 	}
 	
 	public static void init(Config config, Context context) {

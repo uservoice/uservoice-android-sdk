@@ -1,31 +1,49 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".PortalActivity" >
 
-    <Button
-        android:id="@+id/launchButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/suggestion_title"
-        android:layout_below="@+id/suggestion_title"
-        android:layout_marginTop="22dp"
-        android:onClick="launchFeedback"
-        android:text="Help" />
-
     <TextView
         android:id="@+id/suggestion_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:text="This is a demo of UserVoice for Android. To see it in action, select the Help item from the option menu, or tap the button below."
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/launchButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:onClick="launchFeedback"
+        android:text="Help" />
+
+    <Button
+        android:id="@+id/forumButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="launchForum"
+        android:text="Forum" />
+
+    <Button
+        android:id="@+id/contactButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="launchContactUs"
+        android:text="Contact us" />
+    
+    <Button
+        android:id="@+id/ideaButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="launchPostIdea"
+        android:text="Post idea" />
+</LinearLayout>

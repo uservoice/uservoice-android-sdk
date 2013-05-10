@@ -90,15 +90,19 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 		rows.add(BUTTON);
 		return rows;
 	}
+	
+	protected boolean isLoading() {
+		return Session.getInstance().getClientConfig() == null;
+	}
 
 	@Override
 	public int getCount() {
-		return getRows().size();
+		return isLoading() ? 1 : getRows().size();
 	}
 
 	@Override
 	public int getItemViewType(int position) {
-		return getRows().get(position);
+		return isLoading() ? LOADING : getRows().get(position);
 	}
 
 	public void notHelpful() {
