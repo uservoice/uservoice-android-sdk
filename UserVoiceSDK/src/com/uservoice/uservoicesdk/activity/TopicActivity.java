@@ -28,6 +28,7 @@ public class TopicActivity extends ListActivity {
 		
 		setTitle(topic == null ? getString(R.string.all_articles) : topic.getName());
 		getListView().setPadding(10, 0, 10, 0);
+		getListView().setDivider(null);
 		setListAdapter(new LoadAllAdapter<Article>(this, R.layout.article_item, new ArrayList<Article>()) {
 			@Override
 			protected void loadPage(int page, Callback<List<Article>> callback) {

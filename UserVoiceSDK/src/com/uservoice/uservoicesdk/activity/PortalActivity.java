@@ -20,6 +20,7 @@ public class PortalActivity extends ListActivity implements SearchActivity {
 		super.onCreate(savedInstanceState);
 		
 		setTitle(R.string.portal_title);
+		getListView().setDivider(null);
 		getListView().setPadding(10, 0, 10, 0);
 		setListAdapter(new PortalAdapter(this));
 		getListView().setOnItemClickListener(getModelAdapter());

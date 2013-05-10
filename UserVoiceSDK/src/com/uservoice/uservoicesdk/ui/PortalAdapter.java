@@ -177,11 +177,11 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 			else if (type == FORUM)
 				view = inflater.inflate(android.R.layout.simple_list_item_1, null);
 			else if (type == KB_HEADER)
-				view = inflater.inflate(android.R.layout.preference_category, null);
+				view = inflater.inflate(R.layout.header_item, null);
 			else if (type == TOPIC)
 				view = inflater.inflate(R.layout.topic_item, null);
 			else if (type == CONTACT)
-				view = inflater.inflate(android.R.layout.simple_list_item_1, null);
+				view = inflater.inflate(R.layout.text_item, null);
 			else if (type == ARTICLE)
 				view = inflater.inflate(R.layout.article_item, null);
 			else if (type == SUGGESTION)
@@ -192,7 +192,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 			TextView textView = (TextView) view.findViewById(android.R.id.text1);
 			textView.setText(R.string.feedback_forum);
 		} else if (type == KB_HEADER) {
-			TextView textView = (TextView) view.findViewById(android.R.id.title);
+			TextView textView = (TextView) view.findViewById(R.id.header_text);
 			textView.setText(R.string.knowledge_base);
 		} else if (type == TOPIC) {
 			Topic topic = (Topic) getItem(position);
@@ -206,7 +206,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 				textView.setText(String.format("%d %s", topic.getNumberOfArticles(), context.getResources().getQuantityString(R.plurals.articles, topic.getNumberOfArticles())));
 			}
 		} else if (type == CONTACT) {
-			TextView textView = (TextView) view.findViewById(android.R.id.text1);
+			TextView textView = (TextView) view.findViewById(R.id.text);
 			textView.setText(R.string.contact_us);
 		} else if (type == ARTICLE) {
 			TextView textView = (TextView) view.findViewById(R.id.article_name);
@@ -217,6 +217,11 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 			Suggestion suggestion = (Suggestion) getItem(position);
 			textView.setText(highlightResult(suggestion.getTitle()));
 		}
+		
+		View divider = view.findViewById(R.id.divider);
+		if (divider != null)
+			divider.setVisibility(position == getCount() - 1 ? View.GONE : View.VISIBLE);
+		
 		return view;
 	}
 	
