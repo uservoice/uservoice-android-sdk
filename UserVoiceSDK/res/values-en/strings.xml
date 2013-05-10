@@ -71,4 +71,6 @@
     <string name="idea_description_heading">Describe your idea in more detail</string>
     <string name="category">Category</string>
     <string name="idea_description_hint">(optional)</string>
+    <string name="idea_text_heading">I suggest you&#8230;</string>
+    <string name="idea_text_hint">Enter your idea&#8230;</string>
 </resources>

@@ -131,16 +131,13 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 	public void onChildViewAdded(View parent, View child) {
 		if (state == State.DETAILS && emailField != null)
 			emailField.requestFocus();
-		else
+		else if (textField != null)
 			textField.requestFocus();
 	}
 
 	@Override
 	public void onChildViewRemoved(View parent, View child) {
-		if (state == State.DETAILS && emailField != null)
-			emailField.requestFocus();
-		else
-			textField.requestFocus();
+		onChildViewAdded(null, null);
 	}
 
 	@SuppressLint("CutPasteId")

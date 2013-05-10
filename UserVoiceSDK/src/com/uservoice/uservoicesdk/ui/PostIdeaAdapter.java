@@ -3,6 +3,7 @@ package com.uservoice.uservoicesdk.ui;
 import java.util.Arrays;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,14 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
 	}
 	
 	@Override
+	protected List<Integer> getRows() {
+		List<Integer> rows = super.getRows();
+		rows.add(0, HEADING);
+		return rows;
+	}
+	
+	@Override
+	@SuppressLint("CutPasteId")
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View view = convertView;
 		int type = getItemViewType(position);
@@ -59,15 +68,22 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
 				categorySelect.setAdapter(new ArrayAdapter<Category>(context, android.R.layout.simple_list_item_1, Session.getInstance().getForum().getCategories()));
 				title.setText(R.string.category);
 			} else {
-				return super.getView(position, convertView, parent);
+				view = super.getView(position, convertView, parent);
 			}
 		}
 
 		if (type == DESCRIPTION || type == CATEGORY) {
-			return view;
+			// just skip the else
+		} else if (type == HEADING) {
+			TextView textView = (TextView) view.findViewById(R.id.header_text);
+			textView.setText(position == 0 ? R.string.idea_text_heading : R.string.do_any_of_these_help);
+		} else if (type == TEXT) {
+			TextView textView = (TextView) view.findViewById(R.id.text);
+			textView.setHint(R.string.idea_text_hint);
 		} else {
 			return super.getView(position, convertView, parent);
 		}
+		return view;
 	}
 
 	@Override
