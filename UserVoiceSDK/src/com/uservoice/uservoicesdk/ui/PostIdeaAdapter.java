@@ -24,6 +24,7 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
 	
 	private static int DESCRIPTION = 8;
 	private static int CATEGORY = 9;
+	private static int HELP = 10;
 	
 	private Spinner categorySelect;
 	private EditText descriptionField;
@@ -34,7 +35,7 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
 	
 	@Override
 	public int getViewTypeCount() {
-		return super.getViewTypeCount() + 2;
+		return super.getViewTypeCount() + 3;
 	}
 	
 	@Override
@@ -46,6 +47,8 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
 	protected List<Integer> getRows() {
 		List<Integer> rows = super.getRows();
 		rows.add(0, HEADING);
+		if (state == State.DETAILS)
+			rows.add(HELP);
 		return rows;
 	}
 	
@@ -67,12 +70,14 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
 				categorySelect = (Spinner) view.findViewById(R.id.select_field);
 				categorySelect.setAdapter(new ArrayAdapter<Category>(context, android.R.layout.simple_list_item_1, Session.getInstance().getForum().getCategories()));
 				title.setText(R.string.category);
+			} else if (type == HELP) {
+				view = inflater.inflate(R.layout.idea_help_item, null);
 			} else {
 				view = super.getView(position, convertView, parent);
 			}
 		}
 
-		if (type == DESCRIPTION || type == CATEGORY) {
+		if (type == DESCRIPTION || type == CATEGORY || type == HELP) {
 			// just skip the else
 		} else if (type == HEADING) {
 			TextView textView = (TextView) view.findViewById(R.id.header_text);
