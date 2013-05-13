@@ -42,7 +42,7 @@ public class Comment extends BaseModel {
 	@Override
 	public void load(JSONObject object) throws JSONException {
 		super.load(object);
-		text = getString(object, "text");
+		text = getString(object, "formatted_text");
 		JSONObject user = object.getJSONObject("creator");
 		userName = getString(user, "name");
 		avatarUrl = getString(user, "avatar_url");
