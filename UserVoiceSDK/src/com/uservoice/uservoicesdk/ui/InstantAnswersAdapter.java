@@ -264,7 +264,7 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 	public Object getItem(int position) {
 		int type = getItemViewType(position);
 		if (type == INSTANT_ANSWER) {
-			return instantAnswers.get(position - getRows().indexOf(INSTANT_ANSWER) + 1);
+			return instantAnswers.get(position - getRows().indexOf(INSTANT_ANSWER));
 		}
 		return null;
 	}
