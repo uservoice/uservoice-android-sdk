@@ -66,7 +66,7 @@ public class BaseModel {
 	}
 	
 	protected String getString(JSONObject object, String key) throws JSONException {
-		return object.isNull(key) ? null : Html.fromHtml(object.getString(key)).toString();
+		return object.isNull(key) ? null : Html.fromHtml(object.getString(key)).toString().trim();
 	}
 	
 	protected String getHtml(JSONObject object, String key) throws JSONException {

@@ -84,7 +84,7 @@ public class Suggestion extends BaseModel {
 	public void load(JSONObject object) throws JSONException {
 		super.load(object);
 		title = getString(object, "title");
-		text = getString(object, "text");
+		text = getString(object, "formatted_text");
 		createdAt = getDate(object, "created_at");
 		forumId = object.getJSONObject("topic").getJSONObject("forum").getInt("id");
 		if (!object.isNull("category"))
@@ -106,7 +106,7 @@ public class Suggestion extends BaseModel {
 		}
 		if (!object.isNull("response")) {
 			JSONObject response = object.getJSONObject("response");
-			adminResponseText = getString(response, "text");
+			adminResponseText = getString(response, "formatted_text");
 			adminResponseCreatedAt = getDate(response, "created_at");
 			JSONObject responseUser = response.getJSONObject("creator");
 			adminResponseUserName = getString(responseUser, "name");

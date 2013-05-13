@@ -19,7 +19,7 @@
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Make the app more Android friendly"
         android:textColor="#8dc13c"
@@ -37,5 +37,7 @@
         android:background="#8dc13c" />
 
     
-    <include layout="@layout/suggestion_layout" />
+    <ScrollView android:layout_width="match_parent" android:layout_height="match_parent">
+    	<include layout="@layout/suggestion_layout" />
+    </ScrollView>
 </LinearLayout>
