@@ -1,14 +1,13 @@
 package com.uservoice.uservoicesdk.activity;
 
-import android.app.ListActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.ViewGroup;
 
+import com.uservoice.uservoicesdk.compatibility.FragmentListActivity;
 import com.uservoice.uservoicesdk.flow.InitManager;
 import com.uservoice.uservoicesdk.ui.InstantAnswersAdapter;
 
-public abstract class InstantAnswersActivity extends ListActivity {
+public abstract class InstantAnswersActivity extends FragmentListActivity {
 
 	public InstantAnswersActivity() {
 		super();
@@ -17,7 +16,6 @@ public abstract class InstantAnswersActivity extends ListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		getListView().setDivider(null);
 		getListView().setPadding(10, 0, 10, 0);
@@ -36,14 +34,5 @@ public abstract class InstantAnswersActivity extends ListActivity {
 	}
 
 	protected abstract InstantAnswersAdapter createAdapter();
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-	    if (item.getItemId() == android.R.id.home) {
-	        finish();
-	        return true;
-	    }
-	    return super.onOptionsItemSelected(item);
-	}
 
 }

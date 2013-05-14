@@ -3,9 +3,9 @@ package com.uservoice.uservoicesdk.dialog;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.webkit.WebView;
 
 import com.uservoice.uservoicesdk.R;
@@ -45,7 +45,7 @@ public class ArticleDialogFragment extends DialogFragment {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				HelpfulDialogFragment helpfulDialog = new HelpfulDialogFragment();
-				helpfulDialog.show(getActivity().getFragmentManager(), "HelpfulDialogFragment");
+				helpfulDialog.show(getActivity().getSupportFragmentManager(), "HelpfulDialogFragment");
 			}
 		});
 		return builder.create();

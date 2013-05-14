@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:minHeight="?android:attr/listPreferredItemHeightSmall"
+        android:minHeight="@dimen/listPreferredItemHeightSmall"
         android:paddingLeft="8dip"
         android:orientation="vertical" >
 

@@ -4,6 +4,7 @@ import java.text.DateFormat;
 
 import android.annotation.SuppressLint;
 import android.net.Uri;
+import android.os.Build;
 import android.text.Html;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -71,5 +72,9 @@ public class Utils {
 			return view.getContext().getString(verb);
 		else
 			return getQuantityString(view, plural, count);
+	}
+	
+	public static boolean hasActionBar() {
+		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
 	}
 }

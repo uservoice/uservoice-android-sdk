@@ -1,6 +1,5 @@
 package com.uservoice.uservoicesdk.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,13 +12,12 @@ import com.uservoice.uservoicesdk.model.Comment;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.ui.DefaultCallback;
 
-public class CommentActivity extends Activity {
+public class CommentActivity extends BaseActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.comment_layout);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
 		setTitle(R.string.new_comment);
 	}
 
@@ -51,10 +49,6 @@ public class CommentActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.post_comment) {
 			postComment();
-			return true;
-		}
-		if (item.getItemId() == android.R.id.home) {
-			finish();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

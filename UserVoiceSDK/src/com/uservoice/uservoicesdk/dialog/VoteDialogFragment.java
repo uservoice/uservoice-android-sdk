@@ -3,9 +3,9 @@ package com.uservoice.uservoicesdk.dialog;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.text.Html;
 
 import com.uservoice.uservoicesdk.R;
@@ -38,7 +38,7 @@ public class VoteDialogFragment extends DialogFragment {
 					public void onModel(Suggestion model) {
 						Session.getInstance().setSuggestion(model);
 						dialog.dismiss();
-						((SuggestionActivity)getActivity()).updateView();
+						((SuggestionActivity) getActivity()).updateView();
 					}
 				});
 			}

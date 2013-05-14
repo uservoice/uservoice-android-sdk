@@ -3,10 +3,8 @@ package com.uservoice.uservoicesdk.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
@@ -14,15 +12,15 @@ import android.widget.TextView;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
+import com.uservoice.uservoicesdk.compatibility.FragmentListActivity;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.Topic;
 import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.ui.LoadAllAdapter;
 
-public class TopicActivity extends ListActivity {
+public class TopicActivity extends FragmentListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		final Topic topic = Session.getInstance().getTopic();
 		
@@ -56,14 +54,5 @@ public class TopicActivity extends ListActivity {
 		});
 		
 		Babayaga.track(Babayaga.Event.VIEW_TOPIC);
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-	    if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
-	    }
-	    return super.onOptionsItemSelected(item);
 	}
 }

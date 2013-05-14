@@ -1,6 +1,6 @@
 package com.uservoice.uservoicesdk.activity;
 
-import android.app.ListActivity;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,35 +9,41 @@ import android.widget.SearchView;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
+import com.uservoice.uservoicesdk.compatibility.FragmentListActivity;
 import com.uservoice.uservoicesdk.ui.PortalAdapter;
 import com.uservoice.uservoicesdk.ui.SearchExpandListener;
 import com.uservoice.uservoicesdk.ui.SearchQueryListener;
+import com.uservoice.uservoicesdk.ui.Utils;
 
-public class PortalActivity extends ListActivity implements SearchActivity {
+public class PortalActivity extends FragmentListActivity implements SearchActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		
+
 		setTitle(R.string.portal_title);
 		getListView().setDivider(null);
 		getListView().setPadding(10, 0, 10, 0);
 		setListAdapter(new PortalAdapter(this));
 		getListView().setOnItemClickListener(getModelAdapter());
-		
+
 		Babayaga.track(Babayaga.Event.VIEW_CHANNEL);
 	}
 
 	@Override
+	@SuppressLint("NewApi")
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.portal, menu);
-		menu.findItem(R.id.action_search).setOnActionExpandListener(new SearchExpandListener(this));
-		SearchView search = (SearchView) menu.findItem(R.id.action_search).getActionView();
-		search.setOnQueryTextListener(new SearchQueryListener(this));
+		if (Utils.hasActionBar()) {
+			menu.findItem(R.id.action_search).setOnActionExpandListener(new SearchExpandListener(this));
+			SearchView search = (SearchView) menu.findItem(R.id.action_search).getActionView();
+			search.setOnQueryTextListener(new SearchQueryListener(this));
+		} else {
+			menu.findItem(R.id.action_search).setVisible(false);
+		}
 		return true;
 	}
-	
+
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		if (item.getItemId() == R.id.action_contact) {
@@ -46,18 +52,9 @@ public class PortalActivity extends ListActivity implements SearchActivity {
 		}
 		return super.onMenuItemSelected(featureId, item);
 	}
-	
+
 	public PortalAdapter getModelAdapter() {
 		return (PortalAdapter) getListAdapter();
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-	    if (item.getItemId() == android.R.id.home) {
-	        finish();
-	        return true;
-	    }
-	    return super.onOptionsItemSelected(item);
 	}
 
 }

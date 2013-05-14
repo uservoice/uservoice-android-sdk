@@ -1,7 +1,6 @@
 package com.uservoice.uservoicesdk.flow;
 
-import android.app.Activity;
-import android.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
@@ -18,17 +17,17 @@ public class SigninManager {
 	private final Runnable callback;
 	private final String email;
 	private final String name;
-	private final Activity activity;
+	private final FragmentActivity activity;
 
-	public static void signIn(Activity activity, Runnable callback) {
+	public static void signIn(FragmentActivity activity, Runnable callback) {
 		new SigninManager(activity, null, null, callback).signIn();
 	}
 	
-	public static void signIn(Activity activity, String email, String name, Runnable callback) {
+	public static void signIn(FragmentActivity activity, String email, String name, Runnable callback) {
 		new SigninManager(activity, email, name, callback).signIn();
 	}
 	
-	private SigninManager(Activity activity, String email, String name, Runnable callback) {
+	private SigninManager(FragmentActivity activity, String email, String name, Runnable callback) {
 		this.activity = activity;
 		this.email = email;
 		this.name = name;
@@ -78,8 +77,8 @@ public class SigninManager {
 	}
 	
 	private void promptToSignIn() {
-		DialogFragment dialog = new SigninDialogFragment(email, name, callback);
-		dialog.show(activity.getFragmentManager(), "SigninDialogFragment");
+		SigninDialogFragment dialog = new SigninDialogFragment(email, name, callback);
+		dialog.show(activity.getSupportFragmentManager(), "SigninDialogFragment");
 	}
 	
 }

@@ -3,6 +3,7 @@ package com.uservoice.uservoicesdk.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
+import com.uservoice.uservoicesdk.compatibility.FragmentListActivity;
 import com.uservoice.uservoicesdk.flow.InitManager;
 import com.uservoice.uservoicesdk.model.Forum;
 import com.uservoice.uservoicesdk.model.Suggestion;
@@ -28,8 +30,9 @@ import com.uservoice.uservoicesdk.ui.PaginatedAdapter;
 import com.uservoice.uservoicesdk.ui.PaginationScrollListener;
 import com.uservoice.uservoicesdk.ui.SearchExpandListener;
 import com.uservoice.uservoicesdk.ui.SearchQueryListener;
+import com.uservoice.uservoicesdk.ui.Utils;
 
-public class ForumActivity extends ListActivity implements SearchActivity {
+public class ForumActivity extends FragmentListActivity implements SearchActivity {
 	
 	private List<Suggestion> suggestions;
 	private Forum forum;
@@ -37,7 +40,6 @@ public class ForumActivity extends ListActivity implements SearchActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
 		setTitle(R.string.feedback_forum);
 		
 		suggestions = new ArrayList<Suggestion>();
@@ -107,22 +109,24 @@ public class ForumActivity extends ListActivity implements SearchActivity {
 		}).init();
 	}
 	
+	@SuppressLint("NewApi")
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.forum, menu);
-		menu.findItem(R.id.menu_search).setOnActionExpandListener(new SearchExpandListener(this));
-		SearchView search = (SearchView) menu.findItem(R.id.menu_search).getActionView();
-		search.setOnQueryTextListener(new SearchQueryListener(this));
+		if (Utils.hasActionBar()) {
+			menu.findItem(R.id.menu_search).setOnActionExpandListener(new SearchExpandListener(this));
+			SearchView search = (SearchView) menu.findItem(R.id.menu_search).getActionView();
+			search.setOnQueryTextListener(new SearchQueryListener(this));
+		} else {
+			menu.findItem(R.id.menu_search).setVisible(false);
+		}
 		menu.findItem(R.id.new_idea).setVisible(Session.getInstance().getConfig().shouldShowPostIdea());
 		return true;
 	}
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-	    if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
-	    } else if (item.getItemId() == R.id.new_idea) {
+	    if (item.getItemId() == R.id.new_idea) {
 	    	startActivity(new Intent(this, PostIdeaActivity.class));
 	    	return true;
 	    }

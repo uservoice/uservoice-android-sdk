@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -31,7 +31,7 @@ public class ContactAdapter extends InstantAnswersAdapter {
 
 	private Map<String, String> customFieldValues;
 
-	public ContactAdapter(Activity context) {
+	public ContactAdapter(FragmentActivity context) {
 		super(context);
 		customFieldValues = new HashMap<String, String>(Session.getInstance().getConfig().getCustomFields());
 	}

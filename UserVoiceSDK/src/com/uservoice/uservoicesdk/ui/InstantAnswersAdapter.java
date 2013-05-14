@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -46,13 +46,13 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 
 	protected State state = State.INIT;
 	protected List<BaseModel> instantAnswers;
-	protected Activity context;
+	protected FragmentActivity context;
 	protected LayoutInflater inflater;
 	protected EditText textField;
 	protected EditText emailField;
 	protected EditText nameField;
 
-	public InstantAnswersAdapter(Activity context) {
+	public InstantAnswersAdapter(FragmentActivity context) {
 		this.context = context;
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
@@ -125,10 +125,10 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 			BaseModel instantAnswer = (BaseModel) getItem(position);
 			if (instantAnswer instanceof Article) {
 				ArticleDialogFragment fragment = new ArticleDialogFragment((Article) instantAnswer);
-				fragment.show(context.getFragmentManager(), "ArticleDialogFragment");
+				fragment.show(context.getSupportFragmentManager(), "ArticleDialogFragment");
 			} else if (instantAnswer instanceof Suggestion) {
 				SuggestionDialogFragment fragment = new SuggestionDialogFragment((Suggestion) instantAnswer);
-				fragment.show(context.getFragmentManager(), "SuggestionDialogFragment");
+				fragment.show(context.getSupportFragmentManager(), "SuggestionDialogFragment");
 			}
 		}
 	}

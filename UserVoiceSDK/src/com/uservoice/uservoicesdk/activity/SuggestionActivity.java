@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
+import com.uservoice.uservoicesdk.compatibility.FragmentListActivity;
 import com.uservoice.uservoicesdk.dialog.VoteDialogFragment;
 import com.uservoice.uservoicesdk.flow.SigninManager;
 import com.uservoice.uservoicesdk.image.ImageCache;
@@ -27,7 +27,7 @@ import com.uservoice.uservoicesdk.ui.PaginationScrollListener;
 import com.uservoice.uservoicesdk.ui.Utils;
 
 @SuppressLint("DefaultLocale")
-public class SuggestionActivity extends ListActivity {
+public class SuggestionActivity extends FragmentListActivity {
 
 	private static int POST_COMMENT = 1;
 	
@@ -36,7 +36,6 @@ public class SuggestionActivity extends ListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		headerView = getLayoutInflater().inflate(R.layout.suggestion_layout, null);
 		getListView().addHeaderView(headerView);
@@ -102,7 +101,7 @@ public class SuggestionActivity extends ListActivity {
 					@Override
 					public void run() {
 						VoteDialogFragment dialog = new VoteDialogFragment();
-						dialog.show(getFragmentManager(), "VoteDialogFragment");
+						dialog.show(getSupportFragmentManager(), "VoteDialogFragment");
 					}
 				});
 			}
