@@ -16,6 +16,7 @@ public class User extends BaseModel {
 	private String name;
 	private String email;
 	private int numberOfVotesRemaining;
+	private JSONArray visibleForums;
 
 	public static void discover(String email, final Callback<User> callback) {
 		Map<String, String> params = new HashMap<String, String>();
@@ -99,8 +100,16 @@ public class User extends BaseModel {
 		name = getString(object, "name");
 		email = getString(object, "email");
 
-		if (!object.isNull("visible_forums")) {
-			JSONArray visibleForums = object.getJSONArray("visible_forums");
+		if (!object.isNull("visible_forums"))
+			visibleForums = object.getJSONArray("visible_forums");
+		if (Session.getInstance().getConfig().getForumId() != -1)
+			updateVotesRemaining();
+	}
+
+	public void updateVotesRemaining() {
+		if (visibleForums == null)
+			return;
+		try {
 			for (int i = 0; i < visibleForums.length(); i++) {
 				JSONObject forum = visibleForums.getJSONObject(i);
 				if (forum.getInt("id") == Session.getInstance().getConfig().getForumId()) {
@@ -108,6 +117,7 @@ public class User extends BaseModel {
 					numberOfVotesRemaining = forumActivity.getInt("votes_available");
 				}
 			}
+		} catch (JSONException e) {
 		}
 	}
 

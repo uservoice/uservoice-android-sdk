@@ -72,7 +72,7 @@ public class Config {
 	}
 
 	public int getForumId() {
-		if (forumId == -1)
+		if (forumId == -1 && Session.getInstance().getClientConfig() != null)
 			return Session.getInstance().getClientConfig().getDefaultForumId();
 		return forumId;
 	}
