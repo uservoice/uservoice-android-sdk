@@ -57,7 +57,7 @@ public class Utils {
 		ImageView avatar = (ImageView) view.findViewById(R.id.suggestion_details_admin_avatar);
 		ImageCache.getInstance().loadImage(suggestion.getAdminResponseAvatarUrl(), avatar);
 		
-		((TextView)view.findViewById(R.id.suggestion_details_vote_count)).setText(String.format("%s ¥ %s", getQuantityString(view, R.plurals.votes, suggestion.getNumberOfVotes()), getQuantityString(view, R.plurals.comments, suggestion.getNumberOfComments())));
+		((TextView)view.findViewById(R.id.suggestion_details_vote_count)).setText(String.format("%s ¥ %s", getQuantityString(view, R.plurals.subscribers, suggestion.getNumberOfSubscribers()), getQuantityString(view, R.plurals.comments, suggestion.getNumberOfComments())));
 		Button button = (Button) view.findViewById(R.id.vote_button);
 		button.setText(buttonName(view, suggestion.getNumberOfVotesByCurrentUser(), R.string.vote_verb, R.plurals.votes_capitalized));
 	}

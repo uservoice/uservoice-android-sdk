@@ -15,16 +15,16 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/suggestion_vote_count"
+            android:id="@+id/subscriber_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="9999" />
 
         <TextView
-            android:id="@+id/suggestion_votes_label"
+            android:id="@+id/subscriber_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="votes"
+            android:text="subscribers"
             android:textSize="8sp" />
     </LinearLayout>
 

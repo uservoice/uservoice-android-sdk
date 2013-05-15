@@ -26,9 +26,10 @@ public class Suggestion extends BaseModel {
 	private Date createdAt;
 	private Category category;
 	private int numberOfComments;
-	private int numberOfVotes;
+	private int numberOfSubscribers;
 	private int numberOfVotesByCurrentUser;
 	private int forumId;
+	private boolean subscribed;
 
 	public static void loadSuggestions(Forum forum, int page, final Callback<List<Suggestion>> callback) {
 		Map<String, String> params = new HashMap<String, String>();
@@ -69,12 +70,27 @@ public class Suggestion extends BaseModel {
 		});
 	}
 	
-	public void vote(int numberOfVotes, final Callback<Suggestion> callback) {
+	public void subscribe(String email, final Callback<Suggestion> callback) {
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("to", String.valueOf(numberOfVotes));
-		doPost(apiPath("/forums/%d/suggestions/%d/votes.json", forumId, id), params, new RestTaskCallback(callback) {
+		params.put("email", email);
+		params.put("subscribe", "true");
+		doPost(apiPath("/forums/%d/suggestions/%d/watch.json", forumId, id), params, new RestTaskCallback(callback) {
 			@Override
 			public void onComplete(JSONObject result) throws JSONException {
+				subscribed = true;
+				callback.onModel(deserializeObject(result, "suggestion", Suggestion.class));
+			}
+		});
+	}
+	
+	public void unsubscribe(String email, final Callback<Suggestion> callback) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("email", email);
+		params.put("subscribe", "false");
+		doPost(apiPath("/forums/%d/suggestions/%d/watch.json", forumId, id), params, new RestTaskCallback(callback) {
+			@Override
+			public void onComplete(JSONObject result) throws JSONException {
+				subscribed = false;
 				callback.onModel(deserializeObject(result, "suggestion", Suggestion.class));
 			}
 		});
@@ -87,10 +103,11 @@ public class Suggestion extends BaseModel {
 		text = getString(object, "formatted_text");
 		createdAt = getDate(object, "created_at");
 		forumId = object.getJSONObject("topic").getJSONObject("forum").getInt("id");
+		subscribed = object.has("subscribed") && object.getBoolean("subscribed");
 		if (!object.isNull("category"))
 			category = deserializeObject(object, "category", Category.class);
 		numberOfComments = object.getInt("comments_count");
-		numberOfVotes = object.getInt("vote_count");
+		numberOfSubscribers = object.getInt("subscriber_count");
 		if (!object.isNull("creator"))
 			creatorName = getString(object.getJSONObject("creator"), "name");
 		if (!object.isNull("votes_for"))
@@ -112,6 +129,10 @@ public class Suggestion extends BaseModel {
 			adminResponseUserName = getString(responseUser, "name");
 			adminResponseAvatarUrl = getString(responseUser, "avatar_url");
 		}
+	}
+	
+	public boolean isSubscribed() {
+		return subscribed;
 	}
 	
 	public int getForumId() {
@@ -166,8 +187,8 @@ public class Suggestion extends BaseModel {
 		return numberOfComments;
 	}
 
-	public int getNumberOfVotes() {
-		return numberOfVotes;
+	public int getNumberOfSubscribers() {
+		return numberOfSubscribers;
 	}
 
 	public int getNumberOfVotesByCurrentUser() {

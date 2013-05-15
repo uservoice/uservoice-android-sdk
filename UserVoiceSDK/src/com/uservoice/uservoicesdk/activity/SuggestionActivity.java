@@ -16,7 +16,7 @@ import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.compatibility.FragmentListActivity;
-import com.uservoice.uservoicesdk.dialog.VoteDialogFragment;
+import com.uservoice.uservoicesdk.dialog.SubscribeDialogFragment;
 import com.uservoice.uservoicesdk.flow.SigninManager;
 import com.uservoice.uservoicesdk.image.ImageCache;
 import com.uservoice.uservoicesdk.model.Comment;
@@ -100,8 +100,8 @@ public class SuggestionActivity extends FragmentListActivity {
 				SigninManager.signIn(SuggestionActivity.this, new Runnable() {
 					@Override
 					public void run() {
-						VoteDialogFragment dialog = new VoteDialogFragment();
-						dialog.show(getSupportFragmentManager(), "VoteDialogFragment");
+						SubscribeDialogFragment dialog = new SubscribeDialogFragment();
+						dialog.show(getSupportFragmentManager(), "SubscribeDialogFragment");
 					}
 				});
 			}

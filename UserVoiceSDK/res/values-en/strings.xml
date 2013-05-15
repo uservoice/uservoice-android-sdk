@@ -6,9 +6,9 @@
         <item quantity="other">comments</item>
     </plurals>
     
-    <plurals name="votes">
-        <item quantity="one">vote</item>
-        <item quantity="other">votes</item>
+    <plurals name="subscribers">
+        <item quantity="one">subscriber</item>
+        <item quantity="other">subscribers</item>
     </plurals>
     
     <plurals name="votes_capitalized">
@@ -43,7 +43,7 @@
     <string name="signin_dialog_ok">Sign in</string>
     <string name="failed_signin_error">Incorrect email or password</string>
     <string name="msg_forgot_password">Forgot password email sent</string>
-    <string name="vote_dialog_title">Vote</string>
+    <string name="subscribe_dialog_title">Subscribe to this idea</string>
     <string name="remove_votes">Remove Votes</string>
     <string name="feedback_forum">Feedback Forum</string>
     <string name="knowledge_base">Knowledge Base</string>
@@ -80,4 +80,7 @@
     <string name="error">Error</string>
     <string name="msg_user_identity_validation">Please enter your email address</string>
     <string name="status_format">Status: %1$s</string>
+    <string name="subscribe">Subscribe</string>
+    <string name="nevermind">Nevermind</string>
+    <string name="msg_subscribe">We\'ll update you as this idea progresses.</string>
 </resources>

@@ -49,11 +49,11 @@ public class ForumActivity extends FragmentListActivity implements SearchActivit
 				TextView textView = (TextView) view.findViewById(R.id.suggestion_title);
 				textView.setText(searchActive ? highlightResult(model.getTitle()) : model.getTitle());
 				
-				textView = (TextView) view.findViewById(R.id.suggestion_vote_count);
-				textView.setText(String.valueOf(model.getNumberOfVotes()));
+				textView = (TextView) view.findViewById(R.id.subscriber_count);
+				textView.setText(String.valueOf(model.getNumberOfSubscribers()));
 				
-				textView = (TextView) view.findViewById(R.id.suggestion_votes_label);
-				textView.setText(getResources().getQuantityString(R.plurals.votes, model.getNumberOfVotes()));
+				textView = (TextView) view.findViewById(R.id.subscriber_label);
+				textView.setText(getResources().getQuantityString(R.plurals.subscribers, model.getNumberOfSubscribers()));
 
 				textView = (TextView) view.findViewById(R.id.suggestion_status);
 				if (model.getStatus() == null) {
