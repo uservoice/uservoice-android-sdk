@@ -175,7 +175,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 			if (type == LOADING)
 				view = inflater.inflate(R.layout.loading_item, null);
 			else if (type == FORUM)
-				view = inflater.inflate(android.R.layout.simple_list_item_1, null);
+				view = inflater.inflate(R.layout.text_item, null);
 			else if (type == KB_HEADER)
 				view = inflater.inflate(R.layout.header_item, null);
 			else if (type == TOPIC)
@@ -189,7 +189,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 		}
 		
 		if (type == FORUM) {
-			TextView textView = (TextView) view.findViewById(android.R.id.text1);
+			TextView textView = (TextView) view.findViewById(R.id.text);
 			textView.setText(R.string.feedback_forum);
 		} else if (type == KB_HEADER) {
 			TextView textView = (TextView) view.findViewById(R.id.header_text);
@@ -221,6 +221,8 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 		View divider = view.findViewById(R.id.divider);
 		if (divider != null)
 			divider.setVisibility(position == getCount() - 1 ? View.GONE : View.VISIBLE);
+		if (type == FORUM)
+			divider.setVisibility(View.GONE);
 		
 		return view;
 	}
