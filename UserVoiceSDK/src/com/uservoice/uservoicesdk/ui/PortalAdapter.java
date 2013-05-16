@@ -194,6 +194,8 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 		if (type == FORUM) {
 			TextView textView = (TextView) view.findViewById(R.id.text);
 			textView.setText(R.string.feedback_forum);
+			TextView text2 = (TextView) view.findViewById(R.id.text2);
+			text2.setText(Utils.getQuantityString(text2, R.plurals.ideas, Session.getInstance().getForum().getNumberOfOpenSuggestions()));
 		} else if (type == KB_HEADER) {
 			TextView textView = (TextView) view.findViewById(R.id.header_text);
 			textView.setText(R.string.knowledge_base);
@@ -211,6 +213,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 		} else if (type == CONTACT) {
 			TextView textView = (TextView) view.findViewById(R.id.text);
 			textView.setText(R.string.contact_us);
+			view.findViewById(R.id.text2).setVisibility(View.GONE);
 		} else if (type == ARTICLE) {
 			TextView textView = (TextView) view.findViewById(R.id.article_name);
 			Article article = (Article) getItem(position);

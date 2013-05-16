@@ -63,8 +63,8 @@ public class Utils {
 	}
 	
 	@SuppressLint("DefaultLocale")
-	private static String getQuantityString(View view, int id, int count) {
-		return String.format("%d %s", count, view.getContext().getResources().getQuantityString(id, count));
+	public static String getQuantityString(View view, int id, int count) {
+		return String.format("%,d %s", count, view.getContext().getResources().getQuantityString(id, count));
 	}
 	
 	private static String buttonName(View view, int count, int verb, int plural) {

@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
-import com.uservoice.uservoicesdk.compatibility.FragmentListActivity;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.Topic;
 import com.uservoice.uservoicesdk.rest.Callback;

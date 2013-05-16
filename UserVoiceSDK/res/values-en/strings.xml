@@ -20,6 +20,11 @@
         <item quantity="one">article</item>
         <item quantity="other">articles</item>
     </plurals>
+    
+    <plurals name="ideas">
+        <item quantity="one">idea</item>
+        <item quantity="other">ideas</item>
+    </plurals>
 
     <string name="app_name">UserVoice SDK</string>
     <string name="action_settings">Settings</string>
