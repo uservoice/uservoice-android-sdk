@@ -97,10 +97,13 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 			Topic.loadTopics(new DefaultCallback<List<Topic>>(context) {
 				@Override
 				public void onModel(List<Topic> model) {
-					Session.getInstance().setTopics(model);
-					if (getTopics().isEmpty()) {
+					if (model.isEmpty()) {
+						Session.getInstance().setTopics(model);
 						Article.loadAll(articlesCallback);
 					} else {
+						ArrayList<Topic> topics = new ArrayList<Topic>(model);
+						topics.add(Topic.ALL_ARTICLES);
+						Session.getInstance().setTopics(topics);
 						notifyDataSetChanged();
 					}
 				}
@@ -129,7 +132,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 			return loading ? 1 : searchResults.size();
 		} else {
 			computeStaticRows();
-			return staticRows.size() + (Session.getInstance().getConfig().shouldShowKnowledgeBase() ? (getTopics() == null ? 1 : (shouldShowArticles() ? getArticles().size() : getTopics().size() + 1)) : 0);
+			return staticRows.size() + (Session.getInstance().getConfig().shouldShowKnowledgeBase() ? (getTopics() == null ? 1 : (shouldShowArticles() ? getArticles().size() : getTopics().size())) : 0);
 		}
 	}
 
@@ -197,9 +200,9 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 		} else if (type == TOPIC) {
 			Topic topic = (Topic) getItem(position);
 			TextView textView = (TextView) view.findViewById(R.id.topic_name);
-			textView.setText(topic == null ? context.getString(R.string.all_articles) : topic.getName());
+			textView.setText(topic.getName());
 			textView = (TextView) view.findViewById(R.id.article_count);
-			if (topic == null) {
+			if (topic == Topic.ALL_ARTICLES) {
 				textView.setVisibility(View.GONE);
 			} else {
 				textView.setVisibility(View.VISIBLE);

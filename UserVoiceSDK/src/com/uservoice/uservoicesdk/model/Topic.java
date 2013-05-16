@@ -6,12 +6,18 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.uservoice.uservoicesdk.R;
+import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.rest.RestTaskCallback;
 
 public class Topic extends BaseModel {
-	private String name;
+	protected String name;
 	private int numberOfArticles;
+	
+	public static Topic ALL_ARTICLES = new Topic() {{
+		this.name = Session.getInstance().getContext().getString(R.string.all_articles);
+	}};
 	
 	public static void loadTopics(final Callback<List<Topic>> callback) {
 		doGet(apiPath("/topics.json"), new RestTaskCallback(callback) {
@@ -52,4 +58,8 @@ public class Topic extends BaseModel {
 		return numberOfArticles;
 	}
 	
+	@Override
+	public String toString() {
+		return name;
+	}
 }

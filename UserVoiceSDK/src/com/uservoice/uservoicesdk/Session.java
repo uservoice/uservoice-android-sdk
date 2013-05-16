@@ -50,6 +50,10 @@ public class Session {
 	private Comment comment;
 	private CustomField customField;
 	
+	public Context getContext() {
+		return context;
+	}
+	
 	public Config getConfig() {
 		return config;
 	}
