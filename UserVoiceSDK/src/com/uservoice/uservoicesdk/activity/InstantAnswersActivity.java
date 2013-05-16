@@ -3,11 +3,10 @@ package com.uservoice.uservoicesdk.activity;
 import android.os.Bundle;
 import android.view.ViewGroup;
 
-import com.uservoice.uservoicesdk.compatibility.FragmentListActivity;
 import com.uservoice.uservoicesdk.flow.InitManager;
 import com.uservoice.uservoicesdk.ui.InstantAnswersAdapter;
 
-public abstract class InstantAnswersActivity extends FragmentListActivity {
+public abstract class InstantAnswersActivity extends BaseListActivity {
 
 	public InstantAnswersActivity() {
 		super();
@@ -18,7 +17,6 @@ public abstract class InstantAnswersActivity extends FragmentListActivity {
 		super.onCreate(savedInstanceState);
 		
 		getListView().setDivider(null);
-		getListView().setPadding(10, 0, 10, 0);
 		
 		final InstantAnswersAdapter adapter = createAdapter();
 		setListAdapter(adapter);

@@ -9,13 +9,12 @@ import android.widget.SearchView;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
-import com.uservoice.uservoicesdk.compatibility.FragmentListActivity;
 import com.uservoice.uservoicesdk.ui.PortalAdapter;
 import com.uservoice.uservoicesdk.ui.SearchExpandListener;
 import com.uservoice.uservoicesdk.ui.SearchQueryListener;
 import com.uservoice.uservoicesdk.ui.Utils;
 
-public class PortalActivity extends FragmentListActivity implements SearchActivity {
+public class PortalActivity extends BaseListActivity implements SearchActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +22,6 @@ public class PortalActivity extends FragmentListActivity implements SearchActivi
 
 		setTitle(R.string.portal_title);
 		getListView().setDivider(null);
-		getListView().setPadding(10, 0, 10, 0);
 		setListAdapter(new PortalAdapter(this));
 		getListView().setOnItemClickListener(getModelAdapter());
 

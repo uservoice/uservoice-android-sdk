@@ -24,7 +24,7 @@ import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.ui.LoadAllAdapter;
 import com.uservoice.uservoicesdk.ui.Utils;
 
-public class TopicActivity extends FragmentListActivity {
+public class TopicActivity extends BaseListActivity {
 	
 	@SuppressLint({ "InlinedApi", "NewApi" })
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,6 @@ public class TopicActivity extends FragmentListActivity {
 		}
 		
 		setTitle(null);
-		getListView().setPadding(10, 0, 10, 0);
 		getListView().setDivider(null);
 		setListAdapter(new LoadAllAdapter<Article>(this, R.layout.article_item, new ArrayList<Article>()) {
 			@Override

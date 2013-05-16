@@ -26,6 +26,8 @@ public abstract class LoadAllAdapter<T> extends ModelAdapter<T> {
 	}
 	
 	public void reload() {
+		if (loading)
+			return;
 		objects = new ArrayList<T>();
 		loadAll();
 	}

@@ -19,7 +19,6 @@ import android.widget.TextView;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
-import com.uservoice.uservoicesdk.compatibility.FragmentListActivity;
 import com.uservoice.uservoicesdk.flow.InitManager;
 import com.uservoice.uservoicesdk.model.Forum;
 import com.uservoice.uservoicesdk.model.Suggestion;
@@ -31,7 +30,7 @@ import com.uservoice.uservoicesdk.ui.SearchExpandListener;
 import com.uservoice.uservoicesdk.ui.SearchQueryListener;
 import com.uservoice.uservoicesdk.ui.Utils;
 
-public class ForumActivity extends FragmentListActivity implements SearchActivity {
+public class ForumActivity extends BaseListActivity implements SearchActivity {
 	
 	private List<Suggestion> suggestions;
 	private Forum forum;
