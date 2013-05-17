@@ -1,37 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/LinearLayout1"
-    android:layout_width="wrap_content"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:gravity="left|center"
-    android:paddingTop="5dp"
-    android:paddingRight="5dp"
-    android:paddingBottom="5dp" >
-
-    <LinearLayout
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/subscriber_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="9999" />
-
-        <TextView
-            android:id="@+id/subscriber_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="subscribers"
-            android:textSize="8sp" />
-    </LinearLayout>
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp" >
 
         <TextView
             android:id="@+id/suggestion_title"
@@ -40,12 +21,46 @@
             android:text="Suggestion Title"
             android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/suggestion_status"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="under review"
-            android:textSize="12sp" />
+            android:orientation="horizontal"
+            android:paddingTop="3dp" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/uv_heart" />
+
+            <TextView
+                android:id="@+id/subscriber_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12"
+                android:paddingLeft="3dp"
+                android:textColor="#999999"
+                android:textSize="10sp" />
+
+            <View
+                android:id="@+id/suggestion_status_color"
+                android:layout_width="9dp"
+                android:layout_height="9dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginTop="2dp"
+                android:background="#999999" />
+
+            <TextView
+                android:id="@+id/suggestion_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UNDER REVIEW"
+                android:textColor="#999999"
+                android:textSize="10sp" />
+        </LinearLayout>
     </LinearLayout>
+
+    <include layout="@layout/divider" />
 
 </LinearLayout>

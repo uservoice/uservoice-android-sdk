@@ -2,14 +2,16 @@ package com.uservoice.uservoicesdk.activity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -42,7 +44,37 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 		
 		suggestions = new ArrayList<Suggestion>();
 		
+		getListView().setDivider(null);
 		setListAdapter(new PaginatedAdapter<Suggestion>(this, R.layout.suggestion_item, suggestions) {
+			
+			@Override
+			public int getViewTypeCount() {
+				return super.getViewTypeCount() + 1;
+			}
+			
+			@Override
+			public int getItemViewType(int position) {
+				if (loading)
+					return super.getItemViewType(position);
+				if (position == 0)
+					return 2;
+				return super.getItemViewType(position - 1);
+			}
+			
+			@Override
+			public View getView(int position, View convertView, ViewGroup parent) {
+				if (getItemViewType(position) == 2) {
+					View view = convertView;
+					if (view == null) {
+						view = getLayoutInflater().inflate(R.layout.header_item_light, null);
+						TextView text = (TextView) view.findViewById(R.id.header_text);
+						text.setText(R.string.idea_text_heading);
+					}
+					return view;
+				}
+				return super.getView(loading ? position : position - 1, convertView, parent);
+			}
+			
 			@Override
 			protected void customizeLayout(View view, Suggestion model) {
 				TextView textView = (TextView) view.findViewById(R.id.suggestion_title);
@@ -51,15 +83,18 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 				textView = (TextView) view.findViewById(R.id.subscriber_count);
 				textView.setText(String.valueOf(model.getNumberOfSubscribers()));
 				
-				textView = (TextView) view.findViewById(R.id.subscriber_label);
-				textView.setText(getResources().getQuantityString(R.plurals.subscribers, model.getNumberOfSubscribers()));
-
 				textView = (TextView) view.findViewById(R.id.suggestion_status);
+				View colorView = view.findViewById(R.id.suggestion_status_color);
 				if (model.getStatus() == null) {
 					textView.setVisibility(View.GONE);
+					colorView.setVisibility(View.GONE);
 				} else {
+					int color = Color.parseColor(model.getStatusColor());
 					textView.setVisibility(View.VISIBLE);
-					textView.setText(Html.fromHtml(String.format("<font color='%s'>%s</font>", model.getStatusColor(), model.getStatus())));
+					textView.setTextColor(color);
+					textView.setText(model.getStatus().toUpperCase(Locale.getDefault()));
+					colorView.setVisibility(View.VISIBLE);
+					colorView.setBackgroundColor(color);
 				}
 			}
 
