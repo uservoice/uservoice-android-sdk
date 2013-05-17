@@ -180,7 +180,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 			else if (type == FORUM)
 				view = inflater.inflate(R.layout.text_item, null);
 			else if (type == KB_HEADER)
-				view = inflater.inflate(R.layout.header_item, null);
+				view = inflater.inflate(R.layout.header_item_light, null);
 			else if (type == TOPIC)
 				view = inflater.inflate(R.layout.text_item, null);
 			else if (type == CONTACT)
