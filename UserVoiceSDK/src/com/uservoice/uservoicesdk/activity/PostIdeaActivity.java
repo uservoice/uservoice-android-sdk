@@ -11,7 +11,7 @@ public class PostIdeaActivity extends InstantAnswersActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setTitle(R.string.submit_idea);
+		setTitle(R.string.idea_form_title);
 	}
 
 	@Override
