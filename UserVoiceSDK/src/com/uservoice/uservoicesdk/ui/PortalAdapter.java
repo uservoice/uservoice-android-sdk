@@ -182,7 +182,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 			else if (type == KB_HEADER)
 				view = inflater.inflate(R.layout.header_item, null);
 			else if (type == TOPIC)
-				view = inflater.inflate(R.layout.topic_item, null);
+				view = inflater.inflate(R.layout.text_item, null);
 			else if (type == CONTACT)
 				view = inflater.inflate(R.layout.text_item, null);
 			else if (type == ARTICLE)
@@ -201,9 +201,9 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 			textView.setText(R.string.knowledge_base);
 		} else if (type == TOPIC) {
 			Topic topic = (Topic) getItem(position);
-			TextView textView = (TextView) view.findViewById(R.id.topic_name);
+			TextView textView = (TextView) view.findViewById(R.id.text);
 			textView.setText(topic.getName());
-			textView = (TextView) view.findViewById(R.id.article_count);
+			textView = (TextView) view.findViewById(R.id.text2);
 			if (topic == Topic.ALL_ARTICLES) {
 				textView.setVisibility(View.GONE);
 			} else {
