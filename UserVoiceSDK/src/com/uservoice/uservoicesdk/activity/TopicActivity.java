@@ -61,7 +61,7 @@ public class TopicActivity extends BaseListActivity {
 		
 		setTitle(null);
 		getListView().setDivider(null);
-		setListAdapter(new LoadAllAdapter<Article>(this, R.layout.article_item, new ArrayList<Article>()) {
+		setListAdapter(new LoadAllAdapter<Article>(this, R.layout.text_item, new ArrayList<Article>()) {
 			@Override
 			protected void loadPage(int page, Callback<List<Article>> callback) {
 				Topic topic = Session.getInstance().getTopic();
@@ -74,8 +74,15 @@ public class TopicActivity extends BaseListActivity {
 			
 			@Override
 			protected void customizeLayout(View view, Article model) {
-				TextView text = (TextView) view.findViewById(R.id.article_name);
+				TextView text = (TextView) view.findViewById(R.id.text);
+				TextView text2 = (TextView) view.findViewById(R.id.text2);
 				text.setText(model.getTitle());
+				if (Session.getInstance().getTopic() == Topic.ALL_ARTICLES && model.getTopicName() != null) {
+					text2.setVisibility(View.VISIBLE);
+					text2.setText(model.getTopicName());
+				} else {
+					text2.setVisibility(View.GONE);
+				}
 			}
 		});
 		
