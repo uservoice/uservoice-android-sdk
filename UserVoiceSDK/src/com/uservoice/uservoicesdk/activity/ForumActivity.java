@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
+import com.uservoice.uservoicesdk.dialog.SuggestionDialogFragment;
 import com.uservoice.uservoicesdk.flow.InitManager;
 import com.uservoice.uservoicesdk.model.Forum;
 import com.uservoice.uservoicesdk.model.Suggestion;
@@ -128,7 +129,8 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Suggestion suggestion = (Suggestion) getModelAdapter().getItem(position);
 				Session.getInstance().setSuggestion(suggestion);
-				startActivity(new Intent(ForumActivity.this, SuggestionActivity.class));
+				SuggestionDialogFragment dialog = new SuggestionDialogFragment(suggestion);
+				dialog.show(getSupportFragmentManager(), "SuggestionDialogFragment");
 			}
 		});
 		

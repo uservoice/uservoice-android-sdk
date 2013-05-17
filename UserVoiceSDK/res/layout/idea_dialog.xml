@@ -8,36 +8,19 @@
         android:id="@+id/status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Status: Started"
         android:background="#8dc13c"
-        android:textColor="#FFFFFF"
-        android:textSize="11sp"
-        android:textStyle="bold"
+        android:paddingBottom="4dip"
         android:paddingLeft="10dip"
         android:paddingTop="4dip"
-        android:paddingBottom="4dip" />
+        android:text="Started"
+        android:textColor="#FFFFFF"
+        android:textSize="11sp"
+        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/title"
+    <ListView
+        android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Make the app more Android friendly"
-        android:textColor="#8dc13c"
-        android:paddingTop="10dip"
-        android:paddingLeft="10dip"
-        android:paddingBottom="10dip"
-        android:paddingRight="10dip"
-        android:background="#FFFFFF"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-    
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="2dip"
-        android:background="#8dc13c" />
+        android:layout_height="match_parent"
+        android:background="#FFFFFF" />
 
-    
-    <ScrollView android:layout_width="match_parent" android:layout_height="match_parent">
-    	<include layout="@layout/suggestion_layout" />
-    </ScrollView>
 </LinearLayout>

@@ -25,6 +25,11 @@
         <item quantity="one">idea</item>
         <item quantity="other">ideas</item>
     </plurals>
+    
+    <plurals name="people">
+        <item quantity="one">person</item>
+        <item quantity="other">people</item>
+    </plurals>
 
     <string name="app_name">UserVoice SDK</string>
     <string name="action_settings">Settings</string>
@@ -53,7 +58,7 @@
     <string name="remove_votes">Remove Votes</string>
     <string name="feedback_forum">Feedback Forum</string>
     <string name="knowledge_base">Knowledge Base</string>
-    <string name="admin_response">Admin Response</string>
+    <string name="admin_response_format">Admin response: %1$s</string>
     <string name="menu_post_comment">Post</string>
     <string name="next">Next</string>
     <string name="none_of_these_help">None of these help</string>
@@ -94,4 +99,7 @@
     <string name="matching_articles_and_ideas">Matching articles and ideas</string>
     <string name="post_idea_continue_button">I still want to post my idea</string>
     <string name="contact_continue_button">I still want to send a message</string>
+    <string name="i_want_this">I want this!</string>
+    <string name="number_of_subscribers_format">%1$s want this idea</string>
+    <string name="post_a_comment">Post a comment</string>
 </resources>

@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +18,9 @@ import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.activity.ArticleActivity;
 import com.uservoice.uservoicesdk.activity.ContactActivity;
 import com.uservoice.uservoicesdk.activity.ForumActivity;
-import com.uservoice.uservoicesdk.activity.SuggestionActivity;
 import com.uservoice.uservoicesdk.activity.TopicActivity;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
+import com.uservoice.uservoicesdk.dialog.SuggestionDialogFragment;
 import com.uservoice.uservoicesdk.flow.InitManager;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.BaseModel;
@@ -29,7 +30,7 @@ import com.uservoice.uservoicesdk.model.Topic;
 import com.uservoice.uservoicesdk.rest.Callback;
 
 public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterView.OnItemClickListener {
-	
+
 	private static int KB_HEADER = 0;
 	private static int FORUM = 1;
 	private static int TOPIC = 2;
@@ -37,40 +38,39 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 	private static int CONTACT = 4;
 	private static int ARTICLE = 5;
 	private static int SUGGESTION = 6;
-	
+
 	private LayoutInflater inflater;
-	private final Context context;
+	private final FragmentActivity context;
 	private boolean configLoaded = false;
 	private List<Integer> staticRows;
-	
-	public PortalAdapter(Context context) {
+
+	public PortalAdapter(FragmentActivity context) {
 		this.context = context;
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		
+
 		new InitManager(context, new Runnable() {
 			@Override
 			public void run() {
 				configLoaded = true;
 				notifyDataSetChanged();
-				// this has to be deferred only because we fall back to clientconfig forum_id 
 				loadForum();
 			}
 		}).init();
 		loadTopics();
 	}
-	
+
 	private List<Topic> getTopics() {
 		return Session.getInstance().getTopics();
 	}
-	
+
 	private List<Article> getArticles() {
 		return Session.getInstance().getArticles();
 	}
-	
+
 	private boolean shouldShowArticles() {
 		return Session.getInstance().getConfig().getTopicId() != -1 || (getTopics() != null && getTopics().isEmpty());
 	}
-	
+
 	private void loadForum() {
 		Forum.loadForum(Session.getInstance().getConfig().getForumId(), new DefaultCallback<Forum>(context) {
 			@Override
@@ -80,7 +80,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 			}
 		});
 	}
-	
+
 	private void loadTopics() {
 		final DefaultCallback<List<Article>> articlesCallback = new DefaultCallback<List<Article>>(context) {
 			@Override
@@ -90,7 +90,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 				notifyDataSetChanged();
 			}
 		};
-		
+
 		if (Session.getInstance().getConfig().getTopicId() != -1) {
 			Article.loadForTopic(Session.getInstance().getConfig().getTopicId(), articlesCallback);
 		} else {
@@ -110,7 +110,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 			});
 		}
 	}
-	
+
 	private void computeStaticRows() {
 		if (staticRows == null) {
 			staticRows = new ArrayList<Integer>();
@@ -143,7 +143,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 		computeStaticRows();
 		if (position < staticRows.size() && staticRows.get(position) == FORUM)
 			return Session.getInstance().getForum();
-		else if (getTopics() != null && !shouldShowArticles() && position >= staticRows.size() && position - staticRows.size() < getTopics().size()) 
+		else if (getTopics() != null && !shouldShowArticles() && position >= staticRows.size() && position - staticRows.size() < getTopics().size())
 			return getTopics().get(position - staticRows.size());
 		else if (getArticles() != null && shouldShowArticles() && position >= staticRows.size() && position - staticRows.size() < getArticles().size())
 			return getArticles().get(position - staticRows.size());
@@ -154,7 +154,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 	public long getItemId(int position) {
 		return position;
 	}
-	
+
 	@Override
 	public boolean isEnabled(int position) {
 		if (shouldShowSearchResults())
@@ -190,7 +190,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 			else if (type == SUGGESTION)
 				view = inflater.inflate(R.layout.suggestion_result_item, null);
 		}
-		
+
 		if (type == FORUM) {
 			TextView textView = (TextView) view.findViewById(R.id.text);
 			textView.setText(R.string.feedback_forum);
@@ -223,21 +223,21 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 			Suggestion suggestion = (Suggestion) getItem(position);
 			textView.setText(highlightResult(suggestion.getTitle()));
 		}
-		
+
 		View divider = view.findViewById(R.id.divider);
 		if (divider != null)
 			divider.setVisibility(position == getCount() - 1 ? View.GONE : View.VISIBLE);
 		if (type == FORUM)
 			divider.setVisibility(View.GONE);
-		
+
 		return view;
 	}
-	
+
 	@Override
 	public int getViewTypeCount() {
 		return 7;
 	}
-	
+
 	@Override
 	public int getItemViewType(int position) {
 		if (!configLoaded)
@@ -270,7 +270,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 		Babayaga.track(Babayaga.Event.SEARCH_IDEAS);
 		Article.loadInstantAnswers(query, callback);
 	}
-	
+
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		int type = getItemViewType(position);
 		if (type == CONTACT) {
@@ -284,8 +284,8 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 			Session.getInstance().setArticle((Article) getItem(position));
 			context.startActivity(new Intent(context, ArticleActivity.class));
 		} else if (type == SUGGESTION) {
-			Session.getInstance().setSuggestion((Suggestion) getItem(position));
-			context.startActivity(new Intent(context, SuggestionActivity.class));
+			SuggestionDialogFragment dialog = new SuggestionDialogFragment((Suggestion) getItem(position));
+			dialog.show(context.getSupportFragmentManager(), "SuggestionDialogFragment");
 		}
 	}
 
