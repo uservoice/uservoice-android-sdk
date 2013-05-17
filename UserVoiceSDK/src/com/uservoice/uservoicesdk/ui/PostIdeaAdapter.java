@@ -26,17 +26,19 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
 	private static int DESCRIPTION = 8;
 	private static int CATEGORY = 9;
 	private static int HELP = 10;
+	private static int TEXT_HEADING = 11;
 	
 	private Spinner categorySelect;
 	private EditText descriptionField;
 
 	public PostIdeaAdapter(FragmentActivity context) {
 		super(context);
+		continueButtonMessage = R.string.post_idea_continue_button;
 	}
 	
 	@Override
 	public int getViewTypeCount() {
-		return super.getViewTypeCount() + 3;
+		return super.getViewTypeCount() + 4;
 	}
 	
 	@Override
@@ -47,7 +49,7 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
 	@Override
 	protected List<Integer> getRows() {
 		List<Integer> rows = super.getRows();
-		rows.add(0, HEADING);
+		rows.add(0, TEXT_HEADING);
 		if (state == State.DETAILS)
 			rows.add(HELP);
 		return rows;
@@ -73,18 +75,22 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
 				title.setText(R.string.category);
 			} else if (type == HELP) {
 				view = inflater.inflate(R.layout.idea_help_item, null);
+			} else if (type == TEXT_HEADING) {
+				view = inflater.inflate(R.layout.header_item, null);
+				TextView textView = (TextView) view.findViewById(R.id.header_text);
+				textView.setText(R.string.idea_text_heading);
 			} else {
 				view = super.getView(position, convertView, parent);
 			}
 		}
 
-		if (type == DESCRIPTION || type == CATEGORY || type == HELP) {
+		if (type == DESCRIPTION || type == CATEGORY || type == HELP || type == TEXT_HEADING) {
 			// just skip the else
 		} else if (type == TEXT) {
 			TextView textView = (TextView) view.findViewById(R.id.text);
 			textView.setHint(R.string.idea_text_hint);
 		} else {
-			return super.getView(position, convertView, parent);
+			return super.getView(position, view, parent);
 		}
 		return view;
 	}

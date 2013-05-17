@@ -34,6 +34,7 @@ public class ContactAdapter extends InstantAnswersAdapter {
 	public ContactAdapter(FragmentActivity context) {
 		super(context);
 		customFieldValues = new HashMap<String, String>(Session.getInstance().getConfig().getCustomFields());
+		continueButtonMessage = R.string.contact_continue_button;
 	}
 
 	@Override
@@ -117,7 +118,7 @@ public class ContactAdapter extends InstantAnswersAdapter {
 			if (value != null && customField.getPredefinedValues().contains(value))
 				field.setSelection(customField.getPredefinedValues().indexOf(value));
 		} else {
-			return super.getView(position, convertView, parent);
+			return super.getView(position, view, parent);
 		}
 		return view;
 	}

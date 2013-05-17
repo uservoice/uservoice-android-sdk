@@ -52,6 +52,7 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 	protected EditText textField;
 	protected EditText emailField;
 	protected EditText nameField;
+	protected int continueButtonMessage;
 
 	public InstantAnswersAdapter(FragmentActivity context) {
 		this.context = context;
@@ -207,7 +208,7 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 				button.setText(R.string.loading);
 				break;
 			case INSTANT_ANSWERS:
-				button.setText(R.string.none_of_these_help);
+				button.setText(continueButtonMessage);
 				break;
 			case DETAILS:
 				button.setText(getSubmitString());
