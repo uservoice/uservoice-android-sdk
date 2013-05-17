@@ -166,8 +166,6 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 				});
 			} else if (type == HEADING) {
 				view = inflater.inflate(R.layout.header_item, null);
-				TextView textView = (TextView) view.findViewById(R.id.header_text);
-				textView.setText(R.string.do_any_of_these_help);
 			} else if (type == INSTANT_ANSWER) {
 				view = inflater.inflate(R.layout.instant_answer_item, null);
 			} else if (type == SPACE) {
@@ -254,6 +252,17 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 				field.setInputType(EditorInfo.TYPE_TEXT_VARIATION_PERSON_NAME);
 				field.setText(Session.getInstance().getName());
 			}
+		} else if (type == HEADING) {
+			TextView textView = (TextView) view.findViewById(R.id.header_text);
+			boolean hasArticles = false;
+			boolean hasIdeas = false;
+			for (BaseModel model : instantAnswers) {
+				if (model instanceof Article)
+					hasArticles = true;
+				if (model instanceof Suggestion)
+					hasIdeas = true;
+			}
+			textView.setText(hasArticles ? (hasIdeas ? R.string.matching_articles_and_ideas : R.string.matching_articles) : R.string.matching_ideas);
 		}
 		return view;
 	}

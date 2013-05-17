@@ -58,7 +58,6 @@
     <string name="next">Next</string>
     <string name="none_of_these_help">None of these help</string>
     <string name="send_message">Send message</string>
-    <string name="do_any_of_these_help">Do any of these help?</string>
     <string name="your_email_address">Your email address</string>
     <string name="your_name">Your name</string>
     <string name="name_hint">“Anonymous”</string>
@@ -90,4 +89,7 @@
     <string name="nevermind">Nevermind</string>
     <string name="msg_subscribe">We\'ll update you as this idea progresses.</string>
     <string name="contact_hint">Enter your question or feedback</string>
+    <string name="matching_ideas">Matching ideas</string>
+    <string name="matching_articles">Matching articles</string>
+    <string name="matching_articles_and_ideas">Matching articles and ideas</string>
 </resources>

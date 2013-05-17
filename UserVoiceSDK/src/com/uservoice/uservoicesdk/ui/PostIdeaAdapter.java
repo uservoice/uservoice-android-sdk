@@ -80,9 +80,6 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
 
 		if (type == DESCRIPTION || type == CATEGORY || type == HELP) {
 			// just skip the else
-		} else if (type == HEADING) {
-			TextView textView = (TextView) view.findViewById(R.id.header_text);
-			textView.setText(position == 0 ? R.string.idea_text_heading : R.string.do_any_of_these_help);
 		} else if (type == TEXT) {
 			TextView textView = (TextView) view.findViewById(R.id.text);
 			textView.setHint(R.string.idea_text_hint);
