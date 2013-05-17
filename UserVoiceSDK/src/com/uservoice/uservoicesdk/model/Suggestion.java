@@ -30,6 +30,7 @@ public class Suggestion extends BaseModel {
 	private int numberOfVotesByCurrentUser;
 	private int forumId;
 	private boolean subscribed;
+	private String forumName;
 
 	public static void loadSuggestions(Forum forum, int page, final Callback<List<Suggestion>> callback) {
 		Map<String, String> params = new HashMap<String, String>();
@@ -103,6 +104,7 @@ public class Suggestion extends BaseModel {
 		text = getString(object, "formatted_text");
 		createdAt = getDate(object, "created_at");
 		forumId = object.getJSONObject("topic").getJSONObject("forum").getInt("id");
+		forumName = object.getJSONObject("topic").getJSONObject("forum").getString("name");
 		subscribed = object.has("subscribed") && object.getBoolean("subscribed");
 		if (!object.isNull("category"))
 			category = deserializeObject(object, "category", Category.class);
@@ -129,6 +131,10 @@ public class Suggestion extends BaseModel {
 			adminResponseUserName = getString(responseUser, "name");
 			adminResponseAvatarUrl = getString(responseUser, "avatar_url");
 		}
+	}
+	
+	public String getForumName() {
+		return forumName;
 	}
 	
 	public boolean isSubscribed() {

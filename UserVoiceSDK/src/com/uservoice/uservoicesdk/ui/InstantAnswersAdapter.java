@@ -18,6 +18,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -217,28 +218,25 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 		} else if (type == INSTANT_ANSWER) {
 			TextView title = (TextView) view.findViewById(R.id.title);
 			TextView detail = (TextView) view.findViewById(R.id.detail);
+			ImageView image = (ImageView) view.findViewById(R.id.icon);
 			BaseModel model = (BaseModel) getItem(position);
-			String[] details = null;
 			if (model instanceof Article) {
 				Article article = (Article) model;
+				image.setImageResource(R.drawable.uv_article);
 				title.setText(article.getTitle());
-				if (article.getTopicName() != null)
-					details = new String[] { context.getString(R.string.article), article.getTopicName() };
-				else
-					details = new String[] { context.getString(R.string.article) };
-				detail.setText(String.format("%s - %s", context.getString(R.string.article), article.getTopicName()));
+				if (article.getTopicName() != null) {
+					detail.setVisibility(View.VISIBLE);
+					detail.setText(article.getTopicName());
+				} else {
+					detail.setVisibility(View.GONE);
+				}
 			} else if (model instanceof Suggestion) {
 				Suggestion suggestion = (Suggestion) model;
+				image.setImageResource(R.drawable.uv_idea);
 				title.setText(suggestion.getTitle());
-				if (suggestion.getCategory() != null)
-					details = new String[] { context.getString(R.string.idea), suggestion.getCategory().getName() };
-				else
-					details = new String[] { context.getString(R.string.idea) };
+				detail.setVisibility(View.VISIBLE);
+				detail.setText(suggestion.getForumName());
 			}
-			if (details.length == 2)
-				detail.setText(String.format("%s - %s", details[0], details[1]));
-			else
-				detail.setText(details[0]);
 			view.findViewById(R.id.divider).setVisibility(getRows().lastIndexOf(INSTANT_ANSWER) == position ? View.GONE : View.VISIBLE);
 		} else if (type == EMAIL_FIELD || type == NAME_FIELD) {
 			TextView title = (TextView) view.findViewById(R.id.header_text);
