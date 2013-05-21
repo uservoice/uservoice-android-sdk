@@ -18,14 +18,11 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
-import com.uservoice.uservoicesdk.dialog.ArticleDialogFragment;
-import com.uservoice.uservoicesdk.dialog.SuggestionDialogFragment;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.BaseModel;
 import com.uservoice.uservoicesdk.model.Suggestion;
@@ -64,12 +61,12 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 	protected abstract void doSubmit();
 
 	protected abstract String getSubmitString();
-	
+
 	@Override
 	public int getViewTypeCount() {
 		return 8;
 	}
-	
+
 	protected List<Integer> getRows() {
 		List<Integer> rows = new ArrayList<Integer>();
 		rows.add(TEXT);
@@ -92,7 +89,7 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 		rows.add(BUTTON);
 		return rows;
 	}
-	
+
 	protected boolean isLoading() {
 		return Session.getInstance().getClientConfig() == null;
 	}
@@ -124,14 +121,7 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		int type = getItemViewType(position);
 		if (type == INSTANT_ANSWER) {
-			BaseModel instantAnswer = (BaseModel) getItem(position);
-			if (instantAnswer instanceof Article) {
-				ArticleDialogFragment fragment = new ArticleDialogFragment((Article) instantAnswer);
-				fragment.show(context.getSupportFragmentManager(), "ArticleDialogFragment");
-			} else if (instantAnswer instanceof Suggestion) {
-				SuggestionDialogFragment fragment = new SuggestionDialogFragment((Suggestion) instantAnswer);
-				fragment.show(context.getSupportFragmentManager(), "SuggestionDialogFragment");
-			}
+			Utils.showModel(context, (BaseModel) getItem(position));
 		}
 	}
 
@@ -201,41 +191,21 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 			Button button = (Button) view.findViewById(R.id.contact_button);
 			button.setEnabled(state != State.INIT_LOADING);
 			switch (state) {
-			case INIT:
-				button.setText(R.string.next);
-				break;
-			case INIT_LOADING:
-				button.setText(R.string.loading);
-				break;
-			case INSTANT_ANSWERS:
-				button.setText(continueButtonMessage);
-				break;
-			case DETAILS:
-				button.setText(getSubmitString());
-				break;
+				case INIT:
+					button.setText(R.string.next);
+					break;
+				case INIT_LOADING:
+					button.setText(R.string.loading);
+					break;
+				case INSTANT_ANSWERS:
+					button.setText(continueButtonMessage);
+					break;
+				case DETAILS:
+					button.setText(getSubmitString());
+					break;
 			}
 		} else if (type == INSTANT_ANSWER) {
-			TextView title = (TextView) view.findViewById(R.id.title);
-			TextView detail = (TextView) view.findViewById(R.id.detail);
-			ImageView image = (ImageView) view.findViewById(R.id.icon);
-			BaseModel model = (BaseModel) getItem(position);
-			if (model instanceof Article) {
-				Article article = (Article) model;
-				image.setImageResource(R.drawable.uv_article);
-				title.setText(article.getTitle());
-				if (article.getTopicName() != null) {
-					detail.setVisibility(View.VISIBLE);
-					detail.setText(article.getTopicName());
-				} else {
-					detail.setVisibility(View.GONE);
-				}
-			} else if (model instanceof Suggestion) {
-				Suggestion suggestion = (Suggestion) model;
-				image.setImageResource(R.drawable.uv_idea);
-				title.setText(suggestion.getTitle());
-				detail.setVisibility(View.VISIBLE);
-				detail.setText(suggestion.getForumName());
-			}
+			Utils.displayInstantAnswer(view, (BaseModel) getItem(position));
 			view.findViewById(R.id.divider).setVisibility(getRows().lastIndexOf(INSTANT_ANSWER) == position ? View.GONE : View.VISIBLE);
 		} else if (type == EMAIL_FIELD || type == NAME_FIELD) {
 			TextView title = (TextView) view.findViewById(R.id.header_text);
@@ -267,7 +237,7 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 		}
 		return view;
 	}
-	
+
 	@Override
 	public Object getItem(int position) {
 		int type = getItemViewType(position);

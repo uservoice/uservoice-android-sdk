@@ -15,17 +15,13 @@ import android.widget.TextView;
 import com.uservoice.uservoicesdk.Config;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
-import com.uservoice.uservoicesdk.activity.ArticleActivity;
 import com.uservoice.uservoicesdk.activity.ContactActivity;
 import com.uservoice.uservoicesdk.activity.ForumActivity;
-import com.uservoice.uservoicesdk.activity.TopicActivity;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
-import com.uservoice.uservoicesdk.dialog.SuggestionDialogFragment;
 import com.uservoice.uservoicesdk.flow.InitManager;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.BaseModel;
 import com.uservoice.uservoicesdk.model.Forum;
-import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.model.Topic;
 import com.uservoice.uservoicesdk.rest.Callback;
 
@@ -37,7 +33,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 	private static int LOADING = 3;
 	private static int CONTACT = 4;
 	private static int ARTICLE = 5;
-	private static int SUGGESTION = 6;
+	private static int SEARCH_RESULT = 6;
 
 	private LayoutInflater inflater;
 	private final FragmentActivity context;
@@ -187,8 +183,8 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 				view = inflater.inflate(R.layout.text_item, null);
 			else if (type == ARTICLE)
 				view = inflater.inflate(R.layout.article_item, null);
-			else if (type == SUGGESTION)
-				view = inflater.inflate(R.layout.suggestion_result_item, null);
+			else if (type == SEARCH_RESULT)
+				view = inflater.inflate(R.layout.instant_answer_item, null);
 		}
 
 		if (type == FORUM) {
@@ -218,10 +214,8 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 			TextView textView = (TextView) view.findViewById(R.id.article_name);
 			Article article = (Article) getItem(position);
 			textView.setText(shouldShowSearchResults() ? highlightResult(article.getTitle()) : article.getTitle());
-		} else if (type == SUGGESTION) {
-			TextView textView = (TextView) view.findViewById(R.id.suggestion_title);
-			Suggestion suggestion = (Suggestion) getItem(position);
-			textView.setText(highlightResult(suggestion.getTitle()));
+		} else if (type == SEARCH_RESULT) {
+			Utils.displayInstantAnswer(view, (BaseModel) getItem(position));
 		}
 
 		View divider = view.findViewById(R.id.divider);
@@ -242,17 +236,8 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 	public int getItemViewType(int position) {
 		if (!configLoaded)
 			return LOADING;
-		if (shouldShowSearchResults()) {
-			if (loading)
-				return LOADING;
-			BaseModel model = searchResults.get(position);
-			if (model instanceof Article)
-				return ARTICLE;
-			else if (model instanceof Suggestion)
-				return SUGGESTION;
-			else
-				return LOADING;
-		}
+		if (shouldShowSearchResults())
+			return loading ? LOADING : SEARCH_RESULT;
 		computeStaticRows();
 		if (position < staticRows.size()) {
 			int type = staticRows.get(position);
@@ -277,15 +262,8 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 			context.startActivity(new Intent(context, ContactActivity.class));
 		} else if (type == FORUM) {
 			context.startActivity(new Intent(context, ForumActivity.class));
-		} else if (type == TOPIC) {
-			Session.getInstance().setTopic((Topic) getItem(position));
-			context.startActivity(new Intent(context, TopicActivity.class));
-		} else if (type == ARTICLE) {
-			Session.getInstance().setArticle((Article) getItem(position));
-			context.startActivity(new Intent(context, ArticleActivity.class));
-		} else if (type == SUGGESTION) {
-			SuggestionDialogFragment dialog = new SuggestionDialogFragment((Suggestion) getItem(position));
-			dialog.show(context.getSupportFragmentManager(), "SuggestionDialogFragment");
+		} else if (type == TOPIC || type == ARTICLE || type == SEARCH_RESULT) {
+			Utils.showModel(context, (BaseModel) getItem(position));
 		}
 	}
 
