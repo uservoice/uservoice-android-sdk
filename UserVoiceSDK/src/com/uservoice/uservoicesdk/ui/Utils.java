@@ -1,5 +1,7 @@
 package com.uservoice.uservoicesdk.ui;
 
+import java.util.Locale;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
@@ -11,6 +13,7 @@ import android.webkit.WebSettings.PluginState;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.graphics.Color;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
@@ -46,6 +49,7 @@ public class Utils {
 	public static void displayInstantAnswer(View view, BaseModel model) {
 		TextView title = (TextView) view.findViewById(R.id.title);
 		TextView detail = (TextView) view.findViewById(R.id.detail);
+		View suggestionDetails = view.findViewById(R.id.suggestion_details);
 		ImageView image = (ImageView) view.findViewById(R.id.icon);
 		if (model instanceof Article) {
 			Article article = (Article) model;
@@ -57,12 +61,25 @@ public class Utils {
 			} else {
 				detail.setVisibility(View.GONE);
 			}
+			suggestionDetails.setVisibility(View.GONE);
 		} else if (model instanceof Suggestion) {
 			Suggestion suggestion = (Suggestion) model;
 			image.setImageResource(R.drawable.uv_idea);
 			title.setText(suggestion.getTitle());
 			detail.setVisibility(View.VISIBLE);
 			detail.setText(suggestion.getForumName());
+			if (suggestion.getStatus() != null) {
+				View statusColor = suggestionDetails.findViewById(R.id.suggestion_status_color);
+				TextView status = (TextView) suggestionDetails.findViewById(R.id.suggestion_status);
+				int color = Color.parseColor(suggestion.getStatusColor());
+				suggestionDetails.setVisibility(View.VISIBLE);
+				status.setText(suggestion.getStatus().toUpperCase(Locale.getDefault()));
+				status.setTextColor(color);
+				statusColor.setBackgroundColor(color);
+			} else {
+				suggestionDetails.setVisibility(View.GONE);
+			}
+
 		}
 	}
 

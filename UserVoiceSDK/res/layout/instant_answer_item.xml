@@ -1,42 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/LinearLayout1"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal" >
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical" >
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:id="@+id/icon"
-        android:src="@drawable/uv_idea" />
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:minHeight="?android:attr/listPreferredItemHeight"
-        android:orientation="vertical" >
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:paddingLeft="10dp"
+			android:paddingRight="10dp"
+			android:id="@+id/icon"
+			android:src="@drawable/uv_idea" />
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center_vertical"
+			android:minHeight="?android:attr/listPreferredItemHeight"
+			android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Small Text"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#75778c" />
-    </LinearLayout>
+			<TextView
+				android:id="@+id/title"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:paddingTop="5dp"
+				android:text="Medium Text"
+				android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <include layout="@layout/divider" />
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:paddingBottom="5dp"
+				android:orientation="horizontal" >
+
+				<TextView
+					android:id="@+id/detail"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Small Text"
+					android:textSize="12sp"
+					android:textColor="#75778c" />
+
+				<LinearLayout
+					android:id="@+id/suggestion_details"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="3dp"
+					android:orientation="horizontal" >
+
+					<View
+						android:id="@+id/suggestion_status_color"
+						android:layout_width="9dp"
+						android:layout_height="9dp"
+						android:layout_marginLeft="10dp"
+						android:layout_marginRight="3dp"
+						android:layout_marginTop="2dp"
+						android:background="#999999" />
+
+					<TextView
+						android:id="@+id/suggestion_status"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="UNDER REVIEW"
+						android:textColor="#999999"
+						android:textSize="10sp" />
+				</LinearLayout>
+			</LinearLayout>
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<include layout="@layout/divider" />
 
 </LinearLayout>

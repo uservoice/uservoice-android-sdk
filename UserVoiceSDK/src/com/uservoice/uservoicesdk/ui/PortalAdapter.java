@@ -182,7 +182,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 			else if (type == CONTACT)
 				view = inflater.inflate(R.layout.text_item, null);
 			else if (type == ARTICLE)
-				view = inflater.inflate(R.layout.article_item, null);
+				view = inflater.inflate(R.layout.text_item, null);
 			else if (type == SEARCH_RESULT)
 				view = inflater.inflate(R.layout.instant_answer_item, null);
 		}
@@ -211,9 +211,9 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 			textView.setText(R.string.contact_us);
 			view.findViewById(R.id.text2).setVisibility(View.GONE);
 		} else if (type == ARTICLE) {
-			TextView textView = (TextView) view.findViewById(R.id.article_name);
+			TextView textView = (TextView) view.findViewById(R.id.text);
 			Article article = (Article) getItem(position);
-			textView.setText(shouldShowSearchResults() ? highlightResult(article.getTitle()) : article.getTitle());
+			textView.setText(article.getTitle());
 		} else if (type == SEARCH_RESULT) {
 			Utils.displayInstantAnswer(view, (BaseModel) getItem(position));
 		}

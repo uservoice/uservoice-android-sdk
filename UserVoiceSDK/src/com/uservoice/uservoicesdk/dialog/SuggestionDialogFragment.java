@@ -17,7 +17,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.uservoice.uservoicesdk.R;
-import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.image.ImageCache;
 import com.uservoice.uservoicesdk.model.Comment;
 import com.uservoice.uservoicesdk.model.Suggestion;
@@ -60,7 +59,7 @@ public class SuggestionDialogFragment extends DialogFragment {
 
 			@Override
 			protected int getTotalNumberOfObjects() {
-				return Session.getInstance().getSuggestion().getNumberOfComments();
+				return suggestion.getNumberOfComments();
 			}
 
 			@Override
@@ -85,7 +84,7 @@ public class SuggestionDialogFragment extends DialogFragment {
 
 			@Override
 			protected void loadPage(int page, Callback<List<Comment>> callback) {
-				Comment.loadComments(Session.getInstance().getSuggestion(), page, callback);
+				Comment.loadComments(suggestion, page, callback);
 			}
 		};
 	}
