@@ -24,6 +24,7 @@ public abstract class SearchAdapter<T> extends BaseAdapter {
 	protected Context context;
 	protected String currentQuery;
 	protected String pendingQuery;
+	protected int scope;
 	
 	public void performSearch(String query) {
 		pendingQuery = query;
@@ -74,10 +75,14 @@ public abstract class SearchAdapter<T> extends BaseAdapter {
 						loading = false;
 						notifyDataSetChanged();
 						timer = null;
+						searchResultsUpdated();
 					}
 				}
 			});
 		}
+	}
+	
+	protected void searchResultsUpdated() {
 	}
 	
 	protected boolean shouldShowSearchResults() {
@@ -115,4 +120,9 @@ public abstract class SearchAdapter<T> extends BaseAdapter {
 	}
 	
 	protected void search(String query, Callback<List<T>> callback) {}
+
+	public void setScope(int scope) {
+		this.scope = scope;
+		notifyDataSetChanged();
+	}
 }

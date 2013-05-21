@@ -1,8 +1,8 @@
 package com.uservoice.uservoicesdk.ui;
 
-import com.uservoice.uservoicesdk.activity.SearchActivity;
-
 import android.widget.SearchView;
+
+import com.uservoice.uservoicesdk.activity.SearchActivity;
 
 public class SearchQueryListener implements SearchView.OnQueryTextListener {
 	private final SearchActivity searchActivity;
@@ -20,6 +20,11 @@ public class SearchQueryListener implements SearchView.OnQueryTextListener {
 	@Override
 	public boolean onQueryTextChange(String query) {
 		searchActivity.getModelAdapter().performSearch(query);
+		if (!query.isEmpty()) {
+			searchActivity.showScopeBar();
+		} else {
+			searchActivity.hideScopeBar();
+		}
 		return true;
 	}
 }

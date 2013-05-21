@@ -1,9 +1,11 @@
 package com.uservoice.uservoicesdk.ui;
 
-import com.uservoice.uservoicesdk.activity.SearchActivity;
-
+import android.annotation.SuppressLint;
 import android.view.MenuItem;
 
+import com.uservoice.uservoicesdk.activity.SearchActivity;
+
+@SuppressLint("NewApi")
 public class SearchExpandListener implements MenuItem.OnActionExpandListener {
 	private final SearchActivity searchActivity;
 
@@ -20,6 +22,7 @@ public class SearchExpandListener implements MenuItem.OnActionExpandListener {
 	@Override
 	public boolean onMenuItemActionCollapse(MenuItem item) {
 		searchActivity.getModelAdapter().setSearchActive(false);
+		searchActivity.hideScopeBar();
 		return true;
 	}
 }

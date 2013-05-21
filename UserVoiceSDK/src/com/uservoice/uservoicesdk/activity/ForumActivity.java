@@ -79,7 +79,7 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 			@Override
 			protected void customizeLayout(View view, Suggestion model) {
 				TextView textView = (TextView) view.findViewById(R.id.suggestion_title);
-				textView.setText(searchActive ? highlightResult(model.getTitle()) : model.getTitle());
+				textView.setText(model.getTitle());
 				
 				textView = (TextView) view.findViewById(R.id.subscriber_count);
 				textView.setText(String.valueOf(model.getNumberOfSubscribers()));
@@ -189,5 +189,9 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 	@SuppressWarnings("unchecked")
 	public PaginatedAdapter<Suggestion> getModelAdapter() {
 		return (PaginatedAdapter<Suggestion>) getListAdapter();
+	}
+	
+	@Override
+	public void showScopeBar() {
 	}
 }

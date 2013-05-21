@@ -17,15 +17,21 @@ import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.activity.ContactActivity;
 import com.uservoice.uservoicesdk.activity.ForumActivity;
+import com.uservoice.uservoicesdk.activity.SearchActivity;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.flow.InitManager;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.BaseModel;
 import com.uservoice.uservoicesdk.model.Forum;
+import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.model.Topic;
 import com.uservoice.uservoicesdk.rest.Callback;
 
 public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterView.OnItemClickListener {
+	
+	public static int SCOPE_ALL = 0;
+	public static int SCOPE_ARTICLES = 1;
+	public static int SCOPE_IDEAS = 2;
 
 	private static int KB_HEADER = 0;
 	private static int FORUM = 1;
@@ -125,17 +131,38 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 		if (!configLoaded) {
 			return 1;
 		} else if (shouldShowSearchResults()) {
-			return loading ? 1 : searchResults.size();
+			return loading ? 1 : getScopedSearchResults().size();
 		} else {
 			computeStaticRows();
 			return staticRows.size() + (Session.getInstance().getConfig().shouldShowKnowledgeBase() ? (getTopics() == null ? 1 : (shouldShowArticles() ? getArticles().size() : getTopics().size())) : 0);
 		}
 	}
+	
+	public List<BaseModel> getScopedSearchResults() {
+		if (scope == SCOPE_ALL) {
+			return searchResults;
+		} else if  (scope == SCOPE_ARTICLES) {
+			List<BaseModel> articles = new ArrayList<BaseModel>();
+			for (BaseModel model : searchResults) {
+				if (model instanceof Article)
+					articles.add(model);
+			}
+			return articles;
+		} else if (scope == SCOPE_IDEAS) {
+			List<BaseModel> ideas = new ArrayList<BaseModel>();
+			for (BaseModel model : searchResults) {
+				if (model instanceof Suggestion)
+					ideas.add(model);
+			}
+			return ideas;
+		}
+		return null;
+	}
 
 	@Override
 	public Object getItem(int position) {
 		if (shouldShowSearchResults())
-			return loading ? null : searchResults.get(position);
+			return loading ? null : getScopedSearchResults().get(position);
 		computeStaticRows();
 		if (position < staticRows.size() && staticRows.get(position) == FORUM)
 			return Session.getInstance().getForum();
@@ -164,6 +191,19 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 				return false;
 		}
 		return true;
+	}
+	
+	@Override
+	protected void searchResultsUpdated() {
+		int articleResults = 0;
+		int ideaResults = 0;
+		for (BaseModel model : searchResults) {
+			if (model instanceof Article)
+				articleResults += 1;
+			else
+				ideaResults += 1;
+		}
+		((SearchActivity) context).updateScopedSearch(searchResults.size(), articleResults, ideaResults);
 	}
 
 	@Override

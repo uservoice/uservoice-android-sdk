@@ -102,4 +102,7 @@
     <string name="i_want_this">I want this!</string>
     <string name="number_of_subscribers_format">%1$s want this idea</string>
     <string name="post_a_comment">Post a comment</string>
+    <string name="all_results_filter">ALL</string>
+    <string name="articles_filter">ARTICLES</string>
+    <string name="ideas_filter">IDEAS</string>
 </resources>
