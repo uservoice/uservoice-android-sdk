@@ -62,8 +62,9 @@ public class Suggestion extends BaseModel {
 		params.put("suggestion[votes]", String.valueOf(numberOfVotes));
 		params.put("suggestion[title]", title);
 		params.put("suggestion[text]", text);
-		params.put("suggestion[category_id]", String.valueOf(category.getId()));
-		doPost(apiPath("/forum/%d/suggestions.json", forum.getId()), params, new RestTaskCallback(callback) {
+		if (category != null)
+			params.put("suggestion[category_id]", String.valueOf(category.getId()));
+		doPost(apiPath("/forums/%d/suggestions.json", forum.getId()), params, new RestTaskCallback(callback) {
 			@Override
 			public void onComplete(JSONObject object) throws JSONException {
 				callback.onModel(deserializeObject(object, "suggestion", Suggestion.class));
