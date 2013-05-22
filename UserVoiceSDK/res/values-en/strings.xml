@@ -42,8 +42,6 @@
     <string name="display_name">Display name</string>
     <string name="password">Password</string>
     <string name="forgot_password">Forgot password</string>
-    <string name="comment_verb">Comment</string>
-    <string name="vote_verb">Vote</string>
     <string name="msg_comment_posted">Your comment has been posted</string>
     <string name="title_idea">Idea</string>
     <string name="posted_by_format">Posted by %1$s on %2$s</string>
@@ -59,7 +57,7 @@
     <string name="feedback_forum">Feedback Forum</string>
     <string name="knowledge_base">Knowledge Base</string>
     <string name="admin_response_format">Admin response: %1$s</string>
-    <string name="menu_post_comment">Post</string>
+    <string name="post_comment">Post comment</string>
     <string name="next">Next</string>
     <string name="none_of_these_help">None of these help</string>
     <string name="send_message">Send message</string>
@@ -105,4 +103,6 @@
     <string name="all_results_filter">ALL</string>
     <string name="articles_filter">ARTICLES</string>
     <string name="ideas_filter">IDEAS</string>
+	<string name="comment_hint">Enter your comment</string>
+	<string name="cancel">Cancel</string>
 </resources>

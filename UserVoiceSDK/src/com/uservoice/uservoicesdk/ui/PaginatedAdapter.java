@@ -1,5 +1,6 @@
 package com.uservoice.uservoicesdk.ui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -14,7 +15,7 @@ public abstract class PaginatedAdapter<T> extends ModelAdapter<T> {
 
 	
 	public void loadMore() {
-		if (loading || searchActive || objects.size() == getTotalNumberOfObjects()) return;
+		if (loading || searchActive || objects.size() == addedObjects + getTotalNumberOfObjects()) return;
 		loading = true;
 		notifyDataSetChanged();
 		loadPage(page, new DefaultCallback<List<T>>(context) {
@@ -32,5 +33,13 @@ public abstract class PaginatedAdapter<T> extends ModelAdapter<T> {
 	
 	protected List<T> getObjects() {
 		return shouldShowSearchResults() ? searchResults : objects;
+	}
+	
+	public void reload() {
+		// not *correct* but probably good enough. the correct thing would be to cancel the load somehow and proceed
+		if (loading)
+			return;
+		objects = new ArrayList<T>();
+		loadMore();
 	}
 }

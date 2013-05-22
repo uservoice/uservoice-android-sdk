@@ -28,6 +28,7 @@ import com.uservoice.uservoicesdk.ui.Utils;
 @SuppressLint("ValidFragment")
 public class SuggestionDialogFragment extends DialogFragment {
 	private final Suggestion suggestion;
+	private PaginatedAdapter<Comment> adapter;
 
 	public SuggestionDialogFragment(Suggestion suggestion) {
 		this.suggestion = suggestion;
@@ -39,10 +40,22 @@ public class SuggestionDialogFragment extends DialogFragment {
 		setStyle(STYLE_NO_TITLE, getTheme());
 		View view = getActivity().getLayoutInflater().inflate(R.layout.idea_dialog, null);
 		View headerView = getActivity().getLayoutInflater().inflate(R.layout.idea_dialog_header, null);
+		headerView.findViewById(R.id.subscribe).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+			}
+		});
+		headerView.findViewById(R.id.post_comment).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				CommentDialogFragment dialog = new CommentDialogFragment(suggestion, SuggestionDialogFragment.this);
+				dialog.show(getActivity().getSupportFragmentManager(), "CommentDialogFragment");
+			}
+		});
 		ListView listView = (ListView) view.findViewById(R.id.list);
 		listView.addHeaderView(headerView);
 		displaySuggestion(view, suggestion);
-		PaginatedAdapter<Comment> adapter = getListAdapter();
+		adapter = getListAdapter();
 		listView.setAdapter(adapter);
 		listView.setDivider(null);
 		listView.setOnScrollListener(new PaginationScrollListener(adapter));
@@ -87,6 +100,10 @@ public class SuggestionDialogFragment extends DialogFragment {
 				Comment.loadComments(suggestion, page, callback);
 			}
 		};
+	}
+	
+	public void commentPosted(Comment comment) {
+		adapter.add(0, comment);
 	}
 
 	private void displaySuggestion(View view, Suggestion suggestion) {

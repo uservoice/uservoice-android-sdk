@@ -18,6 +18,7 @@ public abstract class ModelAdapter<T> extends SearchAdapter<T> {
 	protected final int layoutId;
 	protected LayoutInflater inflater;
 	protected List<T> objects;
+	protected int addedObjects = 0;
 
 	public ModelAdapter(Context context, int layoutId, List<T> objects) {
 		this.context = context;
@@ -78,6 +79,7 @@ public abstract class ModelAdapter<T> extends SearchAdapter<T> {
 	
 	public void add(int location, T object) {
 		objects.add(location, object);
+		addedObjects += 1;
 		notifyDataSetChanged();
 	}
 	
