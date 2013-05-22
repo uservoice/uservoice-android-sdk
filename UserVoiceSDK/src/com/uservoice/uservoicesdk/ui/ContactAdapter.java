@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -107,14 +106,14 @@ public class ContactAdapter extends InstantAnswersAdapter {
 			field.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 				@Override
 				public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-					customFieldValues.put(customField.getName(), customField.getPredefinedValues().get(position));
+					customFieldValues.put(customField.getName(), position == 0 ? null : customField.getPredefinedValues().get(position-1));
 				}
 
 				@Override
 				public void onNothingSelected(AdapterView<?> parent) {
 				}
 			});
-			field.setAdapter(new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, customField.getPredefinedValues()));
+			field.setAdapter(new SpinnerAdapter<String>(context, customField.getPredefinedValues()));
 			if (value != null && customField.getPredefinedValues().contains(value))
 				field.setSelection(customField.getPredefinedValues().indexOf(value));
 		} else {

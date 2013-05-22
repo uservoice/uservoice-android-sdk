@@ -6,12 +6,11 @@
 
     <include layout="@layout/header_item" />
 
-    <com.uservoice.uservoicesdk.ui.NoDefaultSpinner
+    <Spinner
         android:id="@+id/select_field"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:spinnerMode="dialog"
-        android:prompt="@string/select_one"
-        android:minHeight="?android:attr/listPreferredItemHeight" />
+        android:minHeight="?android:attr/listPreferredItemHeight"
+        android:spinnerMode="dialog" />
 
 </LinearLayout>

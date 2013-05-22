@@ -7,7 +7,6 @@ import android.annotation.SuppressLint;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -71,7 +70,7 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
 				view = inflater.inflate(R.layout.select_field_item, null);
 				TextView title = (TextView) view.findViewById(R.id.header_text);
 				categorySelect = (Spinner) view.findViewById(R.id.select_field);
-				categorySelect.setAdapter(new ArrayAdapter<Category>(context, android.R.layout.simple_list_item_1, Session.getInstance().getForum().getCategories()));
+				categorySelect.setAdapter(new SpinnerAdapter<Category>(context, Session.getInstance().getForum().getCategories()));
 				title.setText(R.string.category);
 			} else if (type == HELP) {
 				view = inflater.inflate(R.layout.idea_help_item, null);

@@ -105,4 +105,5 @@
     <string name="ideas_filter">IDEAS</string>
 	<string name="comment_hint">Enter your comment</string>
 	<string name="cancel">Cancel</string>
+	<string name="select_none">(none)</string>
 </resources>
