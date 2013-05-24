@@ -34,6 +34,7 @@ import com.uservoice.uservoicesdk.ui.Utils;
 public class SuggestionDialogFragment extends DialogFragment {
 	private Suggestion suggestion;
 	private PaginatedAdapter<Comment> adapter;
+	private View headerView;
 
 	public SuggestionDialogFragment(Suggestion suggestion) {
 		this.suggestion = suggestion;
@@ -44,56 +45,36 @@ public class SuggestionDialogFragment extends DialogFragment {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		setStyle(STYLE_NO_TITLE, getTheme());
 		View view = getActivity().getLayoutInflater().inflate(R.layout.idea_dialog, null);
-		View headerView = getActivity().getLayoutInflater().inflate(R.layout.idea_dialog_header, null);
+		headerView = getActivity().getLayoutInflater().inflate(R.layout.idea_dialog_header, null);
 		headerView.findViewById(R.id.subscribe).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				CheckBox checkbox = (CheckBox) v.findViewById(R.id.subscribe_checkbox);
+				final DefaultCallback<Suggestion> callback = new DefaultCallback<Suggestion>(getActivity()) {
+					@Override
+					public void onModel(Suggestion model) {
+						suggestionSubscriptionUpdated(model);
+					}
+				};
 				if (suggestion.isSubscribed()) {
-					checkbox.setChecked(false);
 					SigninManager.signIn(getActivity(), new Runnable() {
 						@Override
 						public void run() {
-							suggestion.vote(0, new DefaultCallback<Suggestion>(getActivity()) {
-								@Override
-								public void onModel(Suggestion model) {
-									suggestion = model;
-									Toast.makeText(getActivity(), R.string.msg_unsubscribe, Toast.LENGTH_SHORT).show();
-								}
-							});
+							suggestion.vote(0, callback);
 						}
 					});
-//					suggestion.unsubscribe(Session.getInstance().getEmail(), new DefaultCallback<Suggestion>(getActivity()) {
-//						@Override
-//						public void onModel(Suggestion model) {
-//							suggestion = model;
-//							Toast.makeText(getActivity(), R.string.msg_unsubscribe, Toast.LENGTH_SHORT).show();
-//						}
-//					});
+//					suggestion.unsubscribe(Session.getInstance().getEmail(), callback);
 				} else {
 					if (Session.getInstance().getEmail() != null) {
-						checkbox.setChecked(true);
 						SigninManager.signIn(getActivity(), new Runnable() {
 							@Override
 							public void run() {
-								suggestion.vote(1, new DefaultCallback<Suggestion>(getActivity()) {
-									@Override
-									public void onModel(Suggestion model) {
-										suggestion = model;
-										Toast.makeText(getActivity(), R.string.msg_subscribe, Toast.LENGTH_SHORT).show();
-									}
-								});
+								suggestion.vote(1, callback);
 							}
 						});
-//						suggestion.subscribe(Session.getInstance().getEmail(), new DefaultCallback<Suggestion>(getActivity()) {
-//							@Override
-//							public void onModel(Suggestion model) {
-//								suggestion = model;
-//								Toast.makeText(getActivity(), R.string.msg_subscribe, Toast.LENGTH_SHORT).show();
-//							}
-//						});			
+//						suggestion.subscribe(Session.getInstance().getEmail(), callback);
 					} else {
-						// TODO show dialog
+						SubscribeDialogFragment dialog = new SubscribeDialogFragment(suggestion, SuggestionDialogFragment.this);
+						dialog.show(getFragmentManager(), "SubscribeDialogFragment");
 					}
 				}
 			}
@@ -115,6 +96,18 @@ public class SuggestionDialogFragment extends DialogFragment {
 		builder.setView(view);
 		builder.setNegativeButton(R.string.close, null);
 		return builder.create();
+	}
+	
+	public void suggestionSubscriptionUpdated(Suggestion model) {
+		CheckBox checkbox = (CheckBox) headerView.findViewById(R.id.subscribe_checkbox);
+		suggestion = model;
+		if (suggestion.isSubscribed()) {
+			Toast.makeText(getActivity(), R.string.msg_subscribe, Toast.LENGTH_SHORT).show();
+			checkbox.setChecked(true);
+		} else {
+			Toast.makeText(getActivity(), R.string.msg_subscribe_success, Toast.LENGTH_SHORT).show();
+			checkbox.setChecked(false);
+		}
 	}
 
 	private PaginatedAdapter<Comment> getListAdapter() {

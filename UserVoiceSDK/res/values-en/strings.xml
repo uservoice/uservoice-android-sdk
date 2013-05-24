@@ -91,6 +91,7 @@
     <string name="subscribe">Subscribe</string>
     <string name="nevermind">Nevermind</string>
     <string name="msg_subscribe">We\'ll update you as this idea progresses.</string>
+    <string name="msg_subscribe_success">You have been subscribed to this idea.</string>
     <string name="msg_unsubscribe">You have been unsubscribed from this idea.</string>
     <string name="contact_hint">Enter your question or feedback</string>
     <string name="matching_ideas">Matching ideas</string>

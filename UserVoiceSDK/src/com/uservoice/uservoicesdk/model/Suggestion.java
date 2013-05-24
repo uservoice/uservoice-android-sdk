@@ -83,16 +83,16 @@ public class Suggestion extends BaseModel {
 	}
 	
 	public void subscribe(String email, final Callback<Suggestion> callback) {
-//		Map<String, String> params = new HashMap<String, String>();
-//		params.put("email", email);
-//		params.put("subscribe", "true");
-//		doPost(apiPath("/forums/%d/suggestions/%d/watch.json", forumId, id), params, new RestTaskCallback(callback) {
-//			@Override
-//			public void onComplete(JSONObject result) throws JSONException {
-//				subscribed = true;
-//				callback.onModel(deserializeObject(result, "suggestion", Suggestion.class));
-//			}
-//		});
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("email", email);
+		params.put("subscribe", "true");
+		doPost(apiPath("/forums/%d/suggestions/%d/watch.json", forumId, id), params, new RestTaskCallback(callback) {
+			@Override
+			public void onComplete(JSONObject result) throws JSONException {
+				subscribed = true;
+				callback.onModel(deserializeObject(result, "suggestion", Suggestion.class));
+			}
+		});
 	}
 	
 	public void unsubscribe(String email, final Callback<Suggestion> callback) {

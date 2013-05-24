@@ -12,11 +12,20 @@ import android.widget.TextView;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.flow.SigninManager;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.ui.DefaultCallback;
 
-@SuppressLint("DefaultLocale")
+@SuppressLint("ValidFragment")
 public class SubscribeDialogFragment extends DialogFragment {
+	
+	private final Suggestion suggestion;
+	private final SuggestionDialogFragment suggestionDialog;
+
+	public SubscribeDialogFragment(Suggestion suggestion, SuggestionDialogFragment suggestionDialog) {
+		this.suggestion = suggestion;
+		this.suggestionDialog = suggestionDialog;
+	}
 	
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -32,12 +41,26 @@ public class SubscribeDialogFragment extends DialogFragment {
 		builder.setPositiveButton(R.string.subscribe, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, int which) {
-				Session.getInstance().getSuggestion().subscribe(emailField.getText().toString(), new DefaultCallback<Suggestion>(getActivity()) {
+				Session.getInstance().persistIdentity(Session.getInstance().getName(), emailField.getText().toString());
+				SigninManager.signIn(getActivity(), new Runnable() {
 					@Override
-					public void onModel(Suggestion model) {
-						dialog.dismiss();
-					};
+					public void run() {
+						suggestion.vote(1, new DefaultCallback<Suggestion>(getActivity()) {
+							@Override
+							public void onModel(Suggestion model) {
+								suggestionDialog.suggestionSubscriptionUpdated(model);
+								dialog.dismiss();
+							}
+						});
+					}
 				});
+//				suggestion.subscribe(emailField.getText().toString(), new DefaultCallback<Suggestion>(getActivity()) {
+//					@Override
+//					public void onModel(Suggestion model) {
+//						suggestionDialog.suggestionSubscriptionUpdated(model);
+//						dialog.dismiss();
+//					};
+//				});
 			}
 		});
 		return builder.create();
