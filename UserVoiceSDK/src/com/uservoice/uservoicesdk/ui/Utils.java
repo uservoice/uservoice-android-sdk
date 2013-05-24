@@ -30,7 +30,7 @@ public class Utils {
 	@SuppressLint("SetJavaScriptEnabled")
 	public static void displayArticle(WebView webView, Article article) {
 		String styles = "iframe, img { width: 100%; }";
-		String html = String.format("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"http://uservoice.com/stylesheets/vendor/typeset.css\"/><style>%s</style></head><body class=\"typeset\" style=\"font-family: sans-serif; margin: 1em\"><h3>%s</h3>%s</body></html>", styles, article.getTitle(), article.getHtml());
+		String html = String.format("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"http://cdn.uservoice.com/stylesheets/vendor/typeset.css\"/><style>%s</style></head><body class=\"typeset\" style=\"font-family: sans-serif; margin: 1em\"><h3>%s</h3>%s</body></html>", styles, article.getTitle(), article.getHtml());
 		webView.setWebChromeClient(new WebChromeClient());
 		webView.getSettings().setJavaScriptEnabled(true);
 		webView.getSettings().setPluginState(PluginState.ON);
