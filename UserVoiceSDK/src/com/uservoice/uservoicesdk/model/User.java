@@ -3,7 +3,6 @@ package com.uservoice.uservoicesdk.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,8 +14,6 @@ public class User extends BaseModel {
 
 	private String name;
 	private String email;
-	private int numberOfVotesRemaining;
-	private JSONArray visibleForums;
 
 	public static void discover(String email, final Callback<User> callback) {
 		Map<String, String> params = new HashMap<String, String>();
@@ -99,26 +96,6 @@ public class User extends BaseModel {
 		super.load(object);
 		name = getString(object, "name");
 		email = getString(object, "email");
-
-		if (!object.isNull("visible_forums"))
-			visibleForums = object.getJSONArray("visible_forums");
-		if (Session.getInstance().getConfig().getForumId() != -1)
-			updateVotesRemaining();
-	}
-
-	public void updateVotesRemaining() {
-		if (visibleForums == null)
-			return;
-		try {
-			for (int i = 0; i < visibleForums.length(); i++) {
-				JSONObject forum = visibleForums.getJSONObject(i);
-				if (forum.getInt("id") == Session.getInstance().getConfig().getForumId()) {
-					JSONObject forumActivity = forum.getJSONObject("forum_activity");
-					numberOfVotesRemaining = forumActivity.getInt("votes_available");
-				}
-			}
-		} catch (JSONException e) {
-		}
 	}
 
 	public String getName() {
@@ -128,13 +105,4 @@ public class User extends BaseModel {
 	public String getEmail() {
 		return email;
 	}
-
-	public int getNumberOfVotesRemaining() {
-		return numberOfVotesRemaining;
-	}
-
-	public void setNumberOfVotesRemaining(int numberOfVotesRemaining) {
-		this.numberOfVotesRemaining = numberOfVotesRemaining;
-	}
-
 }

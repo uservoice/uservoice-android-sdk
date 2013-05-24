@@ -8,7 +8,6 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.rest.RestTaskCallback;
 
@@ -72,17 +71,28 @@ public class Suggestion extends BaseModel {
 		});
 	}
 	
-	public void subscribe(String email, final Callback<Suggestion> callback) {
+	public void vote(int numberOfVotes, final Callback<Suggestion> callback) {
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("email", email);
-		params.put("subscribe", "true");
-		doPost(apiPath("/forums/%d/suggestions/%d/watch.json", forumId, id), params, new RestTaskCallback(callback) {
+		params.put("to", String.valueOf(numberOfVotes));
+		doPost(apiPath("/forums/%d/suggestions/%d/votes.json", forumId, id), params, new RestTaskCallback(callback) {
 			@Override
 			public void onComplete(JSONObject result) throws JSONException {
-				subscribed = true;
 				callback.onModel(deserializeObject(result, "suggestion", Suggestion.class));
 			}
 		});
+	}
+	
+	public void subscribe(String email, final Callback<Suggestion> callback) {
+//		Map<String, String> params = new HashMap<String, String>();
+//		params.put("email", email);
+//		params.put("subscribe", "true");
+//		doPost(apiPath("/forums/%d/suggestions/%d/watch.json", forumId, id), params, new RestTaskCallback(callback) {
+//			@Override
+//			public void onComplete(JSONObject result) throws JSONException {
+//				subscribed = true;
+//				callback.onModel(deserializeObject(result, "suggestion", Suggestion.class));
+//			}
+//		});
 	}
 	
 	public void unsubscribe(String email, final Callback<Suggestion> callback) {
@@ -115,10 +125,6 @@ public class Suggestion extends BaseModel {
 			creatorName = getString(object.getJSONObject("creator"), "name");
 		if (!object.isNull("votes_for"))
 			numberOfVotesByCurrentUser = object.getInt("votes_for");
-		// So every time you load a suggestion, either by viewing the list, or by voting on or creating one, it updates the user's votes remaining.
-		// In a way, this is terrible code. But in another way, it is a very simple solution to the problem at hand. Anyway, this is how the API works.
-		if (!object.isNull("votes_remaining") && Session.getInstance().getUser() != null)
-			Session.getInstance().getUser().setNumberOfVotesRemaining(object.getInt("votes_remaining"));
 		if (!object.isNull("status")) {
 			JSONObject statusObject = object.getJSONObject("status");
 			status = getString(statusObject, "name");
@@ -139,7 +145,8 @@ public class Suggestion extends BaseModel {
 	}
 	
 	public boolean isSubscribed() {
-		return subscribed;
+		// TODO we can get rid of numberOfVotes after we update the API
+		return numberOfVotesByCurrentUser > 0 || subscribed;
 	}
 	
 	public int getForumId() {

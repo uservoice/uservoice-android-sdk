@@ -15,8 +15,8 @@ import com.uservoice.uservoicesdk.ui.DefaultCallback;
 public class SigninManager {
 	
 	private final Runnable callback;
-	private final String email;
-	private final String name;
+	private String email;
+	private String name;
 	private final FragmentActivity activity;
 
 	public static void signIn(FragmentActivity activity, Runnable callback) {
@@ -29,8 +29,8 @@ public class SigninManager {
 	
 	private SigninManager(FragmentActivity activity, String email, String name, Runnable callback) {
 		this.activity = activity;
-		this.email = email.trim().isEmpty() ? null : email;
-		this.name = name.trim().isEmpty() ? null : name;
+		this.email = email == null || email.trim().isEmpty() ? null : email;
+		this.name = name == null || name.trim().isEmpty() ? null : name;
 		this.callback = callback;
 	}
 	
@@ -39,7 +39,8 @@ public class SigninManager {
 		if (currentUser != null && (email == null || email.equals(currentUser.getEmail()))) {
 			callback.run();
 		} else {
-			// TODO if there is a locally stored name & email, use that
+			email = email == null ? Session.getInstance().getEmail() : email;
+			name = name == null ? Session.getInstance().getName() : name;
 			if (email != null) {
 				User.discover(email, new Callback<User>() {
 					@Override

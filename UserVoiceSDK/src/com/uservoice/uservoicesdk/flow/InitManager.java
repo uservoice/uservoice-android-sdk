@@ -96,8 +96,6 @@ public class InitManager {
 	
 	private void checkComplete() {
 		if (configDone && userDone) {
-			if (Session.getInstance().getUser() != null)
-				Session.getInstance().getUser().updateVotesRemaining();
 			callback.run();
 		}
 	}

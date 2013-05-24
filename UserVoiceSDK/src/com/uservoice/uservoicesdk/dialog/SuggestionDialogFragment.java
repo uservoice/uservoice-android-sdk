@@ -12,22 +12,27 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.uservoice.uservoicesdk.R;
+import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.flow.SigninManager;
 import com.uservoice.uservoicesdk.image.ImageCache;
 import com.uservoice.uservoicesdk.model.Comment;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.rest.Callback;
+import com.uservoice.uservoicesdk.ui.DefaultCallback;
 import com.uservoice.uservoicesdk.ui.PaginatedAdapter;
 import com.uservoice.uservoicesdk.ui.PaginationScrollListener;
 import com.uservoice.uservoicesdk.ui.Utils;
 
 @SuppressLint("ValidFragment")
 public class SuggestionDialogFragment extends DialogFragment {
-	private final Suggestion suggestion;
+	private Suggestion suggestion;
 	private PaginatedAdapter<Comment> adapter;
 
 	public SuggestionDialogFragment(Suggestion suggestion) {
@@ -43,6 +48,54 @@ public class SuggestionDialogFragment extends DialogFragment {
 		headerView.findViewById(R.id.subscribe).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				CheckBox checkbox = (CheckBox) v.findViewById(R.id.subscribe_checkbox);
+				if (suggestion.isSubscribed()) {
+					checkbox.setChecked(false);
+					SigninManager.signIn(getActivity(), new Runnable() {
+						@Override
+						public void run() {
+							suggestion.vote(0, new DefaultCallback<Suggestion>(getActivity()) {
+								@Override
+								public void onModel(Suggestion model) {
+									suggestion = model;
+									Toast.makeText(getActivity(), R.string.msg_unsubscribe, Toast.LENGTH_SHORT).show();
+								}
+							});
+						}
+					});
+//					suggestion.unsubscribe(Session.getInstance().getEmail(), new DefaultCallback<Suggestion>(getActivity()) {
+//						@Override
+//						public void onModel(Suggestion model) {
+//							suggestion = model;
+//							Toast.makeText(getActivity(), R.string.msg_unsubscribe, Toast.LENGTH_SHORT).show();
+//						}
+//					});
+				} else {
+					if (Session.getInstance().getEmail() != null) {
+						checkbox.setChecked(true);
+						SigninManager.signIn(getActivity(), new Runnable() {
+							@Override
+							public void run() {
+								suggestion.vote(1, new DefaultCallback<Suggestion>(getActivity()) {
+									@Override
+									public void onModel(Suggestion model) {
+										suggestion = model;
+										Toast.makeText(getActivity(), R.string.msg_subscribe, Toast.LENGTH_SHORT).show();
+									}
+								});
+							}
+						});
+//						suggestion.subscribe(Session.getInstance().getEmail(), new DefaultCallback<Suggestion>(getActivity()) {
+//							@Override
+//							public void onModel(Suggestion model) {
+//								suggestion = model;
+//								Toast.makeText(getActivity(), R.string.msg_subscribe, Toast.LENGTH_SHORT).show();
+//							}
+//						});			
+					} else {
+						// TODO show dialog
+					}
+				}
 			}
 		});
 		headerView.findViewById(R.id.post_comment).setOnClickListener(new View.OnClickListener() {
@@ -111,6 +164,10 @@ public class SuggestionDialogFragment extends DialogFragment {
 		TextView responseStatus = (TextView) view.findViewById(R.id.response_status);
 		View responseDivider = view.findViewById(R.id.response_divider);
 		TextView title = (TextView) view.findViewById(R.id.title);
+		
+		if (suggestion.isSubscribed()) {
+			((CheckBox)view.findViewById(R.id.subscribe_checkbox)).setChecked(true);
+		}
 
 		if (suggestion.getStatus() == null) {
 			status.setVisibility(View.GONE);
