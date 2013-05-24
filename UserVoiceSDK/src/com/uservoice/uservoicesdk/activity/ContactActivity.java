@@ -18,4 +18,9 @@ public class ContactActivity extends InstantAnswersActivity {
 	protected InstantAnswersAdapter createAdapter() {
 		return new ContactAdapter(this);
 	}
+
+	@Override
+	protected int getDiscardDialogMessage() {
+		return R.string.msg_confirm_discard_message;
+	}
 }

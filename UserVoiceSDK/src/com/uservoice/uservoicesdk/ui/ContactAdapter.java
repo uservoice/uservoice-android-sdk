@@ -121,17 +121,32 @@ public class ContactAdapter extends InstantAnswersAdapter {
 		}
 		return view;
 	}
+	
+	private boolean validateCustomFields() {
+		for (CustomField field : Session.getInstance().getClientConfig().getCustomFields()) {
+			if (field.isRequired()) {
+				String string = customFieldValues.get(field.getName());
+				if (string == null || string.isEmpty())
+					return false;
+			}
+		}
+		return true;
+	}
 
 	@Override
 	protected void doSubmit() {
-		Ticket.createTicket(textField.getText().toString(), emailField.getText().toString(), nameField.getText().toString(), customFieldValues, new DefaultCallback<Ticket>(context) {
-			@Override
-			public void onModel(Ticket model) {
-				Babayaga.track(Event.SUBMIT_TICKET);
-				Toast.makeText(context, R.string.msg_ticket_created, Toast.LENGTH_SHORT).show();
-				context.finish();
-			}
-		});
+		if (validateCustomFields()) {
+			Ticket.createTicket(textField.getText().toString(), emailField.getText().toString(), nameField.getText().toString(), customFieldValues, new DefaultCallback<Ticket>(context) {
+				@Override
+				public void onModel(Ticket model) {
+					Babayaga.track(Event.SUBMIT_TICKET);
+					Toast.makeText(context, R.string.msg_ticket_created, Toast.LENGTH_SHORT).show();
+					context.finish();
+				}
+			});
+		} else {
+			Toast.makeText(context, R.string.msg_custom_fields_validation, Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	@Override

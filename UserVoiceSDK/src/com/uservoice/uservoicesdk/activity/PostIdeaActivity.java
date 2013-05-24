@@ -19,4 +19,9 @@ public class PostIdeaActivity extends InstantAnswersActivity {
 		return new PostIdeaAdapter(this);
 	}
 
+	@Override
+	protected int getDiscardDialogMessage() {
+		return R.string.msg_confirm_discard_idea;
+	}
+
 }

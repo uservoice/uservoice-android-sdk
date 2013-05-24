@@ -93,6 +93,7 @@
     <string name="msg_subscribe">We\'ll update you as this idea progresses.</string>
     <string name="msg_subscribe_success">You have been subscribed to this idea.</string>
     <string name="msg_unsubscribe">You have been unsubscribed from this idea.</string>
+    <string name="msg_custom_fields_validation">Please fill out all required fields.</string>
     <string name="contact_hint">Enter your question or feedback</string>
     <string name="matching_ideas">Matching ideas</string>
     <string name="matching_articles">Matching articles</string>
@@ -108,4 +109,7 @@
 	<string name="comment_hint">Enter your comment</string>
 	<string name="cancel">Cancel</string>
 	<string name="select_none">(none)</string>
+	<string name="confirm">Confirm</string>
+	<string name="msg_confirm_discard_idea">Are you sure you want to discard your idea?</string>
+	<string name="msg_confirm_discard_message">Are you sure you want to discard your message?</string>
 </resources>

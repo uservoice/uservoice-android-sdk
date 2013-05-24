@@ -10,11 +10,13 @@ import org.json.JSONObject;
 public class CustomField extends BaseModel {
 	private String name;
 	private List<String> predefinedValues;
+	private boolean required;
 	
 	@Override
 	public void load(JSONObject object) throws JSONException {
 		super.load(object);
 		name = getString(object, "name");
+		required = !object.getBoolean("allow_blank");
 		predefinedValues = new ArrayList<String>();
 		if (object.has("possible_values")) {
 			JSONArray values = object.getJSONArray("possible_values");
@@ -23,6 +25,10 @@ public class CustomField extends BaseModel {
 				predefinedValues.add(getString(value, "value"));
 			}
 		}
+	}
+	
+	public boolean isRequired() {
+		return required;
 	}
 	
 	public boolean isPredefined() {

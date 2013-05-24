@@ -286,5 +286,9 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 	public long getItemId(int position) {
 		return position;
 	}
+	
+	public boolean hasText() {
+		return !textField.getText().toString().isEmpty();
+	}
 
 }
