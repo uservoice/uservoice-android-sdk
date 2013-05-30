@@ -15,6 +15,7 @@ You will need a UserVoice account (free) for it to connect to. Go to [uservoice.
 * Obtain an API key from your UserVoice admin console
   * Admin console -> Settings -> Channels -> API
   * A regular API key pair is fine. You don't need a special Android key.
+  * Set it as untrusted.
 * Add the following code to initialize the UserVoice SDK
   * Do this either in Application.onCreate or your root Activity.onCreate
 
