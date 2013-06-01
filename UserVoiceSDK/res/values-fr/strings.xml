@@ -70,12 +70,12 @@
     <string name="idea">Idée</string>
     <string name="msg_ticket_created">Votre message a été envoyé</string>
     <string name="msg_idea_created">Votre idée a été créée</string>
-    <string name="article_instant_answer_question">Cet article vous a-t-il aidé\u00a0a?</string>
-    <string name="suggestion_instant_answer_question">Cette idée vous a-t-elle aidée\u00a0a?</string>
+    <string name="article_instant_answer_question">Cet article vous a-t-il aidé\u00a0?</string>
+    <string name="suggestion_instant_answer_question">Cette idée vous a-t-elle aidée\u00a0?</string>
     <string name="no">Non</string>
     <string name="yes">Oui</string>
-    <string name="very_yes">Oui\u00A0!</string>
-    <string name="helpful_article_message_question">Etes-vous sûrs de vouloir envoyer cette question\u00a0a?</string>
+    <string name="very_yes">Oui\u00a0!</string>
+    <string name="helpful_article_message_question">Etes-vous sûrs de vouloir envoyer cette question\u00a0?</string>
     <string name="idea_description_heading">Détaillez-votre idée</string>
     <string name="category">Catégorie</string>
     <string name="idea_description_hint">(optionnel)</string>
@@ -100,7 +100,7 @@
     <string name="matching_articles_and_ideas">Articles et idées correspondantes</string>
     <string name="post_idea_continue_button">Je veux toujours poster mon idée</string>
     <string name="contact_continue_button">Je veux toujours envoyer un message</string>
-    <string name="i_want_this">Je le veux\u00a0a!</string>
+    <string name="i_want_this">Je le veux\u00a0!</string>
     <string name="number_of_subscribers_format">%1$s veulent cette idée</string>
     <string name="post_a_comment">Poster un commentaire</string>
     <string name="all_results_filter">TOUS</string>
@@ -110,6 +110,6 @@
 	<string name="cancel">Annuler</string>
 	<string name="select_none">(aucun)</string>
 	<string name="confirm">Confirmer</string>
-	<string name="msg_confirm_discard_idea">Etes-vous sûr de vouloir abandonner cette idée\u00a0a?</string>
-	<string name="msg_confirm_discard_message">Etes-vous sûr de vouloir abandonner ce message\u00a0a?</string>
+	<string name="msg_confirm_discard_idea">Etes-vous sûr de vouloir abandonner cette idée\u00a0?</string>
+	<string name="msg_confirm_discard_message">Etes-vous sûr de vouloir abandonner ce message\u00a0?</string>
 </resources>
