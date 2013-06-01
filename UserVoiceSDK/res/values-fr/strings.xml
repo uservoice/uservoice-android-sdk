@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <plurals name="comments">
+        <item quantity="one">commentaire</item>
+        <item quantity="other">commentaires</item>
+    </plurals>
+    
+    <plurals name="subscribers">
+        <item quantity="one">abonné</item>
+        <item quantity="other">abonnés</item>
+    </plurals>
+    
+    <plurals name="votes_capitalized">
+        <item quantity="one">Vote</item>
+        <item quantity="other">Votes</item>
+    </plurals>
+    
+    <plurals name="articles">
+        <item quantity="one">article</item>
+        <item quantity="other">articles</item>
+    </plurals>
+    
+    <plurals name="ideas">
+        <item quantity="one">idée</item>
+        <item quantity="other">idées</item>
+    </plurals>
+    
+    <plurals name="people">
+        <item quantity="one">personne</item>
+        <item quantity="other">personnes</item>
+    </plurals>
+
+    <string name="app_name">UserVoice SDK</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="loading">Chargement&#8230;</string>
+    <string name="submit_idea">Soumettre une idée</string>
+    <string name="idea_form_title">Poster une idée</string>
+    <string name="menu_search">Recherche</string>
+    <string name="email_address">Adresse e-mail</string>
+    <string name="email_address_hint">your@email.com (requis)</string>
+    <string name="display_name">Nom d\'utilisateur</string>
+    <string name="password">Mot de passe</string>
+    <string name="forgot_password">Mot de passe oublié</string>
+    <string name="msg_comment_posted">Votre commentaire a été posté</string>
+    <string name="title_idea">Idée</string>
+    <string name="posted_by_format">Posté par %1$s sur %2$s</string>
+    <string name="all_articles">Tous les Articles</string>
+    <string name="portal_title">Aide</string>
+    <string name="network_error">Erreur à la connexion avec Uservoice</string>
+    <string name="signin_dialog_title">Sign in</string>
+    <string name="signin_dialog_ok">Sign in</string>
+    <string name="failed_signin_error">Email ou mot de passe incorrect</string>
+    <string name="msg_forgot_password">Email de récupération envoyé</string>
+    <string name="subscribe_dialog_title">Abonnez-vous à cette idée</string>
+    <string name="remove_votes">Enlever des votes</string>
+    <string name="feedback_forum">Feedback Forum</string>
+    <string name="knowledge_base">Knowledge Base</string>
+    <string name="admin_response_format">Réponse des administrateurs: %1$s</string>
+    <string name="post_comment">Poster commentaire</string>
+    <string name="next">Suivant</string>
+    <string name="none_of_these_help">Aucun n\'aide</string>
+    <string name="send_message">Envoyer message</string>
+    <string name="your_email_address">Votre adresse email</string>
+    <string name="your_name">Votre nom</string>
+    <string name="name_hint">“Anonyme”</string>
+    <string name="select_one">Sélectionner</string>
+    <string name="value">Valeur</string>
+    <string name="article">Article</string>
+    <string name="idea">Idée</string>
+    <string name="msg_ticket_created">Votre message a été envoyé</string>
+    <string name="msg_idea_created">Votre idée a été créée</string>
+    <string name="article_instant_answer_question">Cet article vous a-t-il aidé\u00a0a?</string>
+    <string name="suggestion_instant_answer_question">Cette idée vous a-t-elle aidée\u00a0a?</string>
+    <string name="no">Non</string>
+    <string name="yes">Oui</string>
+    <string name="very_yes">Oui\u00A0!</string>
+    <string name="helpful_article_message_question">Etes-vous sûrs de vouloir envoyer cette question\u00a0a?</string>
+    <string name="idea_description_heading">Détaillez-votre idée</string>
+    <string name="category">Catégorie</string>
+    <string name="idea_description_hint">(optionnel)</string>
+    <string name="idea_text_heading">Je suggère&#8230;</string>
+    <string name="idea_text_hint">Entrez votre idée&#8230;</string>
+    <string name="idea_form_help">Lorsque vous postez une idée sur nos forums, d\'autres pourront s\'y abonner et la commenter. Lorsque nous réagirons à votre idée, vous serez notifiés.</string>
+    <string name="contact_us">Nous contacter</string>
+    <string name="close">Fermer</string>
+    <string name="new_comment">Nouveau commentaire</string>
+    <string name="error">Erreur</string>
+    <string name="msg_user_identity_validation">Entrez votre adresse mail svp</string>
+    <string name="status_format">Status: %1$s</string>
+    <string name="subscribe">S\'abonner</string>
+    <string name="nevermind">sans façons</string>
+    <string name="msg_subscribe">Nous vous informerons de l\'avancement de cette idée</string>
+    <string name="msg_subscribe_success">Vous êtes abonnés.</string>
+    <string name="msg_unsubscribe">Vous n\'êtes plus abonnés à cette idée.</string>
+    <string name="msg_custom_fields_validation">Merci de remplir tous les champs requis.</string>
+    <string name="contact_hint">Entrez votre question ou votre retour</string>
+    <string name="matching_ideas">Idées correspondantes</string>
+    <string name="matching_articles">Articles correspondants</string>
+    <string name="matching_articles_and_ideas">Articles et idées correspondantes</string>
+    <string name="post_idea_continue_button">Je veux toujours poster mon idée</string>
+    <string name="contact_continue_button">Je veux toujours envoyer un message</string>
+    <string name="i_want_this">Je le veux\u00a0a!</string>
+    <string name="number_of_subscribers_format">%1$s veulent cette idée</string>
+    <string name="post_a_comment">Poster un commentaire</string>
+    <string name="all_results_filter">TOUS</string>
+    <string name="articles_filter">ARTICLES</string>
+    <string name="ideas_filter">IDEES</string>
+	<string name="comment_hint">Entrez votre commentaire</string>
+	<string name="cancel">Annuler</string>
+	<string name="select_none">(aucun)</string>
+	<string name="confirm">Confirmer</string>
+	<string name="msg_confirm_discard_idea">Etes-vous sûr de vouloir abandonner cette idée\u00a0a?</string>
+	<string name="msg_confirm_discard_message">Etes-vous sûr de vouloir abandonner ce message\u00a0a?</string>
+</resources>
