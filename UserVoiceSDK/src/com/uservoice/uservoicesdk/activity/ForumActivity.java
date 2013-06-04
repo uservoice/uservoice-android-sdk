@@ -57,11 +57,14 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 			public boolean isEnabled(int position) {
 				return getItemViewType(position) == 2 || super.isEnabled(position);
 			}
+			
+			@Override
+			public int getCount() {
+				return super.getCount() + 2;
+			}
 
 			@Override
 			public int getItemViewType(int position) {
-				if (loading)
-					return super.getItemViewType(position);
 				if (position == 0)
 					return 2;
 				if (position == 1)
