@@ -76,7 +76,7 @@ public class RestTask extends AsyncTask<String,String,RestResult> {
 		String host = Session.getInstance().getConfig().getSite();
 		Uri.Builder uriBuilder = new Uri.Builder();
 		uriBuilder.scheme(host.contains(".us.com") ? "http" : "https");
-		uriBuilder.authority(host);
+		uriBuilder.encodedAuthority(host);
 		uriBuilder.path(urlPath);
 		if (method == RestMethod.GET)
 			return requestWithQueryString(new HttpGet(), uriBuilder);

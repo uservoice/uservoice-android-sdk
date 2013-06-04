@@ -2,7 +2,6 @@ package com.uservoice.uservoicesdk.ui;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
 import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,12 +18,12 @@ public abstract class SearchAdapter<T> extends BaseAdapter {
 	
 	protected List<T> searchResults = new ArrayList<T>();
 	protected boolean searchActive = false;
-	protected Timer timer;
 	protected boolean loading;
 	protected Context context;
 	protected String currentQuery;
 	protected String pendingQuery;
 	protected int scope;
+	protected SearchTask currentSearch;
 	
 	public void performSearch(String query) {
 		pendingQuery = query;
@@ -35,12 +34,11 @@ public abstract class SearchAdapter<T> extends BaseAdapter {
 		} else {
 			loading = true;
 			notifyDataSetChanged();
-			if (timer != null) {
-				timer.cancel();
-				timer = null;
+			if (currentSearch != null) {
+				currentSearch.cancel();
 			}
-			timer = new Timer();
-			timer.schedule(new SearchTask(query), 200);
+			currentSearch = new SearchTask(query);
+			currentSearch.run();
 		}
 	}
 	
@@ -74,7 +72,6 @@ public abstract class SearchAdapter<T> extends BaseAdapter {
 						searchResults = model;
 						loading = false;
 						notifyDataSetChanged();
-						timer = null;
 						searchResultsUpdated();
 					}
 				}
