@@ -28,6 +28,7 @@ public abstract class ModelAdapter<T> extends SearchAdapter<T> {
 	}
 	
 	@Override
+	@SuppressWarnings("unchecked")
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View view = convertView;
 		int type = getItemViewType(position);
@@ -36,7 +37,7 @@ public abstract class ModelAdapter<T> extends SearchAdapter<T> {
 		}
 		
 		if (type == MODEL) {
-			T model = getObjects().get(position);
+			T model = (T) getItem(position);
 			customizeLayout(view, model);
 		}
 		

@@ -3,30 +3,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingBottom="10dp"
     android:paddingLeft="10dp"
-    android:paddingTop="10dp"
     android:paddingRight="10dp"
-    android:paddingBottom="10dp" >
+    android:paddingTop="10dp" >
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/email_address"
+        android:inputType="textEmailAddress" >
+
+        <requestFocus />
+    </EditText>
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/msg_subscribe"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#999999"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-    
-    <include layout="@layout/header_item_light" />
-
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/email_address"
-        android:ems="10"
-        android:inputType="textEmailAddress" >
-
-        <requestFocus />
-    </EditText>
+        android:paddingLeft="3dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp" />
 
 </LinearLayout>

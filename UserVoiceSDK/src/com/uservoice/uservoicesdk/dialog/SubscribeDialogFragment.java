@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
@@ -32,8 +31,6 @@ public class SubscribeDialogFragment extends DialogFragment {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle(R.string.subscribe_dialog_title);
 		View view = getActivity().getLayoutInflater().inflate(R.layout.subscribe_dialog, null);
-		TextView text = (TextView) view.findViewById(R.id.header_text);
-		text.setText(R.string.your_email_address);
 		final EditText emailField = (EditText) view.findViewById(R.id.email);
 		emailField.setText(Session.getInstance().getEmail());
 		builder.setView(view);

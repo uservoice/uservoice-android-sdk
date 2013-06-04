@@ -34,56 +34,76 @@ import com.uservoice.uservoicesdk.ui.SearchQueryListener;
 import com.uservoice.uservoicesdk.ui.Utils;
 
 public class ForumActivity extends BaseListActivity implements SearchActivity {
-	
+
 	private List<Suggestion> suggestions;
 	private Forum forum;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setTitle(R.string.feedback_forum);
-		
+
 		suggestions = new ArrayList<Suggestion>();
-		
+
 		getListView().setDivider(null);
 		setListAdapter(new PaginatedAdapter<Suggestion>(this, R.layout.suggestion_item, suggestions) {
-			
+
 			@Override
 			public int getViewTypeCount() {
-				return super.getViewTypeCount() + 1;
+				return super.getViewTypeCount() + 2;
 			}
 			
+			@Override
+			public boolean isEnabled(int position) {
+				return getItemViewType(position) == 2 || super.isEnabled(position);
+			}
+
 			@Override
 			public int getItemViewType(int position) {
 				if (loading)
 					return super.getItemViewType(position);
 				if (position == 0)
 					return 2;
-				return super.getItemViewType(position - 1);
+				if (position == 1)
+					return 3;
+				return super.getItemViewType(position - 2);
 			}
-			
+
+			@Override
+			public Object getItem(int position) {
+				return super.getItem(position - 2);
+			}
+
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
-				if (getItemViewType(position) == 2) {
+				int type = getItemViewType(position);
+				if (type == 2 || type == 3) {
 					View view = convertView;
 					if (view == null) {
-						view = getLayoutInflater().inflate(R.layout.header_item_light, null);
-						TextView text = (TextView) view.findViewById(R.id.header_text);
-						text.setText(R.string.idea_text_heading);
+						if (type == 2) {
+							view = getLayoutInflater().inflate(android.R.layout.simple_list_item_1, null);
+							TextView text = (TextView) view;
+							text.setText(R.string.post_an_idea);
+						} else if (type == 3) {
+							view = getLayoutInflater().inflate(R.layout.header_item_light, null);
+							TextView text = (TextView) view.findViewById(R.id.header_text);
+							text.setText(R.string.idea_text_heading);
+						}
 					}
 					return view;
+				} else {
+					return super.getView(position, convertView, parent);
 				}
-				return super.getView(loading ? position : position - 1, convertView, parent);
 			}
-			
+
 			@Override
 			protected void customizeLayout(View view, Suggestion model) {
 				TextView textView = (TextView) view.findViewById(R.id.suggestion_title);
 				textView.setText(model.getTitle());
-				
+
 				textView = (TextView) view.findViewById(R.id.subscriber_count);
 				textView.setText(String.valueOf(model.getNumberOfSubscribers()));
-				
+
 				textView = (TextView) view.findViewById(R.id.suggestion_status);
 				View colorView = view.findViewById(R.id.suggestion_status_color);
 				if (model.getStatus() == null) {
@@ -103,7 +123,7 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 			public void loadPage(int page, Callback<List<Suggestion>> callback) {
 				Suggestion.loadSuggestions(forum, page, callback);
 			}
-			
+
 			@Override
 			public void search(String query, Callback<List<Suggestion>> callback) {
 				Babayaga.track(Babayaga.Event.SEARCH_IDEAS);
@@ -115,7 +135,7 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 				return forum.getNumberOfOpenSuggestions();
 			}
 		});
-		
+
 		getListView().setOnScrollListener(new PaginationScrollListener(getModelAdapter()) {
 			@Override
 			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
@@ -123,19 +143,23 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 					super.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
 			}
 		});
-		
+
 		getListView().setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Suggestion suggestion = (Suggestion) getModelAdapter().getItem(position);
-				Session.getInstance().setSuggestion(suggestion);
-				SuggestionDialogFragment dialog = new SuggestionDialogFragment(suggestion);
-				dialog.show(getSupportFragmentManager(), "SuggestionDialogFragment");
+				if (position == 0) {
+					startActivity(new Intent(ForumActivity.this, PostIdeaActivity.class));
+				} else if (position != 1) {
+					Suggestion suggestion = (Suggestion) getModelAdapter().getItem(position);
+					Session.getInstance().setSuggestion(suggestion);
+					SuggestionDialogFragment dialog = new SuggestionDialogFragment(suggestion);
+					dialog.show(getSupportFragmentManager(), "SuggestionDialogFragment");
+				}
 			}
 		});
-		
+
 		Babayaga.track(Babayaga.Event.VIEW_FORUM);
-		
+
 		new InitManager(this, new Runnable() {
 			@Override
 			public void run() {
@@ -143,7 +167,7 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 			}
 		}).init();
 	}
-	
+
 	@SuppressLint("NewApi")
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -158,16 +182,16 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 		menu.findItem(R.id.new_idea).setVisible(Session.getInstance().getConfig().shouldShowPostIdea());
 		return true;
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-	    if (item.getItemId() == R.id.new_idea) {
-	    	startActivity(new Intent(this, PostIdeaActivity.class));
-	    	return true;
-	    }
-	    return super.onOptionsItemSelected(item);
+		if (item.getItemId() == R.id.new_idea) {
+			startActivity(new Intent(this, PostIdeaActivity.class));
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
-	
+
 	private void loadForum() {
 		if (Session.getInstance().getForum() != null) {
 			forum = Session.getInstance().getForum();
@@ -185,12 +209,12 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 			}
 		});
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public PaginatedAdapter<Suggestion> getModelAdapter() {
 		return (PaginatedAdapter<Suggestion>) getListAdapter();
 	}
-	
+
 	@Override
 	public void showScopeBar() {
 	}
