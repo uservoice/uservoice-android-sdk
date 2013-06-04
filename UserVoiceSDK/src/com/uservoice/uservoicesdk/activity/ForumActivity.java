@@ -81,9 +81,11 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 					View view = convertView;
 					if (view == null) {
 						if (type == 2) {
-							view = getLayoutInflater().inflate(android.R.layout.simple_list_item_1, null);
-							TextView text = (TextView) view;
+							view = getLayoutInflater().inflate(R.layout.text_item, null);
+							TextView text = (TextView) view.findViewById(R.id.text);
 							text.setText(R.string.post_an_idea);
+							view.findViewById(R.id.divider).setVisibility(View.GONE);
+							view.findViewById(R.id.text2).setVisibility(View.GONE);
 						} else if (type == 3) {
 							view = getLayoutInflater().inflate(R.layout.header_item_light, null);
 							TextView text = (TextView) view.findViewById(R.id.header_text);
