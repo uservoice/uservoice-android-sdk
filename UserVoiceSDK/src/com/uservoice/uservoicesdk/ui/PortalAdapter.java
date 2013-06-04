@@ -134,7 +134,15 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 			return loading ? 1 : getScopedSearchResults().size();
 		} else {
 			computeStaticRows();
-			return staticRows.size() + (Session.getInstance().getConfig().shouldShowKnowledgeBase() ? (getTopics() == null ? 1 : (shouldShowArticles() ? getArticles().size() : getTopics().size())) : 0);
+			int rows = staticRows.size();
+			if (Session.getInstance().getConfig().shouldShowKnowledgeBase()) {
+				if (getTopics() == null || (shouldShowArticles() && getArticles() == null)) {
+					rows += 1;
+				} else {
+					rows += shouldShowArticles() ? getArticles().size() : getTopics().size();
+				}
+			}
+			return rows;
 		}
 	}
 	
