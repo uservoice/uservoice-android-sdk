@@ -16,8 +16,7 @@
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:text="Make the app more Android friendly"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#000000" />
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/text"
@@ -65,8 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/i_want_this"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="#000000" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/subscriber_count"
@@ -196,8 +194,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/post_a_comment"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000000" />
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <View
             android:layout_width="1px"
