@@ -293,7 +293,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 				return LOADING;
 			return type;
 		}
-		return getTopics() == null ? LOADING : (shouldShowArticles() ? ARTICLE : TOPIC);
+		return getTopics() == null || (shouldShowArticles() && getArticles() == null) ? LOADING : (shouldShowArticles() ? ARTICLE : TOPIC);
 	}
 
 	@Override
