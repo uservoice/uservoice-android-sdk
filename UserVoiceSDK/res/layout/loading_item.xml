@@ -15,7 +15,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="10dp"
-        android:text="@string/loading"
+        android:text="@string/uv_loading"
         android:textSize="20sp" />
 
     <ProgressBar

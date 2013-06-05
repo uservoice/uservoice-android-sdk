@@ -32,7 +32,7 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
 
 	public PostIdeaAdapter(FragmentActivity context) {
 		super(context);
-		continueButtonMessage = R.string.post_idea_continue_button;
+		continueButtonMessage = R.string.uv_post_idea_continue_button;
 	}
 	
 	@Override
@@ -64,20 +64,20 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
 				view = inflater.inflate(R.layout.text_field_item, null);
 				TextView title = (TextView) view.findViewById(R.id.header_text);
 				descriptionField = (EditText) view.findViewById(R.id.text_field);
-				title.setText(R.string.idea_description_heading);
-				descriptionField.setHint(R.string.idea_description_hint);
+				title.setText(R.string.uv_idea_description_heading);
+				descriptionField.setHint(R.string.uv_idea_description_hint);
 			} else if (type == CATEGORY) {
 				view = inflater.inflate(R.layout.select_field_item, null);
 				TextView title = (TextView) view.findViewById(R.id.header_text);
 				categorySelect = (Spinner) view.findViewById(R.id.select_field);
 				categorySelect.setAdapter(new SpinnerAdapter<Category>(context, Session.getInstance().getForum().getCategories()));
-				title.setText(R.string.category);
+				title.setText(R.string.uv_category);
 			} else if (type == HELP) {
 				view = inflater.inflate(R.layout.idea_help_item, null);
 			} else if (type == TEXT_HEADING) {
 				view = inflater.inflate(R.layout.header_item, null);
 				TextView textView = (TextView) view.findViewById(R.id.header_text);
-				textView.setText(R.string.idea_text_heading);
+				textView.setText(R.string.uv_idea_text_heading);
 			} else {
 				view = super.getView(position, convertView, parent);
 			}
@@ -87,7 +87,7 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
 			// just skip the else
 		} else if (type == TEXT) {
 			TextView textView = (TextView) view.findViewById(R.id.text);
-			textView.setHint(R.string.idea_text_hint);
+			textView.setHint(R.string.uv_idea_text_hint);
 		} else {
 			return super.getView(position, view, parent);
 		}
@@ -104,7 +104,7 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
 					@Override
 					public void onModel(Suggestion model) {
 						Babayaga.track(Event.SUBMIT_IDEA);
-						Toast.makeText(context, R.string.msg_idea_created, Toast.LENGTH_SHORT).show();
+						Toast.makeText(context, R.string.uv_msg_idea_created, Toast.LENGTH_SHORT).show();
 						context.finish();
 					}
 				});
@@ -114,7 +114,7 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
 
 	@Override
 	protected String getSubmitString() {
-		return context.getString(R.string.submit_idea);
+		return context.getString(R.string.uv_submit_idea);
 	}
 
 }

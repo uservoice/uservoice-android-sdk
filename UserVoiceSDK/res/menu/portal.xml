@@ -3,12 +3,12 @@
     <item android:id="@+id/action_search"
           android:showAsAction="always|collapseActionView"
           android:icon="@android:drawable/ic_menu_search"
-          android:title="@string/menu_search"
+          android:title="@string/uv_menu_search"
           android:actionViewClass="android.widget.SearchView" />
 
     <item android:id="@+id/action_contact"
           android:showAsAction="always"
           android:icon="@drawable/uv_contact"
-          android:title="@string/contact_us" />
+          android:title="@string/uv_contact_us" />
 
 </menu>

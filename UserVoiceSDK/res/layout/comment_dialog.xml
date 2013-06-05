@@ -14,7 +14,7 @@
 		android:layout_height="wrap_content"
 		android:ems="10"
 		android:gravity="top"
-		android:hint="@string/comment_hint"
+		android:hint="@string/uv_comment_hint"
 		android:inputType="textMultiLine"
 		/>
 
@@ -30,7 +30,7 @@
 			android:id="@+id/text_field"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:hint="@string/email_address"
+			android:hint="@string/uv_email_address"
 			android:inputType="textEmailAddress"
 			android:ems="10" >
 		</EditText>
@@ -47,7 +47,7 @@
 			android:id="@+id/text_field"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:hint="@string/name_hint"
+			android:hint="@string/uv_name_hint"
 			android:ems="10" >
 		</EditText>
 	</LinearLayout>

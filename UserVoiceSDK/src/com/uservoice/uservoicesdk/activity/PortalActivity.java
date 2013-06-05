@@ -16,7 +16,7 @@ public class PortalActivity extends BaseListActivity implements SearchActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setTitle(R.string.portal_title);
+		setTitle(R.string.uv_portal_title);
 		getListView().setDivider(null);
 		setListAdapter(new PortalAdapter(this));
 		getListView().setOnItemClickListener(getModelAdapter());

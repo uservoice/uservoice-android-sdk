@@ -94,7 +94,7 @@ public class SuggestionDialogFragment extends DialogFragment {
 		listView.setDivider(null);
 		listView.setOnScrollListener(new PaginationScrollListener(adapter));
 		builder.setView(view);
-		builder.setNegativeButton(R.string.close, null);
+		builder.setNegativeButton(R.string.uv_close, null);
 		return builder.create();
 	}
 	
@@ -102,10 +102,10 @@ public class SuggestionDialogFragment extends DialogFragment {
 		CheckBox checkbox = (CheckBox) headerView.findViewById(R.id.subscribe_checkbox);
 		suggestion = model;
 		if (suggestion.isSubscribed()) {
-			Toast.makeText(getActivity(), R.string.msg_subscribe, Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), R.string.uv_msg_subscribe, Toast.LENGTH_SHORT).show();
 			checkbox.setChecked(true);
 		} else {
-			Toast.makeText(getActivity(), R.string.msg_subscribe_success, Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), R.string.uv_msg_subscribe_success, Toast.LENGTH_SHORT).show();
 			checkbox.setChecked(false);
 		}
 	}
@@ -172,13 +172,13 @@ public class SuggestionDialogFragment extends DialogFragment {
 			status.setBackgroundColor(color);
 			status.setText(suggestion.getStatus());
 			responseStatus.setTextColor(color);
-			responseStatus.setText(String.format(getString(R.string.admin_response_format), suggestion.getStatus().toUpperCase(Locale.getDefault())));
+			responseStatus.setText(String.format(getString(R.string.uv_admin_response_format), suggestion.getStatus().toUpperCase(Locale.getDefault())));
 			responseDivider.setBackgroundColor(color);
 		}
 
 		title.setText(suggestion.getTitle());
 		((TextView) view.findViewById(R.id.text)).setText(suggestion.getText());
-		((TextView) view.findViewById(R.id.creator)).setText(String.format(view.getContext().getString(R.string.posted_by_format), suggestion.getCreatorName(), DateFormat.getDateInstance().format(suggestion.getCreatedAt())));
+		((TextView) view.findViewById(R.id.creator)).setText(String.format(view.getContext().getString(R.string.uv_posted_by_format), suggestion.getCreatorName(), DateFormat.getDateInstance().format(suggestion.getCreatedAt())));
 
 		if (suggestion.getAdminResponseText() == null) {
 			view.findViewById(R.id.admin_response).setVisibility(View.GONE);
@@ -191,8 +191,8 @@ public class SuggestionDialogFragment extends DialogFragment {
 			ImageCache.getInstance().loadImage(suggestion.getAdminResponseAvatarUrl(), avatar);
 		}
 
-		((TextView) view.findViewById(R.id.comment_count)).setText(Utils.getQuantityString(view, R.plurals.comments, suggestion.getNumberOfComments()).toUpperCase(Locale.getDefault()));
-		((TextView) view.findViewById(R.id.subscriber_count)).setText(String.format(getString(R.string.number_of_subscribers_format), Utils.getQuantityString(view, R.plurals.subscribers, suggestion.getNumberOfSubscribers())));
+		((TextView) view.findViewById(R.id.comment_count)).setText(Utils.getQuantityString(view, R.plurals.uv_comments, suggestion.getNumberOfComments()).toUpperCase(Locale.getDefault()));
+		((TextView) view.findViewById(R.id.subscriber_count)).setText(String.format(getString(R.string.uv_number_of_subscribers_format), Utils.getQuantityString(view, R.plurals.uv_subscribers, suggestion.getNumberOfSubscribers())));
 	}
 
 }

@@ -29,13 +29,13 @@ public class SubscribeDialogFragment extends DialogFragment {
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setTitle(R.string.subscribe_dialog_title);
+		builder.setTitle(R.string.uv_subscribe_dialog_title);
 		View view = getActivity().getLayoutInflater().inflate(R.layout.subscribe_dialog, null);
 		final EditText emailField = (EditText) view.findViewById(R.id.email);
 		emailField.setText(Session.getInstance().getEmail());
 		builder.setView(view);
-		builder.setNegativeButton(R.string.nevermind, null);
-		builder.setPositiveButton(R.string.subscribe, new DialogInterface.OnClickListener() {
+		builder.setNegativeButton(R.string.uv_nevermind, null);
+		builder.setPositiveButton(R.string.uv_subscribe, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, int which) {
 				Session.getInstance().persistIdentity(Session.getInstance().getName(), emailField.getText().toString());

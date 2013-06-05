@@ -21,7 +21,7 @@ public abstract class DefaultCallback<T> extends Callback<T> {
 	@Override
 	public void onError(RestResult error) {
 		Log.e(TAG, error.getMessage());
-		new AlertDialog.Builder(context).setTitle(R.string.network_error).show();
+		new AlertDialog.Builder(context).setTitle(R.string.uv_network_error).show();
 	}
 
 }

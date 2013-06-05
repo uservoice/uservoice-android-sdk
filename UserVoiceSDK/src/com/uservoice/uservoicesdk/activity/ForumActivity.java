@@ -41,7 +41,7 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setTitle(R.string.feedback_forum);
+		setTitle(R.string.uv_feedback_forum);
 
 		suggestions = new ArrayList<Suggestion>();
 
@@ -86,13 +86,13 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 						if (type == 2) {
 							view = getLayoutInflater().inflate(R.layout.text_item, null);
 							TextView text = (TextView) view.findViewById(R.id.text);
-							text.setText(R.string.post_an_idea);
+							text.setText(R.string.uv_post_an_idea);
 							view.findViewById(R.id.divider).setVisibility(View.GONE);
 							view.findViewById(R.id.text2).setVisibility(View.GONE);
 						} else if (type == 3) {
 							view = getLayoutInflater().inflate(R.layout.header_item_light, null);
 							TextView text = (TextView) view.findViewById(R.id.header_text);
-							text.setText(R.string.idea_text_heading);
+							text.setText(R.string.uv_idea_text_heading);
 						}
 					}
 					return view;

@@ -62,11 +62,11 @@ public class BaseActivity extends FragmentActivity {
 				public void onTabReselected(Tab tab, FragmentTransaction ft) {
 				}
 			};
-			allTab = getActionBar().newTab().setText(getString(R.string.all_results_filter)).setTabListener(listener).setTag(PortalAdapter.SCOPE_ALL);
+			allTab = getActionBar().newTab().setText(getString(R.string.uv_all_results_filter)).setTabListener(listener).setTag(PortalAdapter.SCOPE_ALL);
 			getActionBar().addTab(allTab);
-			articlesTab = getActionBar().newTab().setText(getString(R.string.articles_filter)).setTabListener(listener).setTag(PortalAdapter.SCOPE_ARTICLES);
+			articlesTab = getActionBar().newTab().setText(getString(R.string.uv_articles_filter)).setTabListener(listener).setTag(PortalAdapter.SCOPE_ARTICLES);
 			getActionBar().addTab(articlesTab);
-			ideasTab = getActionBar().newTab().setText(getString(R.string.ideas_filter)).setTabListener(listener).setTag(PortalAdapter.SCOPE_IDEAS);
+			ideasTab = getActionBar().newTab().setText(getString(R.string.uv_ideas_filter)).setTabListener(listener).setTag(PortalAdapter.SCOPE_IDEAS);
 			getActionBar().addTab(ideasTab);
 		} else {
 			menu.findItem(R.id.action_search).setVisible(false);
@@ -77,9 +77,9 @@ public class BaseActivity extends FragmentActivity {
 	public void updateScopedSearch(int results, int articleResults, int ideaResults) {
 		if (!Utils.hasActionBar())
 			return;
-		allTab.setText(String.format("%s (%d)", getString(R.string.all_results_filter), results));
-		articlesTab.setText(String.format("%s (%d)", getString(R.string.articles_filter), articleResults));
-		ideasTab.setText(String.format("%s (%d)", getString(R.string.ideas_filter), ideaResults));
+		allTab.setText(String.format("%s (%d)", getString(R.string.uv_all_results_filter), results));
+		articlesTab.setText(String.format("%s (%d)", getString(R.string.uv_articles_filter), articleResults));
+		ideasTab.setText(String.format("%s (%d)", getString(R.string.uv_ideas_filter), ideaResults));
 	}
 	
 	@SuppressLint("NewApi")

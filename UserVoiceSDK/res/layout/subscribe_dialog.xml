@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/email_address"
+        android:hint="@string/uv_email_address"
         android:inputType="textEmailAddress" >
 
         <requestFocus />
@@ -23,7 +23,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/msg_subscribe"
+        android:text="@string/uv_msg_subscribe"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#999999"
         android:paddingLeft="3dp"

@@ -11,7 +11,7 @@
 
     <TextView
         android:id="@+id/header_text"
-        android:text="@string/knowledge_base"
+        android:text="@string/uv_knowledge_base"
         android:textIsSelectable="false"
         style="@style/ListSeparatorLight" />
 

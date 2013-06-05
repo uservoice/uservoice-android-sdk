@@ -26,13 +26,13 @@ public class ArticleDialogFragment extends DialogFragment {
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setTitle(R.string.article_instant_answer_question);
+		builder.setTitle(R.string.uv_article_instant_answer_question);
 		
 		WebView webView = new WebView(getActivity());
 		builder.setView(webView);
 		Utils.displayArticle(webView, article);
 		
-		builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+		builder.setNegativeButton(R.string.uv_no, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				InstantAnswersActivity activity = (InstantAnswersActivity) getActivity();
@@ -41,7 +41,7 @@ public class ArticleDialogFragment extends DialogFragment {
 			}
 		});
 		
-		builder.setPositiveButton(R.string.very_yes, new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(R.string.uv_very_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				HelpfulDialogFragment helpfulDialog = new HelpfulDialogFragment();

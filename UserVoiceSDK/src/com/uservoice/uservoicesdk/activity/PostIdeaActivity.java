@@ -11,7 +11,7 @@ public class PostIdeaActivity extends InstantAnswersActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setTitle(R.string.idea_form_title);
+		setTitle(R.string.uv_idea_form_title);
 	}
 
 	@Override
@@ -21,7 +21,7 @@ public class PostIdeaActivity extends InstantAnswersActivity {
 
 	@Override
 	protected int getDiscardDialogMessage() {
-		return R.string.msg_confirm_discard_idea;
+		return R.string.uv_msg_confirm_discard_idea;
 	}
 
 }

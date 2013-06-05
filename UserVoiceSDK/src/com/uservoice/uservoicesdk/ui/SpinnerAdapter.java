@@ -61,7 +61,7 @@ public class SpinnerAdapter<T> extends BaseAdapter {
 			textView.setText(getItem(position).toString());
 		} else {
 			textView.setTextColor(Color.GRAY);
-			textView.setText(R.string.select_none);
+			textView.setText(R.string.uv_select_none);
 		}
 		return view;
 	}
@@ -80,7 +80,7 @@ public class SpinnerAdapter<T> extends BaseAdapter {
 			textView.setText(getItem(position).toString());
 		} else {
 			textView.setTextColor(Color.BLACK);
-			textView.setText(R.string.select_one);
+			textView.setText(R.string.uv_select_one);
 		}
 		return view;
 	}

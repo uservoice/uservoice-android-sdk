@@ -59,7 +59,7 @@ public class SigninDialogFragment extends DialogFragment {
 		});
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setTitle(R.string.signin_dialog_title);
+		builder.setTitle(R.string.uv_signin_dialog_title);
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 		View view = inflater.inflate(R.layout.signin_layout, null);
 		emailField = (EditText) view.findViewById(R.id.signin_email);
@@ -92,7 +92,7 @@ public class SigninDialogFragment extends DialogFragment {
 		});
 		builder.setView(view);
 		builder.setNegativeButton(android.R.string.cancel, null);
-		builder.setPositiveButton(R.string.signin_dialog_ok, null);
+		builder.setPositiveButton(R.string.uv_signin_dialog_ok, null);
 
 		// the crap you have to do to have a button that doesn't always close the dialog
 		final AlertDialog dialog = builder.create();
@@ -165,7 +165,7 @@ public class SigninDialogFragment extends DialogFragment {
 
 						@Override
 						public void onError(RestResult error) {
-							Toast.makeText(activity, R.string.failed_signin_error, Toast.LENGTH_SHORT).show();
+							Toast.makeText(activity, R.string.uv_failed_signin_error, Toast.LENGTH_SHORT).show();
 						}
 					});
 				}
@@ -183,7 +183,7 @@ public class SigninDialogFragment extends DialogFragment {
 		User.sendForgotPassword(emailField.getText().toString(), new DefaultCallback<User>(getActivity()) {
 			@Override
 			public void onModel(User model) {
-				Toast.makeText(activity, R.string.msg_forgot_password, Toast.LENGTH_SHORT).show();
+				Toast.makeText(activity, R.string.uv_msg_forgot_password, Toast.LENGTH_SHORT).show();
 			}
 		});
 	}

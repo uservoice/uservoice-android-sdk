@@ -33,7 +33,7 @@ public class ContactAdapter extends InstantAnswersAdapter {
 	public ContactAdapter(FragmentActivity context) {
 		super(context);
 		customFieldValues = new HashMap<String, String>(Session.getInstance().getConfig().getCustomFields());
-		continueButtonMessage = R.string.contact_continue_button;
+		continueButtonMessage = R.string.uv_contact_continue_button;
 	}
 
 	@Override
@@ -86,7 +86,7 @@ public class ContactAdapter extends InstantAnswersAdapter {
 			final CustomField customField = (CustomField) getItem(position);
 			String value = customFieldValues.get(customField.getName());
 			title.setText(customField.getName());
-			field.setHint(R.string.value);
+			field.setHint(R.string.uv_value);
 			field.setInputType(EditorInfo.TYPE_TEXT_VARIATION_SHORT_MESSAGE);
 			field.setText(value);
 			field.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -140,18 +140,18 @@ public class ContactAdapter extends InstantAnswersAdapter {
 				@Override
 				public void onModel(Ticket model) {
 					Babayaga.track(Event.SUBMIT_TICKET);
-					Toast.makeText(context, R.string.msg_ticket_created, Toast.LENGTH_SHORT).show();
+					Toast.makeText(context, R.string.uv_msg_ticket_created, Toast.LENGTH_SHORT).show();
 					context.finish();
 				}
 			});
 		} else {
-			Toast.makeText(context, R.string.msg_custom_fields_validation, Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, R.string.uv_msg_custom_fields_validation, Toast.LENGTH_SHORT).show();
 		}
 	}
 
 	@Override
 	protected String getSubmitString() {
-		return context.getString(R.string.send_message);
+		return context.getString(R.string.uv_send_message);
 	}
 
 }

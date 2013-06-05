@@ -11,7 +11,7 @@ public class ContactActivity extends InstantAnswersActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setTitle(R.string.contact_us);
+		setTitle(R.string.uv_contact_us);
 	}
 
 	@Override
@@ -21,6 +21,6 @@ public class ContactActivity extends InstantAnswersActivity {
 
 	@Override
 	protected int getDiscardDialogMessage() {
-		return R.string.msg_confirm_discard_message;
+		return R.string.uv_msg_confirm_discard_message;
 	}
 }

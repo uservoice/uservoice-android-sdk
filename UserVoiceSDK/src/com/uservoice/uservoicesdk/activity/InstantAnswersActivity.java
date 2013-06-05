@@ -40,15 +40,15 @@ public abstract class InstantAnswersActivity extends BaseListActivity {
 	public void onBackPressed() {
 		if (adapter.hasText()) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle(R.string.confirm);
+			builder.setTitle(R.string.uv_confirm);
 			builder.setMessage(getDiscardDialogMessage());
-			builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+			builder.setPositiveButton(R.string.uv_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					finish();
 				}
 			});
-			builder.setNegativeButton(R.string.no, null);
+			builder.setNegativeButton(R.string.uv_no, null);
 			builder.show();
 		} else {
 			super.onBackPressed();

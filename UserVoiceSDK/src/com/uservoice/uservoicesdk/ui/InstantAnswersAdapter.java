@@ -192,10 +192,10 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 			button.setEnabled(state != State.INIT_LOADING);
 			switch (state) {
 				case INIT:
-					button.setText(R.string.next);
+					button.setText(R.string.uv_next);
 					break;
 				case INIT_LOADING:
-					button.setText(R.string.loading);
+					button.setText(R.string.uv_loading);
 					break;
 				case INSTANT_ANSWERS:
 					button.setText(continueButtonMessage);
@@ -211,15 +211,15 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 			TextView title = (TextView) view.findViewById(R.id.header_text);
 			final EditText field = (EditText) view.findViewById(R.id.text_field);
 			if (type == EMAIL_FIELD) {
-				title.setText(R.string.your_email_address);
+				title.setText(R.string.uv_your_email_address);
 				emailField = field;
-				field.setHint(R.string.email_address_hint);
+				field.setHint(R.string.uv_email_address_hint);
 				field.setInputType(EditorInfo.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
 				field.setText(Session.getInstance().getEmail());
 			} else if (type == NAME_FIELD) {
-				title.setText(R.string.your_name);
+				title.setText(R.string.uv_your_name);
 				nameField = field;
-				field.setHint(R.string.name_hint);
+				field.setHint(R.string.uv_name_hint);
 				field.setInputType(EditorInfo.TYPE_TEXT_VARIATION_PERSON_NAME);
 				field.setText(Session.getInstance().getName());
 			}
@@ -233,7 +233,7 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 				if (model instanceof Suggestion)
 					hasIdeas = true;
 			}
-			textView.setText(hasArticles ? (hasIdeas ? R.string.matching_articles_and_ideas : R.string.matching_articles) : R.string.matching_ideas);
+			textView.setText(hasArticles ? (hasIdeas ? R.string.uv_matching_articles_and_ideas : R.string.uv_matching_articles) : R.string.uv_matching_ideas);
 		}
 		return view;
 	}
@@ -272,8 +272,8 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 			String email = emailField.getText().toString();
 			if (email.isEmpty()) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(context);
-				builder.setTitle(R.string.error);
-				builder.setMessage(R.string.msg_user_identity_validation);
+				builder.setTitle(R.string.uv_error);
+				builder.setMessage(R.string.uv_msg_user_identity_validation);
 				builder.create().show();
 			} else {
 				Session.getInstance().persistIdentity(name, email);

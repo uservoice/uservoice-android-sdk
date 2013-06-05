@@ -16,7 +16,7 @@ public class Topic extends BaseModel {
 	private int numberOfArticles;
 	
 	public static Topic ALL_ARTICLES = new Topic() {{
-		this.name = Session.getInstance().getContext().getString(R.string.all_articles);
+		this.name = Session.getInstance().getContext().getString(R.string.uv_all_articles);
 	}};
 	
 	public static void loadTopics(final Callback<List<Topic>> callback) {
