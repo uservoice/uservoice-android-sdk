@@ -25,7 +25,7 @@ import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.ui.LoadAllAdapter;
 import com.uservoice.uservoicesdk.ui.Utils;
 
-public class TopicActivity extends BaseListActivity {
+public class TopicActivity extends BaseListActivity implements SearchActivity {
 	
 	@SuppressLint({ "InlinedApi", "NewApi" })
 	protected void onCreate(Bundle savedInstanceState) {
@@ -101,16 +101,9 @@ public class TopicActivity extends BaseListActivity {
 	}
 
 	@Override
-	@SuppressLint("NewApi")
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.portal, menu);
-		if (Utils.hasActionBar()) {
-//			menu.findItem(R.id.action_search).setOnActionExpandListener(new SearchExpandListener(this));
-//			SearchView search = (SearchView) menu.findItem(R.id.action_search).getActionView();
-//			search.setOnQueryTextListener(new SearchQueryListener(this));
-		} else {
-			menu.findItem(R.id.action_search).setVisible(false);
-		}
+		setupScopedSearch(menu);
 		return true;
 	}
 	

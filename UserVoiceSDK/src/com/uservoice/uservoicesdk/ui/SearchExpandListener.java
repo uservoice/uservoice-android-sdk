@@ -15,14 +15,14 @@ public class SearchExpandListener implements MenuItem.OnActionExpandListener {
 
 	@Override
 	public boolean onMenuItemActionExpand(MenuItem item) {
-		searchActivity.getModelAdapter().setSearchActive(true);
+		searchActivity.getSearchAdapter().setSearchActive(true);
 		return true;
 	}
 
 	@Override
 	public boolean onMenuItemActionCollapse(MenuItem item) {
-		searchActivity.getModelAdapter().setSearchActive(false);
-		searchActivity.hideScopeBar();
+		searchActivity.getSearchAdapter().setSearchActive(false);
+		searchActivity.hideSearch();
 		return true;
 	}
 }

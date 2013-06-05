@@ -13,17 +13,17 @@ public class SearchQueryListener implements SearchView.OnQueryTextListener {
 
 	@Override
 	public boolean onQueryTextSubmit(String query) {
-		searchActivity.getModelAdapter().performSearch(query);
+		searchActivity.getSearchAdapter().performSearch(query);
 		return true;
 	}
 
 	@Override
 	public boolean onQueryTextChange(String query) {
-		searchActivity.getModelAdapter().performSearch(query);
+		searchActivity.getSearchAdapter().performSearch(query);
 		if (!query.isEmpty()) {
-			searchActivity.showScopeBar();
+			searchActivity.showSearch();
 		} else {
-			searchActivity.hideScopeBar();
+			searchActivity.hideSearch();
 		}
 		return true;
 	}

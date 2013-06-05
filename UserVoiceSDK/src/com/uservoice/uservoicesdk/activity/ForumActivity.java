@@ -29,6 +29,7 @@ import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.ui.DefaultCallback;
 import com.uservoice.uservoicesdk.ui.PaginatedAdapter;
 import com.uservoice.uservoicesdk.ui.PaginationScrollListener;
+import com.uservoice.uservoicesdk.ui.SearchAdapter;
 import com.uservoice.uservoicesdk.ui.SearchExpandListener;
 import com.uservoice.uservoicesdk.ui.SearchQueryListener;
 import com.uservoice.uservoicesdk.ui.Utils;
@@ -214,6 +215,11 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 			}
 		});
 	}
+	
+	@Override
+	public SearchAdapter<?> getSearchAdapter() {
+		return getModelAdapter();
+	}
 
 	@SuppressWarnings("unchecked")
 	public PaginatedAdapter<Suggestion> getModelAdapter() {
@@ -221,6 +227,10 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 	}
 
 	@Override
-	public void showScopeBar() {
+	public void showSearch() {
+	}
+	
+	@Override
+	public void hideSearch() {
 	}
 }

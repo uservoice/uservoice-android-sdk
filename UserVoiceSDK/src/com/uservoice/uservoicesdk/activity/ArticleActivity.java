@@ -13,7 +13,7 @@ import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.ui.Utils;
 
-public class ArticleActivity extends BaseActivity {
+public class ArticleActivity extends BaseActivity implements SearchActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +32,7 @@ public class ArticleActivity extends BaseActivity {
 	@SuppressLint("NewApi")
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.portal, menu);
-		if (Utils.hasActionBar()) {
-//			menu.findItem(R.id.action_search).setOnActionExpandListener(new SearchExpandListener(this));
-//			SearchView search = (SearchView) menu.findItem(R.id.action_search).getActionView();
-//			search.setOnQueryTextListener(new SearchQueryListener(this));
-		} else {
-			menu.findItem(R.id.action_search).setVisible(false);
-		}
+		setupScopedSearch(menu);
 		return true;
 	}
 	

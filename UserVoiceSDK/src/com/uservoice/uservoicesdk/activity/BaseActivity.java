@@ -8,10 +8,14 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.ViewFlipper;
 
 import com.uservoice.uservoicesdk.R;
+import com.uservoice.uservoicesdk.ui.MixedSearchAdapter;
 import com.uservoice.uservoicesdk.ui.PortalAdapter;
+import com.uservoice.uservoicesdk.ui.SearchAdapter;
 import com.uservoice.uservoicesdk.ui.SearchExpandListener;
 import com.uservoice.uservoicesdk.ui.SearchQueryListener;
 import com.uservoice.uservoicesdk.ui.Utils;
@@ -22,6 +26,7 @@ public class BaseActivity extends FragmentActivity {
 	protected Tab articlesTab;
 	protected Tab ideasTab;
 	private int originalNavigationMode = -1;
+	protected MixedSearchAdapter searchAdapter;
 
 	@Override
 	@SuppressLint("NewApi")
@@ -41,12 +46,22 @@ public class BaseActivity extends FragmentActivity {
 	    return super.onOptionsItemSelected(item);
 	}
 	
+	public SearchAdapter<?> getSearchAdapter() {
+		return searchAdapter;
+	}
+	
 	@SuppressLint("NewApi")
 	protected void setupScopedSearch(Menu menu) {
 		if (Utils.hasActionBar()) {
 			menu.findItem(R.id.action_search).setOnActionExpandListener(new SearchExpandListener((SearchActivity) this));
 			SearchView search = (SearchView) menu.findItem(R.id.action_search).getActionView();
 			search.setOnQueryTextListener(new SearchQueryListener((SearchActivity) this));
+			searchAdapter = new MixedSearchAdapter(this);
+			ListView searchView = new ListView(this);
+			searchView.setAdapter(searchAdapter);
+			searchView.setOnItemClickListener(searchAdapter);
+			ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
+			viewFlipper.addView(searchView, 1);
 			
 			ActionBar.TabListener listener = new ActionBar.TabListener() {
 				@Override
@@ -55,7 +70,7 @@ public class BaseActivity extends FragmentActivity {
 				
 				@Override
 				public void onTabSelected(Tab tab, FragmentTransaction ft) {
-					((SearchActivity) BaseActivity.this).getModelAdapter().setScope((Integer) tab.getTag());
+					searchAdapter.setScope((Integer) tab.getTag());
 				}
 				
 				@Override
@@ -83,7 +98,9 @@ public class BaseActivity extends FragmentActivity {
 	}
 	
 	@SuppressLint("NewApi")
-	public void showScopeBar() {
+	public void showSearch() {
+		ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
+		viewFlipper.setDisplayedChild(1);
 		if (!Utils.hasActionBar())
 			return;
 		if (originalNavigationMode == -1)
@@ -92,7 +109,9 @@ public class BaseActivity extends FragmentActivity {
 	}
 	
 	@SuppressLint("NewApi")
-	public void hideScopeBar() {
+	public void hideSearch() {
+		ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
+		viewFlipper.setDisplayedChild(0);
 		if (!Utils.hasActionBar())
 			return;
 		getActionBar().setNavigationMode(originalNavigationMode == -1 ? ActionBar.NAVIGATION_MODE_STANDARD : originalNavigationMode);
