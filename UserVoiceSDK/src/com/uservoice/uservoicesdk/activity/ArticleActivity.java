@@ -45,4 +45,12 @@ public class ArticleActivity extends BaseActivity implements SearchActivity {
 		}
 		return super.onMenuItemSelected(featureId, item);
 	}
+	
+	@Override
+	public void finish() {
+		// This is what you have to do to make it stop the flash player
+		WebView webview = (WebView) findViewById(R.id.webview);
+		webview.loadData("", "text/html", "utf-8");
+		super.finish();
+	}
 }

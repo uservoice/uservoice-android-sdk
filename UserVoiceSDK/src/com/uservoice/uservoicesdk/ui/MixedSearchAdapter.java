@@ -17,6 +17,7 @@ import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.BaseModel;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.rest.Callback;
+import com.uservoice.uservoicesdk.rest.RestTask;
 
 public class MixedSearchAdapter extends SearchAdapter<BaseModel> implements AdapterView.OnItemClickListener {
 
@@ -99,11 +100,11 @@ public class MixedSearchAdapter extends SearchAdapter<BaseModel> implements Adap
 	}
 
 	@Override
-	protected void search(String query, Callback<List<BaseModel>> callback) {
+	protected RestTask search(String query, Callback<List<BaseModel>> callback) {
 		currentQuery = query;
 		Babayaga.track(Babayaga.Event.SEARCH_ARTICLES);
 		Babayaga.track(Babayaga.Event.SEARCH_IDEAS);
-		Article.loadInstantAnswers(query, callback);
+		return Article.loadInstantAnswers(query, callback);
 	}
 
 	@Override

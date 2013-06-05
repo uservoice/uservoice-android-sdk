@@ -113,10 +113,6 @@ public class SuggestionDialogFragment extends DialogFragment {
 	private PaginatedAdapter<Comment> getListAdapter() {
 		return new PaginatedAdapter<Comment>(getActivity(), R.layout.comment_item, new ArrayList<Comment>()) {
 			@Override
-			protected void search(String query, Callback<List<Comment>> callback) {
-			}
-
-			@Override
 			protected int getTotalNumberOfObjects() {
 				return suggestion.getNumberOfComments();
 			}

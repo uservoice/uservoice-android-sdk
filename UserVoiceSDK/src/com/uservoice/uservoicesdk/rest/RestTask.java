@@ -35,40 +35,50 @@ import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.UserVoice;
 import com.uservoice.uservoicesdk.model.AccessToken;
 
-public class RestTask extends AsyncTask<String,String,RestResult> {
+public class RestTask extends AsyncTask<String, String, RestResult> {
 	private String urlPath;
 	private RestMethod method;
-	private Map<String,String> params;
+	private Map<String, String> params;
 	private RestTaskCallback callback;
-	
-    public RestTask(RestMethod method, String urlPath, Map<String,String> params, RestTaskCallback callback){
-    	this.method = method;
-        this.urlPath = urlPath;
-        this.callback = callback;
-        this.params = params;
-    }
+	private HttpUriRequest request;
+
+	public RestTask(RestMethod method, String urlPath, Map<String, String> params, RestTaskCallback callback) {
+		this.method = method;
+		this.urlPath = urlPath;
+		this.callback = callback;
+		this.params = params;
+	}
 
 	@Override
 	protected RestResult doInBackground(String... args) {
-	    try {
-	        HttpUriRequest request = createRequest();
-	        OAuthConsumer consumer = Session.getInstance().getOAuthConsumer();
-	        AccessToken accessToken = Session.getInstance().getAccessToken();
-	        if (accessToken != null) {
-	        	consumer.setTokenWithSecret(accessToken.getKey(), accessToken.getSecret());
-	        }
-	        consumer.sign(request);
-	        request.setHeader("Accept-Language", Locale.getDefault().getLanguage());
-	        request.setHeader("API-Client", String.format("uservoice-android-%s", UserVoice.getVersion()));
-            HttpClient client = new DefaultHttpClient();
-            HttpResponse response = client.execute(request);
-            HttpEntity responseEntity = response.getEntity();
-            StatusLine responseStatus = response.getStatusLine();
-            int statusCode = responseStatus != null ? responseStatus.getStatusCode() : 0;
-            String body = responseEntity != null ? EntityUtils.toString(responseEntity) : null;
-			return new RestResult(statusCode, new JSONObject(body));
-	    } catch (Exception e) {
-	    	return new RestResult(e);
+		try {
+			request = createRequest();
+			if (isCancelled())
+				throw new InterruptedException();
+			OAuthConsumer consumer = Session.getInstance().getOAuthConsumer();
+			AccessToken accessToken = Session.getInstance().getAccessToken();
+			if (accessToken != null) {
+				consumer.setTokenWithSecret(accessToken.getKey(), accessToken.getSecret());
+			}
+			consumer.sign(request);
+			request.setHeader("Accept-Language", Locale.getDefault().getLanguage());
+			request.setHeader("API-Client", String.format("uservoice-android-%s", UserVoice.getVersion()));
+			HttpClient client = new DefaultHttpClient();
+			if (isCancelled())
+				throw new InterruptedException();
+			// TODO it would be nice to find a way to abort the request on cancellation
+			HttpResponse response = client.execute(request);
+			if (isCancelled())
+				throw new InterruptedException();
+			HttpEntity responseEntity = response.getEntity();
+			StatusLine responseStatus = response.getStatusLine();
+			int statusCode = responseStatus != null ? responseStatus.getStatusCode() : 0;
+			String body = responseEntity != null ? EntityUtils.toString(responseEntity) : null;
+			if (isCancelled())
+				throw new InterruptedException();
+ 			return new RestResult(statusCode, new JSONObject(body));
+		} catch (Exception e) {
+			return new RestResult(e);
 		}
 	}
 
@@ -83,52 +93,52 @@ public class RestTask extends AsyncTask<String,String,RestResult> {
 		else if (method == RestMethod.DELETE)
 			return requestWithQueryString(new HttpDelete(), uriBuilder);
 		else if (method == RestMethod.POST)
-	        return requestWithEntity(new HttpPost(), uriBuilder);
+			return requestWithEntity(new HttpPost(), uriBuilder);
 		else if (method == RestMethod.PUT)
-	        return requestWithEntity(new HttpPut(), uriBuilder);
+			return requestWithEntity(new HttpPut(), uriBuilder);
 		else
 			throw new IllegalArgumentException("Method must be one of [GET, POST, PUT, DELETE], but was " + method);
 	}
 
-    @Override
-    protected void onPostExecute(RestResult result) {
-    	if (result.isError()) {
-    		callback.onError(result);
-    	} else {
-    		try {
+	@Override
+	protected void onPostExecute(RestResult result) {
+		if (result.isError()) {
+			callback.onError(result);
+		} else {
+			try {
 				callback.onComplete(result.getObject());
 			} catch (JSONException e) {
 				callback.onError(new RestResult(e, result.getStatusCode(), result.getObject()));
 			}
-    	}
-        super.onPostExecute(result);
-    }
-    
-    private HttpUriRequest requestWithQueryString(HttpRequestBase request, Uri.Builder uriBuilder) throws URISyntaxException {
-        if (params != null) {
-            for (BasicNameValuePair param : paramsToList(params)) {
-                uriBuilder.appendQueryParameter(param.getName(), param.getValue());
-            }
-        }
-        request.setURI(new URI(uriBuilder.build().toString()));
-        return request;
-    }
-    
-    private HttpUriRequest requestWithEntity(HttpEntityEnclosingRequestBase request, Uri.Builder uriBuilder) throws UnsupportedEncodingException, URISyntaxException {
-    	if (params != null) {
-            request.setEntity(new UrlEncodedFormEntity(paramsToList(params)));
-    	}
-        request.setURI(new URI(uriBuilder.build().toString()));
-    	return request;
-    }
-    
-    private static List<BasicNameValuePair> paramsToList(Map<String,String> params) {
-        ArrayList<BasicNameValuePair> formList = new ArrayList<BasicNameValuePair>(params.size());
-        for (String key : params.keySet()) {
-            String value = params.get(key);
-            if (value != null)
-            	formList.add(new BasicNameValuePair(key, value));
-        }
-        return formList;
-    }
+		}
+		super.onPostExecute(result);
+	}
+
+	private HttpUriRequest requestWithQueryString(HttpRequestBase request, Uri.Builder uriBuilder) throws URISyntaxException {
+		if (params != null) {
+			for (BasicNameValuePair param : paramsToList(params)) {
+				uriBuilder.appendQueryParameter(param.getName(), param.getValue());
+			}
+		}
+		request.setURI(new URI(uriBuilder.build().toString()));
+		return request;
+	}
+
+	private HttpUriRequest requestWithEntity(HttpEntityEnclosingRequestBase request, Uri.Builder uriBuilder) throws UnsupportedEncodingException, URISyntaxException {
+		if (params != null) {
+			request.setEntity(new UrlEncodedFormEntity(paramsToList(params)));
+		}
+		request.setURI(new URI(uriBuilder.build().toString()));
+		return request;
+	}
+
+	private static List<BasicNameValuePair> paramsToList(Map<String, String> params) {
+		ArrayList<BasicNameValuePair> formList = new ArrayList<BasicNameValuePair>(params.size());
+		for (String key : params.keySet()) {
+			String value = params.get(key);
+			if (value != null)
+				formList.add(new BasicNameValuePair(key, value));
+		}
+		return formList;
+	}
 }

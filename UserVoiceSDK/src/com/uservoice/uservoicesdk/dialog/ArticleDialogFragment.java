@@ -18,6 +18,7 @@ import com.uservoice.uservoicesdk.ui.Utils;
 public class ArticleDialogFragment extends DialogFragment {
 	
 	private final Article article;
+	private WebView webView;
 
 	public ArticleDialogFragment(Article article) {
 		this.article = article;
@@ -28,7 +29,7 @@ public class ArticleDialogFragment extends DialogFragment {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle(R.string.uv_article_instant_answer_question);
 		
-		WebView webView = new WebView(getActivity());
+		webView = new WebView(getActivity());
 		builder.setView(webView);
 		Utils.displayArticle(webView, article);
 		
@@ -49,5 +50,11 @@ public class ArticleDialogFragment extends DialogFragment {
 			}
 		});
 		return builder.create();
+	}
+	
+	@Override
+	public void onDismiss(DialogInterface dialog) {
+		webView.loadData("", "text/html", "utf-8");
+		super.onDismiss(dialog);
 	}
 }

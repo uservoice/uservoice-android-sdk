@@ -100,36 +100,44 @@ public class BaseModel {
 		return "/api/v1" + String.format(path, args);
 	}
 	
-	protected static void doGet(String path, RestTaskCallback callback) {
-		doGet(path, null, callback);
+	protected static RestTask doGet(String path, RestTaskCallback callback) {
+		return doGet(path, null, callback);
 	}
 	
-	protected static void doPost(String path, RestTaskCallback callback) {
-		doPost(path, null, callback);
+	protected static RestTask doPost(String path, RestTaskCallback callback) {
+		return doPost(path, null, callback);
 	}
 	
-	protected static void doDelete(String path, RestTaskCallback callback) {
-		doDelete(path, null, callback);
+	protected static RestTask doDelete(String path, RestTaskCallback callback) {
+		return doDelete(path, null, callback);
 	}
 	
-	protected static void doPut(String path, RestTaskCallback callback) {
-		doPut(path, null, callback);
+	protected static RestTask doPut(String path, RestTaskCallback callback) {
+		return doPut(path, null, callback);
 	}
 	
-	protected static void doGet(String path, Map<String,String> params, RestTaskCallback callback) {
-		new RestTask(RestMethod.GET, path, params, callback).execute();
+	protected static RestTask doGet(String path, Map<String,String> params, RestTaskCallback callback) {
+		RestTask task = new RestTask(RestMethod.GET, path, params, callback);
+        task.execute();
+        return task;
 	}
 	
-	protected static void doPost(String path, Map<String,String> params, RestTaskCallback callback) {
-		new RestTask(RestMethod.POST, path, params, callback).execute();
+	protected static RestTask doPost(String path, Map<String,String> params, RestTaskCallback callback) {
+		RestTask task = new RestTask(RestMethod.POST, path, params, callback);
+        task.execute();
+        return task;
 	}
 	
-	protected static void doDelete(String path, Map<String,String> params, RestTaskCallback callback) {
-		new RestTask(RestMethod.DELETE, path, params, callback).execute();
+	protected static RestTask doDelete(String path, Map<String,String> params, RestTaskCallback callback) {
+		RestTask task = new RestTask(RestMethod.DELETE, path, params, callback);
+        task.execute();
+        return task;
 	}
 	
-	protected static void doPut(String path, Map<String,String> params, RestTaskCallback callback) {
-		new RestTask(RestMethod.PUT, path, params, callback).execute();
+	protected static RestTask doPut(String path, Map<String,String> params, RestTaskCallback callback) {
+		RestTask task = new RestTask(RestMethod.PUT, path, params, callback);
+        task.execute();
+        return task;
 	}
 	
 	protected static <T extends BaseModel> List<T> deserializeList(JSONObject object, String rootKey, Class<T> modelClass) throws JSONException {

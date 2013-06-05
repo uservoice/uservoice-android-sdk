@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.uservoice.uservoicesdk.rest.Callback;
+import com.uservoice.uservoicesdk.rest.RestTask;
 import com.uservoice.uservoicesdk.rest.RestTaskCallback;
 
 public class Article extends BaseModel {
@@ -34,7 +35,7 @@ public class Article extends BaseModel {
 		});
 	}
 	
-	public static void loadInstantAnswers(String query, final Callback<List<BaseModel>> callback) {
+	public static RestTask loadInstantAnswers(String query, final Callback<List<BaseModel>> callback) {
 		Map<String,String> params = new HashMap<String,String>();
 		params.put("per_page", "3");
 		params.put("forum_id", String.valueOf(getConfig().getForumId()));
@@ -42,7 +43,7 @@ public class Article extends BaseModel {
 		if (getConfig().getTopicId() != -1) {
 			params.put("topic_id", String.valueOf(getConfig().getTopicId()));
 		}
-		doGet(apiPath("/instant_answers/search.json"), params, new RestTaskCallback(callback) {
+		return doGet(apiPath("/instant_answers/search.json"), params, new RestTaskCallback(callback) {
 			@Override
 			public void onComplete(JSONObject result) throws JSONException {
 				callback.onModel(deserializeHeterogenousList(result, "instant_answers"));

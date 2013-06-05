@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.uservoice.uservoicesdk.rest.Callback;
+import com.uservoice.uservoicesdk.rest.RestTask;
 import com.uservoice.uservoicesdk.rest.RestTaskCallback;
 
 public class Suggestion extends BaseModel {
@@ -45,10 +46,10 @@ public class Suggestion extends BaseModel {
 		});
 	}
 	
-	public static void searchSuggestions(Forum forum, String query, final Callback<List<Suggestion>> callback) {
+	public static RestTask searchSuggestions(Forum forum, String query, final Callback<List<Suggestion>> callback) {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("query", query);
-		doGet(apiPath("/forums/%d/suggestions/search.json", forum.getId()), params, new RestTaskCallback(callback) {
+		return doGet(apiPath("/forums/%d/suggestions/search.json", forum.getId()), params, new RestTaskCallback(callback) {
 			@Override
 			public void onComplete(JSONObject object) throws JSONException {
 				callback.onModel(deserializeList(object, "suggestions", Suggestion.class));

@@ -18,14 +18,12 @@ import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.activity.ContactActivity;
 import com.uservoice.uservoicesdk.activity.ForumActivity;
 import com.uservoice.uservoicesdk.activity.SearchActivity;
-import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.flow.InitManager;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.BaseModel;
 import com.uservoice.uservoicesdk.model.Forum;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.model.Topic;
-import com.uservoice.uservoicesdk.rest.Callback;
 
 public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterView.OnItemClickListener {
 	
@@ -39,7 +37,6 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 	private static int LOADING = 3;
 	private static int CONTACT = 4;
 	private static int ARTICLE = 5;
-	private static int SEARCH_RESULT = 6;
 
 	private LayoutInflater inflater;
 	private final FragmentActivity context;
@@ -130,8 +127,6 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 	public int getCount() {
 		if (!configLoaded) {
 			return 1;
-		} else if (shouldShowSearchResults()) {
-			return loading ? 1 : getScopedSearchResults().size();
 		} else {
 			computeStaticRows();
 			int rows = staticRows.size();
@@ -169,8 +164,6 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 
 	@Override
 	public Object getItem(int position) {
-		if (shouldShowSearchResults())
-			return loading ? null : getScopedSearchResults().get(position);
 		computeStaticRows();
 		if (position < staticRows.size() && staticRows.get(position) == FORUM)
 			return Session.getInstance().getForum();
@@ -188,8 +181,6 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 
 	@Override
 	public boolean isEnabled(int position) {
-		if (shouldShowSearchResults())
-			return !loading;
 		if (!configLoaded)
 			return false;
 		computeStaticRows();
@@ -231,8 +222,6 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 				view = inflater.inflate(R.layout.text_item, null);
 			else if (type == ARTICLE)
 				view = inflater.inflate(R.layout.text_item, null);
-			else if (type == SEARCH_RESULT)
-				view = inflater.inflate(R.layout.instant_answer_item, null);
 		}
 
 		if (type == FORUM) {
@@ -262,8 +251,6 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 			TextView textView = (TextView) view.findViewById(R.id.text);
 			Article article = (Article) getItem(position);
 			textView.setText(article.getTitle());
-		} else if (type == SEARCH_RESULT) {
-			Utils.displayInstantAnswer(view, (BaseModel) getItem(position));
 		}
 
 		View divider = view.findViewById(R.id.divider);
@@ -284,8 +271,6 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 	public int getItemViewType(int position) {
 		if (!configLoaded)
 			return LOADING;
-		if (shouldShowSearchResults())
-			return loading ? LOADING : SEARCH_RESULT;
 		computeStaticRows();
 		if (position < staticRows.size()) {
 			int type = staticRows.get(position);
@@ -296,21 +281,13 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 		return getTopics() == null || (shouldShowArticles() && getArticles() == null) ? LOADING : (shouldShowArticles() ? ARTICLE : TOPIC);
 	}
 
-	@Override
-	protected void search(String query, Callback<List<BaseModel>> callback) {
-		currentQuery = query;
-		Babayaga.track(Babayaga.Event.SEARCH_ARTICLES);
-		Babayaga.track(Babayaga.Event.SEARCH_IDEAS);
-		Article.loadInstantAnswers(query, callback);
-	}
-
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		int type = getItemViewType(position);
 		if (type == CONTACT) {
 			context.startActivity(new Intent(context, ContactActivity.class));
 		} else if (type == FORUM) {
 			context.startActivity(new Intent(context, ForumActivity.class));
-		} else if (type == TOPIC || type == ARTICLE || type == SEARCH_RESULT) {
+		} else if (type == TOPIC || type == ARTICLE) {
 			Utils.showModel(context, (BaseModel) getItem(position));
 		}
 	}

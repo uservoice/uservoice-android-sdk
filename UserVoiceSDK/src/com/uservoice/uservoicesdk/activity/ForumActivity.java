@@ -26,6 +26,7 @@ import com.uservoice.uservoicesdk.flow.InitManager;
 import com.uservoice.uservoicesdk.model.Forum;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.rest.Callback;
+import com.uservoice.uservoicesdk.rest.RestTask;
 import com.uservoice.uservoicesdk.ui.DefaultCallback;
 import com.uservoice.uservoicesdk.ui.PaginatedAdapter;
 import com.uservoice.uservoicesdk.ui.PaginationScrollListener;
@@ -131,9 +132,9 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 			}
 
 			@Override
-			public void search(String query, Callback<List<Suggestion>> callback) {
+			public RestTask search(String query, Callback<List<Suggestion>> callback) {
 				Babayaga.track(Babayaga.Event.SEARCH_IDEAS);
-				Suggestion.searchSuggestions(forum, query, callback);
+				return Suggestion.searchSuggestions(forum, query, callback);
 			}
 
 			@Override
