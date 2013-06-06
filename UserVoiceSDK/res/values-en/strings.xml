@@ -69,6 +69,7 @@
     <string name="uv_yes">Yes</string>
     <string name="uv_very_yes">Yes!</string>
     <string name="uv_helpful_article_message_question">Do you still want to send a message?</string>
+    <string name="uv_unhelpful_article_message_question">Would you like to send us a message?</string>
     <string name="uv_idea_description_heading">Describe your idea in more detail</string>
     <string name="uv_category">Category</string>
     <string name="uv_idea_description_hint">(optional)</string>

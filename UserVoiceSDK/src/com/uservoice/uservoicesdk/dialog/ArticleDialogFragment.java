@@ -14,7 +14,7 @@ import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.ui.InstantAnswersAdapter;
 import com.uservoice.uservoicesdk.ui.Utils;
 
-@SuppressLint("ValidFragment")
+@SuppressLint({ "ValidFragment", "NewApi" })
 public class ArticleDialogFragment extends DialogFragment {
 	
 	private final Article article;
@@ -36,17 +36,24 @@ public class ArticleDialogFragment extends DialogFragment {
 		builder.setNegativeButton(R.string.uv_no, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				InstantAnswersActivity activity = (InstantAnswersActivity) getActivity();
-				InstantAnswersAdapter adapter = (InstantAnswersAdapter) activity.getListAdapter();
-				adapter.notHelpful();
+				if (getActivity() instanceof InstantAnswersActivity) {
+					InstantAnswersActivity activity = (InstantAnswersActivity) getActivity();
+					InstantAnswersAdapter adapter = (InstantAnswersAdapter) activity.getListAdapter();
+					adapter.notHelpful();
+				} else {
+					UnhelpfulDialogFragment dialogFragment = new UnhelpfulDialogFragment();
+					dialogFragment.show(getActivity().getSupportFragmentManager(), "UnhelpfulDialogFragment");
+				}
 			}
 		});
 		
 		builder.setPositiveButton(R.string.uv_very_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				HelpfulDialogFragment helpfulDialog = new HelpfulDialogFragment();
-				helpfulDialog.show(getActivity().getSupportFragmentManager(), "HelpfulDialogFragment");
+				if (getActivity() instanceof InstantAnswersActivity) {
+					HelpfulDialogFragment helpfulDialog = new HelpfulDialogFragment();
+					helpfulDialog.show(getActivity().getSupportFragmentManager(), "HelpfulDialogFragment");
+				}
 			}
 		});
 		return builder.create();
@@ -54,7 +61,8 @@ public class ArticleDialogFragment extends DialogFragment {
 	
 	@Override
 	public void onDismiss(DialogInterface dialog) {
-		webView.loadData("", "text/html", "utf-8");
+		webView.onPause();
+		webView.loadUrl("about:blank");
 		super.onDismiss(dialog);
 	}
 }
