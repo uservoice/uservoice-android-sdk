@@ -45,6 +45,7 @@ public class InitManager {
 					@Override
 					public void onModel(RequestToken model) {
 						if (canceled) return;
+						Session.getInstance().setRequestToken(model);
 						Config config = Session.getInstance().getConfig();
 						DefaultCallback<AccessTokenResult<User>> signinCallback = new DefaultCallback<AccessTokenResult<User>>(context) {
 							public void onModel(AccessTokenResult<User> model) {
