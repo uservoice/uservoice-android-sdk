@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.activity.ForumActivity;
 import com.uservoice.uservoicesdk.flow.SigninManager;
 import com.uservoice.uservoicesdk.image.ImageCache;
 import com.uservoice.uservoicesdk.model.Comment;
@@ -35,6 +36,7 @@ public class SuggestionDialogFragment extends DialogFragment {
 	private Suggestion suggestion;
 	private PaginatedAdapter<Comment> adapter;
 	private View headerView;
+	private View view;
 
 	public SuggestionDialogFragment(Suggestion suggestion) {
 		this.suggestion = suggestion;
@@ -44,7 +46,7 @@ public class SuggestionDialogFragment extends DialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		setStyle(STYLE_NO_TITLE, getTheme());
-		View view = getActivity().getLayoutInflater().inflate(R.layout.idea_dialog, null);
+		view = getActivity().getLayoutInflater().inflate(R.layout.idea_dialog, null);
 		headerView = getActivity().getLayoutInflater().inflate(R.layout.idea_dialog_header, null);
 		headerView.findViewById(R.id.subscribe).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -100,7 +102,6 @@ public class SuggestionDialogFragment extends DialogFragment {
 	
 	public void suggestionSubscriptionUpdated(Suggestion model) {
 		CheckBox checkbox = (CheckBox) headerView.findViewById(R.id.subscribe_checkbox);
-		suggestion = model;
 		if (suggestion.isSubscribed()) {
 			Toast.makeText(getActivity(), R.string.uv_msg_subscribe, Toast.LENGTH_SHORT).show();
 			checkbox.setChecked(true);
@@ -108,6 +109,9 @@ public class SuggestionDialogFragment extends DialogFragment {
 			Toast.makeText(getActivity(), R.string.uv_msg_subscribe_success, Toast.LENGTH_SHORT).show();
 			checkbox.setChecked(false);
 		}
+		displaySuggestion(view, suggestion);
+		if (getActivity() instanceof ForumActivity)
+			((ForumActivity) getActivity()).suggestionUpdated(model);
 	}
 
 	private PaginatedAdapter<Comment> getListAdapter() {
@@ -146,6 +150,8 @@ public class SuggestionDialogFragment extends DialogFragment {
 	
 	public void commentPosted(Comment comment) {
 		adapter.add(0, comment);
+		suggestion.commentPosted(comment);
+		displaySuggestion(view, suggestion);
 	}
 
 	private void displaySuggestion(View view, Suggestion suggestion) {

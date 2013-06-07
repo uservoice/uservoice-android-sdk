@@ -15,7 +15,7 @@ public abstract class PaginatedAdapter<T> extends ModelAdapter<T> {
 
 	
 	public void loadMore() {
-		if (loading || searchActive || objects.size() == addedObjects + getTotalNumberOfObjects()) return;
+		if (loading || searchActive || objects.size() == getTotalNumberOfObjects()) return;
 		loading = true;
 		notifyDataSetChanged();
 		loadPage(page, new DefaultCallback<List<T>>(context) {

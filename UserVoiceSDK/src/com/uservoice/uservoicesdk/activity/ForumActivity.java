@@ -234,4 +234,8 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 	@Override
 	public void hideSearch() {
 	}
+
+	public void suggestionUpdated(Suggestion model) {
+		getModelAdapter().notifyDataSetChanged();
+	}
 }

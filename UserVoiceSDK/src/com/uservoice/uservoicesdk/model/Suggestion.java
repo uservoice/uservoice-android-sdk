@@ -78,7 +78,8 @@ public class Suggestion extends BaseModel {
 		doPost(apiPath("/forums/%d/suggestions/%d/votes.json", forumId, id), params, new RestTaskCallback(callback) {
 			@Override
 			public void onComplete(JSONObject result) throws JSONException {
-				callback.onModel(deserializeObject(result, "suggestion", Suggestion.class));
+				load(result.getJSONObject("suggestion"));
+				callback.onModel(Suggestion.this);
 			}
 		});
 	}
@@ -90,8 +91,8 @@ public class Suggestion extends BaseModel {
 		doPost(apiPath("/forums/%d/suggestions/%d/watch.json", forumId, id), params, new RestTaskCallback(callback) {
 			@Override
 			public void onComplete(JSONObject result) throws JSONException {
-				subscribed = true;
-				callback.onModel(deserializeObject(result, "suggestion", Suggestion.class));
+				load(result.getJSONObject("suggestion"));
+				callback.onModel(Suggestion.this);
 			}
 		});
 	}
@@ -103,8 +104,8 @@ public class Suggestion extends BaseModel {
 		doPost(apiPath("/forums/%d/suggestions/%d/watch.json", forumId, id), params, new RestTaskCallback(callback) {
 			@Override
 			public void onComplete(JSONObject result) throws JSONException {
-				subscribed = false;
-				callback.onModel(deserializeObject(result, "suggestion", Suggestion.class));
+				load(result.getJSONObject("suggestion"));
+				callback.onModel(Suggestion.this);
 			}
 		});
 	}
@@ -208,6 +209,10 @@ public class Suggestion extends BaseModel {
 
 	public int getNumberOfVotesByCurrentUser() {
 		return numberOfVotesByCurrentUser;
+	}
+
+	public void commentPosted(Comment comment) {
+		numberOfComments += 1;
 	}
 	
 }
