@@ -4,6 +4,10 @@ UserVoice for Android allows you to embed UserVoice directly in your Android app
 
 You will need a UserVoice account (free) for it to connect to. Go to [uservoice.com](https://www.uservoice.com/plans/) to sign up.
 
+### Pre-release
+
+This software is in active development and is not ready for production use.
+
 ### Installation for Eclipse
 
 * File -> Import... -> General -> Existing Projects into Workspace
