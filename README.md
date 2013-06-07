@@ -118,7 +118,7 @@ Before calling `UserVoice.init` you can further customize your configuration.
 License
 -------
 
-Copyright 2010 UserVoice Inc. 
+Copyright 2013 UserVoice Inc. 
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
