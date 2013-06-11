@@ -27,7 +27,6 @@ public class Suggestion extends BaseModel {
 	private Category category;
 	private int numberOfComments;
 	private int numberOfSubscribers;
-	private int numberOfVotesByCurrentUser;
 	private int forumId;
 	private boolean subscribed;
 	private String forumName;
@@ -68,18 +67,6 @@ public class Suggestion extends BaseModel {
 			@Override
 			public void onComplete(JSONObject object) throws JSONException {
 				callback.onModel(deserializeObject(object, "suggestion", Suggestion.class));
-			}
-		});
-	}
-	
-	public void vote(int numberOfVotes, final Callback<Suggestion> callback) {
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("to", String.valueOf(numberOfVotes));
-		doPost(apiPath("/forums/%d/suggestions/%d/votes.json", forumId, id), params, new RestTaskCallback(callback) {
-			@Override
-			public void onComplete(JSONObject result) throws JSONException {
-				load(result.getJSONObject("suggestion"));
-				callback.onModel(Suggestion.this);
 			}
 		});
 	}
@@ -125,8 +112,6 @@ public class Suggestion extends BaseModel {
 		numberOfSubscribers = object.getInt("subscriber_count");
 		if (!object.isNull("creator"))
 			creatorName = getString(object.getJSONObject("creator"), "name");
-		if (!object.isNull("votes_for"))
-			numberOfVotesByCurrentUser = object.getInt("votes_for");
 		if (!object.isNull("status")) {
 			JSONObject statusObject = object.getJSONObject("status");
 			status = getString(statusObject, "name");
@@ -147,8 +132,7 @@ public class Suggestion extends BaseModel {
 	}
 	
 	public boolean isSubscribed() {
-		// TODO we can get rid of numberOfVotes after we update the API
-		return numberOfVotesByCurrentUser > 0 || subscribed;
+		return subscribed;
 	}
 	
 	public int getForumId() {
@@ -205,10 +189,6 @@ public class Suggestion extends BaseModel {
 
 	public int getNumberOfSubscribers() {
 		return numberOfSubscribers;
-	}
-
-	public int getNumberOfVotesByCurrentUser() {
-		return numberOfVotesByCurrentUser;
 	}
 
 	public void commentPosted(Comment comment) {
