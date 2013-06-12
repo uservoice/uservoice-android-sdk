@@ -4,7 +4,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TimeZone;
 
@@ -18,11 +17,12 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
-import com.uservoice.uservoicesdk.Session;
-
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.util.Base64;
+import android.util.Log;
+
+import com.uservoice.uservoicesdk.Session;
 
 public class BabayagaTask extends AsyncTask<String,String,Void> {
 	
@@ -41,23 +41,23 @@ public class BabayagaTask extends AsyncTask<String,String,Void> {
 	@SuppressLint("DefaultLocale")
 	private static String getTzOffset() {
 		int offset = TimeZone.getDefault().getOffset(new Date().getTime());
-		return String.format("%s%02d:%02d", offset > 0 ? "-" : "+", Math.floor(Math.abs(offset) / 60.0), Math.abs(offset) % 60);
+		return String.format("%s%02d:%02d", offset > 0 ? "-" : "+", (int) Math.floor(Math.abs(offset) / 60.0), (int) Math.abs(offset) % 60);
 	}
 	
 	@Override
 	protected Void doInBackground(String... args) {
 	    try {
-			Map<String,Object> data = new HashMap<String,Object>();
+			JSONObject data = new JSONObject();
 			if (traits != null && !traits.isEmpty()) {
-				Map<String,Object> copy = new HashMap<String,Object>(traits);
-				copy.put("o", getTzOffset());
-				data.put("u", copy);
+				JSONObject u = new JSONObject(traits);
+				u.put("o", getTzOffset());
+				data.put("u", u);
 			}
 			if (eventProps != null && !eventProps.isEmpty()) {
 				data.put("e", eventProps);
 			}
 			String subdomainId = Session.getInstance().getClientConfig().getSubdomainId();
-			StringBuilder url = new StringBuilder(String.format("http://%s/t/%s/%s/%s", Babayaga.DOMAIN, subdomainId, Babayaga.CHANNEL, event));
+			StringBuilder url = new StringBuilder(String.format("https://%s/t/%s/%s/%s", Babayaga.DOMAIN, subdomainId, Babayaga.CHANNEL, event));
 			if (uvts != null) {
 				url.append("/");
 				url.append(uvts);
@@ -65,10 +65,10 @@ public class BabayagaTask extends AsyncTask<String,String,Void> {
 			url.append("/track.js?_=");
 			url.append(new Date().getTime());
 			url.append("&c=_");
-			if (!data.isEmpty()) {
+			if (data.length() != 0) {
 				url.append("&d=");
 				try {
-					url.append(URLEncoder.encode(Base64.encodeToString(new JSONObject(data).toString().getBytes(), Base64.DEFAULT), "UTF-8"));
+					url.append(URLEncoder.encode(Base64.encodeToString(data.toString().getBytes(), Base64.NO_WRAP), "UTF-8"));
 				} catch (UnsupportedEncodingException e) {
 					throw new RuntimeException(e);
 				}
@@ -89,6 +89,7 @@ public class BabayagaTask extends AsyncTask<String,String,Void> {
             String uvts = responseData.getString("uvts");
             Babayaga.setUvts(uvts);
 	    } catch (Exception e) {
+	    	Log.e("UV", e.getMessage());
 		}
 	    return null;
 	}
