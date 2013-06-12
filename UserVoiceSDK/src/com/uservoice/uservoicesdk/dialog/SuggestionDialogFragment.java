@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.activity.ForumActivity;
+import com.uservoice.uservoicesdk.flow.SigninManager;
 import com.uservoice.uservoicesdk.image.ImageCache;
 import com.uservoice.uservoicesdk.model.Comment;
 import com.uservoice.uservoicesdk.model.Suggestion;
@@ -57,10 +58,15 @@ public class SuggestionDialogFragment extends DialogFragment {
 					}
 				};
 				if (suggestion.isSubscribed()) {
-					suggestion.unsubscribe(Session.getInstance().getEmail(), callback);
+					suggestion.unsubscribe(callback);
 				} else {
 					if (Session.getInstance().getEmail() != null) {
-						suggestion.subscribe(Session.getInstance().getEmail(), callback);
+						SigninManager.signinForSubscribe(getActivity(), Session.getInstance().getEmail(), new Runnable() {
+							@Override
+							public void run() {
+								suggestion.subscribe(callback);
+							}
+						});
 					} else {
 						SubscribeDialogFragment dialog = new SubscribeDialogFragment(suggestion, SuggestionDialogFragment.this);
 						dialog.show(getFragmentManager(), "SubscribeDialogFragment");

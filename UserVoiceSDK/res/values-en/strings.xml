@@ -107,4 +107,5 @@
 	<string name="uv_msg_confirm_discard_idea">Are you sure you want to discard your idea?</string>
 	<string name="uv_msg_confirm_discard_message">Are you sure you want to discard your message?</string>
 	<string name="uv_post_an_idea">Post an idea</string>
+	<string name="uv_password_dialog_title">Please enter your password</string>
 </resources>

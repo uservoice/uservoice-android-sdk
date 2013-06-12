@@ -39,6 +39,7 @@ public abstract class PaginatedAdapter<T> extends ModelAdapter<T> {
 		// not *correct* but probably good enough. the correct thing would be to cancel the load somehow and proceed
 		if (loading)
 			return;
+		page = 1;
 		objects = new ArrayList<T>();
 		loadMore();
 	}

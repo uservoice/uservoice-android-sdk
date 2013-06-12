@@ -4,6 +4,7 @@ import android.support.v4.app.FragmentActivity;
 
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
+import com.uservoice.uservoicesdk.dialog.PasswordDialogFragment;
 import com.uservoice.uservoicesdk.dialog.SigninDialogFragment;
 import com.uservoice.uservoicesdk.model.AccessTokenResult;
 import com.uservoice.uservoicesdk.model.RequestToken;
@@ -18,6 +19,7 @@ public class SigninManager {
 	private String email;
 	private String name;
 	private final FragmentActivity activity;
+	private boolean passwordOnly;
 
 	public static void signIn(FragmentActivity activity, Runnable callback) {
 		new SigninManager(activity, null, null, callback).signIn();
@@ -78,8 +80,23 @@ public class SigninManager {
 	}
 	
 	private void promptToSignIn() {
-		SigninDialogFragment dialog = new SigninDialogFragment(email, name, callback);
-		dialog.show(activity.getSupportFragmentManager(), "SigninDialogFragment");
+		if (passwordOnly) {
+			PasswordDialogFragment dialog = new PasswordDialogFragment(callback);
+			dialog.show(activity.getSupportFragmentManager(), "PasswordDialogFragment");
+		} else {
+			SigninDialogFragment dialog = new SigninDialogFragment(email, name, callback);
+			dialog.show(activity.getSupportFragmentManager(), "SigninDialogFragment");
+		}
+	}
+	
+	public void setPasswordOnly(boolean passwordOnly) {
+		this.passwordOnly = passwordOnly;
+	}
+
+	public static void signinForSubscribe(FragmentActivity activity, String email, Runnable callback) {
+		SigninManager manager = new SigninManager(activity, email, Session.getInstance().getName(), callback);
+		manager.setPasswordOnly(true);
+		manager.signIn();
 	}
 	
 }

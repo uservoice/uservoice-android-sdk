@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.flow.SigninManager;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.ui.DefaultCallback;
 
@@ -38,12 +39,17 @@ public class SubscribeDialogFragment extends DialogFragment {
 			@Override
 			public void onClick(final DialogInterface dialog, int which) {
 				Session.getInstance().persistIdentity(Session.getInstance().getName(), emailField.getText().toString());
-				suggestion.subscribe(emailField.getText().toString(), new DefaultCallback<Suggestion>(getActivity()) {
+				SigninManager.signinForSubscribe(getActivity(), Session.getInstance().getEmail(), new Runnable() {
 					@Override
-					public void onModel(Suggestion model) {
-						suggestionDialog.suggestionSubscriptionUpdated(model);
-						dialog.dismiss();
-					};
+					public void run() {
+						suggestion.subscribe(new DefaultCallback<Suggestion>(getActivity()) {
+							@Override
+							public void onModel(Suggestion model) {
+								suggestionDialog.suggestionSubscriptionUpdated(model);
+								dialog.dismiss();
+							};
+						});
+					}
 				});
 			}
 		});

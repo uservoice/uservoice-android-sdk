@@ -71,9 +71,8 @@ public class Suggestion extends BaseModel {
 		});
 	}
 	
-	public void subscribe(String email, final Callback<Suggestion> callback) {
+	public void subscribe(final Callback<Suggestion> callback) {
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("email", email);
 		params.put("subscribe", "true");
 		doPost(apiPath("/forums/%d/suggestions/%d/watch.json", forumId, id), params, new RestTaskCallback(callback) {
 			@Override
@@ -84,9 +83,8 @@ public class Suggestion extends BaseModel {
 		});
 	}
 	
-	public void unsubscribe(String email, final Callback<Suggestion> callback) {
+	public void unsubscribe(final Callback<Suggestion> callback) {
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("email", email);
 		params.put("subscribe", "false");
 		doPost(apiPath("/forums/%d/suggestions/%d/watch.json", forumId, id), params, new RestTaskCallback(callback) {
 			@Override

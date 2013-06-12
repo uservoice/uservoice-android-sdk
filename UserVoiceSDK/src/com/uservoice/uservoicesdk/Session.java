@@ -49,6 +49,7 @@ public class Session {
 	private Topic topic;
 	private Comment comment;
 	private CustomField customField;
+	private Runnable signinListener;
 	
 	public Context getContext() {
 		return context;
@@ -113,6 +114,8 @@ public class Session {
 	public void setAccessToken(Context context, AccessToken accessToken) {
 		this.accessToken = accessToken;
 		accessToken.persist(context, "access_token");
+		if (signinListener != null)
+			signinListener.run();
 	}
 	
 	public void setAccessToken(AccessToken accessToken) {
@@ -206,5 +209,9 @@ public class Session {
 	
 	public CustomField getCustomField() {
 		return customField;
+	}
+
+	public void setSignInListener(Runnable runnable) {
+		signinListener = runnable;
 	}
 }
