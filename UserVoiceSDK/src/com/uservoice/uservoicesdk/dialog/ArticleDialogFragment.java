@@ -10,6 +10,7 @@ import android.webkit.WebView;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.activity.InstantAnswersActivity;
+import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.ui.InstantAnswersAdapter;
 import com.uservoice.uservoicesdk.ui.Utils;
@@ -56,6 +57,8 @@ public class ArticleDialogFragment extends DialogFragment {
 				}
 			}
 		});
+		
+		Babayaga.track(Babayaga.Event.VIEW_ARTICLE);
 		return builder.create();
 	}
 	

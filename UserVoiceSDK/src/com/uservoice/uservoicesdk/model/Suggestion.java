@@ -8,6 +8,7 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.rest.RestTask;
 import com.uservoice.uservoicesdk.rest.RestTaskCallback;
@@ -77,6 +78,8 @@ public class Suggestion extends BaseModel {
 		doPost(apiPath("/forums/%d/suggestions/%d/watch.json", forumId, id), params, new RestTaskCallback(callback) {
 			@Override
 			public void onComplete(JSONObject result) throws JSONException {
+				Babayaga.track(Babayaga.Event.VOTE_IDEA);
+				Babayaga.track(Babayaga.Event.SUBSCRIBE_IDEA);
 				load(result.getJSONObject("suggestion"));
 				callback.onModel(Suggestion.this);
 			}

@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.activity.ForumActivity;
+import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.flow.SigninManager;
 import com.uservoice.uservoicesdk.image.ImageCache;
 import com.uservoice.uservoicesdk.model.Comment;
@@ -90,6 +91,7 @@ public class SuggestionDialogFragment extends DialogFragment {
 		listView.setOnScrollListener(new PaginationScrollListener(adapter));
 		builder.setView(view);
 		builder.setNegativeButton(R.string.uv_close, null);
+		Babayaga.track(Babayaga.Event.VIEW_IDEA);
 		return builder.create();
 	}
 	

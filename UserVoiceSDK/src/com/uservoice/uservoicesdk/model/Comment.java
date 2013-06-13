@@ -8,6 +8,7 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.rest.RestTaskCallback;
 
@@ -34,6 +35,7 @@ public class Comment extends BaseModel {
 		doPost(apiPath("/forums/%d/suggestions/%d/comments.json", suggestion.getForumId(), suggestion.getId()), params, new RestTaskCallback(callback) {
 			@Override
 			public void onComplete(JSONObject object) throws JSONException {
+				Babayaga.track(Babayaga.Event.COMMENT_IDEA);
 				callback.onModel(deserializeObject(object, "comment", Comment.class));
 			}
 		});

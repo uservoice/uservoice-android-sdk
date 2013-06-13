@@ -45,7 +45,8 @@ public class Babayaga {
 		SUBMIT_TICKET("t"),
 		SUBMIT_IDEA("d"),
 		SUBSCRIBE_IDEA("b"),
-		IDENTIFY("x");
+		IDENTIFY("x"),
+		COMMENT_IDEA("h");
 		
 		private final String code;
 		
