@@ -35,20 +35,6 @@ public class User extends BaseModel {
 		});
 	}
 
-	public static void findOrCreate(String ssoToken, final Callback<AccessTokenResult<User>> callback) {
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("sso", ssoToken);
-		params.put("request_token", Session.getInstance().getRequestToken().getKey());
-		doPost(apiPath("/users/find_or_create.json"), params, new RestTaskCallback(callback) {
-			@Override
-			public void onComplete(JSONObject result) throws JSONException {
-				AccessToken accessToken = deserializeObject(result, "token", AccessToken.class);
-				User user = deserializeObject(result, "user", User.class);
-				callback.onModel(new AccessTokenResult<User>(user, accessToken));
-			}
-		});
-	}
-
 	public static void findOrCreate(String email, String name, String guid, final Callback<AccessTokenResult<User>> callback) {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("user[display_name]", name);

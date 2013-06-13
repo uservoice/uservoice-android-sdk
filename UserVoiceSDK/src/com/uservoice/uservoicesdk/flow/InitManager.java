@@ -47,7 +47,7 @@ public class InitManager {
 						if (canceled) return;
 						Session.getInstance().setRequestToken(model);
 						Config config = Session.getInstance().getConfig();
-						DefaultCallback<AccessTokenResult<User>> signinCallback = new DefaultCallback<AccessTokenResult<User>>(context) {
+						User.findOrCreate(config.getEmail(), config.getName(), config.getGuid(), new DefaultCallback<AccessTokenResult<User>>(context) {
 							public void onModel(AccessTokenResult<User> model) {
 								if (canceled) return;
 								Session.getInstance().setAccessToken(context, model.getAccessToken());
@@ -55,12 +55,7 @@ public class InitManager {
 								userDone = true;
 								checkComplete();
 							};
-						};
-						if (config.getSsoToken() != null) {
-							User.findOrCreate(config.getSsoToken(), signinCallback);
-						} else {
-							User.findOrCreate(config.getEmail(), config.getName(), config.getGuid(), signinCallback);
-						}
+						});
 					}
 				});
 			} else {
@@ -88,7 +83,7 @@ public class InitManager {
 	
 	private boolean shouldSignIn() {
 		Config config = Session.getInstance().getConfig();
-		return config.getEmail() != null || config.getSsoToken() != null;
+		return config.getEmail() != null;
 	}
 	
 	public void cancel() {

@@ -8,7 +8,6 @@ public class Config {
 	private String site;
 	private String key;
 	private String secret;
-	private String ssoToken;
 	private String email;
 	private String name;
 	private String guid;
@@ -37,10 +36,6 @@ public class Config {
 	
 	public String getSecret() {
 		return secret;
-	}
-	
-	public String getSsoToken() {
-		return ssoToken;
 	}
 	
 	public String getEmail() {
