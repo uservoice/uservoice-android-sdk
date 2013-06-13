@@ -1,19 +1,34 @@
 package com.uservoice.uservoicesdk.babayaga;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+import com.uservoice.uservoicesdk.Session;
+
 public class Babayaga {
 	
 	static String DOMAIN = "by.uservoice.com";
 	static String CHANNEL = "d";
 	
+	private static class Track {
+		public String event;
+		public Map<String,Object> eventProps;
+		
+		public Track(String event, Map<String, Object> eventProps) {
+			this.event = event;
+			this.eventProps = eventProps;
+		}
+	}
+	
 	private static String uvts;
 	private static Map<String,Object> traits;
 	private static SharedPreferences prefs;
+	private static List<Track> queue = new ArrayList<Track>();
 
 	public enum Event {
 		VIEW_FORUM("m"),
@@ -63,7 +78,18 @@ public class Babayaga {
 	}
 	
 	public static void track(String event, Map<String,Object> eventProps) {
-		new BabayagaTask(event, uvts, traits, eventProps).execute();
+		if (Session.getInstance().getClientConfig() == null) {
+			queue.add(new Track(event, eventProps));
+		} else {
+			new BabayagaTask(event, uvts, traits, eventProps).execute();
+		}
+	}
+	
+	public static void flush() {
+		for (Track track : queue) {
+			track(track.event, track.eventProps);
+		}
+		queue = null;
 	}
 
 	public static void init(Context context) {

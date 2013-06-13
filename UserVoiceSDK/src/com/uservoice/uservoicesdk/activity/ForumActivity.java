@@ -171,6 +171,12 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 			@Override
 			public void run() {
 				loadForum();
+				Session.getInstance().setSignInListener(new Runnable() {
+					@Override
+					public void run() {
+						getModelAdapter().reload();
+					}
+				});
 			}
 		}).init();
 	}
@@ -198,18 +204,7 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	@Override
-	protected void onStart() {
-		Session.getInstance().setSignInListener(new Runnable() {
-			@Override
-			public void run() {
-				getModelAdapter().reload();
-			}
-		});
-		super.onStart();
-	}
-	
+
 	@Override
 	protected void onStop() {
 		Session.getInstance().setSignInListener(null);

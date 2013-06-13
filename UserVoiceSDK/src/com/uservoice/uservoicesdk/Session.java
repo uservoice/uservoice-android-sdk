@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.model.AccessToken;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.ClientConfig;
@@ -137,6 +138,7 @@ public class Session {
 	
 	public void setClientConfig(ClientConfig clientConfig) {
 		this.clientConfig = clientConfig;
+		Babayaga.flush();
 	}
 	
 	public void setExternalId(String scope, String id) {
