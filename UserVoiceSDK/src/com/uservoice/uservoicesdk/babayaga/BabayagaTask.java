@@ -5,7 +5,6 @@ import java.net.URI;
 import java.net.URLEncoder;
 import java.util.Date;
 import java.util.Map;
-import java.util.TimeZone;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -17,7 +16,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
-import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
@@ -38,20 +36,12 @@ public class BabayagaTask extends AsyncTask<String,String,Void> {
 		this.eventProps = eventProps;
     }
     
-	@SuppressLint("DefaultLocale")
-	private static String getTzOffset() {
-		int offset = TimeZone.getDefault().getOffset(new Date().getTime());
-		return String.format("%s%02d:%02d", offset > 0 ? "-" : "+", (int) Math.floor(Math.abs(offset) / 60.0), (int) Math.abs(offset) % 60);
-	}
-	
 	@Override
 	protected Void doInBackground(String... args) {
 	    try {
 			JSONObject data = new JSONObject();
 			if (traits != null && !traits.isEmpty()) {
-				JSONObject u = new JSONObject(traits);
-				u.put("o", getTzOffset());
-				data.put("u", u);
+				data.put("u", new JSONObject(traits));
 			}
 			if (eventProps != null && !eventProps.isEmpty()) {
 				data.put("e", eventProps);
