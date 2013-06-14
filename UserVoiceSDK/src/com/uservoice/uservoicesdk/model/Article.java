@@ -31,7 +31,7 @@ public class Article extends BaseModel {
 	public static void loadForTopic(int topicId, final Callback<List<Article>> callback) {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("sort", "ordered");
-		doGet(apiPath("/topics/%d/articles.json", params, topicId), new RestTaskCallback(callback) {
+		doGet(apiPath("/topics/%d/articles.json", topicId), params, new RestTaskCallback(callback) {
 			@Override
 			public void onComplete(JSONObject result) throws JSONException {
                 callback.onModel(deserializeList(result, "articles", Article.class));
