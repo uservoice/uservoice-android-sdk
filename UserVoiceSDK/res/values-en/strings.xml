@@ -5,27 +5,23 @@
         <item quantity="one">comment</item>
         <item quantity="other">comments</item>
     </plurals>
-    
     <plurals name="uv_subscribers">
         <item quantity="one">subscriber</item>
         <item quantity="other">subscribers</item>
     </plurals>
-    
     <plurals name="uv_articles">
         <item quantity="one">article</item>
         <item quantity="other">articles</item>
     </plurals>
-    
     <plurals name="uv_ideas">
         <item quantity="one">idea</item>
         <item quantity="other">ideas</item>
     </plurals>
-    
     <plurals name="uv_people">
         <item quantity="one">person</item>
         <item quantity="other">people</item>
     </plurals>
-    
+
     <string name="uv_loading">Loading&#8230;</string>
     <string name="uv_submit_idea">Submit idea</string>
     <string name="uv_idea_form_title">Post an idea</string>
@@ -100,12 +96,15 @@
     <string name="uv_all_results_filter">ALL</string>
     <string name="uv_articles_filter">ARTICLES</string>
     <string name="uv_ideas_filter">IDEAS</string>
-	<string name="uv_comment_hint">Enter your comment</string>
-	<string name="uv_cancel">Cancel</string>
-	<string name="uv_select_none">(none)</string>
-	<string name="uv_confirm">Confirm</string>
-	<string name="uv_msg_confirm_discard_idea">Are you sure you want to discard your idea?</string>
-	<string name="uv_msg_confirm_discard_message">Are you sure you want to discard your message?</string>
-	<string name="uv_post_an_idea">Post an idea</string>
-	<string name="uv_password_dialog_title">Please enter your password</string>
+    <string name="uv_comment_hint">Enter your comment</string>
+    <string name="uv_cancel">Cancel</string>
+    <string name="uv_select_none">(none)</string>
+    <string name="uv_confirm">Confirm</string>
+    <string name="uv_msg_confirm_discard_idea">Are you sure you want to discard your idea?</string>
+    <string name="uv_msg_confirm_discard_message">Are you sure you want to discard your message?</string>
+    <string name="uv_post_an_idea">Post an idea</string>
+    <string name="uv_password_dialog_title">Please enter your password</string>
+    <string name="uv_article_browse_question">Was this article helpful?</string>
+    <string name="uv_thanks">Thanks!</string>
+    
 </resources>
