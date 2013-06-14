@@ -3,10 +3,12 @@ package com.uservoice.uservoicesdk.ui;
 import java.util.Locale;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.FragmentActivity;
+import android.util.TypedValue;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings.PluginState;
@@ -28,8 +30,17 @@ import com.uservoice.uservoicesdk.model.Topic;
 public class Utils {
 
 	@SuppressLint("SetJavaScriptEnabled")
-	public static void displayArticle(WebView webView, Article article) {
+	public static void displayArticle(WebView webView, Article article, Context context) {
+		TypedValue tv = new TypedValue();
+		float [] hsv =  new float[3];
+		context.getTheme().resolveAttribute(android.R.attr.textColorPrimary, tv, true);
+		Color.colorToHSV(context.getResources().getColor(tv.resourceId), hsv);
+		boolean darkTheme = hsv[2] > 0.5f;
 		String styles = "iframe, img { width: 100%; }";
+		if (darkTheme) {
+			styles += "body { background-color: #000000; color: #F6F6F6; } a { color: #0099FF; }"; 
+		}
+		webView.setBackgroundColor(Color.BLACK);
 		String html = String.format("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"http://cdn.uservoice.com/stylesheets/vendor/typeset.css\"/><style>%s</style></head><body class=\"typeset\" style=\"font-family: sans-serif; margin: 1em\"><h3>%s</h3>%s</body></html>", styles, article.getTitle(), article.getHtml());
 		webView.setWebChromeClient(new WebChromeClient());
 		webView.getSettings().setJavaScriptEnabled(true);

@@ -23,7 +23,7 @@ public class ArticleActivity extends BaseActivity implements SearchActivity {
 		Article article = Session.getInstance().getArticle();
 		setTitle(article.getTitle());
 		WebView webView = (WebView) findViewById(R.id.webview);
-		Utils.displayArticle(webView, article);
+		Utils.displayArticle(webView, article, this);
 		
 		Babayaga.track(Babayaga.Event.VIEW_ARTICLE);
 	}

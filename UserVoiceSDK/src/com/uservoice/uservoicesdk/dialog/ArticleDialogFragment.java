@@ -32,7 +32,7 @@ public class ArticleDialogFragment extends DialogFragment {
 		
 		webView = new WebView(getActivity());
 		builder.setView(webView);
-		Utils.displayArticle(webView, article);
+		Utils.displayArticle(webView, article, getActivity());
 		
 		builder.setNegativeButton(R.string.uv_no, new DialogInterface.OnClickListener() {
 			@Override
