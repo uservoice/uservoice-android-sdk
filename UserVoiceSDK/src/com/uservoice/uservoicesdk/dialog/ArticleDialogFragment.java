@@ -51,7 +51,7 @@ public class ArticleDialogFragment extends DialogFragment {
 		builder.setPositiveButton(R.string.uv_very_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				Babayaga.track(Babayaga.Event.VOTE_ARTICLE);
+				Babayaga.track(Babayaga.Event.VOTE_ARTICLE, article.getId());
 				if (getActivity() instanceof InstantAnswersActivity) {
 					HelpfulDialogFragment helpfulDialog = new HelpfulDialogFragment();
 					helpfulDialog.show(getActivity().getSupportFragmentManager(), "HelpfulDialogFragment");
@@ -59,7 +59,7 @@ public class ArticleDialogFragment extends DialogFragment {
 			}
 		});
 		
-		Babayaga.track(Babayaga.Event.VIEW_ARTICLE);
+		Babayaga.track(Babayaga.Event.VIEW_ARTICLE, article.getId());
 		return builder.create();
 	}
 	

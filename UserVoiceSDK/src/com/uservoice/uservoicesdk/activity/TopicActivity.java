@@ -97,7 +97,7 @@ public class TopicActivity extends BaseListActivity implements SearchActivity {
 			}
 		});
 		
-		Babayaga.track(Babayaga.Event.VIEW_TOPIC);
+		Babayaga.track(Babayaga.Event.VIEW_TOPIC, Session.getInstance().getTopic().getId());
 	}
 
 	@Override

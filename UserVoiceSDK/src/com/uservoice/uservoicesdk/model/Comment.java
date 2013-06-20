@@ -29,13 +29,13 @@ public class Comment extends BaseModel {
 		});
 	}
 	
-	public static void createComment(Suggestion suggestion, String text, final Callback<Comment> callback) {
+	public static void createComment(final Suggestion suggestion, String text, final Callback<Comment> callback) {
 		Map<String,String> params = new HashMap<String,String>();
 		params.put("comment[text]", text);
 		doPost(apiPath("/forums/%d/suggestions/%d/comments.json", suggestion.getForumId(), suggestion.getId()), params, new RestTaskCallback(callback) {
 			@Override
 			public void onComplete(JSONObject object) throws JSONException {
-				Babayaga.track(Babayaga.Event.COMMENT_IDEA);
+				Babayaga.track(Babayaga.Event.COMMENT_IDEA, suggestion.getId());
 				callback.onModel(deserializeObject(object, "comment", Comment.class));
 			}
 		});

@@ -1,6 +1,7 @@
 package com.uservoice.uservoicesdk.babayaga;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.model.BaseModel;
 
 public class Babayaga {
 	
@@ -72,6 +74,23 @@ public class Babayaga {
 
 	public static void track(Event event) {
 		track(event, null);
+	}
+	
+	public static void track(Event event, String searchText, List<? extends BaseModel> results) {
+		Map<String,Object> props = new HashMap<String,Object>();
+		List<Integer> ids = new ArrayList<Integer>(results.size());
+		for (BaseModel model : results) {
+			ids.add(model.getId());
+		}
+		props.put("ids", ids);
+		props.put("text", searchText);
+		track(event, props);
+	}
+	
+	public static void track(Event event, int id) {
+		Map<String,Object> props = new HashMap<String,Object>();
+		props.put("id", id);
+		track(event, props);
 	}
 
 	public static void track(Event event, Map<String,Object> eventProps) {

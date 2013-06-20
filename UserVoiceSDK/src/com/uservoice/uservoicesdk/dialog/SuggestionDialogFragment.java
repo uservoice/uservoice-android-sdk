@@ -91,7 +91,7 @@ public class SuggestionDialogFragment extends DialogFragment {
 		listView.setOnScrollListener(new PaginationScrollListener(adapter));
 		builder.setView(view);
 		builder.setNegativeButton(R.string.uv_close, null);
-		Babayaga.track(Babayaga.Event.VIEW_IDEA);
+		Babayaga.track(Babayaga.Event.VIEW_IDEA, suggestion.getId());
 		return builder.create();
 	}
 	

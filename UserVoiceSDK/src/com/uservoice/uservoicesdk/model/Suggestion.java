@@ -78,8 +78,8 @@ public class Suggestion extends BaseModel {
 		doPost(apiPath("/forums/%d/suggestions/%d/watch.json", forumId, id), params, new RestTaskCallback(callback) {
 			@Override
 			public void onComplete(JSONObject result) throws JSONException {
-				Babayaga.track(Babayaga.Event.VOTE_IDEA);
-				Babayaga.track(Babayaga.Event.SUBSCRIBE_IDEA);
+				Babayaga.track(Babayaga.Event.VOTE_IDEA, getId());
+				Babayaga.track(Babayaga.Event.SUBSCRIBE_IDEA, getId());
 				load(result.getJSONObject("suggestion"));
 				callback.onModel(Suggestion.this);
 			}

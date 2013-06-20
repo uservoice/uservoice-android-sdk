@@ -25,7 +25,7 @@ public class ArticleActivity extends BaseActivity implements SearchActivity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.article_layout);
-		Article article = Session.getInstance().getArticle();
+		final Article article = Session.getInstance().getArticle();
 		setTitle(article.getTitle());
 		WebView webView = (WebView) findViewById(R.id.webview);
 		boolean darkTheme = Utils.displayArticle(webView, article, this);
@@ -40,7 +40,7 @@ public class ArticleActivity extends BaseActivity implements SearchActivity {
 		findViewById(R.id.helpful_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Babayaga.track(Babayaga.Event.VOTE_ARTICLE);
+				Babayaga.track(Babayaga.Event.VOTE_ARTICLE, article.getId());
 				Toast.makeText(ArticleActivity.this, R.string.uv_thanks, Toast.LENGTH_SHORT).show();
 			}
 		});
@@ -52,7 +52,7 @@ public class ArticleActivity extends BaseActivity implements SearchActivity {
 			}
 		});
 
-		Babayaga.track(Babayaga.Event.VIEW_ARTICLE);
+		Babayaga.track(Babayaga.Event.VIEW_ARTICLE, article.getId());
 	}
 
 	@Override

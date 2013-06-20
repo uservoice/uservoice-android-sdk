@@ -17,6 +17,7 @@ import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.BaseModel;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.rest.Callback;
+import com.uservoice.uservoicesdk.rest.RestResult;
 import com.uservoice.uservoicesdk.rest.RestTask;
 
 public class MixedSearchAdapter extends SearchAdapter<BaseModel> implements AdapterView.OnItemClickListener {
@@ -100,11 +101,29 @@ public class MixedSearchAdapter extends SearchAdapter<BaseModel> implements Adap
 	}
 
 	@Override
-	protected RestTask search(String query, Callback<List<BaseModel>> callback) {
+	protected RestTask search(final String query, final Callback<List<BaseModel>> callback) {
 		currentQuery = query;
-		Babayaga.track(Babayaga.Event.SEARCH_ARTICLES);
-		Babayaga.track(Babayaga.Event.SEARCH_IDEAS);
-		return Article.loadInstantAnswers(query, callback);
+		return Article.loadInstantAnswers(query, new Callback<List<BaseModel>>() {
+			@Override
+			public void onModel(List<BaseModel> list) {
+				List<Article> articles = new ArrayList<Article>();
+				List<Suggestion> suggestions = new ArrayList<Suggestion>();
+				for (BaseModel model : list) {
+					if (model instanceof Article)
+						articles.add((Article) model);
+					else if (model instanceof Suggestion)
+						suggestions.add((Suggestion) model);
+				}
+				Babayaga.track(Babayaga.Event.SEARCH_ARTICLES, query, articles);
+				Babayaga.track(Babayaga.Event.SEARCH_IDEAS, query, suggestions);
+				callback.onModel(list);
+			}
+			
+			@Override
+			public void onError(RestResult error) {
+				callback.onError(error);
+			}
+		});
 	}
 
 	@Override
