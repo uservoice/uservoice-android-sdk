@@ -21,7 +21,9 @@ import android.widget.Toast;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.activity.ForumActivity;
+import com.uservoice.uservoicesdk.activity.InstantAnswersActivity;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
+import com.uservoice.uservoicesdk.deflection.Deflection;
 import com.uservoice.uservoicesdk.flow.SigninManager;
 import com.uservoice.uservoicesdk.image.ImageCache;
 import com.uservoice.uservoicesdk.model.Comment;
@@ -55,6 +57,8 @@ public class SuggestionDialogFragment extends DialogFragment {
 				final DefaultCallback<Suggestion> callback = new DefaultCallback<Suggestion>(getActivity()) {
 					@Override
 					public void onModel(Suggestion model) {
+						if (getActivity() instanceof InstantAnswersActivity)
+							Deflection.trackDeflection("subscribed", model);
 						suggestionSubscriptionUpdated(model);
 					}
 				};

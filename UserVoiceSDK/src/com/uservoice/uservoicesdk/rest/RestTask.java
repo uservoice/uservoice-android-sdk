@@ -38,11 +38,15 @@ import com.uservoice.uservoicesdk.model.AccessToken;
 public class RestTask extends AsyncTask<String, String, RestResult> {
 	private String urlPath;
 	private RestMethod method;
-	private Map<String, String> params;
+	private List<BasicNameValuePair> params;
 	private RestTaskCallback callback;
 	private HttpUriRequest request;
 
 	public RestTask(RestMethod method, String urlPath, Map<String, String> params, RestTaskCallback callback) {
+		this(method, urlPath, paramsToList(params), callback);
+	}
+
+	public RestTask(RestMethod method, String urlPath, List<BasicNameValuePair> params, RestTaskCallback callback) {
 		this.method = method;
 		this.urlPath = urlPath;
 		this.callback = callback;
@@ -116,7 +120,7 @@ public class RestTask extends AsyncTask<String, String, RestResult> {
 
 	private HttpUriRequest requestWithQueryString(HttpRequestBase request, Uri.Builder uriBuilder) throws URISyntaxException {
 		if (params != null) {
-			for (BasicNameValuePair param : paramsToList(params)) {
+			for (BasicNameValuePair param : params) {
 				uriBuilder.appendQueryParameter(param.getName(), param.getValue());
 			}
 		}
@@ -126,13 +130,13 @@ public class RestTask extends AsyncTask<String, String, RestResult> {
 
 	private HttpUriRequest requestWithEntity(HttpEntityEnclosingRequestBase request, Uri.Builder uriBuilder) throws UnsupportedEncodingException, URISyntaxException {
 		if (params != null) {
-			request.setEntity(new UrlEncodedFormEntity(paramsToList(params)));
+			request.setEntity(new UrlEncodedFormEntity(params));
 		}
 		request.setURI(new URI(uriBuilder.build().toString()));
 		return request;
 	}
 
-	private static List<BasicNameValuePair> paramsToList(Map<String, String> params) {
+	public static List<BasicNameValuePair> paramsToList(Map<String, String> params) {
 		ArrayList<BasicNameValuePair> formList = new ArrayList<BasicNameValuePair>(params.size());
 		for (String key : params.keySet()) {
 			String value = params.get(key);

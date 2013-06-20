@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.deflection.Deflection;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.BaseModel;
 import com.uservoice.uservoicesdk.model.Suggestion;
@@ -121,6 +122,7 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		int type = getItemViewType(position);
 		if (type == INSTANT_ANSWER) {
+			Deflection.trackDeflection("show", (BaseModel) getItem(position));
 			Utils.showModel(context, (BaseModel) getItem(position));
 		}
 	}
@@ -249,13 +251,16 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 
 	protected void onButtonTapped() {
 		if (state == State.INIT) {
-			if (textField.getText().toString().trim().isEmpty())
+			String query = textField.getText().toString().trim();
+			if (query.isEmpty())
 				return;
 			state = State.INIT_LOADING;
 			notifyDataSetChanged();
-			Article.loadInstantAnswers(textField.getText().toString().trim(), new DefaultCallback<List<BaseModel>>(context) {
+			Deflection.setSearchText(query);
+			Article.loadInstantAnswers(query, new DefaultCallback<List<BaseModel>>(context) {
 				@Override
 				public void onModel(List<BaseModel> model) {
+					Deflection.trackSearchDeflection(model);
 					instantAnswers = model;
 					if (instantAnswers.isEmpty())
 						state = State.DETAILS;

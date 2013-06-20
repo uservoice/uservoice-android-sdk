@@ -15,7 +15,7 @@ import com.uservoice.uservoicesdk.model.BaseModel;
 public class Babayaga {
 	
 	static String DOMAIN = "by.uservoice.com";
-	static String CHANNEL = "d";
+	public static String CHANNEL = "d";
 	
 	private static class Track {
 		public String event;
@@ -117,6 +117,10 @@ public class Babayaga {
 		if (prefs.contains("uvts")) {
 			uvts = prefs.getString("uvts", null);
 		}
+	}
+	
+	public static String getUvts() {
+		return uvts;
 	}
 
 }

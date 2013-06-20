@@ -11,6 +11,8 @@ import android.widget.EditText;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.activity.InstantAnswersActivity;
+import com.uservoice.uservoicesdk.deflection.Deflection;
 import com.uservoice.uservoicesdk.flow.SigninManager;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.ui.DefaultCallback;
@@ -45,6 +47,8 @@ public class SubscribeDialogFragment extends DialogFragment {
 						suggestion.subscribe(new DefaultCallback<Suggestion>(getActivity()) {
 							@Override
 							public void onModel(Suggestion model) {
+								if (getActivity() instanceof InstantAnswersActivity)
+									Deflection.trackDeflection("subscribed", model);
 								suggestionDialog.suggestionSubscriptionUpdated(model);
 								dialog.dismiss();
 							};

@@ -11,6 +11,7 @@ import android.webkit.WebView;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.activity.InstantAnswersActivity;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
+import com.uservoice.uservoicesdk.deflection.Deflection;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.ui.InstantAnswersAdapter;
 import com.uservoice.uservoicesdk.ui.Utils;
@@ -38,6 +39,7 @@ public class ArticleDialogFragment extends DialogFragment {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if (getActivity() instanceof InstantAnswersActivity) {
+					Deflection.trackDeflection("unhelpful", article);
 					InstantAnswersActivity activity = (InstantAnswersActivity) getActivity();
 					InstantAnswersAdapter adapter = (InstantAnswersAdapter) activity.getListAdapter();
 					adapter.notHelpful();
@@ -53,6 +55,7 @@ public class ArticleDialogFragment extends DialogFragment {
 			public void onClick(DialogInterface dialog, int which) {
 				Babayaga.track(Babayaga.Event.VOTE_ARTICLE, article.getId());
 				if (getActivity() instanceof InstantAnswersActivity) {
+					Deflection.trackDeflection("helpful", article);
 					HelpfulDialogFragment helpfulDialog = new HelpfulDialogFragment();
 					helpfulDialog.show(getActivity().getSupportFragmentManager(), "HelpfulDialogFragment");
 				}
