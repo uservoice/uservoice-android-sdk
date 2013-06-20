@@ -40,6 +40,7 @@ public class ArticleActivity extends BaseActivity implements SearchActivity {
 		findViewById(R.id.helpful_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				Babayaga.track(Babayaga.Event.VOTE_ARTICLE);
 				Toast.makeText(ArticleActivity.this, R.string.uv_thanks, Toast.LENGTH_SHORT).show();
 			}
 		});
