@@ -43,7 +43,7 @@ public class RestTask extends AsyncTask<String, String, RestResult> {
 	private HttpUriRequest request;
 
 	public RestTask(RestMethod method, String urlPath, Map<String, String> params, RestTaskCallback callback) {
-		this(method, urlPath, paramsToList(params), callback);
+		this(method, urlPath, params == null ? null : paramsToList(params), callback);
 	}
 
 	public RestTask(RestMethod method, String urlPath, List<BasicNameValuePair> params, RestTaskCallback callback) {
