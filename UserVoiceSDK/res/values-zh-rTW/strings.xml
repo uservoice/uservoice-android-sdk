@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <plurals name="uv_comments">
+        <item quantity="one">評論</item>
+        <item quantity="other">評論</item>
+    </plurals>
+    <plurals name="uv_subscribers">
+        <item quantity="one">訂閱者</item>
+        <item quantity="other">訂閱者</item>
+    </plurals>
+    <plurals name="uv_articles">
+        <item quantity="one">文章</item>
+        <item quantity="other">文章</item>
+    </plurals>
+    <plurals name="uv_ideas">
+        <item quantity="one">意見</item>
+        <item quantity="other">意見</item>
+    </plurals>
+    <plurals name="uv_people">
+        <item quantity="one">人</item>
+        <item quantity="other">人</item>
+    </plurals>
+
+    <string name="uv_loading">讀取中&#8230;</string>
+    <string name="uv_submit_idea">送出意見</string>
+    <string name="uv_idea_form_title">張貼意見</string>
+    <string name="uv_menu_search">搜尋</string>
+    <string name="uv_email_address">Email 信箱</string>
+    <string name="uv_email_address_hint">your@email.com （必填）</string>
+    <string name="uv_display_name">顯示名稱</string>
+    <string name="uv_password">密碼</string>
+    <string name="uv_forgot_password">忘記密碼</string>
+    <string name="uv_msg_comment_posted">你的評論已經張貼</string>
+    <string name="uv_title_idea">意見</string>
+    <string name="uv_posted_by_format">由 %1$s 於 %2$s 張貼</string>
+    <string name="uv_all_articles">所有文章</string>
+    <string name="uv_portal_title">幫助</string>
+    <string name="uv_network_error">連線到 UserVoice 時發生錯誤</string>
+    <string name="uv_signin_dialog_title">登入</string>
+    <string name="uv_signin_dialog_ok">登入</string>
+    <string name="uv_failed_signin_error">錯誤的 Email 或密碼</string>
+    <string name="uv_msg_forgot_password">忘記密碼通知信已經送出</string>
+    <string name="uv_subscribe_dialog_title">訂閱此意見</string>
+    <string name="uv_remove_votes">移除投票</string>
+    <string name="uv_feedback_forum">意見回饋論壇</string>
+    <string name="uv_knowledge_base">知識庫</string>
+    <string name="uv_admin_response_format">管理員回應： %1$s</string>
+    <string name="uv_post_comment">張貼評論</string>
+    <string name="uv_next">下一頁</string>
+    <string name="uv_none_of_these_help">這些內容沒有幫助</string>
+    <string name="uv_send_message">發送訊息</string>
+    <string name="uv_your_email_address">你的 Email 信箱</string>
+    <string name="uv_your_name">你的姓名</string>
+    <string name="uv_name_hint">“匿名”</string>
+    <string name="uv_select_one">請選擇</string>
+    <string name="uv_value">值</string>
+    <string name="uv_article">文章</string>
+    <string name="uv_idea">意見</string>
+    <string name="uv_msg_ticket_created">你的訊息已經送出</string>
+    <string name="uv_msg_idea_created">你的意見已經發佈</string>
+    <string name="uv_article_instant_answer_question">這篇文章對你有幫助嗎？</string>
+    <string name="uv_suggestion_instant_answer_question">這個意見對你有幫助嗎？</string>
+    <string name="uv_no">否</string>
+    <string name="uv_yes">是</string>
+    <string name="uv_very_yes">是！</string>
+    <string name="uv_helpful_article_message_question">你仍然想要發送訊息嗎？</string>
+    <string name="uv_unhelpful_article_message_question">你是否願意發送訊息給我們？</string>
+    <string name="uv_idea_description_heading">更詳細地描述你的意見</string>
+    <string name="uv_category">分類</string>
+    <string name="uv_idea_description_hint">（選填）</string>
+    <string name="uv_idea_text_heading">我建議你&#8230;</string>
+    <string name="uv_idea_text_hint">輸入意見&#8230;</string>
+    <string name="uv_idea_form_help">當你張貼一則意見到我們的論壇，其他人可以訂閱或者是加入評論。當我們回復此意見時，你會隨即收到通知。</string>
+    <string name="uv_contact_us">聯絡我們</string>
+    <string name="uv_close">關閉</string>
+    <string name="uv_new_comment">新評論</string>
+    <string name="uv_error">錯誤</string>
+    <string name="uv_msg_user_identity_validation">請輸入你的 Email 信箱</string>
+    <string name="uv_status_format">狀態： %1$s</string>
+    <string name="uv_subscribe">訂閱</string>
+    <string name="uv_nevermind">沒關係</string>
+    <string name="uv_msg_subscribe">我們會通知你這個意見的處理進度。</string>
+    <string name="uv_msg_subscribe_success">你已經訂閱了這個意見。</string>
+    <string name="uv_msg_unsubscribe">你已經取消訂閱了這個意見。</string>
+    <string name="uv_msg_custom_fields_validation">請輸入所有必填欄位。</string>
+    <string name="uv_contact_hint">輸入你的問題或是意見回饋</string>
+    <string name="uv_matching_ideas">符合的意見</string>
+    <string name="uv_matching_articles">符合的文章</string>
+    <string name="uv_matching_articles_and_ideas">符合的文章和意見</string>
+    <string name="uv_post_idea_continue_button">我仍然想張貼我的意見</string>
+    <string name="uv_contact_continue_button">我仍然想發送訊息</string>
+    <string name="uv_i_want_this">我想要這個！</string>
+    <string name="uv_number_of_subscribers_format">%1$s 喜歡這個意見</string>
+    <string name="uv_post_a_comment">張貼一則評論</string>
+    <string name="uv_all_results_filter">全部</string>
+    <string name="uv_articles_filter">文章</string>
+    <string name="uv_ideas_filter">意見</string>
+    <string name="uv_comment_hint">輸入你的評論</string>
+    <string name="uv_cancel">取消</string>
+    <string name="uv_select_none">（無）</string>
+    <string name="uv_confirm">確認</string>
+    <string name="uv_msg_confirm_discard_idea">你確定要捨棄你的意見？</string>
+    <string name="uv_msg_confirm_discard_message">你確定要捨棄你的訊息？</string>
+    <string name="uv_post_an_idea">張貼一則意見</string>
+    <string name="uv_password_dialog_title">請輸入你的密碼</string>
+    <string name="uv_article_browse_question">這篇文章對你有幫助嗎？</string>
+    <string name="uv_thanks">謝謝！</string>
+
+</resources>
