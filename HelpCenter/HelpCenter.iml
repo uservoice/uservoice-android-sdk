@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
   <component name="EclipseModuleManager" forced_jdk="true">
-    <libelement value="jar://$MODULE_DIR$/libs/signpost-commonshttp4-1.2.1.2.jar!/" />
-    <libelement value="jar://$MODULE_DIR$/libs/signpost-core-1.2.1.2.jar!/" />
     <src_description expected_position="1">
       <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
       <src_folder value="file://$MODULE_DIR$/gen" expected_position="1" />
@@ -12,9 +10,7 @@
   </component>
   <component name="FacetManager">
     <facet type="android" name="Android">
-      <configuration>
-        <option name="LIBRARY_PROJECT" value="true" />
-      </configuration>
+      <configuration />
     </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="false">
@@ -26,33 +22,7 @@
     </content>
     <orderEntry type="jdk" jdkName="Android 4.2.2 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library name="signpost-commonshttp4-1.2.1.2.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/signpost-commonshttp4-1.2.1.2.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="signpost-core-1.2.1.2.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/signpost-core-1.2.1.2.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/android-support-v4.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
+    <orderEntry type="module" module-name="UserVoiceSDK" />
   </component>
 </module>
 
