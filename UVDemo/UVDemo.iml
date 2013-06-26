@@ -23,15 +23,6 @@
     </content>
     <orderEntry type="jdk" jdkName="Android 4.2.2 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library name="uservoicesdk.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../UserVoiceSDK/bin/uservoicesdk.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
     <orderEntry type="module" module-name="UserVoiceSDK" />
   </component>
 </module>
