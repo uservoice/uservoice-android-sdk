@@ -177,8 +177,6 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 			}
 		});
 
-		Babayaga.track(Babayaga.Event.VIEW_FORUM, forum.getId());
-
 		new InitManager(this, new Runnable() {
 			@Override
 			public void run() {
@@ -226,6 +224,7 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 	private void loadForum() {
 		if (Session.getInstance().getForum() != null) {
 			forum = Session.getInstance().getForum();
+			Babayaga.track(Babayaga.Event.VIEW_FORUM, forum.getId());
 			setTitle(forum.getName());
 			getModelAdapter().loadMore();
 			return;
