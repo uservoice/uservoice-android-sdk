@@ -60,11 +60,13 @@ public class RestTask extends AsyncTask<String, String, RestResult> {
 			if (isCancelled())
 				throw new InterruptedException();
 			OAuthConsumer consumer = Session.getInstance().getOAuthConsumer();
-			AccessToken accessToken = Session.getInstance().getAccessToken();
-			if (accessToken != null) {
-				consumer.setTokenWithSecret(accessToken.getKey(), accessToken.getSecret());
-			}
-			consumer.sign(request);
+            if (consumer != null) {
+                AccessToken accessToken = Session.getInstance().getAccessToken();
+                if (accessToken != null) {
+                    consumer.setTokenWithSecret(accessToken.getKey(), accessToken.getSecret());
+                }
+                consumer.sign(request);
+            }
 			request.setHeader("Accept-Language", Locale.getDefault().getLanguage());
 			request.setHeader("API-Client", String.format("uservoice-android-%s", UserVoice.getVersion()));
 			HttpClient client = new DefaultHttpClient();

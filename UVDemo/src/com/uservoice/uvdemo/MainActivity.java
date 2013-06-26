@@ -19,9 +19,8 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-//		Config config = new Config("uservoice.us.com:3000", "8L66hVQUQ45TOLl0dA70YA", "a5e6da1827538a27755a4f4de0602e82533aff73");
-//		Config config = new Config("yoursite.uservoice.com", "YOUR_API_KEY", "YOUR_API_SECRET");
-		Config config = new Config("demo.uservoice.com", "gSQ4ljiU2SbSViYQj3py2A", "SOL9wuktQKGibaLXmdPnPj2pjyJ5xj9zAIGGuMEZHyI");
+//		Config config = new Config("yoursite.uservoice.com");
+		Config config = new Config("demo.uservoice.com");
 //		config.setTopicId(9579);
 		UserVoice.init(config, this);
 

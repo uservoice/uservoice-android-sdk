@@ -19,6 +19,10 @@ public class Config {
 	private boolean showContactUs = true;
 	private boolean showKnowledgeBase = true;
 	private Map<String,Object> userTraits = new HashMap<String,Object>();
+
+    public Config(String site) {
+        this.site = site;
+    }
 	
 	public Config(String site, String key, String secret) {
 		this.site = site;

@@ -32,6 +32,42 @@ public class InitManager {
 				public void onModel(ClientConfig model) {
 					Session.getInstance().setClientConfig(model);
 					configDone = true;
+
+                    if (shouldSignIn()) {
+                        RequestToken.getRequestToken(new DefaultCallback<RequestToken>(context) {
+                            @Override
+                            public void onModel(RequestToken model) {
+                                if (canceled) return;
+                                Session.getInstance().setRequestToken(model);
+                                Config config = Session.getInstance().getConfig();
+                                User.findOrCreate(config.getEmail(), config.getName(), config.getGuid(), new DefaultCallback<AccessTokenResult<User>>(context) {
+                                    public void onModel(AccessTokenResult<User> model) {
+                                        if (canceled) return;
+                                        Session.getInstance().setAccessToken(context, model.getAccessToken());
+                                        Session.getInstance().setUser(model.getModel());
+                                        userDone = true;
+                                        checkComplete();
+                                    };
+                                });
+                            }
+                        });
+                    } else {
+                        AccessToken accessToken = BaseModel.load(context, "access_token", AccessToken.class);
+                        if (accessToken != null) {
+                            Session.getInstance().setAccessToken(accessToken);
+                            User.loadCurrentUser(new DefaultCallback<User>(context) {
+                                @Override
+                                public void onModel(User model) {
+                                    Session.getInstance().setUser(model);
+                                    userDone = true;
+                                    checkComplete();
+                                }
+                            });
+                        } else {
+                            userDone = true;
+                        }
+                    }
+
 					checkComplete();
 				}
 			});
@@ -39,45 +75,10 @@ public class InitManager {
 			configDone = true;
 		}
 
-		if (Session.getInstance().getUser() == null) {
-			if (shouldSignIn()) {
-				RequestToken.getRequestToken(new DefaultCallback<RequestToken>(context) {
-					@Override
-					public void onModel(RequestToken model) {
-						if (canceled) return;
-						Session.getInstance().setRequestToken(model);
-						Config config = Session.getInstance().getConfig();
-						User.findOrCreate(config.getEmail(), config.getName(), config.getGuid(), new DefaultCallback<AccessTokenResult<User>>(context) {
-							public void onModel(AccessTokenResult<User> model) {
-								if (canceled) return;
-								Session.getInstance().setAccessToken(context, model.getAccessToken());
-								Session.getInstance().setUser(model.getModel());
-								userDone = true;
-								checkComplete();
-							};
-						});
-					}
-				});
-			} else {
-				AccessToken accessToken = BaseModel.load(context, "access_token", AccessToken.class);
-				if (accessToken != null) {
-					Session.getInstance().setAccessToken(accessToken);
-					User.loadCurrentUser(new DefaultCallback<User>(context) {
-						@Override
-						public void onModel(User model) {
-							Session.getInstance().setUser(model);
-							userDone = true;
-							checkComplete();
-						}
-					});
-				} else {
-					userDone = true;
-					checkComplete();
-				}
-			}
-		} else {
+		if (Session.getInstance().getUser() != null) {
 			userDone = true;
 		}
+
 		checkComplete();
 	}
 	

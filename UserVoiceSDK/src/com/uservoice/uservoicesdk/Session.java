@@ -103,7 +103,10 @@ public class Session {
 	
 	public OAuthConsumer getOAuthConsumer() {
 		if (oauthConsumer == null) {
-			oauthConsumer = new CommonsHttpOAuthConsumer(config.getKey(), config.getSecret());
+            if (config.getKey() != null)
+			    oauthConsumer = new CommonsHttpOAuthConsumer(config.getKey(), config.getSecret());
+            else if (clientConfig != null)
+                oauthConsumer = new CommonsHttpOAuthConsumer(clientConfig.getKey(), clientConfig.getSecret());
 		}
 		return oauthConsumer;
 	}

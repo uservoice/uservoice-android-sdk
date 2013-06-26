@@ -2,6 +2,7 @@ package com.uservoice.uservoicesdk.model;
 
 import java.util.List;
 
+import com.uservoice.uservoicesdk.Session;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,9 +17,12 @@ public class ClientConfig extends BaseModel {
 	private List<CustomField> customFields;
 	private String defaultSort;
 	private String subdomainId;
+    private String key;
+    private String secret;
 	
 	public static void loadClientConfig(final Callback<ClientConfig> callback) {
-		doGet(apiPath("/client.json"), new RestTaskCallback(callback) {
+        String path = Session.getInstance().getConfig().getKey() == null ? "/clients/default.json" : "/client.json";
+		doGet(apiPath(path), new RestTaskCallback(callback) {
 			@Override
 			public void onComplete(JSONObject result) throws JSONException {
 				callback.onModel(deserializeObject(result, "client", ClientConfig.class));
@@ -37,6 +41,9 @@ public class ClientConfig extends BaseModel {
 		customFields = deserializeList(object, "custom_fields", CustomField.class);
 		defaultSort = getString(object.getJSONObject("subdomain"), "default_sort");
 		subdomainId = getString(object.getJSONObject("subdomain"), "id");
+        key = object.getString("key");
+        // secret will only be available for the default client
+        secret = object.has("secret") ? object.getString("secret") : null;
 	}
 	
 	public boolean isTicketSystemEnabled() {
@@ -66,4 +73,12 @@ public class ClientConfig extends BaseModel {
 	public String getSubdomainId() {
 		return subdomainId;
 	}
+
+    public String getKey() {
+        return key;
+    }
+
+    public String getSecret() {
+        return secret;
+    }
 }
