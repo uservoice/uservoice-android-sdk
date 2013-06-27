@@ -1,5 +1,6 @@
 package com.uservoice.helpcenter;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -8,7 +9,14 @@ import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.widget.EditText;
 
+@SuppressLint("ValidFragment")
 public class AccountDialogFragment extends DialogFragment {
+	
+	private final MainAdapter adapter;
+
+	public AccountDialogFragment(MainAdapter adapter) {
+		this.adapter = adapter;
+	}
 	
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -25,6 +33,7 @@ public class AccountDialogFragment extends DialogFragment {
 				if (subdomain.indexOf('.') == -1) {
 					subdomain += ".uservoice.com";
 				}
+				adapter.addAccount(subdomain);
 			}
 		});
 		return builder.create();

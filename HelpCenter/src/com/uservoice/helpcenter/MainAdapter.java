@@ -9,6 +9,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.uservoice.uservoicesdk.Config;
+import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.UserVoice;
+import com.uservoice.uservoicesdk.model.ClientConfig;
+import com.uservoice.uservoicesdk.ui.DefaultCallback;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -29,6 +35,7 @@ public class MainAdapter extends BaseAdapter implements AdapterView.OnItemClickL
 	private FragmentActivity context;
 	private LayoutInflater inflater;
 	private List<Map<String, String>> accounts;
+	private Map<String,String> activeAccount;
 
 	public MainAdapter(FragmentActivity context) {
 		this.context = context;
@@ -133,10 +140,29 @@ public class MainAdapter extends BaseAdapter implements AdapterView.OnItemClickL
 
 		return view;
 	}
-
+	
 	@Override
 	public boolean isEnabled(int position) {
 		return position > 0 && position < getCount();
+	}
+	
+	public void addAccount(final String subdomain) {
+		// TODO maybe add a loading cell
+		activeAccount = null;
+		Config config = new Config(subdomain);
+		UserVoice.init(config, context);
+		ClientConfig.loadClientConfig(new DefaultCallback<ClientConfig>(context) {
+			@Override
+			public void onModel(ClientConfig model) {
+				Session.getInstance().setClientConfig(model);
+				Map<String,String> account = new HashMap<String,String>();
+				account.put("subdomain", subdomain);
+				account.put("name", model.getAccountName());
+				accounts.add(account);
+				saveAccounts();
+				activeAccount = account;
+			}
+		});
 	}
 
 	@Override
@@ -144,8 +170,17 @@ public class MainAdapter extends BaseAdapter implements AdapterView.OnItemClickL
 		Log.d("UV", String.format("Position: %d", position));
 		int type = getItemViewType(position);
 		if (type == ADD) {
-			AccountDialogFragment dialog = new AccountDialogFragment();
+			AccountDialogFragment dialog = new AccountDialogFragment(this);
 			dialog.show(context.getSupportFragmentManager(), "AccountDialogFragment");
+		} else if (type == ACCOUNT) {
+			@SuppressWarnings("unchecked")
+			Map<String,String> account = (Map<String, String>) getItem(position);
+			if (activeAccount != account) {
+				Config config = new Config(account.get("subdomain"));
+				UserVoice.init(config, context);
+				activeAccount = account;
+			}
+			UserVoice.launchContactUs(context);
 		}
 	}
 

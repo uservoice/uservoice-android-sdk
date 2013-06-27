@@ -19,6 +19,7 @@ public class ClientConfig extends BaseModel {
 	private String subdomainId;
     private String key;
     private String secret;
+    private String accountName;
 	
 	public static void loadClientConfig(final Callback<ClientConfig> callback) {
         String path = Session.getInstance().getConfig().getKey() == null ? "/clients/default.json" : "/client.json";
@@ -41,9 +42,14 @@ public class ClientConfig extends BaseModel {
 		customFields = deserializeList(object, "custom_fields", CustomField.class);
 		defaultSort = getString(object.getJSONObject("subdomain"), "default_sort");
 		subdomainId = getString(object.getJSONObject("subdomain"), "id");
+		accountName = getString(object.getJSONObject("subdomain"), "name");
         key = object.getString("key");
         // secret will only be available for the default client
         secret = object.has("secret") ? object.getString("secret") : null;
+	}
+	
+	public String getAccountName() {
+		return accountName;
 	}
 	
 	public boolean isTicketSystemEnabled() {
