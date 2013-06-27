@@ -32,6 +32,10 @@ public class Session {
 		return instance;
 	}
 	
+	public static void reset() {
+		instance = null;
+	}
+	
 	private Session() {}
 	
 	private Context context;
