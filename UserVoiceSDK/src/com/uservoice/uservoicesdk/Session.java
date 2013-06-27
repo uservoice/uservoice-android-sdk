@@ -72,8 +72,7 @@ public class Session {
 	}
 	
 	public void persistIdentity(String name, String email) {
-		SharedPreferences prefs = context.getSharedPreferences("uv", 0);
-		Editor edit = prefs.edit();
+		Editor edit = getSharedPreferences().edit();
 		edit.putString("user_name", name);
 		edit.putString("user_email", email);
 		edit.commit();
@@ -82,15 +81,13 @@ public class Session {
 	public String getName() {
 		if (user != null)
 			return user.getName();
-		SharedPreferences prefs = context.getSharedPreferences("uv", 0);
-		return prefs.getString("user_name", null);
+		return getSharedPreferences().getString("user_name", null);
 	}
 	
 	public String getEmail() {
 		if (user != null)
 			return user.getEmail();
-		SharedPreferences prefs = context.getSharedPreferences("uv", 0);
-		return prefs.getString("user_email", null);
+		return getSharedPreferences().getString("user_email", null);
 	}
 	
 	public RequestToken getRequestToken() {
@@ -117,9 +114,13 @@ public class Session {
 	
 	public void setAccessToken(Context context, AccessToken accessToken) {
 		this.accessToken = accessToken;
-		accessToken.persist(context, "access_token");
+		accessToken.persist(getSharedPreferences(), "access_token");
 		if (signinListener != null)
 			signinListener.run();
+	}
+	
+	public SharedPreferences getSharedPreferences() {
+		return context.getSharedPreferences("uv_" + config.getSite().replaceAll("\\W", "_"), 0);
 	}
 	
 	public void setAccessToken(AccessToken accessToken) {
@@ -211,7 +212,7 @@ public class Session {
 	public void setCustomField(CustomField customField) {
 		this.customField = customField;
 	}
-	
+
 	public CustomField getCustomField() {
 		return customField;
 	}
