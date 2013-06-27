@@ -19,7 +19,9 @@ public class MainActivity extends BaseListActivity {
 		footer.setTextColor(Color.rgb(119, 119, 119));
 		footer.setTextSize(13);
 		getListView().addFooterView(footer);
-		setListAdapter(new MainAdapter(this));
+		MainAdapter adapter = new MainAdapter(this);
+		setListAdapter(adapter);
+		getListView().setOnItemClickListener(adapter);
 	}
 
 	@Override

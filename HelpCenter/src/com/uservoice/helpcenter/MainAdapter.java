@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -135,13 +136,17 @@ public class MainAdapter extends BaseAdapter implements AdapterView.OnItemClickL
 
 	@Override
 	public boolean isEnabled(int position) {
-		return position > 0;
+		return position > 0 && position < getCount();
 	}
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		// TODO Auto-generated method stub
-
+		Log.d("UV", String.format("Position: %d", position));
+		int type = getItemViewType(position);
+		if (type == ADD) {
+			AccountDialogFragment dialog = new AccountDialogFragment();
+			dialog.show(context.getSupportFragmentManager(), "AccountDialogFragment");
+		}
 	}
 
 }
