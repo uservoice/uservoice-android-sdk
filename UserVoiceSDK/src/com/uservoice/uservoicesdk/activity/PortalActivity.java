@@ -1,6 +1,5 @@
 package com.uservoice.uservoicesdk.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -25,7 +24,6 @@ public class PortalActivity extends BaseListActivity implements SearchActivity {
 	}
 
 	@Override
-	@SuppressLint("NewApi")
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.portal, menu);
 		setupScopedSearch(menu);
