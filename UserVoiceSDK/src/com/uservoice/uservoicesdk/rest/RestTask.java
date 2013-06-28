@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import android.util.Log;
 import oauth.signpost.OAuthConsumer;
 
 import org.apache.http.HttpEntity;

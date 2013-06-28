@@ -50,12 +50,12 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 		new InitManager(context, new Runnable() {
 			@Override
 			public void run() {
-				configLoaded = true;
-				notifyDataSetChanged();
-				loadForum();
+            configLoaded = true;
+            notifyDataSetChanged();
+            loadForum();
+            loadTopics();
 			}
 		}).init();
-		loadTopics();
 	}
 
 	private List<Topic> getTopics() {

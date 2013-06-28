@@ -106,6 +106,8 @@ public class Babayaga {
 	}
 	
 	public static void flush() {
+        if (queue == null)
+            return;
 		for (Track track : queue) {
 			track(track.event, track.eventProps);
 		}

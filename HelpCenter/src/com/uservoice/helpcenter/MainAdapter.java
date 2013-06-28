@@ -161,6 +161,7 @@ public class MainAdapter extends BaseAdapter implements AdapterView.OnItemClickL
 				accounts.add(account);
 				saveAccounts();
 				activeAccount = account;
+                notifyDataSetChanged();
 			}
 		});
 	}
@@ -180,7 +181,7 @@ public class MainAdapter extends BaseAdapter implements AdapterView.OnItemClickL
 				UserVoice.init(config, context);
 				activeAccount = account;
 			}
-			UserVoice.launchContactUs(context);
+			UserVoice.launchUserVoice(context);
 		}
 	}
 
