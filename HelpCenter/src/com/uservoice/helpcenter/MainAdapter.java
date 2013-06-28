@@ -100,7 +100,9 @@ public class MainAdapter extends BaseAdapter implements AdapterView.OnItemClickL
 			return HEADER;
 		if (position < accounts.size() + 1)
 			return ACCOUNT;
-		return ADD;
+        if (position == accounts.size() + 1)
+	    	return ADD;
+        return HEADER;
 	}
 
 	@Override
@@ -168,7 +170,6 @@ public class MainAdapter extends BaseAdapter implements AdapterView.OnItemClickL
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		Log.d("UV", String.format("Position: %d", position));
 		int type = getItemViewType(position);
 		if (type == ADD) {
 			AccountDialogFragment dialog = new AccountDialogFragment(this);
