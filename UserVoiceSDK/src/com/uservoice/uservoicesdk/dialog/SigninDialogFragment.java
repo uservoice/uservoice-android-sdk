@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -110,7 +111,8 @@ public class SigninDialogFragment extends DialogFragment {
 		        imm.showSoftInput(emailField, InputMethodManager.SHOW_IMPLICIT);
 			}
 		});
-		return dialog;
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        return dialog;
 	}
 	
 	private void discoverUser() {

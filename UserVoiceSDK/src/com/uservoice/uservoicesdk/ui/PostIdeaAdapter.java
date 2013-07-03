@@ -88,6 +88,7 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
 		} else if (type == TEXT) {
 			TextView textView = (TextView) view.findViewById(R.id.text);
 			textView.setHint(R.string.uv_idea_text_hint);
+            textView.setMinLines(1);
 		} else {
 			return super.getView(position, view, parent);
 		}

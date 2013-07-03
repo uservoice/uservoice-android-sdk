@@ -1,55 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:paddingBottom="10dp"
-	android:paddingLeft="10dp"
-	android:paddingRight="10dp"
-	android:paddingTop="10dp"
-	android:orientation="vertical" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-	<EditText
-		android:id="@+id/comment_edit_text"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:ems="10"
-		android:gravity="top"
-		android:hint="@string/uv_comment_hint"
-		android:inputType="textMultiLine"
-		/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:orientation="vertical">
 
-	<LinearLayout
-		android:id="@+id/email"
-		android:layout_height="wrap_content"
-		android:layout_width="wrap_content"
-		android:orientation="vertical" >
+        <EditText
+            android:id="@+id/comment_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="60dp"
+            android:ems="10"
+            android:gravity="top"
+            android:hint="@string/uv_comment_hint"
+            android:inputType="textMultiLine" />
 
-		<include layout="@layout/header_item_light"/>
+        <LinearLayout
+            android:id="@+id/email"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="vertical">
 
-		<EditText
-			android:id="@+id/text_field"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:hint="@string/uv_email_address"
-			android:inputType="textEmailAddress"
-			android:ems="10" >
-		</EditText>
-	</LinearLayout>
+            <include layout="@layout/header_item_light" />
 
-	<LinearLayout
-		android:id="@+id/name"
-		android:layout_height="wrap_content"
-		android:layout_width="wrap_content"
-		android:orientation="vertical" >
-		<include layout="@layout/header_item_light"/>
+            <EditText
+                android:id="@+id/text_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/uv_email_address"
+                android:inputType="textEmailAddress"
+                android:ems="10"></EditText>
+        </LinearLayout>
 
-		<EditText
-			android:id="@+id/text_field"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:hint="@string/uv_name_hint"
-			android:ems="10" >
-		</EditText>
-	</LinearLayout>
+        <LinearLayout
+            android:id="@+id/name"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="vertical">
 
-</LinearLayout>
+            <include layout="@layout/header_item_light" />
+
+            <EditText
+                android:id="@+id/text_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/uv_name_hint"
+                android:ems="10"></EditText>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
