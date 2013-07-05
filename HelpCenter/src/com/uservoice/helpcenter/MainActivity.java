@@ -25,7 +25,7 @@ public class MainActivity extends BaseListActivity {
         TextView textView = (TextView) footer.findViewById(R.id.text);
         textView.setMovementMethod(LinkMovementMethod.getInstance());
 		getListView().addFooterView(footer, null, false);
-		adapter = new MainAdapter(this);
+		adapter = new MainAdapter(this, getListView());
 		setListAdapter(adapter);
 		getListView().setOnItemClickListener(adapter);
         getListView().setOnItemLongClickListener(adapter);

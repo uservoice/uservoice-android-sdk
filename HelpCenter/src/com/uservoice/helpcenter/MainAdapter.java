@@ -7,6 +7,7 @@ import java.util.Map;
 
 import android.graphics.Color;
 import android.view.*;
+import android.widget.AbsListView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,16 +32,18 @@ public class MainAdapter extends BaseAdapter implements AdapterView.OnItemClickL
 	private static int HEADER = 0;
 	private static int ACCOUNT = 1;
 	private static int ADD = 2;
-	private FragmentActivity context;
+    private final AbsListView listView;
+    private FragmentActivity context;
 	private LayoutInflater inflater;
 	private List<Map<String, String>> accounts;
 	private Map<String,String> activeAccount;
-    private Map<String,String> selectedAccount;
+    private List<Map<String,String>> selectedAccounts = new ArrayList<Map<String, String>>();
     private ActionMode actionMode;
-    private View selectedView;
+    private List<View> selectedViews = new ArrayList<View>();
 
-    public MainAdapter(FragmentActivity context) {
+    public MainAdapter(FragmentActivity context, AbsListView listView) {
 		this.context = context;
+        this.listView = listView;
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		loadAccounts();
 	}
@@ -189,15 +192,23 @@ public class MainAdapter extends BaseAdapter implements AdapterView.OnItemClickL
 	}
 
     @Override
+    @SuppressWarnings("unchecked")
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
         int type = getItemViewType(position);
         if (type == ACCOUNT) {
-            if (actionMode != null)
-                actionMode.finish();
-            selectedAccount = (Map<String,String>) getItem(position);
-            actionMode = context.startActionMode(this);
-            selectedView = view;
-            selectedView.setBackgroundColor(Color.rgb(51, 181, 229));
+            if (actionMode == null)
+                actionMode = context.startActionMode(this);
+            if (listView.isItemChecked(position)) {
+                selectedAccounts.remove((Map<String, String>) getItem(position));
+                selectedViews.remove(view);
+                view.setBackgroundColor(Color.TRANSPARENT);
+                listView.setItemChecked(position, false);
+            } else {
+                selectedAccounts.add((Map<String, String>) getItem(position));
+                selectedViews.add(view);
+                view.setBackgroundColor(Color.rgb(51, 181, 229));
+                listView.setItemChecked(position, true);
+            }
             return true;
         }
         return false;
@@ -212,14 +223,14 @@ public class MainAdapter extends BaseAdapter implements AdapterView.OnItemClickL
 
     @Override
     public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return false;
     }
 
     @Override
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
         switch (item.getItemId()) {
             case R.id.delete:
-                accounts.remove(selectedAccount);
+                accounts.removeAll(selectedAccounts);
                 saveAccounts();
                 notifyDataSetChanged();
                 mode.finish();
@@ -231,9 +242,11 @@ public class MainAdapter extends BaseAdapter implements AdapterView.OnItemClickL
 
     @Override
     public void onDestroyActionMode(ActionMode mode) {
-        selectedView.setBackgroundColor(Color.TRANSPARENT);
-        selectedAccount = null;
+        for (View view : selectedViews) {
+            view.setBackgroundColor(Color.TRANSPARENT);
+        }
+        selectedViews.clear();
+        selectedAccounts.clear();
         actionMode = null;
-        selectedView = null;
     }
 }
