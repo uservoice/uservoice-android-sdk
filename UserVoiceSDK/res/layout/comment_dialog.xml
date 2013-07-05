@@ -25,10 +25,10 @@
         <LinearLayout
             android:id="@+id/email"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:orientation="vertical">
 
-            <include layout="@layout/header_item_light" />
+            <include layout="@layout/header_item_light_no_padding" />
 
             <EditText
                 android:id="@+id/text_field"
@@ -42,10 +42,10 @@
         <LinearLayout
             android:id="@+id/name"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:orientation="vertical">
 
-            <include layout="@layout/header_item_light" />
+            <include layout="@layout/header_item_light_no_padding" />
 
             <EditText
                 android:id="@+id/text_field"

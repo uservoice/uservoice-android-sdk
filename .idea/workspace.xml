@@ -11,13 +11,32 @@
       </filter>
     </filters>
   </component>
+  <component name="AndroidDesignerProfile">
+    <option name="fullProfile">
+      <profile>
+        <option name="device" value="2.7in QVGA" />
+        <option name="deviceConfiguration" value="Portrait" />
+        <option name="localeLanguage" value="en" />
+        <option name="targetHashString" value="android-17" />
+        <option name="theme" value="AppBaseTheme" />
+      </profile>
+    </option>
+    <option name="selection" value="[Full]" />
+  </component>
+  <component name="AndroidLayoutPreviewToolWindow">
+    <option name="state">
+      <GlobalState>
+        <option name="theme" value="AppBaseTheme" />
+      </GlobalState>
+    </option>
+  </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="sane" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HelpCenter/src/com/uservoice/helpcenter/MainActivity.java" afterPath="$PROJECT_DIR$/HelpCenter/src/com/uservoice/helpcenter/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HelpCenter/src/com/uservoice/helpcenter/MainAdapter.java" afterPath="$PROJECT_DIR$/HelpCenter/src/com/uservoice/helpcenter/MainAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UserVoiceSDK/res/layout/header_item_light_no_padding.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserVoiceSDK/res/layout/comment_dialog.xml" afterPath="$PROJECT_DIR$/UserVoiceSDK/res/layout/comment_dialog.xml" />
     </list>
     <ignored path="uservoice-android.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,9 +47,10 @@
     <file path="/context_menu.xml" changelist="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" time="1373049577475" ignored="false" />
     <file path="$PROJECT_DIR$/HelpCenter/res/values/strings.xml" changelist="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" time="1373049589791" ignored="false" />
     <file path="/MainActivity.java" changelist="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" time="1373055580846" ignored="false" />
-    <file path="/Dummy.txt" changelist="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" time="1373052057145" ignored="false" />
+    <file path="/Dummy.txt" changelist="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" time="1373058056235" ignored="false" />
     <file path="/Babayaga.java" changelist="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" time="1373050062435" ignored="false" />
     <file path="/DefaultCallback.java" changelist="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" time="1373050222776" ignored="false" />
+    <file path="/comment_dialog.xml" changelist="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" time="1373058074568" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,28 +111,48 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainAdapter.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/HelpCenter/src/com/uservoice/helpcenter/MainAdapter.java">
+      <file leaf-file-name="CommentDialogFragment.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UserVoiceSDK/src/com/uservoice/uservoicesdk/dialog/CommentDialogFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="249" column="26" selection-start="8269" selection-end="8269" vertical-scroll-proportion="0.70652175">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1361#1382#0" expanded="true" />
-                <element signature="e#1473#1479#0" expanded="true" />
-                <element signature="e#4176#4206#1" expanded="true" />
-                <element signature="e#5994#6024#1" expanded="true" />
-                <element signature="e#6327#6357#0" expanded="true" />
-              </folding>
+            <state line="38" column="74" selection-start="1355" selection-end="1355" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HelpCenter/src/com/uservoice/helpcenter/MainActivity.java">
+      <file leaf-file-name="comment_dialog.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/UserVoiceSDK/res/layout/comment_dialog.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="58" selection-start="1081" selection-end="1081" vertical-scroll-proportion="0.0">
+            <state line="47" column="65" selection-start="1733" selection-end="1733" vertical-scroll-proportion="1.0552764">
               <folding />
             </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="header_item_light.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UserVoiceSDK/res/layout/header_item_light.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="34" selection-start="344" selection-end="407" vertical-scroll-proportion="-2.0192308">
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="header_item_light_no_padding.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UserVoiceSDK/res/layout/header_item_light_no_padding.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="16" column="0" selection-start="628" selection-end="628" vertical-scroll-proportion="-4.6153846">
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
           </provider>
         </entry>
       </file>
@@ -140,6 +180,9 @@
         <option value="$PROJECT_DIR$/UserVoiceSDK/src/com/uservoice/uservoicesdk/ui/DefaultCallback.java" />
         <option value="$PROJECT_DIR$/HelpCenter/src/com/uservoice/helpcenter/MainActivity.java" />
         <option value="$PROJECT_DIR$/HelpCenter/src/com/uservoice/helpcenter/MainAdapter.java" />
+        <option value="$PROJECT_DIR$/UserVoiceSDK/res/layout/header_item_light.xml" />
+        <option value="$PROJECT_DIR$/UserVoiceSDK/res/layout/header_item_light_no_padding.xml" />
+        <option value="$PROJECT_DIR$/UserVoiceSDK/res/layout/comment_dialog.xml" />
       </list>
     </option>
   </component>
@@ -190,7 +233,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="UVDemo" />
+              <option name="myItemId" value="UserVoiceSDK" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -201,6 +244,68 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="UserVoiceSDK" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="uservoicesdk" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="uservoice-android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UserVoiceSDK" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="uservoicesdk" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dialog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="uservoice-android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UserVoiceSDK" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="uservoice-android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UserVoiceSDK" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -278,6 +383,7 @@
     <property name="recentsLimit" value="5" />
     <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/UserVoiceSDK/libs/signpost-core-1.2.1.2.jar!/" />
+    <property name="AndroidLayoutSelectedEditor" value="text-editor" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -287,7 +393,7 @@
     <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
   </component>
-  <component name="RunManager" selected="Android Application.HelpCenter">
+  <component name="RunManager" selected="Android Application.UVDemo">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -485,22 +591,25 @@
     <frame x="0" y="22" width="1438" height="867" extended-state="0" />
     <editor active="true" />
     <layout>
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3297414" sideWeight="0.6706827" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39892906" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32931727" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32931727" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32931727" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32931727" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24640805" sideWeight="0.6706827" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32931727" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32931727" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -660,7 +769,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/HelpCenter/src/com/uservoice/helpcenter/MainAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="249" column="26" selection-start="8269" selection-end="8269" vertical-scroll-proportion="0.70652175">
+        <state line="249" column="26" selection-start="8269" selection-end="8269" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1361#1382#0" expanded="true" />
@@ -670,6 +779,43 @@
             <element signature="e#6327#6357#0" expanded="true" />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserVoiceSDK/src/com/uservoice/uservoicesdk/dialog/CommentDialogFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="74" selection-start="1355" selection-end="1355" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserVoiceSDK/res/layout/header_item_light.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="34" selection-start="344" selection-end="407" vertical-scroll-proportion="-2.0192308">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserVoiceSDK/res/layout/header_item_light_no_padding.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="0" selection-start="628" selection-end="628" vertical-scroll-proportion="-4.6153846">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserVoiceSDK/res/layout/comment_dialog.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="65" selection-start="1733" selection-end="1733" vertical-scroll-proportion="1.0552764">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
   </component>
