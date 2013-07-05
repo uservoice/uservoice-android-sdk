@@ -35,7 +35,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserVoiceSDK/src/com/uservoice/uservoicesdk/ui/PostIdeaAdapter.java" afterPath="$PROJECT_DIR$/UserVoiceSDK/src/com/uservoice/uservoicesdk/ui/PostIdeaAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserVoiceSDK/src/com/uservoice/uservoicesdk/activity/ForumActivity.java" afterPath="$PROJECT_DIR$/UserVoiceSDK/src/com/uservoice/uservoicesdk/activity/ForumActivity.java" />
     </list>
     <ignored path="uservoice-android.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -51,6 +51,7 @@
     <file path="/DefaultCallback.java" changelist="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" time="1373050222776" ignored="false" />
     <file path="/comment_dialog.xml" changelist="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" time="1373058074568" ignored="false" />
     <file path="/PostIdeaAdapter.java" changelist="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" time="1373059151768" ignored="false" />
+    <file path="/ForumActivity.java" changelist="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" time="1373061795303" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,13 +112,40 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PostIdeaAdapter.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="PostIdeaAdapter.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UserVoiceSDK/src/com/uservoice/uservoicesdk/ui/PostIdeaAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="16" selection-start="1469" selection-end="1469" vertical-scroll-proportion="0.45652175">
+            <state line="48" column="16" selection-start="1469" selection-end="1469" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#1336#1345#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ForumActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UserVoiceSDK/src/com/uservoice/uservoicesdk/activity/ForumActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="179" column="19" selection-start="7412" selection-end="7412" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#6682#7389#0" expanded="true" />
+                <element signature="e#7378#7379#0" expanded="true" />
+                <element signature="e#7423#7858#0" expanded="true" />
+                <element signature="e#7579#7832#0" expanded="true" />
+                <element signature="e#7813#7814#0" expanded="true" />
+                <element signature="e#7847#7848#0" expanded="true" />
+                <element signature="e#9780#9810#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InitManager.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/UserVoiceSDK/src/com/uservoice/uservoicesdk/flow/InitManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="11" selection-start="662" selection-end="662" vertical-scroll-proportion="0.04249292">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -150,6 +178,7 @@
         <option value="$PROJECT_DIR$/UserVoiceSDK/res/layout/header_item_light_no_padding.xml" />
         <option value="$PROJECT_DIR$/UserVoiceSDK/res/layout/comment_dialog.xml" />
         <option value="$PROJECT_DIR$/UserVoiceSDK/src/com/uservoice/uservoicesdk/ui/PostIdeaAdapter.java" />
+        <option value="$PROJECT_DIR$/UserVoiceSDK/src/com/uservoice/uservoicesdk/activity/ForumActivity.java" />
       </list>
     </option>
   </component>
@@ -580,7 +609,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24640805" sideWeight="0.6706827" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32931727" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32931727" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -653,27 +682,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/UserVoiceSDK/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UVDemo/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UserVoiceSDK/src/com/uservoice/uservoicesdk/rest/RestTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="21" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/HelpCenter/res/menu/main.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="0" selection-start="66" selection-end="260" vertical-scroll-proportion="0.10806917">
@@ -782,10 +790,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/UserVoiceSDK/src/com/uservoice/uservoicesdk/ui/PostIdeaAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="16" selection-start="1469" selection-end="1469" vertical-scroll-proportion="0.45652175">
+        <state line="48" column="16" selection-start="1469" selection-end="1469" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#1336#1345#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserVoiceSDK/src/com/uservoice/uservoicesdk/ui/PaginatedAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="16" selection-start="876" selection-end="876" vertical-scroll-proportion="0.68706536">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserVoiceSDK/src/com/uservoice/uservoicesdk/activity/ForumActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="179" column="19" selection-start="7412" selection-end="7412" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6682#7389#0" expanded="true" />
+            <element signature="e#7378#7379#0" expanded="true" />
+            <element signature="e#7423#7858#0" expanded="true" />
+            <element signature="e#7579#7832#0" expanded="true" />
+            <element signature="e#7813#7814#0" expanded="true" />
+            <element signature="e#7847#7848#0" expanded="true" />
+            <element signature="e#9780#9810#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserVoiceSDK/src/com/uservoice/uservoicesdk/flow/InitManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="11" selection-start="662" selection-end="662" vertical-scroll-proportion="0.04249292">
+          <folding />
         </state>
       </provider>
     </entry>
