@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.graphics.Color;
 import android.view.*;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +37,7 @@ public class MainAdapter extends BaseAdapter implements AdapterView.OnItemClickL
 	private Map<String,String> activeAccount;
     private Map<String,String> selectedAccount;
     private ActionMode actionMode;
+    private View selectedView;
 
     public MainAdapter(FragmentActivity context) {
 		this.context = context;
@@ -194,6 +196,8 @@ public class MainAdapter extends BaseAdapter implements AdapterView.OnItemClickL
                 actionMode.finish();
             selectedAccount = (Map<String,String>) getItem(position);
             actionMode = context.startActionMode(this);
+            selectedView = view;
+            selectedView.setBackgroundColor(Color.rgb(51, 181, 229));
             return true;
         }
         return false;
@@ -227,7 +231,9 @@ public class MainAdapter extends BaseAdapter implements AdapterView.OnItemClickL
 
     @Override
     public void onDestroyActionMode(ActionMode mode) {
+        selectedView.setBackgroundColor(Color.TRANSPARENT);
         selectedAccount = null;
         actionMode = null;
+        selectedView = null;
     }
 }

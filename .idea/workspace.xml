@@ -15,17 +15,20 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="sane" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" name="Default" comment="" />
+    <list default="true" id="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HelpCenter/src/com/uservoice/helpcenter/MainAdapter.java" afterPath="$PROJECT_DIR$/HelpCenter/src/com/uservoice/helpcenter/MainAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="uservoice-android.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/fragment.java" changelist="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" time="1373050615470" ignored="false" />
     <file path="/AndroidManifest.xml" changelist="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" time="1373048178498" ignored="false" />
     <file path="/Session.java" changelist="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" time="1373048393535" ignored="false" />
-    <file path="/MainAdapter.java" changelist="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" time="1373050881789" ignored="false" />
+    <file path="/MainAdapter.java" changelist="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" time="1373052112337" ignored="false" />
     <file path="/context_menu.xml" changelist="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" time="1373049577475" ignored="false" />
     <file path="$PROJECT_DIR$/HelpCenter/res/values/strings.xml" changelist="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" time="1373049589791" ignored="false" />
     <file path="/MainActivity.java" changelist="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" time="1373049739187" ignored="false" />
-    <file path="/Dummy.txt" changelist="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" time="1373049881605" ignored="false" />
+    <file path="/Dummy.txt" changelist="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" time="1373052057145" ignored="false" />
     <file path="/Babayaga.java" changelist="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" time="1373050062435" ignored="false" />
     <file path="/DefaultCallback.java" changelist="6ce455bd-8166-4a7a-a8bb-77eab25e57dd" time="1373050222776" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -91,11 +94,11 @@
       <file leaf-file-name="MainAdapter.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/HelpCenter/src/com/uservoice/helpcenter/MainAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="196" column="0" selection-start="6420" selection-end="6420" vertical-scroll-proportion="0.29565218">
+            <state line="199" column="59" selection-start="6574" selection-end="6574" vertical-scroll-proportion="0.3152174">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3903#3933#1" expanded="true" />
-                <element signature="e#5721#5751#1" expanded="true" />
+                <element signature="e#3965#3995#1" expanded="true" />
+                <element signature="e#5783#5813#1" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -150,6 +153,14 @@
       <setting name="OPEN_NEW_TAB" value="false" />
     </FindUsagesManager>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitLogSettings">
+    <option name="myDateState">
+      <MyDateState />
+    </option>
+  </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
@@ -167,7 +178,7 @@
     <option name="width" value="1438" />
     <option name="height" value="867" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -295,7 +306,7 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="editor" />
+    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/UserVoiceSDK/libs/signpost-core-1.2.1.2.jar!/" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
@@ -493,14 +504,14 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32931727" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32931727" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32931727" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32931727" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24640805" sideWeight="0.6706827" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32931727" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32931727" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -660,11 +671,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/HelpCenter/src/com/uservoice/helpcenter/MainAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="196" column="0" selection-start="6420" selection-end="6420" vertical-scroll-proportion="0.29565218">
+        <state line="199" column="59" selection-start="6574" selection-end="6574" vertical-scroll-proportion="0.3152174">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3903#3933#1" expanded="true" />
-            <element signature="e#5721#5751#1" expanded="true" />
+            <element signature="e#3965#3995#1" expanded="true" />
+            <element signature="e#5783#5813#1" expanded="true" />
           </folding>
         </state>
       </provider>
