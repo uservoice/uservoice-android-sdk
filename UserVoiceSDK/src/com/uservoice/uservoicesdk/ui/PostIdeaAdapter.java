@@ -1,5 +1,6 @@
 package com.uservoice.uservoicesdk.ui;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -42,7 +43,14 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
 	
 	@Override
 	protected List<Integer> getDetailRows() {
-		return Arrays.asList(DESCRIPTION, CATEGORY, SPACE, EMAIL_FIELD, NAME_FIELD);
+        List<Integer> rows = new ArrayList<Integer>();
+        rows.add(DESCRIPTION);
+        if (Session.getInstance().getForum().getCategories().size() > 0)
+            rows.add(CATEGORY);
+        rows.add(SPACE);
+        rows.add(EMAIL_FIELD);
+        rows.add(NAME_FIELD);
+		return rows;
 	}
 	
 	@Override
