@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.view.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,14 +21,11 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class MainAdapter extends BaseAdapter implements AdapterView.OnItemClickListener {
+public class MainAdapter extends BaseAdapter implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener, ActionMode.Callback {
 
 	private static int HEADER = 0;
 	private static int ACCOUNT = 1;
@@ -36,8 +34,10 @@ public class MainAdapter extends BaseAdapter implements AdapterView.OnItemClickL
 	private LayoutInflater inflater;
 	private List<Map<String, String>> accounts;
 	private Map<String,String> activeAccount;
+    private Map<String,String> selectedAccount;
+    private ActionMode actionMode;
 
-	public MainAdapter(FragmentActivity context) {
+    public MainAdapter(FragmentActivity context) {
 		this.context = context;
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		loadAccounts();
@@ -186,4 +186,48 @@ public class MainAdapter extends BaseAdapter implements AdapterView.OnItemClickL
 		}
 	}
 
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        int type = getItemViewType(position);
+        if (type == ACCOUNT) {
+            if (actionMode != null)
+                actionMode.finish();
+            selectedAccount = (Map<String,String>) getItem(position);
+            actionMode = context.startActionMode(this);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+        MenuInflater inflater = mode.getMenuInflater();
+        inflater.inflate(R.menu.context_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.delete:
+                accounts.remove(selectedAccount);
+                saveAccounts();
+                notifyDataSetChanged();
+                mode.finish();
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    @Override
+    public void onDestroyActionMode(ActionMode mode) {
+        selectedAccount = null;
+        actionMode = null;
+    }
 }

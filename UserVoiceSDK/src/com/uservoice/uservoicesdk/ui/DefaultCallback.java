@@ -21,7 +21,12 @@ public abstract class DefaultCallback<T> extends Callback<T> {
 	@Override
 	public void onError(RestResult error) {
 		Log.e(TAG, error.getMessage());
-		new AlertDialog.Builder(context).setTitle(R.string.uv_network_error).show();
+        try {
+		    new AlertDialog.Builder(context).setTitle(R.string.uv_network_error).show();
+        } catch (Exception e) {
+            // This can happen if the activity is already gone
+            Log.e(TAG, "Failed trying to show alert: " + e.getMessage());
+        }
 	}
 
 }

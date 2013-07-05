@@ -28,6 +28,7 @@ public class MainActivity extends BaseListActivity {
 		adapter = new MainAdapter(this);
 		setListAdapter(adapter);
 		getListView().setOnItemClickListener(adapter);
+        getListView().setOnItemLongClickListener(adapter);
         getListView().setItemsCanFocus(true);
 	}
 

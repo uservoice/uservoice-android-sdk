@@ -7,5 +7,6 @@
     <string name="select_an_account">Select an account</string>
     <string name="account_dialog_title">Add an account</string>
     <string name="about_uservoice">Learn more about UserVoice</string>
-    
+    <string name="delete">Delete</string>
+
 </resources>

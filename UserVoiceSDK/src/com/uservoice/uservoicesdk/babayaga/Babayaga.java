@@ -106,12 +106,10 @@ public class Babayaga {
 	}
 	
 	public static void flush() {
-        if (queue == null)
-            return;
 		for (Track track : queue) {
 			track(track.event, track.eventProps);
 		}
-		queue = null;
+		queue = new ArrayList<Track>();
 	}
 
 	public static void init(Context context) {
