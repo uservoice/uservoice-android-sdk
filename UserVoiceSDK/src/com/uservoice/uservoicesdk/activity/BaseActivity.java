@@ -32,7 +32,7 @@ public class BaseActivity extends FragmentActivity {
 	@SuppressLint("NewApi")
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if (Utils.hasActionBar()) {
+		if (getActionBar() != null) {
 			getActionBar().setDisplayHomeAsUpEnabled(true);
 		}
 	}
@@ -52,7 +52,7 @@ public class BaseActivity extends FragmentActivity {
 	
 	@SuppressLint("NewApi")
 	protected void setupScopedSearch(Menu menu) {
-		if (Utils.hasActionBar()) {
+		if (getActionBar() != null) {
 			menu.findItem(R.id.action_search).setOnActionExpandListener(new SearchExpandListener((SearchActivity) this));
 			SearchView search = (SearchView) menu.findItem(R.id.action_search).getActionView();
 			search.setOnQueryTextListener(new SearchQueryListener((SearchActivity) this));
@@ -90,30 +90,30 @@ public class BaseActivity extends FragmentActivity {
 	
 	@SuppressLint("NewApi")
 	public void updateScopedSearch(int results, int articleResults, int ideaResults) {
-		if (!Utils.hasActionBar())
-			return;
-		allTab.setText(String.format("%s (%d)", getString(R.string.uv_all_results_filter), results));
-		articlesTab.setText(String.format("%s (%d)", getString(R.string.uv_articles_filter), articleResults));
-		ideasTab.setText(String.format("%s (%d)", getString(R.string.uv_ideas_filter), ideaResults));
+		if (getActionBar() != null) {
+            allTab.setText(String.format("%s (%d)", getString(R.string.uv_all_results_filter), results));
+            articlesTab.setText(String.format("%s (%d)", getString(R.string.uv_articles_filter), articleResults));
+            ideasTab.setText(String.format("%s (%d)", getString(R.string.uv_ideas_filter), ideaResults));
+        }
 	}
 	
 	@SuppressLint("NewApi")
 	public void showSearch() {
 		ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
 		viewFlipper.setDisplayedChild(1);
-		if (!Utils.hasActionBar())
-			return;
-		if (originalNavigationMode == -1)
-			originalNavigationMode = getActionBar().getNavigationMode();
-		getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		if (getActionBar() != null) {
+            if (originalNavigationMode == -1)
+                originalNavigationMode = getActionBar().getNavigationMode();
+            getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        }
 	}
 	
 	@SuppressLint("NewApi")
 	public void hideSearch() {
 		ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
 		viewFlipper.setDisplayedChild(0);
-		if (!Utils.hasActionBar())
-			return;
-		getActionBar().setNavigationMode(originalNavigationMode == -1 ? ActionBar.NAVIGATION_MODE_STANDARD : originalNavigationMode);
+		if (getActionBar() != null) {
+    		getActionBar().setNavigationMode(originalNavigationMode == -1 ? ActionBar.NAVIGATION_MODE_STANDARD : originalNavigationMode);
+        }
 	}
 }

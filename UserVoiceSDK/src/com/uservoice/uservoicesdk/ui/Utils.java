@@ -54,10 +54,6 @@ public class Utils {
 		return String.format("%,d %s", count, view.getContext().getResources().getQuantityString(id, count));
 	}
 
-	public static boolean hasActionBar() {
-		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
-	}
-
 	public static void displayInstantAnswer(View view, BaseModel model) {
 		TextView title = (TextView) view.findViewById(R.id.title);
 		TextView detail = (TextView) view.findViewById(R.id.detail);
