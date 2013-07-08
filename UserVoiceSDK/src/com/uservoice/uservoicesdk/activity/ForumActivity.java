@@ -50,6 +50,13 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 
         getListView().setDivider(null);
         setListAdapter(new PaginatedAdapter<Suggestion>(this, R.layout.suggestion_item, suggestions) {
+            boolean initializing = true;
+
+            @Override
+            public void loadMore() {
+                initializing = false;
+                super.loadMore();
+            }
 
             @Override
             public int getViewTypeCount() {
@@ -63,7 +70,7 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 
             @Override
             public int getCount() {
-                return super.getCount() + 2;
+                return super.getCount() + 2 + (initializing ? 1 : 0);
             }
 
             @Override
@@ -72,6 +79,8 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
                     return 2;
                 if (position == 1)
                     return 3;
+                if (position == 2 && initializing)
+                    return LOADING;
                 return super.getItemViewType(position - 2);
             }
 
