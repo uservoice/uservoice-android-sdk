@@ -175,6 +175,8 @@ public class MainAdapter extends BaseAdapter implements AdapterView.OnItemClickL
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if (actionMode != null && onItemLongClick(parent, view, position, id))
+            return;
 		int type = getItemViewType(position);
 		if (type == ADD) {
 			AccountDialogFragment dialog = new AccountDialogFragment(this);
@@ -198,17 +200,21 @@ public class MainAdapter extends BaseAdapter implements AdapterView.OnItemClickL
         if (type == ACCOUNT) {
             if (actionMode == null)
                 actionMode = context.startActionMode(this);
-            if (listView.isItemChecked(position)) {
-                selectedAccounts.remove((Map<String, String>) getItem(position));
+            Map<String, String> account = (Map<String, String>) getItem(position);
+            if (selectedAccounts.contains(account)) {
+                selectedAccounts.remove(account);
                 selectedViews.remove(view);
                 view.setBackgroundColor(Color.TRANSPARENT);
-                listView.setItemChecked(position, false);
+                if (selectedAccounts.isEmpty()) {
+                    actionMode.finish();
+                    return true;
+                }
             } else {
-                selectedAccounts.add((Map<String, String>) getItem(position));
+                selectedAccounts.add(account);
                 selectedViews.add(view);
                 view.setBackgroundColor(Color.rgb(51, 181, 229));
-                listView.setItemChecked(position, true);
             }
+            actionMode.setTitle(String.valueOf(selectedAccounts.size()));
             return true;
         }
         return false;
