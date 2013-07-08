@@ -36,21 +36,9 @@ public class BaseActivity extends FragmentActivity {
     @SuppressLint("NewApi")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (!isNetworkAvailable()) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("No network");
-            builder.create().show();
-            finish();
-        }
         if (getActionBar() != null) {
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
-    }
-
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
 
     @Override
