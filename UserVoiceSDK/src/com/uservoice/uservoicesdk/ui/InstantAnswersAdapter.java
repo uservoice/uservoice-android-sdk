@@ -293,7 +293,7 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 	}
 	
 	public boolean hasText() {
-		return !textField.getText().toString().isEmpty();
+        return textField != null && !textField.getText().toString().isEmpty();
 	}
 
 }
