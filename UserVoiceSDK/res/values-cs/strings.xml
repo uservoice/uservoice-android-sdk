@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <plurals name="uv_comments">
+        <item quantity="one">komentář</item>
+        <item quantity="other">komentáře</item>
+    </plurals>
+    <plurals name="uv_subscribers">
+        <item quantity="one">odběratel</item>
+        <item quantity="other">odběratelé</item>
+    </plurals>
+    <plurals name="uv_articles">
+        <item quantity="one">článek</item>
+        <item quantity="other">články</item>
+    </plurals>
+    <plurals name="uv_ideas">
+        <item quantity="one">nápad</item>
+        <item quantity="other">nápady</item>
+    </plurals>
+    <plurals name="uv_people">
+        <item quantity="one">osoba</item>
+        <item quantity="other">osoby</item>
+    </plurals>
+
+    <string name="uv_loading">Nahrávám&#8230;</string>
+    <string name="uv_submit_idea">Poslat nápad</string>
+    <string name="uv_idea_form_title">Poslat nápad</string>
+    <string name="uv_menu_search">Hledat</string>
+    <string name="uv_email_address">Emailová adresa</string>
+    <string name="uv_email_address_hint">your@email.com (požadováno)</string>
+    <string name="uv_display_name">Zobrazované jméno</string>
+    <string name="uv_password">Heslo</string>
+    <string name="uv_forgot_password">Zapomenuté heslo</string>
+    <string name="uv_msg_comment_posted">Tvůj komentář byl odeslán</string>
+    <string name="uv_title_idea">Nápad</string>
+    <string name="uv_posted_by_format">Odeslal %1$s, %2$s</string>
+    <string name="uv_all_articles">Všechny články</string>
+    <string name="uv_portal_title">Nápověda</string>
+    <string name="uv_network_error">Během připojování k UserVoice se vyskytla chyba</string>
+    <string name="uv_signin_dialog_title">Přihlášení</string>
+    <string name="uv_signin_dialog_ok">Přihlásit</string>
+    <string name="uv_failed_signin_error">Neplatný email nebo heslo</string>
+    <string name="uv_msg_forgot_password">Zapomenuté heslo zasláno</string>
+    <string name="uv_subscribe_dialog_title">Přihlásit se k odběru tohoto nápadu</string>
+    <string name="uv_remove_votes">Odebrat hlasy</string>
+    <string name="uv_feedback_forum">Zpětná vazba</string>
+    <string name="uv_knowledge_base">Znalostní báze</string>
+    <string name="uv_admin_response_format">Admin odpověděl: %1$s</string>
+    <string name="uv_post_comment">Odeslat komentář</string>
+    <string name="uv_next">Další</string>
+    <string name="uv_none_of_these_help">Nic z toho nepomohlo</string>
+    <string name="uv_send_message">Poslat zprávu</string>
+    <string name="uv_your_email_address">Tvá emailová adresa</string>
+    <string name="uv_your_name">Tvé jméno</string>
+    <string name="uv_name_hint">“Anonymní”</string>
+    <string name="uv_select_one">Vyber jeden</string>
+    <string name="uv_value">Hodnota</string>
+    <string name="uv_article">Článek</string>
+    <string name="uv_idea">Nápad</string>
+    <string name="uv_msg_ticket_created">Tvá zpráva byla odeslána</string>
+    <string name="uv_msg_idea_created">Tvůj nápad byl vytvořen</string>
+    <string name="uv_article_instant_answer_question">Je tento článek užitečný?</string>
+    <string name="uv_suggestion_instant_answer_question">Je tento nápad užitečný?</string>
+    <string name="uv_no">Ne</string>
+    <string name="uv_yes">Ano</string>
+    <string name="uv_very_yes">Ano!</string>
+    <string name="uv_helpful_article_message_question">Stále chcete poslat zprávu?</string>
+    <string name="uv_unhelpful_article_message_question">Chcete nám zaslat zprávu?</string>
+    <string name="uv_idea_description_heading">Popište Váš nápad</string>
+    <string name="uv_category">Kategorie</string>
+    <string name="uv_idea_description_hint">(volitelné)</string>
+    <string name="uv_idea_text_heading">Doporučuji&#8230;</string>
+    <string name="uv_idea_text_hint">Vložte Váš nápad&#8230;</string>
+    <string name="uv_idea_form_help">Když zašlete nápad na naše fórum, ostatní uživatelé se budou moci přihlásit k odběru a přidávat komentáře. Pokud na nápad odpovíme, budete notifikován.</string>
+    <string name="uv_contact_us">Kontaktujte nás</string>
+    <string name="uv_close">Zavřít</string>
+    <string name="uv_new_comment">Nový komentář</string>
+    <string name="uv_error">Chyba</string>
+    <string name="uv_msg_user_identity_validation">Zadejte Váš email, prosím</string>
+    <string name="uv_status_format">Status: %1$s</string>
+    <string name="uv_subscribe">Odebírat</string>
+    <string name="uv_nevermind">Nevadí</string>
+    <string name="uv_msg_subscribe">Budeme Vás informovat, jakmile se progres tohoto nápadu posune.</string>
+    <string name="uv_msg_subscribe_success">Byl jste přihlášen ke sledování tohoto nápadu.</string>
+    <string name="uv_msg_unsubscribe">Byl jste odhlášen ze sledování tohoto nápadu.</string>
+    <string name="uv_msg_custom_fields_validation">Prosím vyplňte všechna povinná pole.</string>
+    <string name="uv_contact_hint">Vložte Váš dotaz nebo feedback</string>
+    <string name="uv_matching_ideas">Shodné nápady</string>
+    <string name="uv_matching_articles">Shodné články</string>
+    <string name="uv_matching_articles_and_ideas">Shodné články a nápady</string>
+    <string name="uv_post_idea_continue_button">Stále chci odeslat můj nápad</string>
+    <string name="uv_contact_continue_button">Stále chci odeslat tuto zprávu</string>
+    <string name="uv_i_want_this">Chci to!</string>
+    <string name="uv_number_of_subscribers_format">%1$s uživatelům se líbí tento nápad</string>
+    <string name="uv_post_a_comment">Odeslat komentář</string>
+    <string name="uv_all_results_filter">VŠE</string>
+    <string name="uv_articles_filter">ČLÁNKY</string>
+    <string name="uv_ideas_filter">NÁPADY</string>
+    <string name="uv_comment_hint">Vložte komentář</string>
+    <string name="uv_cancel">Zrušit</string>
+    <string name="uv_select_none">(nic)</string>
+    <string name="uv_confirm">Potvrdit</string>
+    <string name="uv_msg_confirm_discard_idea">Opravdu chcete zrušit tento nápad?</string>
+    <string name="uv_msg_confirm_discard_message">Opravdu chcete zrušit tuto zprávu?</string>
+    <string name="uv_post_an_idea">Odeslat nápad</string>
+    <string name="uv_password_dialog_title">Prosím vložte Vaše heslo</string>
+    <string name="uv_article_browse_question">Byl tento článek nápomocný?</string>
+    <string name="uv_thanks">Díky!</string>
+
+</resources>
