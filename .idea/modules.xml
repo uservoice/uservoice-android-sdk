@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/HelpCenter/HelpCenter.iml" filepath="$PROJECT_DIR$/HelpCenter/HelpCenter.iml" />
       <module fileurl="file://$PROJECT_DIR$/UVDemo/UVDemo.iml" filepath="$PROJECT_DIR$/UVDemo/UVDemo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/UVTests/UVTests.iml" filepath="$PROJECT_DIR$/UVTests/UVTests.iml" />
       <module fileurl="file://$PROJECT_DIR$/UserVoiceSDK/UserVoiceSDK.iml" filepath="$PROJECT_DIR$/UserVoiceSDK/UserVoiceSDK.iml" />
     </modules>
   </component>
