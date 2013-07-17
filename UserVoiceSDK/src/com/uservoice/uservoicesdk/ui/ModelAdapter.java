@@ -33,7 +33,7 @@ public abstract class ModelAdapter<T> extends SearchAdapter<T> {
 		View view = convertView;
 		int type = getItemViewType(position);
 		if (view == null) {
-			view = inflater.inflate(type == LOADING ? R.layout.loading_item : layoutId, null);
+			view = inflater.inflate(type == LOADING ? R.layout.uv_loading_item : layoutId, null);
 		}
 		
 		if (type == MODEL) {

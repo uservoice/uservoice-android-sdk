@@ -28,8 +28,8 @@ public class PasswordDialogFragment extends DialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle(R.string.uv_password_dialog_title);
-		View view = getActivity().getLayoutInflater().inflate(R.layout.password_dialog, null);
-		final EditText password = (EditText) view.findViewById(R.id.password);
+		View view = getActivity().getLayoutInflater().inflate(R.layout.uv_password_dialog, null);
+		final EditText password = (EditText) view.findViewById(R.id.uv_password);
 		builder.setView(view);
 		builder.setNegativeButton(R.string.uv_cancel, null);
 		builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {

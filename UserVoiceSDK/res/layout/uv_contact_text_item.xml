@@ -7,7 +7,7 @@
     android:paddingRight="10dp" >
 
     <EditText
-        android:id="@+id/text"
+        android:id="@+id/uv_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="top"

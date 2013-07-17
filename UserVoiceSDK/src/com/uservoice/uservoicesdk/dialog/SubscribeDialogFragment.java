@@ -33,8 +33,8 @@ public class SubscribeDialogFragment extends DialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle(R.string.uv_subscribe_dialog_title);
-		View view = getActivity().getLayoutInflater().inflate(R.layout.subscribe_dialog, null);
-		final EditText emailField = (EditText) view.findViewById(R.id.email);
+		View view = getActivity().getLayoutInflater().inflate(R.layout.uv_subscribe_dialog, null);
+		final EditText emailField = (EditText) view.findViewById(R.id.uv_email);
 		emailField.setText(Session.getInstance().getEmail());
 		builder.setView(view);
 		builder.setNegativeButton(R.string.uv_nevermind, null);

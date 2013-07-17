@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/LinearLayout1"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -17,7 +16,7 @@
         android:paddingTop="5dp" >
 
         <TextView
-            android:id="@+id/suggestion_title"
+            android:id="@+id/uv_suggestion_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Suggestion Title"
@@ -36,7 +35,7 @@
                 android:src="@drawable/uv_heart" />
 
             <TextView
-                android:id="@+id/subscriber_count"
+                android:id="@+id/uv_subscriber_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="12"
@@ -45,7 +44,7 @@
                 android:textSize="10sp" />
 
             <View
-                android:id="@+id/suggestion_status_color"
+                android:id="@+id/uv_suggestion_status_color"
                 android:layout_width="9dp"
                 android:layout_height="9dp"
                 android:layout_marginLeft="10dp"
@@ -54,7 +53,7 @@
                 android:background="#999999" />
 
             <TextView
-                android:id="@+id/suggestion_status"
+                android:id="@+id/uv_suggestion_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="UNDER REVIEW"
@@ -63,6 +62,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <include layout="@layout/divider" />
+    <include layout="@layout/uv_divider" />
 
 </LinearLayout>

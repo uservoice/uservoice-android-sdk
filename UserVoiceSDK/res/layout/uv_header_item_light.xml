@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="false"
@@ -10,9 +9,9 @@
     android:paddingRight="10dp" >
 
     <TextView
-        android:id="@+id/header_text"
+        android:id="@+id/uv_header_text"
         android:text="@string/uv_knowledge_base"
         android:textIsSelectable="false"
-        style="@style/ListSeparator" />
+        style="@style/uv_ListSeparatorLight" />
 
 </LinearLayout>

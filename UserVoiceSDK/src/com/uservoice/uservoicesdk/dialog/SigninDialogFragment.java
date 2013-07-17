@@ -62,12 +62,12 @@ public class SigninDialogFragment extends DialogFragment {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle(R.string.uv_signin_dialog_title);
 		LayoutInflater inflater = getActivity().getLayoutInflater();
-		View view = inflater.inflate(R.layout.signin_layout, null);
-		emailField = (EditText) view.findViewById(R.id.signin_email);
-		nameField = (EditText) view.findViewById(R.id.signin_name);
-		passwordField = (EditText) view.findViewById(R.id.signin_password);
-		passwordFields = view.findViewById(R.id.signin_password_fields);
-		forgotPassword = (Button) view.findViewById(R.id.signin_forgot_password);
+		View view = inflater.inflate(R.layout.uv_signin_layout, null);
+		emailField = (EditText) view.findViewById(R.id.uv_signin_email);
+		nameField = (EditText) view.findViewById(R.id.uv_signin_name);
+		passwordField = (EditText) view.findViewById(R.id.uv_signin_password);
+		passwordFields = view.findViewById(R.id.uv_signin_password_fields);
+		forgotPassword = (Button) view.findViewById(R.id.uv_signin_forgot_password);
 		
 		passwordFields.setVisibility(View.GONE);
 		

@@ -27,7 +27,7 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:id="@+id/name"
+                    android:id="@+id/uv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingRight="5dp"
@@ -35,7 +35,7 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/date"
+                    android:id="@+id/uv_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Feb 12, 2013"
@@ -44,7 +44,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/text"
+                android:id="@+id/uv_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="2dp"
@@ -54,12 +54,12 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/avatar"
+            android:id="@+id/uv_avatar"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:paddingTop="2dp" />
     </LinearLayout>
 
-    <include layout="@layout/divider" />
+    <include layout="@layout/uv_divider" />
 
 </LinearLayout>

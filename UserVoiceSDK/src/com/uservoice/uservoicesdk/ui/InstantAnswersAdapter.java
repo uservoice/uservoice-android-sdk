@@ -147,10 +147,10 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 		int type = getItemViewType(position);
 		if (view == null) {
 			if (type == LOADING) {
-				view = inflater.inflate(R.layout.loading_item, null);
+				view = inflater.inflate(R.layout.uv_loading_item, null);
 			} else if (type == BUTTON) {
-				view = inflater.inflate(R.layout.contact_button_item, null);
-				Button button = (Button) view.findViewById(R.id.contact_button);
+				view = inflater.inflate(R.layout.uv_contact_button_item, null);
+				Button button = (Button) view.findViewById(R.id.uv_contact_button);
 				button.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -158,15 +158,15 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 					}
 				});
 			} else if (type == HEADING) {
-				view = inflater.inflate(R.layout.header_item, null);
+				view = inflater.inflate(R.layout.uv_header_item, null);
 			} else if (type == INSTANT_ANSWER) {
-				view = inflater.inflate(R.layout.instant_answer_item, null);
+				view = inflater.inflate(R.layout.uv_instant_answer_item, null);
 			} else if (type == SPACE) {
 				view = new LinearLayout(context);
 				view.setPadding(0, 30, 0, 0);
 			} else if (type == TEXT) {
-				view = inflater.inflate(R.layout.contact_text_item, null);
-				textField = (EditText) view.findViewById(R.id.text);
+				view = inflater.inflate(R.layout.uv_contact_text_item, null);
+				textField = (EditText) view.findViewById(R.id.uv_text);
 				textField.addTextChangedListener(new TextWatcher() {
 					@Override
 					public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -185,12 +185,12 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 					}
 				});
 			} else if (type == EMAIL_FIELD || type == NAME_FIELD) {
-				view = inflater.inflate(R.layout.text_field_item, null);
+				view = inflater.inflate(R.layout.uv_text_field_item, null);
 			}
 		}
 
 		if (type == BUTTON) {
-			Button button = (Button) view.findViewById(R.id.contact_button);
+			Button button = (Button) view.findViewById(R.id.uv_contact_button);
 			button.setEnabled(state != State.INIT_LOADING);
 			switch (state) {
 				case INIT:
@@ -208,10 +208,10 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 			}
 		} else if (type == INSTANT_ANSWER) {
 			Utils.displayInstantAnswer(view, (BaseModel) getItem(position));
-			view.findViewById(R.id.divider).setVisibility(getRows().lastIndexOf(INSTANT_ANSWER) == position ? View.GONE : View.VISIBLE);
+			view.findViewById(R.id.uv_divider).setVisibility(getRows().lastIndexOf(INSTANT_ANSWER) == position ? View.GONE : View.VISIBLE);
 		} else if (type == EMAIL_FIELD || type == NAME_FIELD) {
-			TextView title = (TextView) view.findViewById(R.id.header_text);
-			final EditText field = (EditText) view.findViewById(R.id.text_field);
+			TextView title = (TextView) view.findViewById(R.id.uv_header_text);
+			final EditText field = (EditText) view.findViewById(R.id.uv_text_field);
 			if (type == EMAIL_FIELD) {
 				title.setText(R.string.uv_your_email_address);
 				emailField = field;
@@ -226,7 +226,7 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 				field.setText(Session.getInstance().getName());
 			}
 		} else if (type == HEADING) {
-			TextView textView = (TextView) view.findViewById(R.id.header_text);
+			TextView textView = (TextView) view.findViewById(R.id.uv_header_text);
 			boolean hasArticles = false;
 			boolean hasIdeas = false;
 			for (BaseModel model : instantAnswers) {

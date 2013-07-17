@@ -211,32 +211,32 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 		int type = getItemViewType(position);
 		if (view == null) {
 			if (type == LOADING)
-				view = inflater.inflate(R.layout.loading_item, null);
+				view = inflater.inflate(R.layout.uv_loading_item, null);
 			else if (type == FORUM)
-				view = inflater.inflate(R.layout.text_item, null);
+				view = inflater.inflate(R.layout.uv_text_item, null);
 			else if (type == KB_HEADER)
-				view = inflater.inflate(R.layout.header_item_light, null);
+				view = inflater.inflate(R.layout.uv_header_item_light, null);
 			else if (type == TOPIC)
-				view = inflater.inflate(R.layout.text_item, null);
+				view = inflater.inflate(R.layout.uv_text_item, null);
 			else if (type == CONTACT)
-				view = inflater.inflate(R.layout.text_item, null);
+				view = inflater.inflate(R.layout.uv_text_item, null);
 			else if (type == ARTICLE)
-				view = inflater.inflate(R.layout.text_item, null);
+				view = inflater.inflate(R.layout.uv_text_item, null);
 		}
 
 		if (type == FORUM) {
-			TextView textView = (TextView) view.findViewById(R.id.text);
+			TextView textView = (TextView) view.findViewById(R.id.uv_text);
 			textView.setText(R.string.uv_feedback_forum);
-			TextView text2 = (TextView) view.findViewById(R.id.text2);
+			TextView text2 = (TextView) view.findViewById(R.id.uv_text2);
 			text2.setText(Utils.getQuantityString(text2, R.plurals.uv_ideas, Session.getInstance().getForum().getNumberOfOpenSuggestions()));
 		} else if (type == KB_HEADER) {
-			TextView textView = (TextView) view.findViewById(R.id.header_text);
+			TextView textView = (TextView) view.findViewById(R.id.uv_header_text);
 			textView.setText(R.string.uv_knowledge_base);
 		} else if (type == TOPIC) {
 			Topic topic = (Topic) getItem(position);
-			TextView textView = (TextView) view.findViewById(R.id.text);
+			TextView textView = (TextView) view.findViewById(R.id.uv_text);
 			textView.setText(topic.getName());
-			textView = (TextView) view.findViewById(R.id.text2);
+			textView = (TextView) view.findViewById(R.id.uv_text2);
 			if (topic == Topic.ALL_ARTICLES) {
 				textView.setVisibility(View.GONE);
 			} else {
@@ -244,16 +244,16 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 				textView.setText(String.format("%d %s", topic.getNumberOfArticles(), context.getResources().getQuantityString(R.plurals.uv_articles, topic.getNumberOfArticles())));
 			}
 		} else if (type == CONTACT) {
-			TextView textView = (TextView) view.findViewById(R.id.text);
+			TextView textView = (TextView) view.findViewById(R.id.uv_text);
 			textView.setText(R.string.uv_contact_us);
-			view.findViewById(R.id.text2).setVisibility(View.GONE);
+			view.findViewById(R.id.uv_text2).setVisibility(View.GONE);
 		} else if (type == ARTICLE) {
-			TextView textView = (TextView) view.findViewById(R.id.text);
+			TextView textView = (TextView) view.findViewById(R.id.uv_text);
 			Article article = (Article) getItem(position);
 			textView.setText(article.getTitle());
 		}
 
-		View divider = view.findViewById(R.id.divider);
+		View divider = view.findViewById(R.id.uv_divider);
 		if (divider != null)
 			divider.setVisibility(position == getCount() - 1 ? View.GONE : View.VISIBLE);
 		if (type == FORUM)

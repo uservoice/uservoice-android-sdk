@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/view_flipper"
+    android:id="@+id/uv_view_flipper"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -9,18 +9,18 @@
         android:layout_height="match_parent" >
 
         <LinearLayout
-            android:id="@+id/container"
+            android:id="@+id/uv_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
             <WebView
-                android:id="@+id/webview"
+                android:id="@+id/uv_webview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <LinearLayout
-                android:id="@+id/helpful_section"
+                android:id="@+id/uv_helpful_section"
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,14 +55,14 @@
                         <TableRow>
 
                             <Button
-                                android:id="@+id/helpful_button"
+                                android:id="@+id/uv_helpful_button"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="@string/uv_very_yes" />
 
                             <Button
-                                android:id="@+id/unhelpful_button"
+                                android:id="@+id/uv_unhelpful_button"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"

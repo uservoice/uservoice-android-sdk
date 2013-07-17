@@ -5,7 +5,7 @@
     android:orientation="vertical" >
 
     <EditText
-        android:id="@+id/signin_email"
+        android:id="@+id/uv_signin_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -16,7 +16,7 @@
     </EditText>
 
     <EditText
-        android:id="@+id/signin_name"
+        android:id="@+id/uv_signin_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -26,10 +26,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:id="@+id/signin_password_fields" >
+        android:id="@+id/uv_signin_password_fields" >
 
         <EditText
-            android:id="@+id/signin_password"
+            android:id="@+id/uv_signin_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -38,7 +38,7 @@
             android:inputType="textPassword" />
 
         <Button
-            android:id="@+id/signin_forgot_password"
+            android:id="@+id/uv_signin_forgot_password"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/uv_forgot_password"

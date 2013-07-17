@@ -23,7 +23,6 @@ import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.Topic;
 import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.ui.LoadAllAdapter;
-import com.uservoice.uservoicesdk.ui.Utils;
 
 public class TopicActivity extends BaseListActivity implements SearchActivity {
 	
@@ -63,7 +62,7 @@ public class TopicActivity extends BaseListActivity implements SearchActivity {
 		
 		setTitle(null);
 		getListView().setDivider(null);
-		setListAdapter(new LoadAllAdapter<Article>(this, R.layout.text_item, new ArrayList<Article>()) {
+		setListAdapter(new LoadAllAdapter<Article>(this, R.layout.uv_text_item, new ArrayList<Article>()) {
 			@Override
 			protected void loadPage(int page, Callback<List<Article>> callback) {
 				Topic topic = Session.getInstance().getTopic();
@@ -76,8 +75,8 @@ public class TopicActivity extends BaseListActivity implements SearchActivity {
 			
 			@Override
 			protected void customizeLayout(View view, Article model) {
-				TextView text = (TextView) view.findViewById(R.id.text);
-				TextView text2 = (TextView) view.findViewById(R.id.text2);
+				TextView text = (TextView) view.findViewById(R.id.uv_text);
+				TextView text2 = (TextView) view.findViewById(R.id.uv_text2);
 				text.setText(model.getTitle());
 				if (Session.getInstance().getTopic() == Topic.ALL_ARTICLES && model.getTopicName() != null) {
 					text2.setVisibility(View.VISIBLE);
@@ -102,14 +101,14 @@ public class TopicActivity extends BaseListActivity implements SearchActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.portal, menu);
+		getMenuInflater().inflate(R.menu.uv_portal, menu);
 		setupScopedSearch(menu);
 		return true;
 	}
 	
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
-		if (item.getItemId() == R.id.action_contact) {
+		if (item.getItemId() == R.id.uv_action_contact) {
 			startActivity(new Intent(this, ContactActivity.class));
 			return true;
 		}

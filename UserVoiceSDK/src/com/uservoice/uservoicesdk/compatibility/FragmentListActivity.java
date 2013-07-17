@@ -146,7 +146,7 @@ public abstract class FragmentListActivity extends BaseActivity {
 		if (mList != null) {
 			return;
 		}
-		setContentView(R.layout.list_content);
+		setContentView(R.layout.uv_list_content);
 	}
 
 	private AdapterView.OnItemClickListener mOnClickListener = new AdapterView.OnItemClickListener() {

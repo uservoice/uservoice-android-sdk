@@ -17,7 +17,7 @@
 			android:layout_gravity="center_vertical"
 			android:paddingLeft="10dp"
 			android:paddingRight="10dp"
-			android:id="@+id/icon"
+			android:id="@+id/uv_icon"
 			android:src="@drawable/uv_idea" />
 
 		<LinearLayout
@@ -28,7 +28,7 @@
 			android:orientation="vertical" >
 
 			<TextView
-				android:id="@+id/title"
+				android:id="@+id/uv_title"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:paddingTop="5dp"
@@ -42,7 +42,7 @@
 				android:orientation="horizontal" >
 
 				<TextView
-					android:id="@+id/detail"
+					android:id="@+id/uv_detail"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:text="Small Text"
@@ -50,14 +50,14 @@
 					android:textColor="#75778c" />
 
 				<LinearLayout
-					android:id="@+id/suggestion_details"
+					android:id="@+id/uv_suggestion_details"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="3dp"
 					android:orientation="horizontal" >
 
 					<View
-						android:id="@+id/suggestion_status_color"
+						android:id="@+id/uv_suggestion_status_color"
 						android:layout_width="9dp"
 						android:layout_height="9dp"
 						android:layout_marginLeft="10dp"
@@ -66,7 +66,7 @@
 						android:background="#999999" />
 
 					<TextView
-						android:id="@+id/suggestion_status"
+						android:id="@+id/uv_suggestion_status"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:text="UNDER REVIEW"
@@ -78,6 +78,6 @@
 
 	</LinearLayout>
 
-	<include layout="@layout/divider" />
+	<include layout="@layout/uv_divider" />
 
 </LinearLayout>

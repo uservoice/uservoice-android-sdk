@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -11,26 +10,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:minHeight="@dimen/listPreferredItemHeightSmall"
+        android:minHeight="@dimen/uv_listPreferredItemHeightSmall"
         android:orientation="vertical"
         android:paddingLeft="8dip" >
 
         <TextView
-            android:id="@+id/text"
+            android:id="@+id/uv_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Medium Text"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/text2"
+            android:id="@+id/uv_text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Small Text"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="#999999" />
     </LinearLayout>
 
-    <include layout="@layout/divider" />
+    <include layout="@layout/uv_divider" />
 
 </LinearLayout>

@@ -1,7 +1,6 @@
 package com.uservoice.uservoicesdk.ui;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -69,22 +68,22 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
 		int type = getItemViewType(position);
 		if (view == null) {
 			if (type == DESCRIPTION) {
-				view = inflater.inflate(R.layout.text_field_item, null);
-				TextView title = (TextView) view.findViewById(R.id.header_text);
-				descriptionField = (EditText) view.findViewById(R.id.text_field);
+				view = inflater.inflate(R.layout.uv_text_field_item, null);
+				TextView title = (TextView) view.findViewById(R.id.uv_header_text);
+				descriptionField = (EditText) view.findViewById(R.id.uv_text_field);
 				title.setText(R.string.uv_idea_description_heading);
 				descriptionField.setHint(R.string.uv_idea_description_hint);
 			} else if (type == CATEGORY) {
-				view = inflater.inflate(R.layout.select_field_item, null);
-				TextView title = (TextView) view.findViewById(R.id.header_text);
-				categorySelect = (Spinner) view.findViewById(R.id.select_field);
+				view = inflater.inflate(R.layout.uv_select_field_item, null);
+				TextView title = (TextView) view.findViewById(R.id.uv_header_text);
+				categorySelect = (Spinner) view.findViewById(R.id.uv_select_field);
 				categorySelect.setAdapter(new SpinnerAdapter<Category>(context, Session.getInstance().getForum().getCategories()));
 				title.setText(R.string.uv_category);
 			} else if (type == HELP) {
-				view = inflater.inflate(R.layout.idea_help_item, null);
+				view = inflater.inflate(R.layout.uv_idea_help_item, null);
 			} else if (type == TEXT_HEADING) {
-				view = inflater.inflate(R.layout.header_item, null);
-				TextView textView = (TextView) view.findViewById(R.id.header_text);
+				view = inflater.inflate(R.layout.uv_header_item, null);
+				TextView textView = (TextView) view.findViewById(R.id.uv_header_text);
 				textView.setText(R.string.uv_idea_text_heading);
 			} else {
 				view = super.getView(position, convertView, parent);
@@ -94,7 +93,7 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
 		if (type == DESCRIPTION || type == CATEGORY || type == HELP || type == TEXT_HEADING) {
 			// just skip the else
 		} else if (type == TEXT) {
-			TextView textView = (TextView) view.findViewById(R.id.text);
+			TextView textView = (TextView) view.findViewById(R.id.uv_text);
 			textView.setHint(R.string.uv_idea_text_hint);
             textView.setMinLines(1);
 		} else {

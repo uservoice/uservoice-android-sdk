@@ -132,9 +132,9 @@ public class MixedSearchAdapter extends SearchAdapter<BaseModel> implements Adap
 		int type = getItemViewType(position);
 		if (view == null) {
 			if (type == SEARCH_RESULT)
-				view = inflater.inflate(R.layout.instant_answer_item, null);
+				view = inflater.inflate(R.layout.uv_instant_answer_item, null);
 			else if (type == LOADING)
-				view = inflater.inflate(R.layout.loading_item, null);
+				view = inflater.inflate(R.layout.uv_loading_item, null);
 		}
 
 		if (type == SEARCH_RESULT) {

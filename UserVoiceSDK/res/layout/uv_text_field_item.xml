@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <include layout="@layout/header_item" />
+    <include layout="@layout/uv_header_item" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,12 +13,15 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp" >
 
-        <Spinner
-            android:id="@+id/select_field"
+        <EditText
+            android:id="@+id/uv_text_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="?android:attr/listPreferredItemHeight"
-            android:spinnerMode="dialog" />
+            android:inputType="text"
+            android:ems="10" >
+
+            <requestFocus />
+        </EditText>
     </LinearLayout>
 
 </LinearLayout>

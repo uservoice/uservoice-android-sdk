@@ -36,21 +36,21 @@ public class CommentDialogFragment extends DialogFragment {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle(R.string.uv_post_a_comment);
 
-		View view = getActivity().getLayoutInflater().inflate(R.layout.comment_dialog, null);
-		final EditText textField = (EditText) view.findViewById(R.id.comment_edit_text);
+		View view = getActivity().getLayoutInflater().inflate(R.layout.uv_comment_dialog, null);
+		final EditText textField = (EditText) view.findViewById(R.id.uv_comment_edit_text);
 
-		View email = view.findViewById(R.id.email);
-		View name = view.findViewById(R.id.name);
-		final EditText emailField = (EditText) email.findViewById(R.id.text_field);
-		final EditText nameField = (EditText) name.findViewById(R.id.text_field);
+		View email = view.findViewById(R.id.uv_email);
+		View name = view.findViewById(R.id.uv_name);
+		final EditText emailField = (EditText) email.findViewById(R.id.uv_text_field);
+		final EditText nameField = (EditText) name.findViewById(R.id.uv_text_field);
 		if (Session.getInstance().getUser() != null) {
 			email.setVisibility(View.GONE);
 			name.setVisibility(View.GONE);
 		} else {
 			emailField.setText(Session.getInstance().getEmail());
-			((TextView) email.findViewById(R.id.header_text)).setText(R.string.uv_your_email_address);
+			((TextView) email.findViewById(R.id.uv_header_text)).setText(R.string.uv_your_email_address);
 			nameField.setText(Session.getInstance().getName());
-			((TextView) name.findViewById(R.id.header_text)).setText(R.string.uv_your_name);
+			((TextView) name.findViewById(R.id.uv_header_text)).setText(R.string.uv_your_name);
 		}
 
 		builder.setView(view);

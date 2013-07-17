@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/comment_edit_text"
+            android:id="@+id/uv_comment_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="60dp"
@@ -23,15 +23,15 @@
             android:inputType="textMultiLine" />
 
         <LinearLayout
-            android:id="@+id/email"
+            android:id="@+id/uv_email"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:orientation="vertical">
 
-            <include layout="@layout/header_item_light_no_padding" />
+            <include layout="@layout/uv_header_item_light_no_padding" />
 
             <EditText
-                android:id="@+id/text_field"
+                android:id="@+id/uv_text_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/uv_email_address"
@@ -40,15 +40,15 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/name"
+            android:id="@+id/uv_name"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:orientation="vertical">
 
-            <include layout="@layout/header_item_light_no_padding" />
+            <include layout="@layout/uv_header_item_light_no_padding" />
 
             <EditText
-                android:id="@+id/text_field"
+                android:id="@+id/uv_text_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/uv_name_hint"

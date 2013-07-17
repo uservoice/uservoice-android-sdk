@@ -49,9 +49,9 @@ public class SuggestionDialogFragment extends DialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		setStyle(STYLE_NO_TITLE, getTheme());
-		view = getActivity().getLayoutInflater().inflate(R.layout.idea_dialog, null);
-		headerView = getActivity().getLayoutInflater().inflate(R.layout.idea_dialog_header, null);
-		headerView.findViewById(R.id.subscribe).setOnClickListener(new View.OnClickListener() {
+		view = getActivity().getLayoutInflater().inflate(R.layout.uv_idea_dialog, null);
+		headerView = getActivity().getLayoutInflater().inflate(R.layout.uv_idea_dialog_header, null);
+		headerView.findViewById(R.id.uv_subscribe).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				final DefaultCallback<Suggestion> callback = new DefaultCallback<Suggestion>(getActivity()) {
@@ -79,14 +79,14 @@ public class SuggestionDialogFragment extends DialogFragment {
 				}
 			}
 		});
-		headerView.findViewById(R.id.post_comment).setOnClickListener(new View.OnClickListener() {
+		headerView.findViewById(R.id.uv_post_comment).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				CommentDialogFragment dialog = new CommentDialogFragment(suggestion, SuggestionDialogFragment.this);
 				dialog.show(getActivity().getSupportFragmentManager(), "CommentDialogFragment");
 			}
 		});
-		ListView listView = (ListView) view.findViewById(R.id.list);
+		ListView listView = (ListView) view.findViewById(R.id.uv_list);
 		listView.addHeaderView(headerView);
 		displaySuggestion(view, suggestion);
 		adapter = getListAdapter();
@@ -100,7 +100,7 @@ public class SuggestionDialogFragment extends DialogFragment {
 	}
 	
 	public void suggestionSubscriptionUpdated(Suggestion model) {
-		CheckBox checkbox = (CheckBox) headerView.findViewById(R.id.subscribe_checkbox);
+		CheckBox checkbox = (CheckBox) headerView.findViewById(R.id.uv_subscribe_checkbox);
 		if (suggestion.isSubscribed()) {
 			Toast.makeText(getActivity(), R.string.uv_msg_subscribe_success, Toast.LENGTH_SHORT).show();
 			checkbox.setChecked(true);
@@ -114,7 +114,7 @@ public class SuggestionDialogFragment extends DialogFragment {
 	}
 
 	private PaginatedAdapter<Comment> getListAdapter() {
-		return new PaginatedAdapter<Comment>(getActivity(), R.layout.comment_item, new ArrayList<Comment>()) {
+		return new PaginatedAdapter<Comment>(getActivity(), R.layout.uv_comment_item, new ArrayList<Comment>()) {
 			@Override
 			protected int getTotalNumberOfObjects() {
 				return suggestion.getNumberOfComments();
@@ -122,16 +122,16 @@ public class SuggestionDialogFragment extends DialogFragment {
 
 			@Override
 			protected void customizeLayout(View view, Comment model) {
-				TextView textView = (TextView) view.findViewById(R.id.text);
+				TextView textView = (TextView) view.findViewById(R.id.uv_text);
 				textView.setText(model.getText());
 
-				textView = (TextView) view.findViewById(R.id.name);
+				textView = (TextView) view.findViewById(R.id.uv_name);
 				textView.setText(model.getUserName());
 
-				textView = (TextView) view.findViewById(R.id.date);
+				textView = (TextView) view.findViewById(R.id.uv_date);
 				textView.setText(DateFormat.getDateInstance().format(model.getCreatedAt()));
 
-				ImageView avatar = (ImageView) view.findViewById(R.id.avatar);
+				ImageView avatar = (ImageView) view.findViewById(R.id.uv_avatar);
 				ImageCache.getInstance().loadImage(model.getAvatarUrl(), avatar);
 			}
 
@@ -154,13 +154,13 @@ public class SuggestionDialogFragment extends DialogFragment {
 	}
 
 	private void displaySuggestion(View view, Suggestion suggestion) {
-		TextView status = (TextView) view.findViewById(R.id.status);
-		TextView responseStatus = (TextView) view.findViewById(R.id.response_status);
-		View responseDivider = view.findViewById(R.id.response_divider);
-		TextView title = (TextView) view.findViewById(R.id.title);
+		TextView status = (TextView) view.findViewById(R.id.uv_status);
+		TextView responseStatus = (TextView) view.findViewById(R.id.uv_response_status);
+		View responseDivider = view.findViewById(R.id.uv_response_divider);
+		TextView title = (TextView) view.findViewById(R.id.uv_title);
 		
 		if (suggestion.isSubscribed()) {
-			((CheckBox)view.findViewById(R.id.subscribe_checkbox)).setChecked(true);
+			((CheckBox)view.findViewById(R.id.uv_subscribe_checkbox)).setChecked(true);
 		}
 
 		if (suggestion.getStatus() == null) {
@@ -178,22 +178,22 @@ public class SuggestionDialogFragment extends DialogFragment {
 		}
 
 		title.setText(suggestion.getTitle());
-		((TextView) view.findViewById(R.id.text)).setText(suggestion.getText());
-		((TextView) view.findViewById(R.id.creator)).setText(String.format(view.getContext().getString(R.string.uv_posted_by_format), suggestion.getCreatorName(), DateFormat.getDateInstance().format(suggestion.getCreatedAt())));
+		((TextView) view.findViewById(R.id.uv_text)).setText(suggestion.getText());
+		((TextView) view.findViewById(R.id.uv_creator)).setText(String.format(view.getContext().getString(R.string.uv_posted_by_format), suggestion.getCreatorName(), DateFormat.getDateInstance().format(suggestion.getCreatedAt())));
 
 		if (suggestion.getAdminResponseText() == null) {
-			view.findViewById(R.id.admin_response).setVisibility(View.GONE);
+			view.findViewById(R.id.uv_admin_response).setVisibility(View.GONE);
 		} else {
-			view.findViewById(R.id.admin_response).setVisibility(View.VISIBLE);
-			((TextView) view.findViewById(R.id.admin_name)).setText(suggestion.getAdminResponseUserName());
-			((TextView) view.findViewById(R.id.response_date)).setText(DateFormat.getDateInstance().format(suggestion.getAdminResponseCreatedAt()));
-			((TextView) view.findViewById(R.id.response_text)).setText(suggestion.getAdminResponseText());
-			ImageView avatar = (ImageView) view.findViewById(R.id.admin_avatar);
+			view.findViewById(R.id.uv_admin_response).setVisibility(View.VISIBLE);
+			((TextView) view.findViewById(R.id.uv_admin_name)).setText(suggestion.getAdminResponseUserName());
+			((TextView) view.findViewById(R.id.uv_response_date)).setText(DateFormat.getDateInstance().format(suggestion.getAdminResponseCreatedAt()));
+			((TextView) view.findViewById(R.id.uv_response_text)).setText(suggestion.getAdminResponseText());
+			ImageView avatar = (ImageView) view.findViewById(R.id.uv_admin_avatar);
 			ImageCache.getInstance().loadImage(suggestion.getAdminResponseAvatarUrl(), avatar);
 		}
 
-		((TextView) view.findViewById(R.id.comment_count)).setText(Utils.getQuantityString(view, R.plurals.uv_comments, suggestion.getNumberOfComments()).toUpperCase(Locale.getDefault()));
-		((TextView) view.findViewById(R.id.subscriber_count)).setText(String.format(getString(R.string.uv_number_of_subscribers_format), Utils.getQuantityString(view, R.plurals.uv_subscribers, suggestion.getNumberOfSubscribers())));
+		((TextView) view.findViewById(R.id.uv_comment_count)).setText(Utils.getQuantityString(view, R.plurals.uv_comments, suggestion.getNumberOfComments()).toUpperCase(Locale.getDefault()));
+		((TextView) view.findViewById(R.id.uv_subscriber_count)).setText(String.format(getString(R.string.uv_number_of_subscribers_format), Utils.getQuantityString(view, R.plurals.uv_subscribers, suggestion.getNumberOfSubscribers())));
 	}
 
 }

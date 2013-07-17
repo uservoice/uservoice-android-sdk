@@ -3,11 +3,7 @@ package com.uservoice.uservoicesdk.activity;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
-import android.app.AlertDialog;
 import android.app.FragmentTransaction;
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
@@ -22,7 +18,6 @@ import com.uservoice.uservoicesdk.ui.PortalAdapter;
 import com.uservoice.uservoicesdk.ui.SearchAdapter;
 import com.uservoice.uservoicesdk.ui.SearchExpandListener;
 import com.uservoice.uservoicesdk.ui.SearchQueryListener;
-import com.uservoice.uservoicesdk.ui.Utils;
 
 public class BaseActivity extends FragmentActivity {
 
@@ -57,14 +52,14 @@ public class BaseActivity extends FragmentActivity {
     @SuppressLint("NewApi")
     protected void setupScopedSearch(Menu menu) {
         if (getActionBar() != null) {
-            menu.findItem(R.id.action_search).setOnActionExpandListener(new SearchExpandListener((SearchActivity) this));
-            SearchView search = (SearchView) menu.findItem(R.id.action_search).getActionView();
+            menu.findItem(R.id.uv_action_search).setOnActionExpandListener(new SearchExpandListener((SearchActivity) this));
+            SearchView search = (SearchView) menu.findItem(R.id.uv_action_search).getActionView();
             search.setOnQueryTextListener(new SearchQueryListener((SearchActivity) this));
             searchAdapter = new MixedSearchAdapter(this);
             ListView searchView = new ListView(this);
             searchView.setAdapter(searchAdapter);
             searchView.setOnItemClickListener(searchAdapter);
-            ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
+            ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.uv_view_flipper);
             viewFlipper.addView(searchView, 1);
 
             ActionBar.TabListener listener = new ActionBar.TabListener() {
@@ -88,7 +83,7 @@ public class BaseActivity extends FragmentActivity {
             ideasTab = getActionBar().newTab().setText(getString(R.string.uv_ideas_filter)).setTabListener(listener).setTag(PortalAdapter.SCOPE_IDEAS);
             getActionBar().addTab(ideasTab);
         } else {
-            menu.findItem(R.id.action_search).setVisible(false);
+            menu.findItem(R.id.uv_action_search).setVisible(false);
         }
     }
 
@@ -103,7 +98,7 @@ public class BaseActivity extends FragmentActivity {
 
     @SuppressLint("NewApi")
     public void showSearch() {
-        ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
+        ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.uv_view_flipper);
         viewFlipper.setDisplayedChild(1);
         if (getActionBar() != null) {
             if (originalNavigationMode == -1)
@@ -114,7 +109,7 @@ public class BaseActivity extends FragmentActivity {
 
     @SuppressLint("NewApi")
     public void hideSearch() {
-        ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
+        ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.uv_view_flipper);
         viewFlipper.setDisplayedChild(0);
         if (getActionBar() != null) {
             getActionBar().setNavigationMode(originalNavigationMode == -1 ? ActionBar.NAVIGATION_MODE_STANDARD : originalNavigationMode);

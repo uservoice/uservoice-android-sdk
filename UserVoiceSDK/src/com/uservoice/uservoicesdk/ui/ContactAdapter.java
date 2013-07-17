@@ -72,17 +72,17 @@ public class ContactAdapter extends InstantAnswersAdapter {
 		int type = getItemViewType(position);
 		if (view == null) {
 			if (type == CUSTOM_TEXT_FIELD) {
-				view = inflater.inflate(R.layout.text_field_item, null);
+				view = inflater.inflate(R.layout.uv_text_field_item, null);
 			} else if (type == CUSTOM_PREDEFINED_FIELD) {
-				view = inflater.inflate(R.layout.select_field_item, null);
+				view = inflater.inflate(R.layout.uv_select_field_item, null);
 			} else {
 				return super.getView(position, convertView, parent);
 			}
 		}
 
 		if (type == CUSTOM_TEXT_FIELD) {
-			TextView title = (TextView) view.findViewById(R.id.header_text);
-			final EditText field = (EditText) view.findViewById(R.id.text_field);
+			TextView title = (TextView) view.findViewById(R.id.uv_header_text);
+			final EditText field = (EditText) view.findViewById(R.id.uv_text_field);
 			final CustomField customField = (CustomField) getItem(position);
 			String value = customFieldValues.get(customField.getName());
 			title.setText(customField.getName());
@@ -100,9 +100,9 @@ public class ContactAdapter extends InstantAnswersAdapter {
 		} else if (type == CUSTOM_PREDEFINED_FIELD) {
 			final CustomField customField = (CustomField) getItem(position);
 			String value = customFieldValues.get(customField.getName());
-			TextView title = (TextView) view.findViewById(R.id.header_text);
+			TextView title = (TextView) view.findViewById(R.id.uv_header_text);
 			title.setText(customField.getName());
-			Spinner field = (Spinner) view.findViewById(R.id.select_field);
+			Spinner field = (Spinner) view.findViewById(R.id.uv_select_field);
 			field.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 				@Override
 				public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

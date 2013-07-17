@@ -9,7 +9,7 @@
     android:paddingTop="10dp" >
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/uv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="5dp"
@@ -18,7 +18,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/uv_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="5dp"
@@ -29,7 +29,7 @@
         android:textColor="#999999" />
 
     <TextView
-        android:id="@+id/creator"
+        android:id="@+id/uv_creator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="10dp"
@@ -40,13 +40,13 @@
         android:textColor="#999999"
         android:textSize="11sp" />
 
-    <include layout="@layout/divider" />
+    <include layout="@layout/uv_divider" />
 
     <RelativeLayout
-        android:id="@+id/subscribe"
+        android:id="@+id/uv_subscribe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/clickable"
+        android:background="@drawable/uv_clickable"
         android:clickable="true"
         android:orientation="horizontal"
         android:paddingBottom="10dp"
@@ -66,7 +66,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
-                android:id="@+id/subscriber_count"
+                android:id="@+id/uv_subscriber_count"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="12 people want this"
@@ -75,7 +75,7 @@
         </LinearLayout>
 
         <CheckBox
-            android:id="@+id/subscribe_checkbox"
+            android:id="@+id/uv_subscribe_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -83,7 +83,7 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/admin_response"
+        android:id="@+id/uv_admin_response"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -91,7 +91,7 @@
         android:paddingTop="10dp" >
 
         <TextView
-            android:id="@+id/response_status"
+            android:id="@+id/uv_response_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="2dp"
@@ -104,7 +104,7 @@
             android:textStyle="bold" />
 
         <View
-            android:id="@+id/response_divider"
+            android:id="@+id/uv_response_divider"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="#8dc13c" />
@@ -129,7 +129,7 @@
                     android:paddingTop="5dp" >
 
                     <TextView
-                        android:id="@+id/admin_name"
+                        android:id="@+id/uv_admin_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingRight="5dp"
@@ -137,7 +137,7 @@
                         android:textSize="12sp" />
 
                     <TextView
-                        android:id="@+id/response_date"
+                        android:id="@+id/uv_response_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Feb 12, 2013"
@@ -146,7 +146,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/response_text"
+                    android:id="@+id/uv_response_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="2dp"
@@ -156,7 +156,7 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/admin_avatar"
+                android:id="@+id/uv_admin_avatar"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:paddingTop="2dp" />
@@ -170,18 +170,18 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/comment_count"
-            style="@style/ListSeparatorLight"
+            android:id="@+id/uv_comment_count"
+            style="@style/uv_ListSeparatorLight"
             android:paddingLeft="5dp"
             android:text="14 comments"
             android:textIsSelectable="false" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/post_comment"
+        android:id="@+id/uv_post_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/clickable"
+        android:background="@drawable/uv_clickable"
         android:clickable="true"
         android:paddingBottom="10dp"
         android:paddingLeft="5dp"
@@ -209,6 +209,6 @@
             android:src="@drawable/uv_comment" />
     </LinearLayout>
 
-    <include layout="@layout/divider" />
+    <include layout="@layout/uv_divider" />
 
 </LinearLayout>

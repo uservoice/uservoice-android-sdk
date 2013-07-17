@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/menu_search"
+    <item android:id="@+id/uv_menu_search"
           android:title="@string/uv_menu_search"
           android:icon="@android:drawable/ic_menu_search"
           android:showAsAction="ifRoom|collapseActionView"
           android:actionViewClass="android.widget.SearchView" />
     
-    <item android:id="@+id/new_idea"
+    <item android:id="@+id/uv_new_idea"
           android:title="@string/uv_submit_idea"
           android:icon="@drawable/uv_add"
           android:showAsAction="ifRoom" />

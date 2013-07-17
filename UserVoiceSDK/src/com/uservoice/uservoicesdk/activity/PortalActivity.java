@@ -25,14 +25,14 @@ public class PortalActivity extends BaseListActivity implements SearchActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.portal, menu);
+		getMenuInflater().inflate(R.menu.uv_portal, menu);
 		setupScopedSearch(menu);
 		return true;
 	}
 
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
-		if (item.getItemId() == R.id.action_contact) {
+		if (item.getItemId() == R.id.uv_action_contact) {
 			startActivity(new Intent(this, ContactActivity.class));
 			return true;
 		}

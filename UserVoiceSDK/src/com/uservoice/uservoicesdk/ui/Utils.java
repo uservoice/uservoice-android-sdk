@@ -6,7 +6,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.support.v4.app.FragmentActivity;
 import android.util.TypedValue;
 import android.view.View;
@@ -55,10 +54,10 @@ public class Utils {
 	}
 
 	public static void displayInstantAnswer(View view, BaseModel model) {
-		TextView title = (TextView) view.findViewById(R.id.title);
-		TextView detail = (TextView) view.findViewById(R.id.detail);
-		View suggestionDetails = view.findViewById(R.id.suggestion_details);
-		ImageView image = (ImageView) view.findViewById(R.id.icon);
+		TextView title = (TextView) view.findViewById(R.id.uv_title);
+		TextView detail = (TextView) view.findViewById(R.id.uv_detail);
+		View suggestionDetails = view.findViewById(R.id.uv_suggestion_details);
+		ImageView image = (ImageView) view.findViewById(R.id.uv_icon);
 		if (model instanceof Article) {
 			Article article = (Article) model;
 			image.setImageResource(R.drawable.uv_article);
@@ -77,8 +76,8 @@ public class Utils {
 			detail.setVisibility(View.VISIBLE);
 			detail.setText(suggestion.getForumName());
 			if (suggestion.getStatus() != null) {
-				View statusColor = suggestionDetails.findViewById(R.id.suggestion_status_color);
-				TextView status = (TextView) suggestionDetails.findViewById(R.id.suggestion_status);
+				View statusColor = suggestionDetails.findViewById(R.id.uv_suggestion_status_color);
+				TextView status = (TextView) suggestionDetails.findViewById(R.id.uv_suggestion_status);
 				int color = Color.parseColor(suggestion.getStatusColor());
 				suggestionDetails.setVisibility(View.VISIBLE);
 				status.setText(suggestion.getStatus().toUpperCase(Locale.getDefault()));
