@@ -14,52 +14,57 @@ import com.uservoice.uservoicesdk.ui.InstantAnswersAdapter;
 
 public abstract class InstantAnswersActivity extends BaseListActivity {
 
-	private InstantAnswersAdapter adapter;
+    private InstantAnswersAdapter adapter;
 
-	public InstantAnswersActivity() {
-		super();
-	}
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
-		getListView().setDivider(null);
-
-		adapter = createAdapter();
-		setListAdapter(adapter);
-		getListView().setOnHierarchyChangeListener(adapter);
-		getListView().setOnItemClickListener(adapter);
-		getListView().setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
-		new InitManager(this, new Runnable() {
-			@Override
-			public void run() {
-				adapter.notifyDataSetChanged();
-			}
-		}).init();
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+    public InstantAnswersActivity() {
+        super();
     }
 
     @Override
-	public void onBackPressed() {
-		if (adapter.hasText()) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle(R.string.uv_confirm);
-			builder.setMessage(getDiscardDialogMessage());
-			builder.setPositiveButton(R.string.uv_yes, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					finish();
-				}
-			});
-			builder.setNegativeButton(R.string.uv_no, null);
-			builder.show();
-		} else {
-			super.onBackPressed();
-		}
-	}
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-	protected abstract InstantAnswersAdapter createAdapter();
-	protected abstract int getDiscardDialogMessage();
+        getListView().setDivider(null);
+
+        adapter = createAdapter();
+        setListAdapter(adapter);
+        getListView().setOnHierarchyChangeListener(adapter);
+        getListView().setOnItemClickListener(adapter);
+        getListView().setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
+        new InitManager(this, new Runnable() {
+            @Override
+            public void run() {
+                onInitialize();
+            }
+        }).init();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+    }
+
+    protected void onInitialize() {
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (adapter.hasText()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(R.string.uv_confirm);
+            builder.setMessage(getDiscardDialogMessage());
+            builder.setPositiveButton(R.string.uv_yes, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            builder.setNegativeButton(R.string.uv_no, null);
+            builder.show();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    protected abstract InstantAnswersAdapter createAdapter();
+
+    protected abstract int getDiscardDialogMessage();
 
 }
