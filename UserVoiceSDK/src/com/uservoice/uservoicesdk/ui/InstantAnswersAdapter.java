@@ -252,7 +252,7 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 	protected void onButtonTapped() {
 		if (state == State.INIT) {
 			String query = textField.getText().toString().trim();
-			if (query.isEmpty())
+			if (query.length() == 0)
 				return;
 			state = State.INIT_LOADING;
 			notifyDataSetChanged();
@@ -293,7 +293,7 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 	}
 	
 	public boolean hasText() {
-        return textField != null && !textField.getText().toString().isEmpty();
+        return textField != null && textField.getText().toString().length() != 0;
 	}
 
 }

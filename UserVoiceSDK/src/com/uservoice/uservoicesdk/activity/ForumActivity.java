@@ -205,7 +205,7 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.uv_forum, menu);
-        if (getActionBar() != null) {
+        if (hasActionBar()) {
             menu.findItem(R.id.uv_menu_search).setOnActionExpandListener(new SearchExpandListener(this));
             SearchView search = (SearchView) menu.findItem(R.id.uv_menu_search).getActionView();
             search.setOnQueryTextListener(new SearchQueryListener(this));
