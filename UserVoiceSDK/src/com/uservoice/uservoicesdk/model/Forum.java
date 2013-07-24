@@ -1,5 +1,6 @@
 package com.uservoice.uservoicesdk.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONException;
@@ -31,6 +32,8 @@ public class Forum extends BaseModel {
 		numberOfOpenSuggestions = topic.getInt("open_suggestions_count");
 		numberOfVotesAllowed = topic.getInt("votes_allowed");
 		categories = deserializeList(topic, "categories", Category.class);
+        if (categories == null)
+            categories = new ArrayList<Category>();
 	}
 	
 	public String getName() {
