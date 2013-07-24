@@ -107,7 +107,7 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
 		SigninManager.signIn(context, emailField.getText().toString(), nameField.getText().toString(), new Runnable() {
 			@Override
 			public void run() {
-				Category category = (Category) categorySelect.getSelectedItem();
+				Category category = categorySelect == null ? null : (Category) categorySelect.getSelectedItem();
 				Suggestion.createSuggestion(Session.getInstance().getForum(), category, textField.getText().toString(), descriptionField.getText().toString(), 1, new DefaultCallback<Suggestion>(context) {
 					@Override
 					public void onModel(Suggestion model) {
