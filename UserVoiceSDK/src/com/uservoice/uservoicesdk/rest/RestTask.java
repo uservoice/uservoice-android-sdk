@@ -133,7 +133,7 @@ public class RestTask extends AsyncTask<String, String, RestResult> {
 
 	private HttpUriRequest requestWithEntity(HttpEntityEnclosingRequestBase request, Uri.Builder uriBuilder) throws UnsupportedEncodingException, URISyntaxException {
 		if (params != null) {
-			request.setEntity(new UrlEncodedFormEntity(params));
+			request.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
 		}
 		request.setURI(new URI(uriBuilder.build().toString()));
 		return request;
