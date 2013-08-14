@@ -99,7 +99,13 @@ public class TopicActivity extends BaseListActivity implements SearchActivity {
 		Babayaga.track(Babayaga.Event.VIEW_TOPIC, Session.getInstance().getTopic().getId());
 	}
 
-	@Override
+    @Override
+    public void hideSearch() {
+        super.hideSearch();
+        getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+    }
+
+    @Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.uv_portal, menu);
 		setupScopedSearch(menu);
