@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +20,14 @@ public class SpinnerAdapter<T> extends BaseAdapter {
 	
 	private final List<T> objects;
 	private LayoutInflater inflater;
+	private int color;
 
 	public SpinnerAdapter(Activity context, List<T> objects) {
 		this.objects = objects;
 		inflater = context.getLayoutInflater();
+		TypedValue tv = new TypedValue();
+		context.getTheme().resolveAttribute(android.R.attr.textColorPrimary, tv, true);
+		color = context.getResources().getColor(tv.resourceId);
 	}
 
 	@Override
@@ -57,7 +62,7 @@ public class SpinnerAdapter<T> extends BaseAdapter {
 
 		TextView textView = (TextView) view;
 		if (type == OBJECT) {
-			textView.setTextColor(Color.BLACK);
+			textView.setTextColor(color);
 			textView.setText(getItem(position).toString());
 		} else {
 			textView.setTextColor(Color.GRAY);
@@ -76,10 +81,10 @@ public class SpinnerAdapter<T> extends BaseAdapter {
 
 		TextView textView = (TextView) view;
 		if (type == OBJECT) {
-			textView.setTextColor(Color.BLACK);
+			textView.setTextColor(color);
 			textView.setText(getItem(position).toString());
 		} else {
-			textView.setTextColor(Color.BLACK);
+			textView.setTextColor(color);
 			textView.setText(R.string.uv_select_one);
 		}
 		return view;
