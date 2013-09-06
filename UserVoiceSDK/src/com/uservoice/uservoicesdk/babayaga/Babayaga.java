@@ -103,7 +103,7 @@ public class Babayaga {
 		if (Session.getInstance().getClientConfig() == null) {
 			queue.add(new Track(event, eventProps));
 		} else {
-            Log.d("UV", "BY flushing: " + event);
+//            Log.d("UV", "BY flushing: " + event);
 			new BabayagaTask(event, uvts, traits, eventProps).execute();
 		}
 	}

@@ -31,7 +31,7 @@ public class ClientConfig extends BaseModel {
         // cache the client config and then request it in the background
         ClientConfig clientConfig = load(prefs, cacheKey, "client", ClientConfig.class);
         if (clientConfig != null) {
-            Log.d("UV", "client config from cache");
+//            Log.d("UV", "client config from cache");
             callback.onModel(clientConfig);
             // background refresh
             doGet(apiPath(path), new RestTaskCallback(callback) {
@@ -42,7 +42,7 @@ public class ClientConfig extends BaseModel {
                 }
             });
         } else {
-            Log.d("UV", "loading client config");
+//            Log.d("UV", "loading client config");
             doGet(apiPath(path), new RestTaskCallback(callback) {
                 @Override
                 public void onComplete(JSONObject result) throws JSONException {
