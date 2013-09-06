@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+import android.util.Log;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.model.BaseModel;
 
@@ -33,6 +34,7 @@ public class Babayaga {
 	private static List<Track> queue = new ArrayList<Track>();
 
 	public enum Event {
+    VIEW_APP("g"),
 		VIEW_FORUM("m"),
 		VIEW_TOPIC("c"),
 		VIEW_KB("k"),
@@ -101,6 +103,7 @@ public class Babayaga {
 		if (Session.getInstance().getClientConfig() == null) {
 			queue.add(new Track(event, eventProps));
 		} else {
+            Log.d("UV", "BY flushing: " + event);
 			new BabayagaTask(event, uvts, traits, eventProps).execute();
 		}
 	}
@@ -117,6 +120,7 @@ public class Babayaga {
 		if (prefs.contains("uvts")) {
 			uvts = prefs.getString("uvts", null);
 		}
+        track(Event.VIEW_APP);
 	}
 	
 	public static String getUvts() {

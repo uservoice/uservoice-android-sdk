@@ -59,7 +59,7 @@ public class InitManager {
 					}
 				});
 			} else {
-				AccessToken accessToken = BaseModel.load(Session.getInstance().getSharedPreferences(), "access_token", AccessToken.class);
+				AccessToken accessToken = BaseModel.load(Session.getInstance().getSharedPreferences(), "access_token", "access_token", AccessToken.class);
 				if (accessToken != null) {
 					Session.getInstance().setAccessToken(accessToken);
 					User.loadCurrentUser(new DefaultCallback<User>(context) {

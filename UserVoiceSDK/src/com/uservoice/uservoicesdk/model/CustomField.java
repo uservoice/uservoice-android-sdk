@@ -26,8 +26,22 @@ public class CustomField extends BaseModel {
 			}
 		}
 	}
-	
-	public boolean isRequired() {
+
+    @Override
+    public void save(JSONObject object) throws JSONException {
+        super.save(object);
+        object.put("name", name);
+        object.put("allow_blank", !required);
+        JSONArray jsonPredefinedValues = new JSONArray();
+        for (String value : predefinedValues) {
+            JSONObject predefinedValue = new JSONObject();
+            predefinedValue.put("value", value);
+            jsonPredefinedValues.put(predefinedValue);
+        }
+        object.put("possible_values", jsonPredefinedValues);
+    }
+
+    public boolean isRequired() {
 		return required;
 	}
 	

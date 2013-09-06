@@ -118,7 +118,7 @@ public class Session {
 	
 	public void setAccessToken(Context context, AccessToken accessToken) {
 		this.accessToken = accessToken;
-		accessToken.persist(getSharedPreferences(), "access_token");
+		accessToken.persist(getSharedPreferences(), "access_token", "access_token");
 		if (signinListener != null)
 			signinListener.run();
 	}

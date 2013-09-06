@@ -10,6 +10,8 @@ import com.uservoice.uservoicesdk.activity.ForumActivity;
 import com.uservoice.uservoicesdk.activity.PortalActivity;
 import com.uservoice.uservoicesdk.activity.PostIdeaActivity;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
+import com.uservoice.uservoicesdk.model.ClientConfig;
+import com.uservoice.uservoicesdk.ui.DefaultCallback;
 
 public class UserVoice {
 	
@@ -35,7 +37,15 @@ public class UserVoice {
 		Babayaga.setUserTraits(config.getUserTraits());
 		Session.getInstance().setContext(context);
 		Session.getInstance().setConfig(config);
-	}
+
+        // we have to do this preemptively so that Babayaga can send the view_app event
+        ClientConfig.loadClientConfig(new DefaultCallback<ClientConfig>(context) {
+            @Override
+            public void onModel(ClientConfig model) {
+                Session.getInstance().setClientConfig(model);
+            }
+        });
+    }
 	
 	public static void setExternalId(String scope, String id) {
 		Session.getInstance().setExternalId(scope, id);

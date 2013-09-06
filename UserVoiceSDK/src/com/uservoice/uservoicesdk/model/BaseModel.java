@@ -35,24 +35,24 @@ public class BaseModel {
 		return id;
 	}
 	
-	public boolean persist(SharedPreferences prefs, String key) {
+	public boolean persist(SharedPreferences prefs, String prefsKey, String rootKey) {
 		JSONObject object = new JSONObject();
 		JSONObject container = new JSONObject();
 		try {
 			save(object);
-			container.put(key, object);
+			container.put(rootKey, object);
 		} catch (JSONException e) {
 			return false;
 		}
 		Editor edit = prefs.edit();
-		edit.putString(key, container.toString());
+		edit.putString(prefsKey, container.toString());
 		return edit.commit();
 	}
 	
-	public static <T extends BaseModel> T load(SharedPreferences prefs, String key, Class<T> modelClass) {
+	public static <T extends BaseModel> T load(SharedPreferences prefs, String prefsKey, String rootKey, Class<T> modelClass) {
 		try {
-			JSONObject container = new JSONObject(prefs.getString(key, "{}"));
-			return deserializeObject(container, key, modelClass);
+			JSONObject container = new JSONObject(prefs.getString(prefsKey, "{}"));
+			return deserializeObject(container, rootKey, modelClass);
 		} catch (JSONException e) {
 			return null;
 		}
