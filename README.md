@@ -20,9 +20,11 @@ You will need a UserVoice account (free) for it to connect to. Go to [uservoice.
   * Set it as untrusted.
 * Add the following code to initialize the UserVoice SDK
   * Do this either in Application.onCreate or your root Activity.onCreate
+  * We strongly recommend you do this on app launch so that UserVoice can provide accurate analytics.
+  * You can call UserVoice.init again later if you need to change something about the config.
 
 ```
-    Config config = new Config("yoursite.uservoice.com", "YOUR_API_KEY", "YOUR_API_SECRET");
+    Config config = new Config("yoursite.uservoice.com");
     UserVoice.init(config, this);
 ```
 
