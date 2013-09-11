@@ -1,10 +1,5 @@
 package com.uservoice.uservoicesdk.dialog;
 
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -12,12 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.widget.*;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.activity.ForumActivity;
@@ -33,6 +23,11 @@ import com.uservoice.uservoicesdk.ui.DefaultCallback;
 import com.uservoice.uservoicesdk.ui.PaginatedAdapter;
 import com.uservoice.uservoicesdk.ui.PaginationScrollListener;
 import com.uservoice.uservoicesdk.ui.Utils;
+
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 @SuppressLint("ValidFragment")
 public class SuggestionDialogFragment extends DialogFragment {
@@ -193,7 +188,8 @@ public class SuggestionDialogFragment extends DialogFragment {
 		}
 
 		((TextView) view.findViewById(R.id.uv_comment_count)).setText(Utils.getQuantityString(view, R.plurals.uv_comments, suggestion.getNumberOfComments()).toUpperCase(Locale.getDefault()));
-		((TextView) view.findViewById(R.id.uv_subscriber_count)).setText(String.format(getString(R.string.uv_number_of_subscribers_format), Utils.getQuantityString(view, R.plurals.uv_subscribers, suggestion.getNumberOfSubscribers())));
+		((TextView) view.findViewById(R.id.uv_subscriber_count)).setText(String.format( view.getContext().getResources().getQuantityString (R.plurals.uv_number_of_subscribers_format, suggestion.getNumberOfSubscribers()),
+                                                                                        Utils.getQuantityString(view, R.plurals.uv_subscribers, suggestion.getNumberOfSubscribers())));
 	}
 
 }
