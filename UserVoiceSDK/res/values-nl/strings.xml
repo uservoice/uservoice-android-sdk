@@ -57,14 +57,14 @@
     <string name="uv_your_email_address">Je emailadres</string>
     <string name="uv_your_name">Je naam</string>
     <string name="uv_name_hint">“Anoniem”</string>
-    <string name="uv_select_one">Select er één</string>
+    <string name="uv_select_one">Selecter er één</string>
     <string name="uv_value">Waarde</string>
     <string name="uv_article">Artikel</string>
     <string name="uv_idea">Idee</string>
     <string name="uv_msg_ticket_created">Je bericht is verstuurd</string>
     <string name="uv_msg_idea_created">Je idee is geplaatst</string>
     <string name="uv_article_instant_answer_question">Was dit artikel nuttig?</string>
-    <string name="uv_suggestion_instant_answer_question">Is this idee nuttig?</string>
+    <string name="uv_suggestion_instant_answer_question">Is dit idee nuttig?</string>
     <string name="uv_no">Nee</string>
     <string name="uv_yes">Ja</string>
     <string name="uv_very_yes">Ja!</string>
