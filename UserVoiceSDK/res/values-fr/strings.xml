@@ -26,7 +26,6 @@
         <item quantity="other">personnes</item>
     </plurals>
 
-    <string name="uv_action_settings">Paramètres</string>
     <string name="uv_loading">Chargement&#8230;</string>
     <string name="uv_submit_idea">Soumettre une idée</string>
     <string name="uv_idea_form_title">Poster une idée</string>
