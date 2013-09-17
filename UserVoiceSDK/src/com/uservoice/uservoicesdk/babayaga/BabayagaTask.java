@@ -74,10 +74,12 @@ public class BabayagaTask extends AsyncTask<String,String,Void> {
             if (statusCode != 200)
             	return null;
             String body = responseEntity != null ? EntityUtils.toString(responseEntity) : null;
-            String payload = body.substring(2, body.length() - 2);
-			JSONObject responseData = new JSONObject(payload);
-            String uvts = responseData.getString("uvts");
-            Babayaga.setUvts(uvts);
+            if (!body.isEmpty()) {
+                String payload = body.substring(2, body.length() - 2);
+                JSONObject responseData = new JSONObject(payload);
+                String uvts = responseData.getString("uvts");
+                Babayaga.setUvts(uvts);
+            }
 	    } catch (Exception e) {
 	    	e.printStackTrace();
 	    	Log.e("UV", String.format("%s: %s", e.getClass().getName(), e.getMessage()));
