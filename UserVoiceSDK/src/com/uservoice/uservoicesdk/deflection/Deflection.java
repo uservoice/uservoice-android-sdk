@@ -29,7 +29,7 @@ public class Deflection {
 		Map<String,String> params = deflectionParams();
 		params.put("kind", kind);
 		params.put("deflector_id", String.valueOf(deflector.getId()));
-		params.put("deflector_type", (deflector instanceof Article) ? "Faq" : "Suggetion");
+		params.put("deflector_type", (deflector instanceof Article) ? "Faq" : "Suggestion");
 		new RestTask(RestMethod.GET, "/clients/omnibox/deflections/upsert.json", params, getCallback()).execute();
 	}
 	
