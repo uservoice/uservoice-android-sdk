@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <plurals name="uv_comments">
+        <item quantity="one">комментарий</item>
+        <item quantity="few">комментария</item>
+        <item quantity="other">комментариев</item>
+    </plurals>
+    <plurals name="uv_subscribers">
+        <item quantity="one">подписчик</item>
+        <item quantity="few">подписчика</item>
+        <item quantity="other">подписчиков</item>
+    </plurals>
+    <plurals name="uv_articles">
+        <item quantity="one">статья</item>
+        <item quantity="few">статьи</item>
+        <item quantity="other">статей</item>
+    </plurals>
+    <plurals name="uv_ideas">
+        <item quantity="one">идея</item>
+        <item quantity="few">идеи</item>
+        <item quantity="other">идей</item>
+    </plurals>
+    <plurals name="uv_people">
+        <item quantity="one">человек</item>
+        <item quantity="few">человека</item>
+        <item quantity="other">человек</item>
+    </plurals>
+
+    <string name="uv_loading">Загружается&#8230;</string>
+    <string name="uv_submit_idea">Отправить идею</string>
+    <string name="uv_idea_form_title">Подать идею</string>
+    <string name="uv_menu_search">Искать</string>
+    <string name="uv_email_address">Email-адрес</string>
+    <string name="uv_email_address_hint">your@email.com (обязательно)</string>
+    <string name="uv_display_name">Отображаемое имя</string>
+    <string name="uv_password">Пароль</string>
+    <string name="uv_forgot_password">Забыл пароль</string>
+    <string name="uv_msg_comment_posted">Ваш комментарий был отправлен</string>
+    <string name="uv_title_idea">Идея</string>
+    <string name="uv_posted_by_format">Отправлено %1$s в %2$s</string>
+    <string name="uv_all_articles">Все статьи</string>
+    <string name="uv_portal_title">Помощь</string>
+    <string name="uv_network_error">Ошибка при подключении к UserVoice</string>
+    <string name="uv_signin_dialog_title">Вход</string>
+    <string name="uv_signin_dialog_ok">Войти</string>
+    <string name="uv_failed_signin_error">Некорректный email или пароль</string>
+    <string name="uv_msg_forgot_password">Отправлено письмо для восстановления пароля</string>
+    <string name="uv_subscribe_dialog_title">Подписаться на эту идею</string>
+    <string name="uv_remove_votes">Отозвать голоса</string>
+    <string name="uv_feedback_forum">Форум поддержки</string>
+    <string name="uv_knowledge_base">База знаний</string>
+    <string name="uv_admin_response_format">Ответ администратора: %1$s</string>
+    <string name="uv_post_comment">Отправить комментарий</string>
+    <string name="uv_next">Далее</string>
+    <string name="uv_none_of_these_help">Всё это не помогло</string>
+    <string name="uv_send_message">Отправить сообщение</string>
+    <string name="uv_your_email_address">Ваш адрес email</string>
+    <string name="uv_your_name">Ваше имя</string>
+    <string name="uv_name_hint">“Аноним”</string>
+    <string name="uv_select_one">Выберите одно</string>
+    <string name="uv_value">Значение</string>
+    <string name="uv_article">Статья</string>
+    <string name="uv_idea">Идея</string>
+    <string name="uv_msg_ticket_created">Ваше сообщение было отправлено</string>
+    <string name="uv_msg_idea_created">Ваша идея была записана</string>
+    <string name="uv_article_instant_answer_question">Эта статья полезна?</string>
+    <string name="uv_suggestion_instant_answer_question">Эта идея полезна?</string>
+    <string name="uv_no">Нет</string>
+    <string name="uv_yes">Да</string>
+    <string name="uv_very_yes">Да!</string>
+    <string name="uv_helpful_article_message_question">Вы всё ещё хотите отправить сообщение?</string>
+    <string name="uv_unhelpful_article_message_question">Хотите отправить нам сообщение?</string>
+    <string name="uv_idea_description_heading">Опишите свою идею более детально</string>
+    <string name="uv_category">Категория</string>
+    <string name="uv_idea_description_hint">(не обязательно)</string>
+    <string name="uv_idea_text_heading">Я предлагаю вам&#8230;</string>
+    <string name="uv_idea_text_hint">Напишите свою идею&#8230;</string>
+    <string name="uv_idea_form_help">Когда вы отправите идею на форум, другие люди смогут подписаться на неё и оставлять комментарии. Когда мы ответим на Вашу идею, Вы получите уведомление.</string>
+    <string name="uv_contact_us">Свяжитесь с нами</string>
+    <string name="uv_close">Закрыть</string>
+    <string name="uv_new_comment">Новый комментарий</string>
+    <string name="uv_error">Ошибка</string>
+    <string name="uv_msg_user_identity_validation">Пожалуйста, укажите свой email</string>
+    <string name="uv_status_format">Статус: %1$s</string>
+    <string name="uv_subscribe">Подписаться</string>
+    <string name="uv_nevermind">Я передумал</string>
+    <string name="uv_msg_subscribe">Мы уведомим вас об изменениях состояния этой идеи.</string>
+    <string name="uv_msg_subscribe_success">Вы подписались на эту идею.</string>
+    <string name="uv_msg_unsubscribe">Вы отписались от этой идеи.</string>
+    <string name="uv_msg_custom_fields_validation">Пожалуйста, заполните все поля.</string>
+    <string name="uv_contact_hint">Напишите ваш вопрос или отзыв</string>
+    <string name="uv_matching_ideas">Похожие идеи</string>
+    <string name="uv_matching_articles">Похожие статьи</string>
+    <string name="uv_matching_articles_and_ideas">Похожие идеи и статьи базы знаний</string>
+    <string name="uv_post_idea_continue_button">Я всё ещё хочу отправить свою идею</string>
+    <string name="uv_contact_continue_button">Я всё ещё хочу отправить сообщение</string>
+    <string name="uv_i_want_this">Да, я хочу!</string>
+    <string name="uv_number_of_subscribers_format">%1$s хотят этого</string>
+    <string name="uv_post_a_comment">Отправить комментарий</string>
+    <string name="uv_all_results_filter">ВСЕ</string>
+    <string name="uv_articles_filter">СТАТЬИ</string>
+    <string name="uv_ideas_filter">ИДЕИ</string>
+    <string name="uv_comment_hint">Напишите свой комментарий</string>
+    <string name="uv_cancel">Отменить</string>
+    <string name="uv_select_none">(ничего)</string>
+    <string name="uv_confirm">Подтвердите</string>
+    <string name="uv_msg_confirm_discard_idea">Уверены, что хотите отменить отправку идеи?</string>
+    <string name="uv_msg_confirm_discard_message">Уверены, что хотите отменить отправку сообщения?</string>
+    <string name="uv_post_an_idea">Отправить идею</string>
+    <string name="uv_password_dialog_title">Пожалуйста, укажите свой пароль</string>
+    <string name="uv_article_browse_question">Эта статья была полезна?</string>
+    <string name="uv_thanks">Спасибо!</string>
+
+</resources>
