@@ -6,6 +6,8 @@ import java.net.URLEncoder;
 import java.util.Date;
 import java.util.Map;
 
+import android.net.http.AndroidHttpClient;
+import com.uservoice.uservoicesdk.UserVoice;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -66,7 +68,7 @@ public class BabayagaTask extends AsyncTask<String,String,Void> {
 			
 	    	HttpRequestBase request = new HttpGet();
 			request.setURI(new URI(url.toString()));
-			HttpClient client = new DefaultHttpClient();
+            HttpClient client = AndroidHttpClient.newInstance(String.format("uservoice-android-%s", UserVoice.getVersion()), Session.getInstance().getContext());
             HttpResponse response = client.execute(request);
             HttpEntity responseEntity = response.getEntity();
             StatusLine responseStatus = response.getStatusLine();
