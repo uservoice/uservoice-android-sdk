@@ -19,6 +19,7 @@ import com.uservoice.uservoicesdk.flow.SigninManager;
 import com.uservoice.uservoicesdk.model.Comment;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.ui.DefaultCallback;
+import com.uservoice.uservoicesdk.ui.Utils;
 
 @SuppressLint("ValidFragment")
 public class CommentDialogFragment extends DialogFragment {
@@ -34,6 +35,9 @@ public class CommentDialogFragment extends DialogFragment {
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        if (!Utils.isDarkTheme(getActivity())) {
+            builder.setInverseBackgroundForced(true);
+        }
 		builder.setTitle(R.string.uv_post_a_comment);
 
 		View view = getActivity().getLayoutInflater().inflate(R.layout.uv_comment_dialog, null);

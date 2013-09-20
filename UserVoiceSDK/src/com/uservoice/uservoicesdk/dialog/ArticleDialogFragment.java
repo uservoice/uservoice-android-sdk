@@ -32,6 +32,9 @@ public class ArticleDialogFragment extends DialogFragment {
 		builder.setTitle(R.string.uv_article_instant_answer_question);
 		
 		webView = new WebView(getActivity());
+        if (!Utils.isDarkTheme(getActivity())) {
+            builder.setInverseBackgroundForced(true);
+        }
 		builder.setView(webView);
 		Utils.displayArticle(webView, article, getActivity());
 		

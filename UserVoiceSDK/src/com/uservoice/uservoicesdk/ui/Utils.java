@@ -29,24 +29,26 @@ import com.uservoice.uservoicesdk.model.Topic;
 public class Utils {
 
 	@SuppressLint("SetJavaScriptEnabled")
-	public static boolean displayArticle(WebView webView, Article article, Context context) {
-		TypedValue tv = new TypedValue();
-		float [] hsv =  new float[3];
-		context.getTheme().resolveAttribute(android.R.attr.textColorPrimary, tv, true);
-		Color.colorToHSV(context.getResources().getColor(tv.resourceId), hsv);
-		boolean darkTheme = hsv[2] > 0.5f;
+	public static void displayArticle(WebView webView, Article article, Context context) {
 		String styles = "iframe, img { width: 100%; }";
-		if (darkTheme) {
+		if (isDarkTheme(context)) {
 			webView.setBackgroundColor(Color.BLACK);
 			styles += "body { background-color: #000000; color: #F6F6F6; } a { color: #0099FF; }";
 		}
-		String html = String.format("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"http://cdn.uservoice.com/stylesheets/vendor/typeset.css\"/><style>%s</style></head><body class=\"typeset\" style=\"font-family: sans-serif; margin: 1em\"><h3>%s</h3>%s</body></html>", styles, article.getTitle(), article.getHtml());
+		String html = String.format("<html><head><meta charset=\"utf-8\"><link rel=\"stylesheet\" type=\"text/css\" href=\"http://cdn.uservoice.com/stylesheets/vendor/typeset.css\"/><style>%s</style></head><body class=\"typeset\" style=\"font-family: sans-serif; margin: 1em\"><h3>%s</h3>%s</body></html>", styles, article.getTitle(), article.getHtml());
 		webView.setWebChromeClient(new WebChromeClient());
 		webView.getSettings().setJavaScriptEnabled(true);
 		webView.getSettings().setPluginState(PluginState.ON);
 		webView.loadUrl(String.format("data:text/html;charset=utf-8,%s", Uri.encode(html)));
-		return darkTheme;
 	}
+
+    public static boolean isDarkTheme(Context context) {
+        TypedValue tv = new TypedValue();
+        float [] hsv =  new float[3];
+        context.getTheme().resolveAttribute(android.R.attr.textColorPrimary, tv, true);
+        Color.colorToHSV(context.getResources().getColor(tv.resourceId), hsv);
+        return hsv[2] > 0.5f;
+    }
 
 	@SuppressLint("DefaultLocale")
 	public static String getQuantityString(View view, int id, int count) {

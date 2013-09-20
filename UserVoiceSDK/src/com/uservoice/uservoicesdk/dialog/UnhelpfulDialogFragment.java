@@ -9,13 +9,18 @@ import android.support.v4.app.DialogFragment;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.activity.ContactActivity;
+import com.uservoice.uservoicesdk.ui.Utils;
 
 public class UnhelpfulDialogFragment extends DialogFragment {
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		
+
+        if (!Utils.isDarkTheme(getActivity())) {
+            builder.setInverseBackgroundForced(true);
+        }
+
 		builder.setTitle(R.string.uv_unhelpful_article_message_question);
 		
 		builder.setNegativeButton(R.string.uv_no, new DialogInterface.OnClickListener() {

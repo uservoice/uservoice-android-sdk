@@ -49,7 +49,10 @@ public class SuggestionDialogFragment extends DialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		setStyle(STYLE_NO_TITLE, getTheme());
-		view = getActivity().getLayoutInflater().inflate(R.layout.uv_idea_dialog, null);
+        if (!Utils.isDarkTheme(getActivity())) {
+            builder.setInverseBackgroundForced(true);
+        }
+        view = getActivity().getLayoutInflater().inflate(R.layout.uv_idea_dialog, null);
 		headerView = getActivity().getLayoutInflater().inflate(R.layout.uv_idea_dialog_header, null);
 		headerView.findViewById(R.id.uv_subscribe).setOnClickListener(new View.OnClickListener() {
 			@Override

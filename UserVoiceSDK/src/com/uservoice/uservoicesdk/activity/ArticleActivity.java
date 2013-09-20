@@ -28,8 +28,8 @@ public class ArticleActivity extends BaseActivity implements SearchActivity {
 		final Article article = Session.getInstance().getArticle();
 		setTitle(article.getTitle());
 		WebView webView = (WebView) findViewById(R.id.uv_webview);
-		boolean darkTheme = Utils.displayArticle(webView, article, this);
-		findViewById(R.id.uv_container).setBackgroundColor(darkTheme ? Color.BLACK : Color.WHITE);
+		Utils.displayArticle(webView, article, this);
+		findViewById(R.id.uv_container).setBackgroundColor(Utils.isDarkTheme(this) ? Color.BLACK : Color.WHITE);
 		webView.setWebViewClient(new WebViewClient() {
 			@Override
 			public void onPageFinished(WebView view, String url) {
