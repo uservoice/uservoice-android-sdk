@@ -81,9 +81,9 @@ public class RestTask extends AsyncTask<String, String, RestResult> {
             StatusLine responseStatus = response.getStatusLine();
             int statusCode = responseStatus != null ? responseStatus.getStatusCode() : 0;
             String body = responseEntity != null ? EntityUtils.toString(responseEntity) : null;
+            client.close();
             if (isCancelled())
                 throw new InterruptedException();
-            client.close();
             return new RestResult(statusCode, new JSONObject(body));
         } catch (Exception e) {
             return new RestResult(e);
