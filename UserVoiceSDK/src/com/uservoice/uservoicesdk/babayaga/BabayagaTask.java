@@ -68,7 +68,7 @@ public class BabayagaTask extends AsyncTask<String,String,Void> {
 			
 	    	HttpRequestBase request = new HttpGet();
 			request.setURI(new URI(url.toString()));
-            HttpClient client = AndroidHttpClient.newInstance(String.format("uservoice-android-%s", UserVoice.getVersion()), Session.getInstance().getContext());
+            AndroidHttpClient client = AndroidHttpClient.newInstance(String.format("uservoice-android-%s", UserVoice.getVersion()), Session.getInstance().getContext());
             HttpResponse response = client.execute(request);
             HttpEntity responseEntity = response.getEntity();
             StatusLine responseStatus = response.getStatusLine();
@@ -76,7 +76,8 @@ public class BabayagaTask extends AsyncTask<String,String,Void> {
             if (statusCode != 200)
             	return null;
             String body = responseEntity != null ? EntityUtils.toString(responseEntity) : null;
-            if (!body.isEmpty()) {
+            client.close();
+            if (body != null && !body.isEmpty()) {
                 String payload = body.substring(2, body.length() - 2);
                 JSONObject responseData = new JSONObject(payload);
                 String uvts = responseData.getString("uvts");
