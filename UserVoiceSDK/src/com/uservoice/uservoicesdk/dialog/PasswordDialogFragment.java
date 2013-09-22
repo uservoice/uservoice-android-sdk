@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -17,7 +16,7 @@ import com.uservoice.uservoicesdk.ui.DefaultCallback;
 import com.uservoice.uservoicesdk.ui.Utils;
 
 @SuppressLint("ValidFragment")
-public class PasswordDialogFragment extends DialogFragment {
+public class PasswordDialogFragment extends DialogFragmentBugfixed {
 
 	private final Runnable callback;
 
