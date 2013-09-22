@@ -1,16 +1,10 @@
 package com.uservoice.uservoicesdk.dialog;
 
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -34,8 +28,13 @@ import com.uservoice.uservoicesdk.ui.PaginatedAdapter;
 import com.uservoice.uservoicesdk.ui.PaginationScrollListener;
 import com.uservoice.uservoicesdk.ui.Utils;
 
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
 @SuppressLint("ValidFragment")
-public class SuggestionDialogFragment extends DialogFragment {
+public class SuggestionDialogFragment extends DialogFragmentBugfixed {
 	private Suggestion suggestion;
 	private PaginatedAdapter<Comment> adapter;
 	private View headerView;

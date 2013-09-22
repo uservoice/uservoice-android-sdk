@@ -4,12 +4,11 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.ui.Utils;
 
-public class HelpfulDialogFragment extends DialogFragment {
+public class HelpfulDialogFragment extends DialogFragmentBugfixed {
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {

@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -20,7 +19,7 @@ import com.uservoice.uservoicesdk.ui.DefaultCallback;
 import com.uservoice.uservoicesdk.ui.Utils;
 
 @SuppressLint("ValidFragment")
-public class SubscribeDialogFragment extends DialogFragment {
+public class SubscribeDialogFragment extends DialogFragmentBugfixed {
 	
 	private final Suggestion suggestion;
 	private final SuggestionDialogFragment suggestionDialog;

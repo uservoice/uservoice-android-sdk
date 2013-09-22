@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.webkit.WebView;
 
 import com.uservoice.uservoicesdk.R;
@@ -17,7 +16,7 @@ import com.uservoice.uservoicesdk.ui.InstantAnswersAdapter;
 import com.uservoice.uservoicesdk.ui.Utils;
 
 @SuppressLint({ "ValidFragment", "NewApi" })
-public class ArticleDialogFragment extends DialogFragment {
+public class ArticleDialogFragment extends DialogFragmentBugfixed {
 	
 	private final Article article;
 	private WebView webView;
