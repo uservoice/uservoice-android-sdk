@@ -7,7 +7,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -29,7 +28,7 @@ import com.uservoice.uservoicesdk.ui.DefaultCallback;
 import com.uservoice.uservoicesdk.ui.Utils;
 
 @SuppressLint("ValidFragment")
-public class SigninDialogFragment extends DialogFragment {
+public class SigninDialogFragment extends DialogFragmentBugfixed {
 	
 	private EditText emailField;
 	private EditText nameField;
