@@ -6,12 +6,7 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.widget.*;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.activity.ForumActivity;
@@ -195,7 +190,8 @@ public class SuggestionDialogFragment extends DialogFragmentBugfixed {
 		}
 
 		((TextView) view.findViewById(R.id.uv_comment_count)).setText(Utils.getQuantityString(view, R.plurals.uv_comments, suggestion.getNumberOfComments()).toUpperCase(Locale.getDefault()));
-		((TextView) view.findViewById(R.id.uv_subscriber_count)).setText(String.format(getString(R.string.uv_number_of_subscribers_format), Utils.getQuantityString(view, R.plurals.uv_subscribers, suggestion.getNumberOfSubscribers())));
+		((TextView) view.findViewById(R.id.uv_subscriber_count)).setText(String.format( view.getContext().getResources().getQuantityString (R.plurals.uv_number_of_subscribers_format, suggestion.getNumberOfSubscribers()),
+                                                                                        Utils.getQuantityString(view, R.plurals.uv_subscribers, suggestion.getNumberOfSubscribers())));
 	}
 
 }

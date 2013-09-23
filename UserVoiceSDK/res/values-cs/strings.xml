@@ -21,6 +21,11 @@
         <item quantity="one">osoba</item>
         <item quantity="other">osoby</item>
     </plurals>
+    <plurals name="uv_number_of_subscribers_format">
+        <item quantity="one">%1$s uživatelům se líbí tento nápad</item>
+        <item quantity="other">%1$s uživatelům se líbí tento nápad</item>
+    </plurals>
+
 
     <string name="uv_loading">Nahrávám&#8230;</string>
     <string name="uv_submit_idea">Poslat nápad</string>
@@ -91,7 +96,6 @@
     <string name="uv_post_idea_continue_button">Stále chci odeslat můj nápad</string>
     <string name="uv_contact_continue_button">Stále chci odeslat tuto zprávu</string>
     <string name="uv_i_want_this">Chci to!</string>
-    <string name="uv_number_of_subscribers_format">%1$s uživatelům se líbí tento nápad</string>
     <string name="uv_post_a_comment">Odeslat komentář</string>
     <string name="uv_all_results_filter">VŠE</string>
     <string name="uv_articles_filter">ČLÁNKY</string>

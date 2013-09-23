@@ -26,6 +26,11 @@
         <item quantity="other">personnes</item>
     </plurals>
 
+    <plurals name="uv_number_of_subscribers_format">
+        <item quantity="one">%1$s veut cette idée</item>
+        <item quantity="other">%1$s veulent cette idée</item>
+    </plurals>
+
     <string name="uv_loading">Chargement&#8230;</string>
     <string name="uv_submit_idea">Soumettre une idée</string>
     <string name="uv_idea_form_title">Poster une idée</string>
@@ -94,7 +99,6 @@
     <string name="uv_post_idea_continue_button">Je veux toujours poster mon idée</string>
     <string name="uv_contact_continue_button">Je veux toujours envoyer un message</string>
     <string name="uv_i_want_this">Je le veux\u00a0!</string>
-    <string name="uv_number_of_subscribers_format">%1$s veulent cette idée</string>
     <string name="uv_post_a_comment">Poster un commentaire</string>
     <string name="uv_all_results_filter">TOUS</string>
     <string name="uv_articles_filter">ARTICLES</string>

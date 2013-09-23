@@ -16,18 +16,22 @@ import com.uservoice.uservoicesdk.ui.DefaultCallback;
 public class UserVoice {
 	
 	public static void launchUserVoice(Context context) {
+		Babayaga.track(Babayaga.Event.VIEW_CHANNEL);
 		context.startActivity(new Intent(context, PortalActivity.class));
 	}
 	
 	public static void launchForum(Context context) {
+		Babayaga.track(Babayaga.Event.VIEW_CHANNEL);
 		context.startActivity(new Intent(context, ForumActivity.class));
 	}
 	
 	public static void launchContactUs(Context context) {
+		Babayaga.track(Babayaga.Event.VIEW_CHANNEL);
 		context.startActivity(new Intent(context, ContactActivity.class));
 	}
 	
 	public static void launchPostIdea(Context context) {
+		Babayaga.track(Babayaga.Event.VIEW_CHANNEL);
 		context.startActivity(new Intent(context, PostIdeaActivity.class));
 	}
 	
