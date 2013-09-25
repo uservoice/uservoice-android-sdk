@@ -70,7 +70,7 @@ public class Deflection {
 	private static Map<String, String> deflectionParams() {
 		Map<String,String> params = new HashMap<String,String>();
 		params.put("uvts", Babayaga.getUvts());
-		params.put("channel", Babayaga.CHANNEL);
+		params.put("channel", "android");
 		params.put("search_term", searchText);
 		params.put("interaction_identifier", String.valueOf(interactionIdentifier));
 		return params;
