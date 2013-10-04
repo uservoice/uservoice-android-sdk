@@ -125,4 +125,9 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
 		return context.getString(R.string.uv_submit_idea);
 	}
 
+	@Override
+	public String getDeflectingType() {
+		return "Suggestion";
+	}
+
 }

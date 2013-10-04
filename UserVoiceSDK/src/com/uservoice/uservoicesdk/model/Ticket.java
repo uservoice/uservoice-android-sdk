@@ -6,6 +6,7 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.uservoice.uservoicesdk.deflection.Deflection;
 import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.rest.RestTaskCallback;
 
@@ -18,6 +19,7 @@ public class Ticket extends BaseModel {
 	public static void createTicket(String message, String email, String name, Map<String,String> customFields, final Callback<Ticket> callback) {
 		Map<String,String> params = new HashMap<String,String>();
 		params.put("ticket[message]", message);
+    params.put("interaction_identifier", String.valueOf(Deflection.getInteractionIdentifier()));
 		
 		if (email != null)
 			params.put("email", email);

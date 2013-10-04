@@ -20,6 +20,10 @@ public abstract class InstantAnswersActivity extends BaseListActivity {
         super();
     }
 
+    public String getDeflectingType() {
+        return adapter.getDeflectingType();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

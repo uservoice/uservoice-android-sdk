@@ -32,6 +32,7 @@ public class Suggestion extends BaseModel {
 	private int forumId;
 	private boolean subscribed;
 	private String forumName;
+	private int weight;
 
 	public static void loadSuggestions(Forum forum, int page, final Callback<List<Suggestion>> callback) {
 		Map<String, String> params = new HashMap<String, String>();
@@ -63,6 +64,7 @@ public class Suggestion extends BaseModel {
 		params.put("suggestion[votes]", String.valueOf(numberOfVotes));
 		params.put("suggestion[title]", title);
 		params.put("suggestion[text]", text);
+		params.put("interaction_identifier", String.valueOf(Deflection.getInteractionIdentifier()));
 		if (category != null)
 			params.put("suggestion[category_id]", String.valueOf(category.getId()));
 		doPost(apiPath("/forums/%d/suggestions.json", forum.getId()), params, new RestTaskCallback(callback) {
@@ -127,6 +129,8 @@ public class Suggestion extends BaseModel {
 			adminResponseUserName = getString(responseUser, "name");
 			adminResponseAvatarUrl = getString(responseUser, "avatar_url");
 		}
+		if (object.has("weight"))
+			weight = object.getInt("weight");
 	}
 	
 	public String getForumName() {
@@ -195,6 +199,10 @@ public class Suggestion extends BaseModel {
 
 	public void commentPosted(Comment comment) {
 		numberOfComments += 1;
+	}
+
+	public int getWeight() {
+		return weight;
 	}
 	
 }

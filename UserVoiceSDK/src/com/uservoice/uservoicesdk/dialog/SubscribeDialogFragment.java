@@ -52,7 +52,7 @@ public class SubscribeDialogFragment extends DialogFragmentBugfixed {
 							@Override
 							public void onModel(Suggestion model) {
 								if (getActivity() instanceof InstantAnswersActivity)
-									Deflection.trackDeflection("subscribed", model);
+									Deflection.trackDeflection("subscribed", ((InstantAnswersActivity)getActivity()).getDeflectingType(), model);
 								suggestionDialog.suggestionSubscriptionUpdated(model);
 								dialog.dismiss();
 							};

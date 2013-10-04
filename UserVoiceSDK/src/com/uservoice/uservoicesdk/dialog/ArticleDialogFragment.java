@@ -41,8 +41,8 @@ public class ArticleDialogFragment extends DialogFragmentBugfixed {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if (getActivity() instanceof InstantAnswersActivity) {
-					Deflection.trackDeflection("unhelpful", article);
 					InstantAnswersActivity activity = (InstantAnswersActivity) getActivity();
+					Deflection.trackDeflection("unhelpful", activity.getDeflectingType(), article);
 					InstantAnswersAdapter adapter = (InstantAnswersAdapter) activity.getListAdapter();
 					adapter.notHelpful();
 				} else {
@@ -57,7 +57,7 @@ public class ArticleDialogFragment extends DialogFragmentBugfixed {
 			public void onClick(DialogInterface dialog, int which) {
 				Babayaga.track(Babayaga.Event.VOTE_ARTICLE, article.getId());
 				if (getActivity() instanceof InstantAnswersActivity) {
-					Deflection.trackDeflection("helpful", article);
+					Deflection.trackDeflection("helpful", ((InstantAnswersActivity)getActivity()).getDeflectingType(), article);
 					HelpfulDialogFragment helpfulDialog = new HelpfulDialogFragment();
 					helpfulDialog.show(getActivity().getSupportFragmentManager(), "HelpfulDialogFragment");
 				}

@@ -154,4 +154,9 @@ public class ContactAdapter extends InstantAnswersAdapter {
 		return context.getString(R.string.uv_send_message);
 	}
 
+	@Override
+	public String getDeflectingType() {
+		return "Ticket";
+	}
+
 }

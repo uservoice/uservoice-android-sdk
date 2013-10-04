@@ -16,16 +16,17 @@ public class Article extends BaseModel {
 	private String title;
 	private String html;
 	private String topicName;
+	private int weight;
 	
 	public static void loadAll(final Callback<List<Article>> callback) {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("sort", "ordered");
-        doGet(apiPath("/articles.json"), params, new RestTaskCallback(callback) {
-            @Override
-            public void onComplete(JSONObject result) throws JSONException {
-                callback.onModel(deserializeList(result, "articles", Article.class));
-            }
-        });
+		doGet(apiPath("/articles.json"), params, new RestTaskCallback(callback) {
+			@Override
+			public void onComplete(JSONObject result) throws JSONException {
+				callback.onModel(deserializeList(result, "articles", Article.class));
+			}
+		});
 	}
 	
 	public static void loadForTopic(int topicId, final Callback<List<Article>> callback) {
@@ -34,7 +35,7 @@ public class Article extends BaseModel {
 		doGet(apiPath("/topics/%d/articles.json", topicId), params, new RestTaskCallback(callback) {
 			@Override
 			public void onComplete(JSONObject result) throws JSONException {
-                callback.onModel(deserializeList(result, "articles", Article.class));
+				callback.onModel(deserializeList(result, "articles", Article.class));
 			}
 		});
 	}
@@ -64,6 +65,8 @@ public class Article extends BaseModel {
 			JSONObject topic = object.getJSONObject("topic");
 			topicName = topic.getString("name");
 		}
+		if (object.has("weight"))
+			weight = object.getInt("weight");
 	}
 	
 	public String getTitle() {
@@ -76,5 +79,9 @@ public class Article extends BaseModel {
 	
 	public String getTopicName() {
 		return topicName;
+	}
+
+	public int getWeight() {
+		return weight;
 	}
 }
