@@ -5,6 +5,7 @@ import java.util.Locale;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.util.TypedValue;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.graphics.Color;
 
+import com.seppius.i18n.plurals.PluralResources;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.activity.TopicActivity;
@@ -52,10 +54,20 @@ public class Utils {
 
 	@SuppressLint("DefaultLocale")
 	public static String getQuantityString(View view, int id, int count) {
-		return String.format("%,d %s", count, view.getContext().getResources().getQuantityString(id, count));
+        Resources resources = view.getContext().getResources();
+        return String.format("%,d %s", count, getQuantityString(resources, id, count));
 	}
 
-	public static void displayInstantAnswer(View view, BaseModel model) {
+    public static String getQuantityString(Resources resources, int id, int count) {
+        try {
+            PluralResources plural = new PluralResources(resources);
+            return plural.getQuantityString(id, count);
+        } catch (NoSuchMethodException e) {
+            return resources.getQuantityString(id, count);
+        }
+    }
+
+    public static void displayInstantAnswer(View view, BaseModel model) {
 		TextView title = (TextView) view.findViewById(R.id.uv_title);
 		TextView detail = (TextView) view.findViewById(R.id.uv_detail);
 		View suggestionDetails = view.findViewById(R.id.uv_suggestion_details);

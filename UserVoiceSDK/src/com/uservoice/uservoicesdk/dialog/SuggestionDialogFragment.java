@@ -190,7 +190,7 @@ public class SuggestionDialogFragment extends DialogFragmentBugfixed {
 		}
 
 		((TextView) view.findViewById(R.id.uv_comment_count)).setText(Utils.getQuantityString(view, R.plurals.uv_comments, suggestion.getNumberOfComments()).toUpperCase(Locale.getDefault()));
-		((TextView) view.findViewById(R.id.uv_subscriber_count)).setText(String.format( view.getContext().getResources().getQuantityString (R.plurals.uv_number_of_subscribers_format, suggestion.getNumberOfSubscribers()),
+		((TextView) view.findViewById(R.id.uv_subscriber_count)).setText(String.format( Utils.getQuantityString(view, R.plurals.uv_number_of_subscribers_format, suggestion.getNumberOfSubscribers()),
                                                                                         Utils.getQuantityString(view, R.plurals.uv_subscribers, suggestion.getNumberOfSubscribers())));
 	}
 

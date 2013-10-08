@@ -241,7 +241,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 				textView.setVisibility(View.GONE);
 			} else {
 				textView.setVisibility(View.VISIBLE);
-				textView.setText(String.format("%d %s", topic.getNumberOfArticles(), context.getResources().getQuantityString(R.plurals.uv_articles, topic.getNumberOfArticles())));
+				textView.setText(String.format("%d %s", topic.getNumberOfArticles(), Utils.getQuantityString(context.getResources(), R.plurals.uv_articles, topic.getNumberOfArticles())));
 			}
 		} else if (type == CONTACT) {
 			TextView textView = (TextView) view.findViewById(R.id.uv_text);
