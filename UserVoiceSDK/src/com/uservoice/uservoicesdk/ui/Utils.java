@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v4.app.FragmentActivity;
 import android.util.TypedValue;
 import android.view.View;
@@ -59,6 +60,8 @@ public class Utils {
 	}
 
     public static String getQuantityString(Resources resources, int id, int count) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+            return resources.getQuantityString(id, count);
         try {
             PluralResources plural = new PluralResources(resources);
             return plural.getQuantityString(id, count);

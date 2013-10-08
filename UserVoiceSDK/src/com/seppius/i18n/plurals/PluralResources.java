@@ -59,8 +59,8 @@ public class PluralResources
 	{
 	    // Android 3.0 and later have fixed the problem with plurals,
 	    // may consider to use system function, will lose special handling of ZERO though
-	    if ( Build.VERSION.SDK_INT >= 11 )
-	        return resources.getQuantityString(id, quantity);
+	    // if ( Build.VERSION.SDK_INT >= 11 )
+	    //    return resources.getQuantityString(id, quantity);
 
 	    Locale locale = resources.getConfiguration().locale;
 	    if ( !locale.getLanguage().equals(language))
