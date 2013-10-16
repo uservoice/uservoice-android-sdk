@@ -40,22 +40,20 @@ public class Deflection {
 			params.put("is_empty", "true");
 		} else {
 			int i = 0;
-			List<Map<String,String>> resultsList = new ArrayList<Map<String,String>>();
 			for (BaseModel model : results) {
+				String keyRoot = "results[" + String.valueOf(i) + "]";
 				Map<String,String> result = new HashMap<String,String>();
-				result.put("position", String.valueOf(i++));
-				result.put("deflector_id", String.valueOf(model.getId()));
+				result.put(keyRoot + "[position]", String.valueOf(i));
+				result.put(keyRoot + "[deflector_id]", String.valueOf(model.getId()));
 				if (model instanceof Suggestion) {
-					result.put("deflection_type", "Suggestion");
-					result.put("weight", String.valueOf(((Suggestion)model).getWeight()));
+					result.put(keyRoot + "[deflection_type]", "Suggestion");
+					result.put(keyRoot + "[weight]", String.valueOf(((Suggestion)model).getWeight()));
 				} else if (model instanceof Article) {
-					result.put("deflection_type", "Faq");
-					result.put("weight", String.valueOf(((Article)model).getWeight()));
+					result.put(keyRoot + "[deflection_type]", "Faq");
+					result.put(keyRoot + "[weight]", String.valueOf(((Article)model).getWeight()));
 				}
-				resultsList.add(result);
+				i++;
 			}
-			// TODO should this be JSON or what
-			// params.put("results", resultsList);
 		}
 		new RestTask(RestMethod.GET, "/clients/omnibox/deflections/list_view.json", params, getCallback()).execute();
 	}
