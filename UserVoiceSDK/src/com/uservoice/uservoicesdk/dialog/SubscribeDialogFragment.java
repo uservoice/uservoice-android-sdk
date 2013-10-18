@@ -3,6 +3,7 @@ package com.uservoice.uservoicesdk.dialog;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
@@ -44,6 +45,7 @@ public class SubscribeDialogFragment extends DialogFragmentBugfixed {
 		builder.setPositiveButton(R.string.uv_subscribe, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, int which) {
+				final Context activity = getActivity();
 				Session.getInstance().persistIdentity(Session.getInstance().getName(), emailField.getText().toString());
 				SigninManager.signinForSubscribe(getActivity(), Session.getInstance().getEmail(), new Runnable() {
 					@Override
@@ -53,9 +55,9 @@ public class SubscribeDialogFragment extends DialogFragmentBugfixed {
 							public void onModel(Suggestion model) {
 								if (getActivity() instanceof InstantAnswersActivity)
 									Deflection.trackDeflection("subscribed", model);
-								suggestionDialog.suggestionSubscriptionUpdated(model);
+								suggestionDialog.suggestionSubscriptionUpdated(activity, model);
 								dialog.dismiss();
-							};
+							}
 						});
 					}
 				});

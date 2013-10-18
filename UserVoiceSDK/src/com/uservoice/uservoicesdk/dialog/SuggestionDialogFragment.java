@@ -3,6 +3,7 @@ package com.uservoice.uservoicesdk.dialog;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -51,12 +52,13 @@ public class SuggestionDialogFragment extends DialogFragmentBugfixed {
 		headerView.findViewById(R.id.uv_subscribe).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				final Context activity = getActivity();
 				final DefaultCallback<Suggestion> callback = new DefaultCallback<Suggestion>(getActivity()) {
 					@Override
 					public void onModel(Suggestion model) {
-						if (getActivity() instanceof InstantAnswersActivity)
+						if (activity instanceof InstantAnswersActivity)
 							Deflection.trackDeflection("subscribed", model);
-						suggestionSubscriptionUpdated(model);
+						suggestionSubscriptionUpdated(activity, model);
 					}
 				};
 				if (suggestion.isSubscribed()) {
@@ -95,19 +97,19 @@ public class SuggestionDialogFragment extends DialogFragmentBugfixed {
 		Babayaga.track(Babayaga.Event.VIEW_IDEA, suggestion.getId());
 		return builder.create();
 	}
-	
-	public void suggestionSubscriptionUpdated(Suggestion model) {
+
+	public void suggestionSubscriptionUpdated(Context activity, Suggestion model) {
 		CheckBox checkbox = (CheckBox) headerView.findViewById(R.id.uv_subscribe_checkbox);
 		if (suggestion.isSubscribed()) {
-			Toast.makeText(getActivity(), R.string.uv_msg_subscribe_success, Toast.LENGTH_SHORT).show();
+			Toast.makeText(activity, R.string.uv_msg_subscribe_success, Toast.LENGTH_SHORT).show();
 			checkbox.setChecked(true);
 		} else {
-			Toast.makeText(getActivity(), R.string.uv_msg_unsubscribe, Toast.LENGTH_SHORT).show();
+			Toast.makeText(activity, R.string.uv_msg_unsubscribe, Toast.LENGTH_SHORT).show();
 			checkbox.setChecked(false);
 		}
 		displaySuggestion(view, suggestion);
-		if (getActivity() instanceof ForumActivity)
-			((ForumActivity) getActivity()).suggestionUpdated(model);
+		if (activity instanceof ForumActivity)
+			((ForumActivity) activity).suggestionUpdated(model);
 	}
 
 	private PaginatedAdapter<Comment> getListAdapter() {
@@ -191,7 +193,7 @@ public class SuggestionDialogFragment extends DialogFragmentBugfixed {
 
 		((TextView) view.findViewById(R.id.uv_comment_count)).setText(Utils.getQuantityString(view, R.plurals.uv_comments, suggestion.getNumberOfComments()).toUpperCase(Locale.getDefault()));
 		((TextView) view.findViewById(R.id.uv_subscriber_count)).setText(String.format( Utils.getQuantityString(view.getContext().getResources(), R.plurals.uv_number_of_subscribers_format, suggestion.getNumberOfSubscribers()),
-                                                                                        Utils.getQuantityString(view, R.plurals.uv_subscribers, suggestion.getNumberOfSubscribers())));
+																						Utils.getQuantityString(view, R.plurals.uv_subscribers, suggestion.getNumberOfSubscribers())));
 	}
 
 }
