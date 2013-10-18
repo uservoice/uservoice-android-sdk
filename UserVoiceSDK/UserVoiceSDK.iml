@@ -16,6 +16,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="android-support-v4" level="project" />
+    <orderEntry type="library" name="android-support-v7-appcompat" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -43,7 +44,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="android-support-v7-appcompat" level="project" />
     <orderEntry type="module" module-name="android-support-v7" />
   </component>
 </module>

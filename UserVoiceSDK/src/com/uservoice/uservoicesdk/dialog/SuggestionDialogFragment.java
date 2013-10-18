@@ -153,6 +153,8 @@ public class SuggestionDialogFragment extends DialogFragmentBugfixed {
 	}
 
 	private void displaySuggestion(View view, Suggestion suggestion) {
+        if (getActivity() == null)
+            return;
 		TextView status = (TextView) view.findViewById(R.id.uv_status);
 		TextView responseStatus = (TextView) view.findViewById(R.id.uv_response_status);
 		View responseDivider = view.findViewById(R.id.uv_response_divider);
