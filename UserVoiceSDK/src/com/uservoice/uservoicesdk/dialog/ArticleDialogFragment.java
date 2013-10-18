@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.webkit.WebView;
 
@@ -70,7 +71,8 @@ public class ArticleDialogFragment extends DialogFragmentBugfixed {
 	
 	@Override
 	public void onDismiss(DialogInterface dialog) {
-		webView.onPause();
+        if (Build.VERSION.SDK_INT >= 11)
+		    webView.onPause();
 		webView.loadUrl("about:blank");
 		super.onDismiss(dialog);
 	}

@@ -21,14 +21,10 @@ public class SigninManager {
 	private final FragmentActivity activity;
 	private boolean passwordOnly;
 
-	public static void signIn(FragmentActivity activity, Runnable callback) {
-		new SigninManager(activity, null, null, callback).signIn();
-	}
-	
 	public static void signIn(FragmentActivity activity, String email, String name, Runnable callback) {
 		new SigninManager(activity, email, name, callback).signIn();
 	}
-	
+
 	private SigninManager(FragmentActivity activity, String email, String name, Runnable callback) {
 		this.activity = activity;
 		this.email = email == null || email.trim().isEmpty() ? null : email;
