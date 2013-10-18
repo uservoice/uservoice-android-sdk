@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/UVDemo/UVDemo.iml" filepath="$PROJECT_DIR$/UVDemo/UVDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/UserVoiceSDK/UserVoiceSDK.iml" filepath="$PROJECT_DIR$/UserVoiceSDK/UserVoiceSDK.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-support-v7/android-support-v7.iml" filepath="$PROJECT_DIR$/android-support-v7/android-support-v7.iml" />
     </modules>
   </component>
 </project>

@@ -1,6 +1,7 @@
 package com.uservoice.uservoicesdk.ui;
 
-import android.widget.SearchView;
+
+import android.support.v7.widget.SearchView;
 
 import com.uservoice.uservoicesdk.activity.SearchActivity;
 

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,14 +24,13 @@ import com.uservoice.uservoicesdk.model.Topic;
 import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.ui.LoadAllAdapter;
 
-public class TopicActivity extends BaseListActivity implements SearchActivity {
+public class TopicActivity extends SearchActivity {
 	
 	@SuppressLint({ "InlinedApi", "NewApi" })
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
         if (hasActionBar()) {
-            ActionBar actionBar = getActionBar();
 			actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 			actionBar.setListNavigationCallbacks(new ArrayAdapter<Topic>(this, android.R.layout.simple_spinner_dropdown_item, Session.getInstance().getTopics()) {
 				@Override
@@ -102,7 +101,7 @@ public class TopicActivity extends BaseListActivity implements SearchActivity {
     @Override
     public void hideSearch() {
         super.hideSearch();
-        getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
     }
 
     @Override
@@ -113,11 +112,11 @@ public class TopicActivity extends BaseListActivity implements SearchActivity {
 	}
 	
 	@Override
-	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.uv_action_contact) {
 			startActivity(new Intent(this, ContactActivity.class));
 			return true;
 		}
-		return super.onMenuItemSelected(featureId, item);
+		return super.onOptionsItemSelected(item);
 	}
 }
