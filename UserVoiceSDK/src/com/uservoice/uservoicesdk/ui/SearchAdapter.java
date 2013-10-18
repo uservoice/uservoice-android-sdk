@@ -23,7 +23,7 @@ public abstract class SearchAdapter<T> extends BaseAdapter {
 	
 	public void performSearch(String query) {
 		pendingQuery = query;
-		if (query.isEmpty()) {
+		if (query.length() == 0) {
 			searchResults = new ArrayList<T>();
 			loading = false;
 			notifyDataSetChanged();
@@ -81,7 +81,7 @@ public abstract class SearchAdapter<T> extends BaseAdapter {
 	}
 	
 	protected boolean shouldShowSearchResults() {
-		return searchActive && pendingQuery != null && !pendingQuery.isEmpty();
+		return searchActive && pendingQuery != null && pendingQuery.length() > 0;
 	}
 	
 	protected RestTask search(String query, Callback<List<T>> callback) { return null; }

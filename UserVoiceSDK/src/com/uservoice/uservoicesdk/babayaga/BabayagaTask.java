@@ -77,7 +77,7 @@ public class BabayagaTask extends AsyncTask<String,String,Void> {
             	return null;
             String body = responseEntity != null ? EntityUtils.toString(responseEntity) : null;
             client.close();
-            if (body != null && !body.isEmpty()) {
+            if (body != null && body.length() > 0) {
                 String payload = body.substring(2, body.length() - 2);
                 JSONObject responseData = new JSONObject(payload);
                 String uvts = responseData.getString("uvts");

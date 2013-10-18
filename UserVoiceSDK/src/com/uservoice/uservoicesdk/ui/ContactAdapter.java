@@ -126,7 +126,7 @@ public class ContactAdapter extends InstantAnswersAdapter {
 		for (CustomField field : Session.getInstance().getClientConfig().getCustomFields()) {
 			if (field.isRequired()) {
 				String string = customFieldValues.get(field.getName());
-				if (string == null || string.isEmpty())
+				if (string == null || string.length() == 0)
 					return false;
 			}
 		}

@@ -31,8 +31,8 @@ public class SigninManager {
 	
 	private SigninManager(FragmentActivity activity, String email, String name, Runnable callback) {
 		this.activity = activity;
-		this.email = email == null || email.trim().isEmpty() ? null : email;
-		this.name = name == null || name.trim().isEmpty() ? null : name;
+		this.email = email == null || email.trim().length() == 0 ? null : email;
+		this.name = name == null || name.trim().length() == 0 ? null : name;
 		this.callback = callback;
 	}
 	
