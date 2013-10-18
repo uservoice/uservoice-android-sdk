@@ -21,7 +21,7 @@ public class SearchQueryListener implements SearchView.OnQueryTextListener {
 	@Override
 	public boolean onQueryTextChange(String query) {
 		searchActivity.getSearchAdapter().performSearch(query);
-		if (!query.isEmpty()) {
+		if (query.length() == 0) {
 			searchActivity.showSearch();
 		} else {
 			searchActivity.hideSearch();

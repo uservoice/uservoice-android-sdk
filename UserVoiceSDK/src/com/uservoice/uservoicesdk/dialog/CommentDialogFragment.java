@@ -65,7 +65,7 @@ public class CommentDialogFragment extends DialogFragmentBugfixed {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				final String text = textField.getText().toString();
-				if (!text.trim().isEmpty()) {
+				if (text.trim().length() > 0) {
 					SigninManager.signIn(getActivity(), emailField.getText().toString(), nameField.getText().toString(), new Runnable() {
 						@Override
 						public void run() {

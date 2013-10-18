@@ -275,7 +275,7 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 		} else if (state == State.DETAILS) {
 			String name = nameField.getText().toString();
 			String email = emailField.getText().toString();
-			if (email.isEmpty()) {
+			if (email.length() == 0) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(context);
 				builder.setTitle(R.string.uv_error);
 				builder.setMessage(R.string.uv_msg_user_identity_validation);
