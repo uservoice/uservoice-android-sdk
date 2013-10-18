@@ -11,10 +11,8 @@ import com.uservoice.uservoicesdk.UserVoice;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
@@ -73,8 +71,10 @@ public class BabayagaTask extends AsyncTask<String,String,Void> {
             HttpEntity responseEntity = response.getEntity();
             StatusLine responseStatus = response.getStatusLine();
             int statusCode = responseStatus != null ? responseStatus.getStatusCode() : 0;
-            if (statusCode != 200)
+            if (statusCode != 200) {
+                client.close();
             	return null;
+            }
             String body = responseEntity != null ? EntityUtils.toString(responseEntity) : null;
             client.close();
             if (body != null && !body.isEmpty()) {
