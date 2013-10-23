@@ -37,5 +37,5 @@ android {
 dependencies {
     compile 'com.android.support:support-v4:18.0.+'
     compile 'com.android.support:appcompat-v7:18.0.+'
-    compile 'oauth.signpost:signpost-commonshttp4:1.2.1.2'
+    compile group: 'oauth.signpost', name: 'signpost-commonshttp4', version: '1.2.1.2' exclude module: 'httpclient'
 }
