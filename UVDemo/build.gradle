@@ -32,9 +32,20 @@ android {
             assets.srcDirs = ['assets']
         }
     }
+
+    buildTypes {
+        debug {
+            runProguard false
+        }
+        release {
+            runProguard true
+            proguardFile getDefaultProguardFile('proguard-android.txt')
+            proguardFile 'proguard-project.txt'
+        }
+    }
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:18.0.+'
+    compile 'com.android.support:appcompat-v7:18.+@aar'
     compile project(':UserVoiceSDK')
 }

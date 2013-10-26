@@ -1,0 +1,7 @@
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.8'
+}
+
+task install(dependsOn: ":UserVoiceSDK:assemble") {
+    println "Assembling UserVoiceSDK"
+}

@@ -4,3 +4,5 @@
 .DS_Store
 out
 .idea/workspace.xml
+.gradle
+local.properties

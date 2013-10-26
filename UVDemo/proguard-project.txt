@@ -18,3 +18,28 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-dontnote org.apache.http.**
+-dontwarn org.apache.http.**
+-dontnote android.support.v4.text.ICUCompatIcs
+-dontnote com.*.vending.licensing.ILicensingService
+
+# keep all classes that might be used in XML layouts
+-keep public class * extends android.view.View
+-keep public class * extends android.support.v4.app.Fragment
+-keep public class * extends android.support.v7.app.ActionBarActivity
+-keep class android.support.v4.app.**
+-keep interface android.support.v4.app.**
+-keepclasseswithmembers class * { public <init>(android.content.Context, android.util.AttributeSet, int); }
+
+-keepattributes *Annotation*,EnclosingMethod
+-keep class org.apache.http.** { *; }
+-keep class org.apache.http.impl.** { *; }
+-keep class android.context.Context,android.util.AttributeSet
+-keep class libcore.icu.ICU
+-keep public interface com.*.vending.licensing.ILicensingService
+
+#Uservoice
+-keep public class * extends com.uservoice.uservoicesdk.activity.BaseActivity { *; }
+-keep class android.support.v7.widget.SearchView
+-keep class android.support.v7.widget.SearchView { public <init>(android.content.Context); }

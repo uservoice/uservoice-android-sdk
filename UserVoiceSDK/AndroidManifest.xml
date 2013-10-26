@@ -17,5 +17,5 @@
         <activity android:name="com.uservoice.uservoicesdk.activity.TopicActivity" />
         <activity android:name="com.uservoice.uservoicesdk.activity.ContactActivity" android:hardwareAccelerated="true" />
         <activity android:name="com.uservoice.uservoicesdk.activity.PostIdeaActivity" android:hardwareAccelerated="true" />
-        </application>
+    </application>
 </manifest>
