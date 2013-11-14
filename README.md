@@ -39,9 +39,7 @@ You will need a UserVoice account (free) for it to connect to. Go to [uservoice.
 ```
     <activity android:name="com.uservoice.uservoicesdk.activity.PortalActivity" />
     <activity android:name="com.uservoice.uservoicesdk.activity.ForumActivity" />
-    <activity android:name="com.uservoice.uservoicesdk.activity.SuggestionActivity" />
     <activity android:name="com.uservoice.uservoicesdk.activity.ArticleActivity" android:hardwareAccelerated="true" />
-    <activity android:name="com.uservoice.uservoicesdk.activity.CommentActivity" />
     <activity android:name="com.uservoice.uservoicesdk.activity.TopicActivity" />
     <activity android:name="com.uservoice.uservoicesdk.activity.ContactActivity" android:hardwareAccelerated="true" />
     <activity android:name="com.uservoice.uservoicesdk.activity.PostIdeaActivity" android:hardwareAccelerated="true" />
