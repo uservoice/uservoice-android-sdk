@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.rest.RestTaskCallback;
+import com.uservoice.uservoicesdk.babayaga.Babayaga;
 
 public class Ticket extends BaseModel {
 	
@@ -24,6 +25,9 @@ public class Ticket extends BaseModel {
 		
 		if (name != null)
 			params.put("display_name", name);
+
+    if (Babayaga.getUvts() != null)
+      params.put("uvts", Babayaga.getUvts());
 		
 		for (Map.Entry<String, String> entry : getSession().getExternalIds().entrySet()) {
 			params.put(String.format("created_by[external_ids][%s]", entry.getKey()), entry.getValue());
