@@ -1,7 +1,10 @@
 package com.uservoice.uservoicesdk.flow;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.support.v4.app.FragmentActivity;
 
+import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.dialog.PasswordDialogFragment;
@@ -25,7 +28,14 @@ public class SigninManager {
 		new SigninManager(activity, null, null, callback).signIn();
 	}
 	
-	public static void signIn(FragmentActivity activity, String email, String name, Runnable callback) {
+	@SuppressLint("NewApi") public static void signIn(FragmentActivity activity, String email, String name, Runnable callback) {
+		if( name == null || name.isEmpty() ){
+			new AlertDialog.Builder(activity).setTitle(R.string.uv_invalid_name).show();
+			return;
+		}else if( email == null || email.isEmpty() || !email.matches("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$") ){
+			new AlertDialog.Builder(activity).setTitle(R.string.uv_invalid_email).show();
+			return;
+		}
 		new SigninManager(activity, email, name, callback).signIn();
 	}
 	
