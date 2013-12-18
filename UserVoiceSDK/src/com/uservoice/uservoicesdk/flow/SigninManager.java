@@ -28,14 +28,7 @@ public class SigninManager {
 		new SigninManager(activity, null, null, callback).signIn();
 	}
 	
-	@SuppressLint("NewApi") public static void signIn(FragmentActivity activity, String email, String name, Runnable callback) {
-		if( name == null || name.isEmpty() ){
-			new AlertDialog.Builder(activity).setTitle(R.string.uv_invalid_name).show();
-			return;
-		}else if( email == null || email.isEmpty() || !email.matches("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$") ){
-			new AlertDialog.Builder(activity).setTitle(R.string.uv_invalid_email).show();
-			return;
-		}
+	@SuppressLint("NewApi") public static void signIn(FragmentActivity activity, String email, String name, Runnable callback) {		
 		new SigninManager(activity, email, name, callback).signIn();
 	}
 	

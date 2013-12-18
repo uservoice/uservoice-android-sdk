@@ -109,7 +109,6 @@
     <string name="uv_password_dialog_title">請輸入你的密碼</string>
     <string name="uv_article_browse_question">這篇文章對你有幫助嗎？</string>
     <string name="uv_thanks">謝謝！</string>
-    <string name="uv_invalid_name">名稱格式有誤,請檢查是否輸入正確!</string>
-    <string name="uv_invalid_email">email格式有誤,請檢查是否輸入正確!</string>
+    <string name="uv_invalid_email">不正確的email格式,請檢查是否輸入正確!</string>
 
 </resources>

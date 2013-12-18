@@ -278,11 +278,8 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 		} else if (state == State.DETAILS) {
 			String name = nameField.getText().toString();
 			String email = emailField.getText().toString();
-			if (email.length() == 0) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(context);
-				builder.setTitle(R.string.uv_error);
-				builder.setMessage(R.string.uv_msg_user_identity_validation);
-				builder.create().show();
+			if (email.length() == 0 || !email.matches("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$") ){
+				new AlertDialog.Builder(context).setTitle(R.string.uv_invalid_email).show();
 			} else {
 				Session.getInstance().persistIdentity(name, email);
 				doSubmit();
