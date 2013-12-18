@@ -51,6 +51,7 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 	protected EditText emailField;
 	protected EditText nameField;
 	protected int continueButtonMessage;
+	private String text = "";
 
 	public InstantAnswersAdapter(FragmentActivity context) {
 		this.context = context;
@@ -154,6 +155,7 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 				button.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
+						text = textField.getText().toString();
 						onButtonTapped();
 					}
 				});
@@ -167,6 +169,7 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 			} else if (type == TEXT) {
 				view = inflater.inflate(R.layout.uv_contact_text_item, null);
 				textField = (EditText) view.findViewById(R.id.uv_text);
+				textField.setText( text );
 				textField.addTextChangedListener(new TextWatcher() {
 					@Override
 					public void onTextChanged(CharSequence s, int start, int before, int count) {
