@@ -51,6 +51,7 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 	protected EditText emailField;
 	protected EditText nameField;
 	protected int continueButtonMessage;
+	private String text = "";
 
 	public InstantAnswersAdapter(FragmentActivity context) {
 		this.context = context;
@@ -154,6 +155,7 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 				button.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
+						text = textField.getText().toString();
 						onButtonTapped();
 					}
 				});
@@ -167,6 +169,7 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 			} else if (type == TEXT) {
 				view = inflater.inflate(R.layout.uv_contact_text_item, null);
 				textField = (EditText) view.findViewById(R.id.uv_text);
+				textField.setText( text );
 				textField.addTextChangedListener(new TextWatcher() {
 					@Override
 					public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -275,11 +278,8 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 		} else if (state == State.DETAILS) {
 			String name = nameField.getText().toString();
 			String email = emailField.getText().toString();
-			if (email.length() == 0) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(context);
-				builder.setTitle(R.string.uv_error);
-				builder.setMessage(R.string.uv_msg_user_identity_validation);
-				builder.create().show();
+			if (email.length() == 0 || !email.matches("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$") ){
+				new AlertDialog.Builder(context).setTitle(R.string.uv_invalid_email).show();
 			} else {
 				Session.getInstance().persistIdentity(name, email);
 				doSubmit();
