@@ -7,3 +7,5 @@ out
 .idea/libraries
 .gradle
 local.properties
+gradle.properties
+/*/build

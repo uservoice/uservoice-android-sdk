@@ -3,22 +3,23 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.6.+'
+        classpath 'com.android.tools.build:gradle:0.7.+'
     }
 }
 apply plugin: 'android'
 
 repositories {
     mavenCentral()
+    maven { url 'http://dl.bintray.com/populov/maven' }
 }
 
 android {
-    compileSdkVersion 18
-    buildToolsVersion "18.1.0"
+    compileSdkVersion 19
+    buildToolsVersion "19.0.0"
 
     defaultConfig {
         minSdkVersion 8
-        targetSdkVersion 18
+        targetSdkVersion 19
         versionName project.version
     }
 
