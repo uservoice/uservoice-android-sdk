@@ -1,11 +1,5 @@
 package com.uservoice.uservoicesdk.ui;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +17,12 @@ import com.uservoice.uservoicesdk.babayaga.Babayaga.Event;
 import com.uservoice.uservoicesdk.model.CustomField;
 import com.uservoice.uservoicesdk.model.Ticket;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class ContactAdapter extends InstantAnswersAdapter {
 
 	private int CUSTOM_TEXT_FIELD = 8;
@@ -30,7 +30,7 @@ public class ContactAdapter extends InstantAnswersAdapter {
 
 	private Map<String, String> customFieldValues;
 
-	public ContactAdapter(FragmentActivity context) {
+    public ContactAdapter(FragmentActivity context) {
 		super(context);
 		customFieldValues = new HashMap<String, String>(Session.getInstance().getConfig().getCustomFields());
 		continueButtonMessage = R.string.uv_contact_continue_button;
@@ -114,8 +114,10 @@ public class ContactAdapter extends InstantAnswersAdapter {
 				}
 			});
 			field.setAdapter(new SpinnerAdapter<String>(context, customField.getPredefinedValues()));
-			if (value != null && customField.getPredefinedValues().contains(value))
-				field.setSelection(customField.getPredefinedValues().indexOf(value));
+			if (value != null && customField.getPredefinedValues().contains(value)) {
+                // Add one to account for (none)
+				field.setSelection(customField.getPredefinedValues().indexOf(value) + 1);
+            }
 		} else {
 			return super.getView(position, view, parent);
 		}
