@@ -40,6 +40,7 @@ public class BabayagaTask extends AsyncTask<String,String,Void> {
     
 	@Override
 	protected Void doInBackground(String... args) {
+        AndroidHttpClient client = null;
 	    try {
 			JSONObject data = new JSONObject();
 			if (traits != null && !traits.isEmpty()) {
@@ -68,7 +69,7 @@ public class BabayagaTask extends AsyncTask<String,String,Void> {
 			
 	    	HttpRequestBase request = new HttpGet();
 			request.setURI(new URI(url.toString()));
-            AndroidHttpClient client = AndroidHttpClient.newInstance(String.format("uservoice-android-%s", UserVoice.getVersion()), Session.getInstance().getContext());
+            client = AndroidHttpClient.newInstance(String.format("uservoice-android-%s", UserVoice.getVersion()), Session.getInstance().getContext());
             HttpResponse response = client.execute(request);
             HttpEntity responseEntity = response.getEntity();
             StatusLine responseStatus = response.getStatusLine();
@@ -76,7 +77,6 @@ public class BabayagaTask extends AsyncTask<String,String,Void> {
             if (statusCode != 200)
             	return null;
             String body = responseEntity != null ? EntityUtils.toString(responseEntity) : null;
-            client.close();
             if (body != null && body.length() > 0) {
                 String payload = body.substring(2, body.length() - 2);
                 JSONObject responseData = new JSONObject(payload);
@@ -86,7 +86,11 @@ public class BabayagaTask extends AsyncTask<String,String,Void> {
 	    } catch (Exception e) {
 	    	e.printStackTrace();
 	    	Log.e("UV", String.format("%s: %s", e.getClass().getName(), e.getMessage()));
-		}
+		} finally {
+            if (client != null) {
+                client.close();
+            }
+        }
 	    return null;
 	}
 }

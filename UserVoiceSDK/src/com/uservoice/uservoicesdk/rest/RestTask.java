@@ -56,6 +56,7 @@ public class RestTask extends AsyncTask<String, String, RestResult> {
 
     @Override
     protected RestResult doInBackground(String... args) {
+        AndroidHttpClient client = null;
         try {
             request = createRequest();
             if (isCancelled())
@@ -70,7 +71,7 @@ public class RestTask extends AsyncTask<String, String, RestResult> {
             }
             request.setHeader("Accept-Language", Locale.getDefault().getLanguage());
             request.setHeader("API-Client", String.format("uservoice-android-%s", UserVoice.getVersion()));
-            AndroidHttpClient client = AndroidHttpClient.newInstance(String.format("uservoice-android-%s", UserVoice.getVersion()), Session.getInstance().getContext());
+            client = AndroidHttpClient.newInstance(String.format("uservoice-android-%s", UserVoice.getVersion()), Session.getInstance().getContext());
             if (isCancelled())
                 throw new InterruptedException();
             // TODO it would be nice to find a way to abort the request on cancellation
@@ -81,12 +82,15 @@ public class RestTask extends AsyncTask<String, String, RestResult> {
             StatusLine responseStatus = response.getStatusLine();
             int statusCode = responseStatus != null ? responseStatus.getStatusCode() : 0;
             String body = responseEntity != null ? EntityUtils.toString(responseEntity) : null;
-            client.close();
             if (isCancelled())
                 throw new InterruptedException();
             return new RestResult(statusCode, new JSONObject(body));
         } catch (Exception e) {
             return new RestResult(e);
+        } finally {
+            if (client != null) {
+                client.close();
+            }
         }
     }
 
