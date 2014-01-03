@@ -9,11 +9,11 @@ import android.widget.ImageView;
 
 public class DownloadImageTask extends AsyncTask<Void, Void, Bitmap> {
     private ImageView imageView;
-	private final String url;
+    private final String url;
 
     public DownloadImageTask(String url, ImageView imageView) {
         this.url = url;
-		this.imageView = imageView;
+        this.imageView = imageView;
         imageView.setImageBitmap(null);
     }
 
@@ -29,8 +29,8 @@ public class DownloadImageTask extends AsyncTask<Void, Void, Bitmap> {
     }
 
     protected void onPostExecute(Bitmap bitmap) {
-    	ImageCache.getInstance().set(url, bitmap);
-    	imageView.setImageBitmap(bitmap);
+        ImageCache.getInstance().set(url, bitmap);
+        imageView.setImageBitmap(bitmap);
     }
 
 }

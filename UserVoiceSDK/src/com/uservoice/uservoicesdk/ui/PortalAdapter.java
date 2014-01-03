@@ -26,270 +26,270 @@ import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.model.Topic;
 
 public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterView.OnItemClickListener {
-	
-	public static int SCOPE_ALL = 0;
-	public static int SCOPE_ARTICLES = 1;
-	public static int SCOPE_IDEAS = 2;
 
-	private static int KB_HEADER = 0;
-	private static int FORUM = 1;
-	private static int TOPIC = 2;
-	private static int LOADING = 3;
-	private static int CONTACT = 4;
-	private static int ARTICLE = 5;
+    public static int SCOPE_ALL = 0;
+    public static int SCOPE_ARTICLES = 1;
+    public static int SCOPE_IDEAS = 2;
 
-	private LayoutInflater inflater;
-	private final FragmentActivity context;
-	private boolean configLoaded = false;
-	private List<Integer> staticRows;
+    private static int KB_HEADER = 0;
+    private static int FORUM = 1;
+    private static int TOPIC = 2;
+    private static int LOADING = 3;
+    private static int CONTACT = 4;
+    private static int ARTICLE = 5;
 
-	public PortalAdapter(FragmentActivity context) {
-		this.context = context;
-		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    private LayoutInflater inflater;
+    private final FragmentActivity context;
+    private boolean configLoaded = false;
+    private List<Integer> staticRows;
 
-		new InitManager(context, new Runnable() {
-			@Override
-			public void run() {
-            configLoaded = true;
-            notifyDataSetChanged();
-            loadForum();
-            loadTopics();
-			}
-		}).init();
-	}
+    public PortalAdapter(FragmentActivity context) {
+        this.context = context;
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-	private List<Topic> getTopics() {
-		return Session.getInstance().getTopics();
-	}
+        new InitManager(context, new Runnable() {
+            @Override
+            public void run() {
+                configLoaded = true;
+                notifyDataSetChanged();
+                loadForum();
+                loadTopics();
+            }
+        }).init();
+    }
 
-	private List<Article> getArticles() {
-		return Session.getInstance().getArticles();
-	}
+    private List<Topic> getTopics() {
+        return Session.getInstance().getTopics();
+    }
 
-	private boolean shouldShowArticles() {
-		return Session.getInstance().getConfig().getTopicId() != -1 || (getTopics() != null && getTopics().isEmpty());
-	}
+    private List<Article> getArticles() {
+        return Session.getInstance().getArticles();
+    }
 
-	private void loadForum() {
-		Forum.loadForum(Session.getInstance().getConfig().getForumId(), new DefaultCallback<Forum>(context) {
-			@Override
-			public void onModel(Forum model) {
-				Session.getInstance().setForum(model);
-				notifyDataSetChanged();
-			}
-		});
-	}
+    private boolean shouldShowArticles() {
+        return Session.getInstance().getConfig().getTopicId() != -1 || (getTopics() != null && getTopics().isEmpty());
+    }
 
-	private void loadTopics() {
-		final DefaultCallback<List<Article>> articlesCallback = new DefaultCallback<List<Article>>(context) {
-			@Override
-			public void onModel(List<Article> model) {
-				Session.getInstance().setTopics(new ArrayList<Topic>());
-				Session.getInstance().setArticles(model);
-				notifyDataSetChanged();
-			}
-		};
+    private void loadForum() {
+        Forum.loadForum(Session.getInstance().getConfig().getForumId(), new DefaultCallback<Forum>(context) {
+            @Override
+            public void onModel(Forum model) {
+                Session.getInstance().setForum(model);
+                notifyDataSetChanged();
+            }
+        });
+    }
 
-		if (Session.getInstance().getConfig().getTopicId() != -1) {
-			Article.loadForTopic(Session.getInstance().getConfig().getTopicId(), articlesCallback);
-		} else {
-			Topic.loadTopics(new DefaultCallback<List<Topic>>(context) {
-				@Override
-				public void onModel(List<Topic> model) {
-					if (model.isEmpty()) {
-						Session.getInstance().setTopics(model);
-						Article.loadAll(articlesCallback);
-					} else {
-						ArrayList<Topic> topics = new ArrayList<Topic>(model);
-						topics.add(Topic.ALL_ARTICLES);
-						Session.getInstance().setTopics(topics);
-						notifyDataSetChanged();
-					}
-				}
-			});
-		}
-	}
+    private void loadTopics() {
+        final DefaultCallback<List<Article>> articlesCallback = new DefaultCallback<List<Article>>(context) {
+            @Override
+            public void onModel(List<Article> model) {
+                Session.getInstance().setTopics(new ArrayList<Topic>());
+                Session.getInstance().setArticles(model);
+                notifyDataSetChanged();
+            }
+        };
 
-	private void computeStaticRows() {
-		if (staticRows == null) {
-			staticRows = new ArrayList<Integer>();
-			Config config = Session.getInstance().getConfig();
-			if (config.shouldShowContactUs())
-				staticRows.add(CONTACT);
-			if (config.shouldShowForum())
-				staticRows.add(FORUM);
-			if (config.shouldShowKnowledgeBase())
-				staticRows.add(KB_HEADER);
-		}
-	}
+        if (Session.getInstance().getConfig().getTopicId() != -1) {
+            Article.loadForTopic(Session.getInstance().getConfig().getTopicId(), articlesCallback);
+        } else {
+            Topic.loadTopics(new DefaultCallback<List<Topic>>(context) {
+                @Override
+                public void onModel(List<Topic> model) {
+                    if (model.isEmpty()) {
+                        Session.getInstance().setTopics(model);
+                        Article.loadAll(articlesCallback);
+                    } else {
+                        ArrayList<Topic> topics = new ArrayList<Topic>(model);
+                        topics.add(Topic.ALL_ARTICLES);
+                        Session.getInstance().setTopics(topics);
+                        notifyDataSetChanged();
+                    }
+                }
+            });
+        }
+    }
 
-	@Override
-	public int getCount() {
-		if (!configLoaded) {
-			return 1;
-		} else {
-			computeStaticRows();
-			int rows = staticRows.size();
-			if (Session.getInstance().getConfig().shouldShowKnowledgeBase()) {
-				if (getTopics() == null || (shouldShowArticles() && getArticles() == null)) {
-					rows += 1;
-				} else {
-					rows += shouldShowArticles() ? getArticles().size() : getTopics().size();
-				}
-			}
-			return rows;
-		}
-	}
-	
-	public List<BaseModel> getScopedSearchResults() {
-		if (scope == SCOPE_ALL) {
-			return searchResults;
-		} else if  (scope == SCOPE_ARTICLES) {
-			List<BaseModel> articles = new ArrayList<BaseModel>();
-			for (BaseModel model : searchResults) {
-				if (model instanceof Article)
-					articles.add(model);
-			}
-			return articles;
-		} else if (scope == SCOPE_IDEAS) {
-			List<BaseModel> ideas = new ArrayList<BaseModel>();
-			for (BaseModel model : searchResults) {
-				if (model instanceof Suggestion)
-					ideas.add(model);
-			}
-			return ideas;
-		}
-		return null;
-	}
+    private void computeStaticRows() {
+        if (staticRows == null) {
+            staticRows = new ArrayList<Integer>();
+            Config config = Session.getInstance().getConfig();
+            if (config.shouldShowContactUs())
+                staticRows.add(CONTACT);
+            if (config.shouldShowForum())
+                staticRows.add(FORUM);
+            if (config.shouldShowKnowledgeBase())
+                staticRows.add(KB_HEADER);
+        }
+    }
 
-	@Override
-	public Object getItem(int position) {
-		computeStaticRows();
-		if (position < staticRows.size() && staticRows.get(position) == FORUM)
-			return Session.getInstance().getForum();
-		else if (getTopics() != null && !shouldShowArticles() && position >= staticRows.size() && position - staticRows.size() < getTopics().size())
-			return getTopics().get(position - staticRows.size());
-		else if (getArticles() != null && shouldShowArticles() && position >= staticRows.size() && position - staticRows.size() < getArticles().size())
-			return getArticles().get(position - staticRows.size());
-		return null;
-	}
+    @Override
+    public int getCount() {
+        if (!configLoaded) {
+            return 1;
+        } else {
+            computeStaticRows();
+            int rows = staticRows.size();
+            if (Session.getInstance().getConfig().shouldShowKnowledgeBase()) {
+                if (getTopics() == null || (shouldShowArticles() && getArticles() == null)) {
+                    rows += 1;
+                } else {
+                    rows += shouldShowArticles() ? getArticles().size() : getTopics().size();
+                }
+            }
+            return rows;
+        }
+    }
 
-	@Override
-	public long getItemId(int position) {
-		return position;
-	}
+    public List<BaseModel> getScopedSearchResults() {
+        if (scope == SCOPE_ALL) {
+            return searchResults;
+        } else if (scope == SCOPE_ARTICLES) {
+            List<BaseModel> articles = new ArrayList<BaseModel>();
+            for (BaseModel model : searchResults) {
+                if (model instanceof Article)
+                    articles.add(model);
+            }
+            return articles;
+        } else if (scope == SCOPE_IDEAS) {
+            List<BaseModel> ideas = new ArrayList<BaseModel>();
+            for (BaseModel model : searchResults) {
+                if (model instanceof Suggestion)
+                    ideas.add(model);
+            }
+            return ideas;
+        }
+        return null;
+    }
 
-	@Override
-	public boolean isEnabled(int position) {
-		if (!configLoaded)
-			return false;
-		computeStaticRows();
-		if (position < staticRows.size()) {
-			int type = staticRows.get(position);
-			if (type == KB_HEADER || type == LOADING)
-				return false;
-		}
-		return true;
-	}
-	
-	@Override
-	protected void searchResultsUpdated() {
-		int articleResults = 0;
-		int ideaResults = 0;
-		for (BaseModel model : searchResults) {
-			if (model instanceof Article)
-				articleResults += 1;
-			else
-				ideaResults += 1;
-		}
-		((SearchActivity) context).updateScopedSearch(searchResults.size(), articleResults, ideaResults);
-	}
+    @Override
+    public Object getItem(int position) {
+        computeStaticRows();
+        if (position < staticRows.size() && staticRows.get(position) == FORUM)
+            return Session.getInstance().getForum();
+        else if (getTopics() != null && !shouldShowArticles() && position >= staticRows.size() && position - staticRows.size() < getTopics().size())
+            return getTopics().get(position - staticRows.size());
+        else if (getArticles() != null && shouldShowArticles() && position >= staticRows.size() && position - staticRows.size() < getArticles().size())
+            return getArticles().get(position - staticRows.size());
+        return null;
+    }
 
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		View view = convertView;
-		int type = getItemViewType(position);
-		if (view == null) {
-			if (type == LOADING)
-				view = inflater.inflate(R.layout.uv_loading_item, null);
-			else if (type == FORUM)
-				view = inflater.inflate(R.layout.uv_text_item, null);
-			else if (type == KB_HEADER)
-				view = inflater.inflate(R.layout.uv_header_item_light, null);
-			else if (type == TOPIC)
-				view = inflater.inflate(R.layout.uv_text_item, null);
-			else if (type == CONTACT)
-				view = inflater.inflate(R.layout.uv_text_item, null);
-			else if (type == ARTICLE)
-				view = inflater.inflate(R.layout.uv_text_item, null);
-		}
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
-		if (type == FORUM) {
-			TextView textView = (TextView) view.findViewById(R.id.uv_text);
-			textView.setText(R.string.uv_feedback_forum);
-			TextView text2 = (TextView) view.findViewById(R.id.uv_text2);
-			text2.setText(Utils.getQuantityString(text2, R.plurals.uv_ideas, Session.getInstance().getForum().getNumberOfOpenSuggestions()));
-		} else if (type == KB_HEADER) {
-			TextView textView = (TextView) view.findViewById(R.id.uv_header_text);
-			textView.setText(R.string.uv_knowledge_base);
-		} else if (type == TOPIC) {
-			Topic topic = (Topic) getItem(position);
-			TextView textView = (TextView) view.findViewById(R.id.uv_text);
-			textView.setText(topic.getName());
-			textView = (TextView) view.findViewById(R.id.uv_text2);
-			if (topic == Topic.ALL_ARTICLES) {
-				textView.setVisibility(View.GONE);
-			} else {
-				textView.setVisibility(View.VISIBLE);
-				textView.setText(String.format("%d %s", topic.getNumberOfArticles(), context.getResources().getQuantityString(R.plurals.uv_articles, topic.getNumberOfArticles())));
-			}
-		} else if (type == CONTACT) {
-			TextView textView = (TextView) view.findViewById(R.id.uv_text);
-			textView.setText(R.string.uv_contact_us);
-			view.findViewById(R.id.uv_text2).setVisibility(View.GONE);
-		} else if (type == ARTICLE) {
-			TextView textView = (TextView) view.findViewById(R.id.uv_text);
-			Article article = (Article) getItem(position);
-			textView.setText(article.getTitle());
-		}
+    @Override
+    public boolean isEnabled(int position) {
+        if (!configLoaded)
+            return false;
+        computeStaticRows();
+        if (position < staticRows.size()) {
+            int type = staticRows.get(position);
+            if (type == KB_HEADER || type == LOADING)
+                return false;
+        }
+        return true;
+    }
 
-		View divider = view.findViewById(R.id.uv_divider);
-		if (divider != null)
-			divider.setVisibility(position == getCount() - 1 ? View.GONE : View.VISIBLE);
-		if (type == FORUM)
-			divider.setVisibility(View.GONE);
+    @Override
+    protected void searchResultsUpdated() {
+        int articleResults = 0;
+        int ideaResults = 0;
+        for (BaseModel model : searchResults) {
+            if (model instanceof Article)
+                articleResults += 1;
+            else
+                ideaResults += 1;
+        }
+        ((SearchActivity) context).updateScopedSearch(searchResults.size(), articleResults, ideaResults);
+    }
 
-		return view;
-	}
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View view = convertView;
+        int type = getItemViewType(position);
+        if (view == null) {
+            if (type == LOADING)
+                view = inflater.inflate(R.layout.uv_loading_item, null);
+            else if (type == FORUM)
+                view = inflater.inflate(R.layout.uv_text_item, null);
+            else if (type == KB_HEADER)
+                view = inflater.inflate(R.layout.uv_header_item_light, null);
+            else if (type == TOPIC)
+                view = inflater.inflate(R.layout.uv_text_item, null);
+            else if (type == CONTACT)
+                view = inflater.inflate(R.layout.uv_text_item, null);
+            else if (type == ARTICLE)
+                view = inflater.inflate(R.layout.uv_text_item, null);
+        }
 
-	@Override
-	public int getViewTypeCount() {
-		return 7;
-	}
+        if (type == FORUM) {
+            TextView textView = (TextView) view.findViewById(R.id.uv_text);
+            textView.setText(R.string.uv_feedback_forum);
+            TextView text2 = (TextView) view.findViewById(R.id.uv_text2);
+            text2.setText(Utils.getQuantityString(text2, R.plurals.uv_ideas, Session.getInstance().getForum().getNumberOfOpenSuggestions()));
+        } else if (type == KB_HEADER) {
+            TextView textView = (TextView) view.findViewById(R.id.uv_header_text);
+            textView.setText(R.string.uv_knowledge_base);
+        } else if (type == TOPIC) {
+            Topic topic = (Topic) getItem(position);
+            TextView textView = (TextView) view.findViewById(R.id.uv_text);
+            textView.setText(topic.getName());
+            textView = (TextView) view.findViewById(R.id.uv_text2);
+            if (topic == Topic.ALL_ARTICLES) {
+                textView.setVisibility(View.GONE);
+            } else {
+                textView.setVisibility(View.VISIBLE);
+                textView.setText(String.format("%d %s", topic.getNumberOfArticles(), context.getResources().getQuantityString(R.plurals.uv_articles, topic.getNumberOfArticles())));
+            }
+        } else if (type == CONTACT) {
+            TextView textView = (TextView) view.findViewById(R.id.uv_text);
+            textView.setText(R.string.uv_contact_us);
+            view.findViewById(R.id.uv_text2).setVisibility(View.GONE);
+        } else if (type == ARTICLE) {
+            TextView textView = (TextView) view.findViewById(R.id.uv_text);
+            Article article = (Article) getItem(position);
+            textView.setText(article.getTitle());
+        }
 
-	@Override
-	public int getItemViewType(int position) {
-		if (!configLoaded)
-			return LOADING;
-		computeStaticRows();
-		if (position < staticRows.size()) {
-			int type = staticRows.get(position);
-			if (type == FORUM && Session.getInstance().getForum() == null)
-				return LOADING;
-			return type;
-		}
-		return getTopics() == null || (shouldShowArticles() && getArticles() == null) ? LOADING : (shouldShowArticles() ? ARTICLE : TOPIC);
-	}
+        View divider = view.findViewById(R.id.uv_divider);
+        if (divider != null)
+            divider.setVisibility(position == getCount() - 1 ? View.GONE : View.VISIBLE);
+        if (type == FORUM)
+            divider.setVisibility(View.GONE);
 
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		int type = getItemViewType(position);
-		if (type == CONTACT) {
-			context.startActivity(new Intent(context, ContactActivity.class));
-		} else if (type == FORUM) {
-			context.startActivity(new Intent(context, ForumActivity.class));
-		} else if (type == TOPIC || type == ARTICLE) {
-			Utils.showModel(context, (BaseModel) getItem(position));
-		}
-	}
+        return view;
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return 7;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (!configLoaded)
+            return LOADING;
+        computeStaticRows();
+        if (position < staticRows.size()) {
+            int type = staticRows.get(position);
+            if (type == FORUM && Session.getInstance().getForum() == null)
+                return LOADING;
+            return type;
+        }
+        return getTopics() == null || (shouldShowArticles() && getArticles() == null) ? LOADING : (shouldShowArticles() ? ARTICLE : TOPIC);
+    }
+
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        int type = getItemViewType(position);
+        if (type == CONTACT) {
+            context.startActivity(new Intent(context, ContactActivity.class));
+        } else if (type == FORUM) {
+            context.startActivity(new Intent(context, ForumActivity.class));
+        } else if (type == TOPIC || type == ARTICLE) {
+            Utils.showModel(context, (BaseModel) getItem(position));
+        }
+    }
 
 }

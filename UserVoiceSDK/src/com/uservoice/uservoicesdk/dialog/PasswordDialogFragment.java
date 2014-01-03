@@ -18,38 +18,38 @@ import com.uservoice.uservoicesdk.ui.Utils;
 @SuppressLint("ValidFragment")
 public class PasswordDialogFragment extends DialogFragmentBugfixed {
 
-	private final Runnable callback;
+    private final Runnable callback;
 
-	public PasswordDialogFragment(Runnable callback) {
-		this.callback = callback;
-	}
-	
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setTitle(R.string.uv_password_dialog_title);
+    public PasswordDialogFragment(Runnable callback) {
+        this.callback = callback;
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.uv_password_dialog_title);
         if (!Utils.isDarkTheme(getActivity())) {
             builder.setInverseBackgroundForced(true);
         }
-		View view = getActivity().getLayoutInflater().inflate(R.layout.uv_password_dialog, null);
-		final EditText password = (EditText) view.findViewById(R.id.uv_password);
-		builder.setView(view);
-		builder.setNegativeButton(R.string.uv_cancel, null);
-		builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(final DialogInterface dialog, int which) {
-				AccessToken.authorize(Session.getInstance().getEmail(), password.getText().toString(), new DefaultCallback<AccessToken>(getActivity()) {
-					@Override
-					public void onModel(AccessToken model) {
-						Session.getInstance().setAccessToken(model);
-						callback.run();
-					}
-				});
-			}
-		});
+        View view = getActivity().getLayoutInflater().inflate(R.layout.uv_password_dialog, null);
+        final EditText password = (EditText) view.findViewById(R.id.uv_password);
+        builder.setView(view);
+        builder.setNegativeButton(R.string.uv_cancel, null);
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialog, int which) {
+                AccessToken.authorize(Session.getInstance().getEmail(), password.getText().toString(), new DefaultCallback<AccessToken>(getActivity()) {
+                    @Override
+                    public void onModel(AccessToken model) {
+                        Session.getInstance().setAccessToken(model);
+                        callback.run();
+                    }
+                });
+            }
+        });
         AlertDialog dialog = builder.create();
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         return dialog;
-	}
+    }
 
 }
