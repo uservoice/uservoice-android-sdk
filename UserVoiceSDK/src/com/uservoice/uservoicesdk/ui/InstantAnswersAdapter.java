@@ -1,13 +1,11 @@
 package com.uservoice.uservoicesdk.ui;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +25,9 @@ import com.uservoice.uservoicesdk.deflection.Deflection;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.BaseModel;
 import com.uservoice.uservoicesdk.model.Suggestion;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewGroup.OnHierarchyChangeListener, OnItemClickListener {
 
@@ -165,25 +166,28 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 				view = new LinearLayout(context);
 				view.setPadding(0, 30, 0, 0);
 			} else if (type == TEXT) {
-				view = inflater.inflate(R.layout.uv_contact_text_item, null);
-				textField = (EditText) view.findViewById(R.id.uv_text);
-				textField.addTextChangedListener(new TextWatcher() {
-					@Override
-					public void onTextChanged(CharSequence s, int start, int before, int count) {
-						if (state != State.INIT) {
-							state = State.INIT;
-							notifyDataSetChanged();
-						}
-					}
 
-					@Override
-					public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-					}
+                view = inflater.inflate(R.layout.uv_contact_text_item, null);
+                EditText field = (EditText) view.findViewById(R.id.uv_text);
+                restoreEnteredText(textField, field, "");
+                textField = field;
+                textField.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        if (state != State.INIT) {
+                            state = State.INIT;
+                            notifyDataSetChanged();
+                        }
+                    }
 
-					@Override
-					public void afterTextChanged(Editable s) {
-					}
-				});
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                    }
+                });
 			} else if (type == EMAIL_FIELD || type == NAME_FIELD) {
 				view = inflater.inflate(R.layout.uv_text_field_item, null);
 			}
@@ -214,16 +218,16 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 			final EditText field = (EditText) view.findViewById(R.id.uv_text_field);
 			if (type == EMAIL_FIELD) {
 				title.setText(R.string.uv_your_email_address);
-				emailField = field;
+                restoreEnteredText(emailField, field, Session.getInstance().getEmail());
+                emailField = field;
 				field.setHint(R.string.uv_email_address_hint);
 				field.setInputType(EditorInfo.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-				field.setText(Session.getInstance().getEmail());
 			} else if (type == NAME_FIELD) {
 				title.setText(R.string.uv_your_name);
+                restoreEnteredText(nameField, field, Session.getInstance().getName());
 				nameField = field;
 				field.setHint(R.string.uv_name_hint);
 				field.setInputType(EditorInfo.TYPE_TEXT_VARIATION_PERSON_NAME);
-				field.setText(Session.getInstance().getName());
 			}
 		} else if (type == HEADING) {
 			TextView textView = (TextView) view.findViewById(R.id.uv_header_text);
@@ -239,6 +243,18 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 		}
 		return view;
 	}
+
+    private void restoreEnteredText(EditText previous, EditText current, String defaultText) {
+        if (previous != null) {
+            String text = null;
+            text = previous.getText().toString();
+            current.setText(TextUtils.isEmpty(text) ? defaultText : text);
+            current.setSelection(current.getText().length());
+        } else {
+            current.setText(defaultText);
+            current.setSelection(current.getText().length());
+        }
+    }
 
 	@Override
 	public Object getItem(int position) {
