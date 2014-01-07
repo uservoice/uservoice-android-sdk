@@ -53,6 +53,11 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 
             @Override
             public void loadMore() {
+                // Need to notify data set change as initializing flag
+                // will impact count below
+                if (initializing) {
+                    notifyDataSetChanged();
+                }
                 initializing = false;
                 super.loadMore();
             }
