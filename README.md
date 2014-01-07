@@ -14,10 +14,6 @@ You will need a UserVoice account (free) for it to connect to. Go to [uservoice.
 * Select the project you wish to add UserVoice to
   * Open project properties -> Android -> Library -> Add...
   * Select the UserVoiceSDK project as a library
-* Obtain an API key from your UserVoice admin console
-  * Admin console -> Settings -> Channels -> API
-  * A regular API key pair is fine. You don't need a special Android key.
-  * Set it as untrusted.
 * Add the following code to initialize the UserVoice SDK
   * Do this either in Application.onCreate or your root Activity.onCreate
   * We strongly recommend you do this on app launch so that UserVoice can provide accurate analytics.
@@ -115,6 +111,15 @@ UserVoice.setExternalId("myapp", "1234");
 ```
 UserVoice.track("myevent");
 UserVoice.track("myevent", propertyMap);
+```
+
+### Private sites
+
+The SDK relies on being able to obtain a client key to communicate with the UserVoice API. If you have a public UserVoice site (the default) then it can obtain this key automatically, so you only need to pass your site URL. However, if you turn on site privacy, this key is also private, so you will need to pass it in. You can obtain an API key pair from the mobile settings section of the UserVoice admin console.
+
+```
+Config config = new Config("yoursite.uservoice.com", "API_CLIENT_KEY", "API_CLIENT_SECRET");
+UserVoice.init(config);
 ```
 
 License
