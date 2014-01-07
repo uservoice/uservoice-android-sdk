@@ -114,8 +114,9 @@ public class ContactAdapter extends InstantAnswersAdapter {
                 }
             });
             field.setAdapter(new SpinnerAdapter<String>(context, customField.getPredefinedValues()));
-            if (value != null && customField.getPredefinedValues().contains(value))
-                field.setSelection(customField.getPredefinedValues().indexOf(value));
+            if (value != null && customField.getPredefinedValues().contains(value)) {
+                field.setSelection(customField.getPredefinedValues().indexOf(value) + 1);
+            }
         } else {
             return super.getView(position, view, parent);
         }
