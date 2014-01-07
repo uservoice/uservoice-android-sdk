@@ -1,13 +1,11 @@
 package com.uservoice.uservoicesdk.ui;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +25,9 @@ import com.uservoice.uservoicesdk.deflection.Deflection;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.BaseModel;
 import com.uservoice.uservoicesdk.model.Suggestion;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewGroup.OnHierarchyChangeListener, OnItemClickListener {
 
@@ -166,7 +167,9 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
                 view.setPadding(0, 30, 0, 0);
             } else if (type == TEXT) {
                 view = inflater.inflate(R.layout.uv_contact_text_item, null);
-                textField = (EditText) view.findViewById(R.id.uv_text);
+                EditText field = (EditText) view.findViewById(R.id.uv_text);
+                restoreEnteredText(textField, field, "");
+                textField = field;
                 textField.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -214,16 +217,16 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
             final EditText field = (EditText) view.findViewById(R.id.uv_text_field);
             if (type == EMAIL_FIELD) {
                 title.setText(R.string.uv_your_email_address);
+                restoreEnteredText(emailField, field, Session.getInstance().getEmail());
                 emailField = field;
                 field.setHint(R.string.uv_email_address_hint);
                 field.setInputType(EditorInfo.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-                field.setText(Session.getInstance().getEmail());
             } else if (type == NAME_FIELD) {
                 title.setText(R.string.uv_your_name);
+                restoreEnteredText(nameField, field, Session.getInstance().getName());
                 nameField = field;
                 field.setHint(R.string.uv_name_hint);
                 field.setInputType(EditorInfo.TYPE_TEXT_VARIATION_PERSON_NAME);
-                field.setText(Session.getInstance().getName());
             }
         } else if (type == HEADING) {
             TextView textView = (TextView) view.findViewById(R.id.uv_header_text);
@@ -238,6 +241,17 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
             textView.setText(hasArticles ? (hasIdeas ? R.string.uv_matching_articles_and_ideas : R.string.uv_matching_articles) : R.string.uv_matching_ideas);
         }
         return view;
+    }
+
+    protected void restoreEnteredText(EditText previous, EditText current, String defaultText) {
+        if (previous != null) {
+            String text = previous.getText().toString();
+            current.setText(TextUtils.isEmpty(text) ? defaultText : text);
+            current.setSelection(current.getText().length());
+        } else {
+            current.setText(defaultText);
+            current.setSelection(current.getText().length());
+        }
     }
 
     @Override

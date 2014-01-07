@@ -70,8 +70,10 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
             if (type == DESCRIPTION) {
                 view = inflater.inflate(R.layout.uv_text_field_item, null);
                 TextView title = (TextView) view.findViewById(R.id.uv_header_text);
-                descriptionField = (EditText) view.findViewById(R.id.uv_text_field);
                 title.setText(R.string.uv_idea_description_heading);
+                EditText field = (EditText) view.findViewById(R.id.uv_text_field);
+                restoreEnteredText(descriptionField, field, "");
+                descriptionField = field;
                 descriptionField.setHint(R.string.uv_idea_description_hint);
             } else if (type == CATEGORY) {
                 view = inflater.inflate(R.layout.uv_select_field_item, null);
