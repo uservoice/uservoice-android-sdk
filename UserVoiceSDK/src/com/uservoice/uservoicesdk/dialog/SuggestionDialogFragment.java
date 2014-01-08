@@ -3,6 +3,7 @@ package com.uservoice.uservoicesdk.dialog;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -34,6 +35,7 @@ public class SuggestionDialogFragment extends DialogFragmentBugfixed {
     private PaginatedAdapter<Comment> adapter;
     private View headerView;
     private View view;
+    private Context context;
 
     public SuggestionDialogFragment(Suggestion suggestion) {
         this.suggestion = suggestion;
@@ -42,6 +44,7 @@ public class SuggestionDialogFragment extends DialogFragmentBugfixed {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        this.context = getActivity();
         setStyle(STYLE_NO_TITLE, getTheme());
         if (!Utils.isDarkTheme(getActivity())) {
             builder.setInverseBackgroundForced(true);
@@ -99,10 +102,10 @@ public class SuggestionDialogFragment extends DialogFragmentBugfixed {
     public void suggestionSubscriptionUpdated(Suggestion model) {
         CheckBox checkbox = (CheckBox) headerView.findViewById(R.id.uv_subscribe_checkbox);
         if (suggestion.isSubscribed()) {
-            Toast.makeText(getActivity(), R.string.uv_msg_subscribe_success, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.uv_msg_subscribe_success, Toast.LENGTH_SHORT).show();
             checkbox.setChecked(true);
         } else {
-            Toast.makeText(getActivity(), R.string.uv_msg_unsubscribe, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.uv_msg_unsubscribe, Toast.LENGTH_SHORT).show();
             checkbox.setChecked(false);
         }
         displaySuggestion(view, suggestion);
