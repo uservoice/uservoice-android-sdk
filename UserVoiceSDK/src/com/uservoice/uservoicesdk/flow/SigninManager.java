@@ -40,6 +40,9 @@ public class SigninManager {
         User currentUser = Session.getInstance().getUser();
         if (currentUser != null && (email == null || email.equals(currentUser.getEmail()))) {
             callback.run();
+        } else if (Session.getInstance().getAccessToken() != null) {
+            // If we have an access token but no user, they have signed in in this session. Don't prompt again.
+            callback.run();
         } else {
             email = email == null ? Session.getInstance().getEmail() : email;
             name = name == null ? Session.getInstance().getName() : name;
