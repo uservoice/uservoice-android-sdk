@@ -60,7 +60,7 @@ public class Suggestion extends BaseModel {
 
     public static void createSuggestion(Forum forum, Category category, String title, String text, int numberOfVotes, final Callback<Suggestion> callback) {
         Map<String, String> params = new HashMap<String, String>();
-        params.put("suggestion[votes]", String.valueOf(numberOfVotes));
+        params.put("subscribe", "true");
         params.put("suggestion[title]", title);
         params.put("suggestion[text]", text);
         if (category != null)
