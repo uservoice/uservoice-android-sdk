@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.uservoice.uservoicesdk.Config;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.UserVoice;
 import com.uservoice.uservoicesdk.activity.ContactActivity;
 import com.uservoice.uservoicesdk.activity.ForumActivity;
 import com.uservoice.uservoicesdk.activity.SearchActivity;
@@ -37,6 +38,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
     private static int LOADING = 3;
     private static int CONTACT = 4;
     private static int ARTICLE = 5;
+    private static int POWERED_BY = 6;
 
     private LayoutInflater inflater;
     private final FragmentActivity context;
@@ -137,6 +139,9 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
                     rows += shouldShowArticles() ? getArticles().size() : getTopics().size();
                 }
             }
+            if (!Session.getInstance().getClientConfig().isWhiteLabel()) {
+            	rows += 1;
+            }
             return rows;
         }
     }
@@ -222,6 +227,8 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
                 view = inflater.inflate(R.layout.uv_text_item, null);
             else if (type == ARTICLE)
                 view = inflater.inflate(R.layout.uv_text_item, null);
+            else if (type == POWERED_BY)
+            	view = inflater.inflate(R.layout.uv_powered_by_item, null);
         }
 
         if (type == FORUM) {
@@ -251,11 +258,14 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
             TextView textView = (TextView) view.findViewById(R.id.uv_text);
             Article article = (Article) getItem(position);
             textView.setText(article.getTitle());
+        } else if (type == POWERED_BY) {
+        	TextView textView = (TextView) view.findViewById(R.id.uv_version);
+        	textView.setText(context.getString(R.string.uv_android_sdk) + " v" + UserVoice.getVersion());
         }
 
         View divider = view.findViewById(R.id.uv_divider);
         if (divider != null)
-            divider.setVisibility(position == getCount() - 1 ? View.GONE : View.VISIBLE);
+            divider.setVisibility((position == getCount() - 2 && getItemViewType(getCount() - 1) == POWERED_BY) || position == getCount() - 1 ? View.GONE : View.VISIBLE);
         if (type == FORUM)
             divider.setVisibility(View.GONE);
 
@@ -278,7 +288,17 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
                 return LOADING;
             return type;
         }
-        return getTopics() == null || (shouldShowArticles() && getArticles() == null) ? LOADING : (shouldShowArticles() ? ARTICLE : TOPIC);
+        if (Session.getInstance().getConfig().shouldShowKnowledgeBase()) {
+	        if (getTopics() == null || (shouldShowArticles() && getArticles() == null)) {
+	        	if (position - staticRows.size() == 0)
+	        		return LOADING;
+	        } else if (shouldShowArticles() && position - staticRows.size() < getArticles().size()) {
+	        	return ARTICLE;
+	        } else if (!shouldShowArticles() && position - staticRows.size() < getTopics().size()) {
+	        	return TOPIC;
+	        }
+        }
+        return POWERED_BY;
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

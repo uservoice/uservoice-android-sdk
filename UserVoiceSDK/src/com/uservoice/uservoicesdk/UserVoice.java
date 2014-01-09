@@ -64,7 +64,6 @@ public class UserVoice {
     }
 
     public static String getVersion() {
-        // TODO get this from the package version maybe
-        return "0.0.1";
+        return "1.0.0";
     }
 }
