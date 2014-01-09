@@ -36,9 +36,11 @@ public class SuggestionDialogFragment extends DialogFragmentBugfixed {
     private View headerView;
     private View view;
     private Context context;
+    private String deflectingType;
 
-    public SuggestionDialogFragment(Suggestion suggestion) {
+    public SuggestionDialogFragment(Suggestion suggestion, String deflectingType) {
         this.suggestion = suggestion;
+        this.deflectingType = deflectingType;
     }
 
     @Override
@@ -58,7 +60,7 @@ public class SuggestionDialogFragment extends DialogFragmentBugfixed {
                     @Override
                     public void onModel(Suggestion model) {
                         if (getActivity() instanceof InstantAnswersActivity)
-                            Deflection.trackDeflection("subscribed", model);
+                            Deflection.trackDeflection("subscribed", deflectingType, model);
                         suggestionSubscriptionUpdated(model);
                     }
                 };
@@ -73,7 +75,7 @@ public class SuggestionDialogFragment extends DialogFragmentBugfixed {
                             }
                         });
                     } else {
-                        SubscribeDialogFragment dialog = new SubscribeDialogFragment(suggestion, SuggestionDialogFragment.this);
+                        SubscribeDialogFragment dialog = new SubscribeDialogFragment(suggestion, SuggestionDialogFragment.this, deflectingType);
                         dialog.show(getFragmentManager(), "SubscribeDialogFragment");
                     }
                 }

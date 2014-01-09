@@ -23,10 +23,12 @@ public class SubscribeDialogFragment extends DialogFragmentBugfixed {
 
     private final Suggestion suggestion;
     private final SuggestionDialogFragment suggestionDialog;
+    private final String deflectingType;
 
-    public SubscribeDialogFragment(Suggestion suggestion, SuggestionDialogFragment suggestionDialog) {
+    public SubscribeDialogFragment(Suggestion suggestion, SuggestionDialogFragment suggestionDialog, String deflectingType) {
         this.suggestion = suggestion;
         this.suggestionDialog = suggestionDialog;
+        this.deflectingType = deflectingType;
     }
 
     @Override
@@ -52,12 +54,10 @@ public class SubscribeDialogFragment extends DialogFragmentBugfixed {
                             @Override
                             public void onModel(Suggestion model) {
                                 if (getActivity() instanceof InstantAnswersActivity)
-                                    Deflection.trackDeflection("subscribed", model);
+                                    Deflection.trackDeflection("subscribed", deflectingType, model);
                                 suggestionDialog.suggestionSubscriptionUpdated(model);
                                 dialog.dismiss();
                             }
-
-                            ;
                         });
                     }
                 });

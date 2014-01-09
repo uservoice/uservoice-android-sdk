@@ -1,13 +1,11 @@
 package com.uservoice.uservoicesdk.activity;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.ViewGroup;
 
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.flow.InitManager;
 import com.uservoice.uservoicesdk.ui.InstantAnswersAdapter;

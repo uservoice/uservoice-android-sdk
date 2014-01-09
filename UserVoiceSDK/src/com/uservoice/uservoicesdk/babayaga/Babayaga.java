@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-import android.util.Log;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.model.BaseModel;
 

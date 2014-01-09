@@ -52,6 +52,7 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
     protected EditText emailField;
     protected EditText nameField;
     protected int continueButtonMessage;
+    protected String deflectingType;
 
     public InstantAnswersAdapter(FragmentActivity context) {
         this.context = context;
@@ -123,8 +124,8 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         int type = getItemViewType(position);
         if (type == INSTANT_ANSWER) {
-            Deflection.trackDeflection("show", (BaseModel) getItem(position));
-            Utils.showModel(context, (BaseModel) getItem(position));
+            Deflection.trackDeflection("show", deflectingType, (BaseModel) getItem(position));
+            Utils.showModel(context, (BaseModel) getItem(position), deflectingType);
         }
     }
 
@@ -274,7 +275,8 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
             Article.loadInstantAnswers(query, new DefaultCallback<List<BaseModel>>(context) {
                 @Override
                 public void onModel(List<BaseModel> model) {
-                    Deflection.trackSearchDeflection(model);
+                    List<BaseModel> results = model.subList(0, Math.min(model.size(), 3));
+                    Deflection.trackSearchDeflection(results, deflectingType);
                     instantAnswers = model;
                     if (instantAnswers.isEmpty())
                         state = State.DETAILS;

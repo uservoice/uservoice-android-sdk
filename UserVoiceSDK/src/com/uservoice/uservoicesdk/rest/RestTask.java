@@ -8,14 +8,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import android.content.Context;
-import android.net.http.AndroidHttpClient;
 import oauth.signpost.OAuthConsumer;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
@@ -30,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.net.Uri;
+import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 
 import com.uservoice.uservoicesdk.Session;

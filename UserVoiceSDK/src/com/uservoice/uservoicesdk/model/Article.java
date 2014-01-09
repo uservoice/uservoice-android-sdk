@@ -16,6 +16,7 @@ public class Article extends BaseModel {
     private String title;
     private String html;
     private String topicName;
+    private int weight;
 
     public static void loadAll(final Callback<List<Article>> callback) {
         Map<String, String> params = new HashMap<String, String>();
@@ -60,6 +61,9 @@ public class Article extends BaseModel {
         super.load(object);
         title = getString(object, "question");
         html = getHtml(object, "answer_html");
+        if (object.has("normalized_weight")) {
+            weight = object.getInt("normalized_weight");
+        }
         if (!object.isNull("topic")) {
             JSONObject topic = object.getJSONObject("topic");
             topicName = topic.getString("name");
@@ -76,5 +80,9 @@ public class Article extends BaseModel {
 
     public String getTopicName() {
         return topicName;
+    }
+
+    public int getWeight() {
+        return weight;
     }
 }

@@ -9,7 +9,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
-import com.uservoice.uservoicesdk.deflection.Deflection;
 import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.rest.RestTask;
 import com.uservoice.uservoicesdk.rest.RestTaskCallback;
@@ -32,6 +31,7 @@ public class Suggestion extends BaseModel {
     private int forumId;
     private boolean subscribed;
     private String forumName;
+    private int weight;
 
     public static void loadSuggestions(Forum forum, int page, final Callback<List<Suggestion>> callback) {
         Map<String, String> params = new HashMap<String, String>();
@@ -127,6 +127,9 @@ public class Suggestion extends BaseModel {
             adminResponseUserName = getString(responseUser, "name");
             adminResponseAvatarUrl = getString(responseUser, "avatar_url");
         }
+        if (object.has("normalized_weight")) {
+            weight = object.getInt("normalized_weight");
+        }
     }
 
     public String getForumName() {
@@ -195,6 +198,10 @@ public class Suggestion extends BaseModel {
 
     public void commentPosted(Comment comment) {
         numberOfComments += 1;
+    }
+    
+    public int getWeight() {
+        return weight;
     }
 
 }

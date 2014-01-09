@@ -93,11 +93,15 @@ public class Utils {
     }
 
     public static void showModel(FragmentActivity context, BaseModel model) {
+        showModel(context, model, null);
+    }
+
+    public static void showModel(FragmentActivity context, BaseModel model, String deflectingType) {
         if (model instanceof Article) {
-            ArticleDialogFragment fragment = new ArticleDialogFragment((Article) model);
+            ArticleDialogFragment fragment = new ArticleDialogFragment((Article) model, deflectingType);
             fragment.show(context.getSupportFragmentManager(), "ArticleDialogFragment");
         } else if (model instanceof Suggestion) {
-            SuggestionDialogFragment fragment = new SuggestionDialogFragment((Suggestion) model);
+            SuggestionDialogFragment fragment = new SuggestionDialogFragment((Suggestion) model, deflectingType);
             fragment.show(context.getSupportFragmentManager(), "SuggestionDialogFragment");
         } else if (model instanceof Topic) {
             Session.getInstance().setTopic((Topic) model);
