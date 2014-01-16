@@ -1,6 +1,6 @@
-## UserVoice for Android
+## UserVoice Android SDK
 
-UserVoice for Android allows you to embed UserVoice directly in your Android apps.
+The UserVoice Android SDK allows you to integrate a native UserVoice experience directly in your Android apps.
 
 You can try out UserVoice for Android by installing the [UserVoice Help Center app](http://sdk-downloads.uservoice.com/android/HelpCenter.apk) on your device.
 
