@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <plurals name="uv_comments">
+        <item quantity="one">comentário</item>
+        <item quantity="other">comentários</item>
+    </plurals>
+    <plurals name="uv_subscribers">
+        <item quantity="one">assinante</item>
+        <item quantity="other">assinantes</item>
+    </plurals>
+    <plurals name="uv_articles">
+        <item quantity="one">artigo</item>
+        <item quantity="other">artigos</item>
+    </plurals>
+    <plurals name="uv_ideas">
+        <item quantity="one">ideia</item>
+        <item quantity="other">ideias</item>
+    </plurals>
+    <plurals name="uv_people">
+        <item quantity="one">pessoa</item>
+        <item quantity="other">pessoas</item>
+    </plurals>
+    <plurals name="uv_number_of_subscribers_format">
+        <item quantity="one">%1$s quer esta ideia</item>
+        <item quantity="other">%1$s querem esta ideia</item>
+    </plurals>
+
+    <string name="uv_loading">Carregando&#8230;</string>
+    <string name="uv_submit_idea">Enviar ideia</string>
+    <string name="uv_idea_form_title">Publicar ideia</string>
+    <string name="uv_menu_search">Buscar</string>
+    <string name="uv_email_address">E-mail</string>
+    <string name="uv_email_address_hint">seu@email.com.br (obrigatório)</string>
+    <string name="uv_display_name">Nome de exibição</string>
+    <string name="uv_password">Senha</string>
+    <string name="uv_forgot_password">Esqueci minha senha</string>
+    <string name="uv_msg_comment_posted">Seu comentário foi publicado</string>
+    <string name="uv_title_idea">Ideia</string>
+    <string name="uv_posted_by_format">Publicado por %1$s em %2$s</string>
+    <string name="uv_all_articles">Todos artigos</string>
+    <string name="uv_portal_title">Ajuda</string>
+    <string name="uv_network_error">Erro ao conectar-se com o UserVoice</string>
+    <string name="uv_signin_dialog_title">Login</string>
+    <string name="uv_signin_dialog_ok">Registrar</string>
+    <string name="uv_failed_signin_error">E-mail ou senha incorretos</string>
+    <string name="uv_msg_forgot_password">E-mail de redefinição de senha enviado</string>
+    <string name="uv_subscribe_dialog_title">Acompanhar esta ideia</string>
+    <string name="uv_remove_votes">Remover Votos</string>
+    <string name="uv_feedback_forum">Fórum de Feedback</string>
+    <string name="uv_knowledge_base">Base de Conhecimento</string>
+    <string name="uv_admin_response_format">Resposta do Administrador: %1$s</string>
+    <string name="uv_post_comment">Publicar comentário</string>
+    <string name="uv_next">Próximo</string>
+    <string name="uv_none_of_these_help">Nada disso ajudou</string>
+    <string name="uv_send_message">Enviar mensagem</string>
+    <string name="uv_your_email_address">Seu e-mail</string>
+    <string name="uv_your_name">Seu nome</string>
+    <string name="uv_name_hint">“Anônimo”</string>
+    <string name="uv_select_one">Escolha um</string>
+    <string name="uv_value">Valor</string>
+    <string name="uv_article">Artigo</string>
+    <string name="uv_idea">Ideia</string>
+    <string name="uv_msg_ticket_created">Sua mensagem foi enviada</string>
+    <string name="uv_msg_idea_created">Sua ideia foi criada</string>
+    <string name="uv_article_instant_answer_question">Este artigo é útil?</string>
+    <string name="uv_suggestion_instant_answer_question">Esta ideia é útill?</string>
+    <string name="uv_no">Não</string>
+    <string name="uv_yes">Sim</string>
+    <string name="uv_very_yes">Sim!</string>
+    <string name="uv_helpful_article_message_question">Ainda deseja enviar uma mensagem?</string>
+    <string name="uv_unhelpful_article_message_question">Gostaria de nos enviar uma mensagem?</string>
+    <string name="uv_idea_description_heading">Descreva sua ideia em detalhes</string>
+    <string name="uv_category">Categoria</string>
+    <string name="uv_idea_description_hint">(opcional)</string>
+    <string name="uv_idea_text_heading">Sugiro que&#8230;</string>
+    <string name="uv_idea_text_hint">Digite sua ideia&#8230;</string>
+    <string name="uv_idea_form_help">Ao publicar uma ideia em nosso fórum, outras pessoas poderão votar e comentar sobre ela. Quando respondemos a uma ideia, você é avisado.</string>
+    <string name="uv_contact_us">Fale conosco</string>
+    <string name="uv_close">Fechar</string>
+    <string name="uv_new_comment">Novo comentário</string>
+    <string name="uv_error">Erro</string>
+    <string name="uv_msg_user_identity_validation">Digite seu e-mail</string>
+    <string name="uv_status_format">Status: %1$s</string>
+    <string name="uv_subscribe">Assinar</string>
+    <string name="uv_nevermind">Retornar</string>
+    <string name="uv_msg_subscribe">Vamos notificá-lo sobre o progresso desta idea.</string>
+    <string name="uv_msg_subscribe_success">Você está inscrito nesta ideia.</string>
+    <string name="uv_msg_unsubscribe">Sua inscrição foi removida.</string>
+    <string name="uv_msg_custom_fields_validation">Preencha todos os campos obrigatórios.</string>
+    <string name="uv_contact_hint">Digite sua pergunta ou feedback</string>
+    <string name="uv_matching_ideas">Ideias compatíveis</string>
+    <string name="uv_matching_articles">Artigos compatíveis</string>
+    <string name="uv_matching_articles_and_ideas">Artigos e ideias compatíveis</string>
+    <string name="uv_post_idea_continue_button">Ainda quero publicar minha ideia</string>
+    <string name="uv_contact_continue_button">Ainda quero enviar uma mensagem</string>
+    <string name="uv_i_want_this">Eu quero isto!</string>
+    <string name="uv_post_a_comment">Enviar comentário</string>
+    <string name="uv_all_results_filter">TODOS</string>
+    <string name="uv_articles_filter">ARTIGOS</string>
+    <string name="uv_ideas_filter">IDEIAS</string>
+    <string name="uv_comment_hint">Digite seu comentário</string>
+    <string name="uv_cancel">Cancelar</string>
+    <string name="uv_select_none">(nenhum)</string>
+    <string name="uv_confirm">Confirmar</string>
+    <string name="uv_msg_confirm_discard_idea">Tem certeza de que deseja descartar sua ideia?</string>
+    <string name="uv_msg_confirm_discard_message">Tem certeza de que deseja descartar sua mensagem?</string>
+    <string name="uv_post_an_idea">Publicar uma ideia</string>
+    <string name="uv_password_dialog_title">Digite sua senha</string>
+    <string name="uv_article_browse_question">Este artigo foi útil?</string>
+    <string name="uv_thanks">Obrigado!</string>
+    <string name="uv_powered_by_uservoice">Powered by UserVoice</string>
+    <string name="uv_android_sdk">Android SDK</string>
+</resources>
