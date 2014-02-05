@@ -122,6 +122,19 @@ Config config = new Config("yoursite.uservoice.com", "API_CLIENT_KEY", "API_CLIE
 UserVoice.init(config);
 ```
 
+Translations
+------------
+
+UserVoice for Android now has support for the following locales: cs, en, fr, nl, pt, ru, zh-rTW.
+
+If you have done an additional translation, we would love to pull it in so that
+everyone can benefit. Just fork the project and submit a pull request.
+
+Some strings that show up in the SDK may come directly from the UserVoice API.
+If a translation is missing for a string that does not appear in the SDK
+codebase, you will need to contribute to the main [UserVoice translation
+site](http://translate.uservoice.com/).
+
 License
 -------
 
