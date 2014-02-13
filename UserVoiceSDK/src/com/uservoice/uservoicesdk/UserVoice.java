@@ -11,6 +11,7 @@ import com.uservoice.uservoicesdk.activity.PortalActivity;
 import com.uservoice.uservoicesdk.activity.PostIdeaActivity;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.model.ClientConfig;
+import com.uservoice.uservoicesdk.rest.RestResult;
 import com.uservoice.uservoicesdk.ui.DefaultCallback;
 
 public class UserVoice {
@@ -47,6 +48,11 @@ public class UserVoice {
             @Override
             public void onModel(ClientConfig model) {
                 Session.getInstance().setClientConfig(model);
+            }
+
+            @Override
+            public void onError(RestResult error) {
+                // ignore
             }
         });
     }
