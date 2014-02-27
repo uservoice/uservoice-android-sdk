@@ -22,6 +22,7 @@ import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.babayaga.Babayaga.Event;
 import com.uservoice.uservoicesdk.model.CustomField;
 import com.uservoice.uservoicesdk.model.Ticket;
+import com.uservoice.uservoicesdk.rest.RestResult;
 
 public class ContactAdapter extends InstantAnswersAdapter {
 
@@ -144,8 +145,15 @@ public class ContactAdapter extends InstantAnswersAdapter {
                     Toast.makeText(context, R.string.uv_msg_ticket_created, Toast.LENGTH_SHORT).show();
                     context.finish();
                 }
+
+                @Override
+                public void onError(RestResult error) {
+                    isPosting = false;
+                    super.onError(error);
+                }
             });
         } else {
+            isPosting = false;
             Toast.makeText(context, R.string.uv_msg_custom_fields_validation, Toast.LENGTH_SHORT).show();
         }
     }

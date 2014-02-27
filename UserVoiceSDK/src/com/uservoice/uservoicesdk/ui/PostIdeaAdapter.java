@@ -19,6 +19,7 @@ import com.uservoice.uservoicesdk.babayaga.Babayaga.Event;
 import com.uservoice.uservoicesdk.flow.SigninManager;
 import com.uservoice.uservoicesdk.model.Category;
 import com.uservoice.uservoicesdk.model.Suggestion;
+import com.uservoice.uservoicesdk.rest.RestResult;
 
 public class PostIdeaAdapter extends InstantAnswersAdapter {
 
@@ -106,9 +107,11 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
 
     @Override
     protected void doSubmit() {
+        isPosting = false;
         SigninManager.signIn(context, emailField.getText().toString(), nameField.getText().toString(), new Runnable() {
             @Override
             public void run() {
+                isPosting = true;
                 Category category = categorySelect == null ? null : (Category) categorySelect.getSelectedItem();
                 Suggestion.createSuggestion(Session.getInstance().getForum(), category, textField.getText().toString(), descriptionField.getText().toString(), 1, new DefaultCallback<Suggestion>(context) {
                     @Override
@@ -116,6 +119,12 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
                         Babayaga.track(Event.SUBMIT_IDEA);
                         Toast.makeText(context, R.string.uv_msg_idea_created, Toast.LENGTH_SHORT).show();
                         context.finish();
+                    }
+
+                    @Override
+                    public void onError(RestResult error) {
+                        isPosting = false;
+                        super.onError(error);
                     }
                 });
             }
