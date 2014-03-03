@@ -6,14 +6,13 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.uservoice.uservoicesdk.R;
@@ -33,31 +32,18 @@ public class TopicActivity extends BaseListActivity implements SearchActivity {
         if (hasActionBar()) {
             ActionBar actionBar = getActionBar();
             actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-            actionBar.setListNavigationCallbacks(new ArrayAdapter<Topic>(this, android.R.layout.simple_spinner_dropdown_item, Session.getInstance().getTopics()) {
-                                                     @Override
-                                                     public View getView(int position, View convertView, ViewGroup parent) {
-                                                         View view = super.getView(position, convertView, parent);
-                                                         ((TextView) view).setTextColor(Color.WHITE);
-                                                         return view;
-                                                     }
-
-                                                     @Override
-                                                     public View getDropDownView(int position, View convertView, ViewGroup parent) {
-                                                         View view = super.getDropDownView(position, convertView, parent);
-                                                         ((TextView) view).setTextColor(Color.WHITE);
-                                                         return view;
-                                                     }
-                                                 }, new ActionBar.OnNavigationListener() {
-                                                     @Override
-                                                     @SuppressWarnings("unchecked")
-                                                     public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-                                                         Topic topic = Session.getInstance().getTopics().get(itemPosition);
-                                                         Session.getInstance().setTopic(topic);
-                                                         ((LoadAllAdapter<Article>) getListAdapter()).reload();
-                                                         return true;
-                                                     }
-                                                 }
-            );
+            SpinnerAdapter topicAdapter = new ArrayAdapter<Topic>(actionBar.getThemedContext(),
+                    android.R.layout.simple_spinner_dropdown_item, Session.getInstance().getTopics());
+            actionBar.setListNavigationCallbacks(topicAdapter, new ActionBar.OnNavigationListener() {
+                @Override
+                @SuppressWarnings("unchecked")
+                public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+                    Topic topic = Session.getInstance().getTopics().get(itemPosition);
+                    Session.getInstance().setTopic(topic);
+                    ((LoadAllAdapter<Article>) getListAdapter()).reload();
+                    return true;
+                }
+            });
             actionBar.setSelectedNavigationItem(Session.getInstance().getTopics().indexOf(Session.getInstance().getTopic()));
         }
 
