@@ -56,7 +56,9 @@ public abstract class SearchAdapter<T> extends BaseAdapter {
         @Override
         public boolean cancel() {
             stop = true;
-            task.cancel(true);
+            if (task != null) {
+                task.cancel(true);
+            }
             return true;
         }
 
@@ -74,6 +76,10 @@ public abstract class SearchAdapter<T> extends BaseAdapter {
                     }
                 }
             });
+            if (task == null) {
+                // can't search
+                loading = false;
+            }
         }
     }
 

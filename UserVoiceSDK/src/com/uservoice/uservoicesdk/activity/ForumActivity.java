@@ -147,6 +147,9 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
 
             @Override
             public RestTask search(final String query, final Callback<List<Suggestion>> callback) {
+                if (forum == null) {
+                    return null;
+                }
                 return Suggestion.searchSuggestions(forum, query, new Callback<List<Suggestion>>() {
 
                     @Override
