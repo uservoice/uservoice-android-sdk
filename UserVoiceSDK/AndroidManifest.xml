@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.uservoice.uservoicesdk"
-    android:versionCode="1"
-    android:versionName="0.0.1" >
-
-    <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="17" />
+    android:versionCode="1" >
 
    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application>
         <activity android:name="com.uservoice.uservoicesdk.activity.PortalActivity" />
         <activity android:name="com.uservoice.uservoicesdk.activity.ForumActivity" />
-        <activity android:name="com.uservoice.uservoicesdk.activity.ArticleActivity" android:hardwareAccelerated="true" />
+        <activity android:name="com.uservoice.uservoicesdk.activity.ArticleActivity" />
         <activity android:name="com.uservoice.uservoicesdk.activity.TopicActivity" />
-        <activity android:name="com.uservoice.uservoicesdk.activity.ContactActivity" android:hardwareAccelerated="true" />
-        <activity android:name="com.uservoice.uservoicesdk.activity.PostIdeaActivity" android:hardwareAccelerated="true" />
+        <activity android:name="com.uservoice.uservoicesdk.activity.ContactActivity" android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity android:name="com.uservoice.uservoicesdk.activity.PostIdeaActivity" android:configChanges="orientation|keyboardHidden|screenSize" />
     </application>
 </manifest>

@@ -53,6 +53,7 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
     protected EditText nameField;
     protected int continueButtonMessage;
     protected String deflectingType;
+    protected boolean isPosting;
 
     public InstantAnswersAdapter(FragmentActivity context) {
         this.context = context;
@@ -296,7 +297,8 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
                 builder.setTitle(R.string.uv_error);
                 builder.setMessage(R.string.uv_msg_user_identity_validation);
                 builder.create().show();
-            } else {
+            } else if (!isPosting) {
+                isPosting = true;
                 Session.getInstance().persistIdentity(name, email);
                 doSubmit();
             }

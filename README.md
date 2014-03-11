@@ -1,6 +1,6 @@
-## UserVoice for Android
+## UserVoice Android SDK
 
-UserVoice for Android allows you to embed UserVoice directly in your Android apps.
+The UserVoice Android SDK allows you to integrate a native UserVoice experience directly in your Android apps.
 
 You can try out UserVoice for Android by installing the [UserVoice Help Center app](http://sdk-downloads.uservoice.com/android/HelpCenter.apk) on your device.
 
@@ -121,6 +121,19 @@ The SDK relies on being able to obtain a client key to communicate with the User
 Config config = new Config("yoursite.uservoice.com", "API_CLIENT_KEY", "API_CLIENT_SECRET");
 UserVoice.init(config);
 ```
+
+Translations
+------------
+
+UserVoice for Android now has support for the following locales: cs, en, fr, nl, pt, ru, zh-rTW.
+
+If you have done an additional translation, we would love to pull it in so that
+everyone can benefit. Just fork the project and submit a pull request.
+
+Some strings that show up in the SDK may come directly from the UserVoice API.
+If a translation is missing for a string that does not appear in the SDK
+codebase, you will need to contribute to the main [UserVoice translation
+site](http://translate.uservoice.com/).
 
 License
 -------

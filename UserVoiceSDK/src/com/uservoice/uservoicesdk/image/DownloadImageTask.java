@@ -19,11 +19,18 @@ public class DownloadImageTask extends AsyncTask<Void, Void, Bitmap> {
 
     protected Bitmap doInBackground(Void... voids) {
         Bitmap bitmap = null;
+        InputStream in = null;
+
         try {
-            InputStream in = new java.net.URL(url).openStream();
+            in = new java.net.URL(url).openStream();
             bitmap = BitmapFactory.decodeStream(in);
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                in.close();
+            } catch (Exception ignored) {
+            }
         }
         return bitmap;
     }

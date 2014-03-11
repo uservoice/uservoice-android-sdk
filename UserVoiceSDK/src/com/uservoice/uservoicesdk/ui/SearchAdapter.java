@@ -1,14 +1,14 @@
 package com.uservoice.uservoicesdk.ui;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TimerTask;
-
 import android.content.Context;
 import android.widget.BaseAdapter;
 
 import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.rest.RestTask;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TimerTask;
 
 public abstract class SearchAdapter<T> extends BaseAdapter {
 
@@ -56,7 +56,9 @@ public abstract class SearchAdapter<T> extends BaseAdapter {
         @Override
         public boolean cancel() {
             stop = true;
-            task.cancel(true);
+            if (task != null) {
+                task.cancel(true);
+            }
             return true;
         }
 
@@ -74,6 +76,10 @@ public abstract class SearchAdapter<T> extends BaseAdapter {
                     }
                 }
             });
+            if (task == null) {
+                // can't search
+                loading = false;
+            }
         }
     }
 
