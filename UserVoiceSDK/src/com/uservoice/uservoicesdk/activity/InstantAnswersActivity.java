@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.compatibility.FragmentListActivity;
 import com.uservoice.uservoicesdk.flow.InitManager;
@@ -65,5 +64,4 @@ public abstract class InstantAnswersActivity extends FragmentListActivity {
     protected abstract InstantAnswersAdapter createAdapter();
 
     protected abstract int getDiscardDialogMessage();
-
 }

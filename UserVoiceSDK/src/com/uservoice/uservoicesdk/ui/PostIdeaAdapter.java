@@ -21,27 +21,27 @@ import com.uservoice.uservoicesdk.model.Category;
 import com.uservoice.uservoicesdk.model.Suggestion;
 
 public class PostIdeaAdapter extends InstantAnswersAdapter {
-	
-	private static int DESCRIPTION = 8;
-	private static int CATEGORY = 9;
-	private static int HELP = 10;
-	private static int TEXT_HEADING = 11;
-	
-	private Spinner categorySelect;
-	private EditText descriptionField;
 
-	public PostIdeaAdapter(FragmentActivity context) {
-		super(context);
-		continueButtonMessage = R.string.uv_post_idea_continue_button;
-	}
-	
-	@Override
-	public int getViewTypeCount() {
-		return super.getViewTypeCount() + 4;
-	}
-	
-	@Override
-	protected List<Integer> getDetailRows() {
+    private static int DESCRIPTION = 8;
+    private static int CATEGORY = 9;
+    private static int HELP = 10;
+    private static int TEXT_HEADING = 11;
+
+    private Spinner categorySelect;
+    private EditText descriptionField;
+
+    public PostIdeaAdapter(FragmentActivity context) {
+        super(context);
+        continueButtonMessage = R.string.uv_post_idea_continue_button;
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return super.getViewTypeCount() + 4;
+    }
+
+    @Override
+    protected List<Integer> getDetailRows() {
         List<Integer> rows = new ArrayList<Integer>();
         rows.add(DESCRIPTION);
         if (Session.getInstance().getForum().getCategories().size() > 0)
@@ -49,80 +49,82 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
         rows.add(SPACE);
         rows.add(EMAIL_FIELD);
         rows.add(NAME_FIELD);
-		return rows;
-	}
-	
-	@Override
-	protected List<Integer> getRows() {
-		List<Integer> rows = super.getRows();
-		rows.add(0, TEXT_HEADING);
-		if (state == State.DETAILS)
-			rows.add(HELP);
-		return rows;
-	}
-	
-	@Override
-	@SuppressLint("CutPasteId")
-	public View getView(int position, View convertView, ViewGroup parent) {
-		View view = convertView;
-		int type = getItemViewType(position);
-		if (view == null) {
-			if (type == DESCRIPTION) {
-				view = inflater.inflate(R.layout.uv_text_field_item, null);
-				TextView title = (TextView) view.findViewById(R.id.uv_header_text);
-				descriptionField = (EditText) view.findViewById(R.id.uv_text_field);
-				title.setText(R.string.uv_idea_description_heading);
-				descriptionField.setHint(R.string.uv_idea_description_hint);
-			} else if (type == CATEGORY) {
-				view = inflater.inflate(R.layout.uv_select_field_item, null);
-				TextView title = (TextView) view.findViewById(R.id.uv_header_text);
-				categorySelect = (Spinner) view.findViewById(R.id.uv_select_field);
-				categorySelect.setAdapter(new SpinnerAdapter<Category>(context, Session.getInstance().getForum().getCategories()));
-				title.setText(R.string.uv_category);
-			} else if (type == HELP) {
-				view = inflater.inflate(R.layout.uv_idea_help_item, null);
-			} else if (type == TEXT_HEADING) {
-				view = inflater.inflate(R.layout.uv_header_item, null);
-				TextView textView = (TextView) view.findViewById(R.id.uv_header_text);
-				textView.setText(R.string.uv_idea_text_heading);
-			} else {
-				view = super.getView(position, convertView, parent);
-			}
-		}
+        return rows;
+    }
 
-		if (type == DESCRIPTION || type == CATEGORY || type == HELP || type == TEXT_HEADING) {
-			// just skip the else
-		} else if (type == TEXT) {
-			TextView textView = (TextView) view.findViewById(R.id.uv_text);
-			textView.setHint(R.string.uv_idea_text_hint);
+    @Override
+    protected List<Integer> getRows() {
+        List<Integer> rows = super.getRows();
+        rows.add(0, TEXT_HEADING);
+        if (state == State.DETAILS)
+            rows.add(HELP);
+        return rows;
+    }
+
+    @Override
+    @SuppressLint("CutPasteId")
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View view = convertView;
+        int type = getItemViewType(position);
+        if (view == null) {
+            if (type == DESCRIPTION) {
+                view = inflater.inflate(R.layout.uv_text_field_item, null);
+                TextView title = (TextView) view.findViewById(R.id.uv_header_text);
+                title.setText(R.string.uv_idea_description_heading);
+                EditText field = (EditText) view.findViewById(R.id.uv_text_field);
+                restoreEnteredText(descriptionField, field, "");
+                descriptionField = field;
+                descriptionField.setHint(R.string.uv_idea_description_hint);
+            } else if (type == CATEGORY) {
+                view = inflater.inflate(R.layout.uv_select_field_item, null);
+                TextView title = (TextView) view.findViewById(R.id.uv_header_text);
+                categorySelect = (Spinner) view.findViewById(R.id.uv_select_field);
+                categorySelect.setAdapter(new SpinnerAdapter<Category>(context, Session.getInstance().getForum().getCategories()));
+                title.setText(R.string.uv_category);
+            } else if (type == HELP) {
+                view = inflater.inflate(R.layout.uv_idea_help_item, null);
+            } else if (type == TEXT_HEADING) {
+                view = inflater.inflate(R.layout.uv_header_item, null);
+                TextView textView = (TextView) view.findViewById(R.id.uv_header_text);
+                textView.setText(R.string.uv_idea_text_heading);
+            } else {
+                view = super.getView(position, convertView, parent);
+            }
+        }
+
+        if (type == DESCRIPTION || type == CATEGORY || type == HELP || type == TEXT_HEADING) {
+            // just skip the else
+        } else if (type == TEXT) {
+            TextView textView = (TextView) view.findViewById(R.id.uv_text);
+            textView.setHint(R.string.uv_idea_text_hint);
             textView.setMinLines(1);
-		} else {
-			return super.getView(position, view, parent);
-		}
-		return view;
-	}
+        } else {
+            return super.getView(position, view, parent);
+        }
+        return view;
+    }
 
-	@Override
-	protected void doSubmit() {
-		SigninManager.signIn(context, emailField.getText().toString(), nameField.getText().toString(), new Runnable() {
-			@Override
-			public void run() {
-				Category category = categorySelect == null ? null : (Category) categorySelect.getSelectedItem();
-				Suggestion.createSuggestion(Session.getInstance().getForum(), category, textField.getText().toString(), descriptionField.getText().toString(), 1, new DefaultCallback<Suggestion>(context) {
-					@Override
-					public void onModel(Suggestion model) {
-						Babayaga.track(Event.SUBMIT_IDEA);
-						Toast.makeText(context, R.string.uv_msg_idea_created, Toast.LENGTH_SHORT).show();
-						context.finish();
-					}
-				});
-			}
-		});
-	}
+    @Override
+    protected void doSubmit() {
+        SigninManager.signIn(context, emailField.getText().toString(), nameField.getText().toString(), new Runnable() {
+            @Override
+            public void run() {
+                Category category = categorySelect == null ? null : (Category) categorySelect.getSelectedItem();
+                Suggestion.createSuggestion(Session.getInstance().getForum(), category, textField.getText().toString(), descriptionField.getText().toString(), 1, new DefaultCallback<Suggestion>(context) {
+                    @Override
+                    public void onModel(Suggestion model) {
+                        Babayaga.track(Event.SUBMIT_IDEA);
+                        Toast.makeText(context, R.string.uv_msg_idea_created, Toast.LENGTH_SHORT).show();
+                        context.finish();
+                    }
+                });
+            }
+        });
+    }
 
-	@Override
-	protected String getSubmitString() {
-		return context.getString(R.string.uv_submit_idea);
-	}
+    @Override
+    protected String getSubmitString() {
+        return context.getString(R.string.uv_submit_idea);
+    }
 
 }

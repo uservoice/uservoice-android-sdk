@@ -14,80 +14,82 @@ import com.uservoice.uservoicesdk.ui.DefaultCallback;
 
 public class InitManager {
 
-	private final Context context;
-	private final Runnable callback;
-	private boolean canceled;
+    private final Context context;
+    private final Runnable callback;
+    private boolean canceled;
 
-	public InitManager(Context context, Runnable callback) {
-		this.context = context;
-		this.callback = callback;
-	}
+    public InitManager(Context context, Runnable callback) {
+        this.context = context;
+        this.callback = callback;
+    }
 
-	public void init() {
-		if (Session.getInstance().getClientConfig() == null) {
-			ClientConfig.loadClientConfig(new DefaultCallback<ClientConfig>(context) {
-				@Override
-				public void onModel(ClientConfig model) {
-					Session.getInstance().setClientConfig(model);
-					loadUser();
-				}
-			});
-		} else {
-			loadUser();
-		}
-	}
+    public void init() {
+        if (Session.getInstance().getClientConfig() == null) {
+            ClientConfig.loadClientConfig(new DefaultCallback<ClientConfig>(context) {
+                @Override
+                public void onModel(ClientConfig model) {
+                    Session.getInstance().setClientConfig(model);
+                    loadUser();
+                }
+            });
+        } else {
+            loadUser();
+        }
+    }
 
-	private void loadUser() {
-		if (Session.getInstance().getUser() == null) {
-			if (shouldSignIn()) {
-				RequestToken.getRequestToken(new DefaultCallback<RequestToken>(context) {
-					@Override
-					public void onModel(RequestToken model) {
-						if (canceled)
-							return;
-						Session.getInstance().setRequestToken(model);
-						Config config = Session.getInstance().getConfig();
-						User.findOrCreate(config.getEmail(), config.getName(), config.getGuid(), new DefaultCallback<AccessTokenResult<User>>(context) {
-							public void onModel(AccessTokenResult<User> model) {
-								if (canceled)
-									return;
-								Session.getInstance().setAccessToken(context, model.getAccessToken());
-								Session.getInstance().setUser(model.getModel());
-								done();
-							};
-						});
-					}
-				});
-			} else {
-				AccessToken accessToken = BaseModel.load(Session.getInstance().getSharedPreferences(), "access_token", "access_token", AccessToken.class);
-				if (accessToken != null) {
-					Session.getInstance().setAccessToken(accessToken);
-					User.loadCurrentUser(new DefaultCallback<User>(context) {
-						@Override
-						public void onModel(User model) {
-							Session.getInstance().setUser(model);
-							done();
-						}
-					});
-				} else {
-					done();
-				}
-			}
-		} else {
-			done();
-		}
-	}
+    private void loadUser() {
+        if (Session.getInstance().getUser() == null) {
+            if (shouldSignIn()) {
+                RequestToken.getRequestToken(new DefaultCallback<RequestToken>(context) {
+                    @Override
+                    public void onModel(RequestToken model) {
+                        if (canceled)
+                            return;
+                        Session.getInstance().setRequestToken(model);
+                        Config config = Session.getInstance().getConfig();
+                        User.findOrCreate(config.getEmail(), config.getName(), config.getGuid(), new DefaultCallback<AccessTokenResult<User>>(context) {
+                            public void onModel(AccessTokenResult<User> model) {
+                                if (canceled)
+                                    return;
+                                Session.getInstance().setAccessToken(context, model.getAccessToken());
+                                Session.getInstance().setUser(model.getModel());
+                                done();
+                            }
 
-	private boolean shouldSignIn() {
-		Config config = Session.getInstance().getConfig();
-		return config.getEmail() != null;
-	}
+                            ;
+                        });
+                    }
+                });
+            } else {
+                AccessToken accessToken = BaseModel.load(Session.getInstance().getSharedPreferences(), "access_token", "access_token", AccessToken.class);
+                if (accessToken != null) {
+                    Session.getInstance().setAccessToken(accessToken);
+                    User.loadCurrentUser(new DefaultCallback<User>(context) {
+                        @Override
+                        public void onModel(User model) {
+                            Session.getInstance().setUser(model);
+                            done();
+                        }
+                    });
+                } else {
+                    done();
+                }
+            }
+        } else {
+            done();
+        }
+    }
 
-	public void cancel() {
-		canceled = true;
-	}
+    private boolean shouldSignIn() {
+        Config config = Session.getInstance().getConfig();
+        return config.getEmail() != null;
+    }
 
-	private void done() {
-		callback.run();
-	}
+    public void cancel() {
+        canceled = true;
+    }
+
+    private void done() {
+        callback.run();
+    }
 }

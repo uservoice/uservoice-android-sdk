@@ -25,11 +25,11 @@
         </activity>
         
         <activity android:name="com.uservoice.uservoicesdk.activity.PortalActivity" />
-        <activity android:name="com.uservoice.uservoicesdk.activity.ForumActivity" />
-        <activity android:name="com.uservoice.uservoicesdk.activity.ArticleActivity" android:hardwareAccelerated="true" />
+        <activity android:name="com.uservoice.uservoicesdk.activity.ForumActivity" /> 
+        <activity android:name="com.uservoice.uservoicesdk.activity.ArticleActivity" />
         <activity android:name="com.uservoice.uservoicesdk.activity.TopicActivity" />
-        <activity android:name="com.uservoice.uservoicesdk.activity.ContactActivity" android:hardwareAccelerated="true" />
-        <activity android:name="com.uservoice.uservoicesdk.activity.PostIdeaActivity" android:hardwareAccelerated="true" />
+        <activity android:name="com.uservoice.uservoicesdk.activity.ContactActivity" android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity android:name="com.uservoice.uservoicesdk.activity.PostIdeaActivity" android:configChanges="orientation|keyboardHidden|screenSize" />
         </application>
 
 </manifest>

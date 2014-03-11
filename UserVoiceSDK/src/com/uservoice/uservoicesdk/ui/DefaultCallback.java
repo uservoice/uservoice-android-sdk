@@ -9,24 +9,24 @@ import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.rest.RestResult;
 
 public abstract class DefaultCallback<T> extends Callback<T> {
-	
-	private static final String TAG = "com.uservoice.uservoicesdk";
-	
-	private final Context context;
 
-	public DefaultCallback(Context context) {
-		this.context = context;
-	}
+    private static final String TAG = "com.uservoice.uservoicesdk";
 
-	@Override
-	public void onError(RestResult error) {
-		Log.e(TAG, error.getMessage());
+    private final Context context;
+
+    public DefaultCallback(Context context) {
+        this.context = context;
+    }
+
+    @Override
+    public void onError(RestResult error) {
+        Log.e(TAG, error.getMessage());
         try {
-		    new AlertDialog.Builder(context).setTitle(R.string.uv_network_error).show();
+            new AlertDialog.Builder(context).setTitle(R.string.uv_network_error).show();
         } catch (Exception e) {
             // This can happen if the activity is already gone
             Log.e(TAG, "Failed trying to show alert: " + e.getMessage());
         }
-	}
+    }
 
 }

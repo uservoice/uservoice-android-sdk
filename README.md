@@ -14,46 +14,40 @@ You will need a UserVoice account (free) for it to connect to. Go to [uservoice.
 * Select the project you wish to add UserVoice to
   * Open project properties -> Android -> Library -> Add...
   * Select the UserVoiceSDK project as a library
-* Obtain an API key from your UserVoice admin console
-  * Admin console -> Settings -> Channels -> API
-  * A regular API key pair is fine. You don't need a special Android key.
-  * Set it as untrusted.
 * Add the following code to initialize the UserVoice SDK
   * Do this either in Application.onCreate or your root Activity.onCreate
   * We strongly recommend you do this on app launch so that UserVoice can provide accurate analytics.
   * You can call UserVoice.init again later if you need to change something about the config.
 
 ```
-    Config config = new Config("yoursite.uservoice.com");
-    UserVoice.init(config, this);
+Config config = new Config("yoursite.uservoice.com");
+UserVoice.init(config, this);
 ```
 
 * Make sure you include an Internet permission in your AndroidManifest.xml
 
 ```
-    <uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.INTERNET"/>
 ```
 
 * Add the following activities to the <application> element in your AndroidManifest.xml
 
 ```
-    <activity android:name="com.uservoice.uservoicesdk.activity.PortalActivity" />
-    <activity android:name="com.uservoice.uservoicesdk.activity.ForumActivity" />
-    <activity android:name="com.uservoice.uservoicesdk.activity.SuggestionActivity" />
-    <activity android:name="com.uservoice.uservoicesdk.activity.ArticleActivity" android:hardwareAccelerated="true" />
-    <activity android:name="com.uservoice.uservoicesdk.activity.CommentActivity" />
-    <activity android:name="com.uservoice.uservoicesdk.activity.TopicActivity" />
-    <activity android:name="com.uservoice.uservoicesdk.activity.ContactActivity" android:hardwareAccelerated="true" />
-    <activity android:name="com.uservoice.uservoicesdk.activity.PostIdeaActivity" android:hardwareAccelerated="true" />
+<activity android:name="com.uservoice.uservoicesdk.activity.PortalActivity" />
+<activity android:name="com.uservoice.uservoicesdk.activity.ForumActivity" /> 
+<activity android:name="com.uservoice.uservoicesdk.activity.ArticleActivity" />
+<activity android:name="com.uservoice.uservoicesdk.activity.TopicActivity" />
+<activity android:name="com.uservoice.uservoicesdk.activity.ContactActivity" android:configChanges="orientation|keyboardHidden|screenSize" />
+<activity android:name="com.uservoice.uservoicesdk.activity.PostIdeaActivity" android:configChanges="orientation|keyboardHidden|screenSize" />
 ```
 
 * Finally, invoke the UserVoice SDK from your application using one of the following methods.
 
 ```
-    UserVoice.launchUserVoice(this);    // Show the UserVoice portal
-    UserVoice.launchForum(this);        // Show the feedback forum
-    UserVoice.launchContactUs(this);    // Show the contact form
-    UserVoice.launchPostIdea(this);     // Show the idea form
+UserVoice.launchUserVoice(this);    // Show the UserVoice portal
+UserVoice.launchForum(this);        // Show the feedback forum
+UserVoice.launchContactUs(this);    // Show the contact form
+UserVoice.launchPostIdea(this);     // Show the idea form
 ```
 
 ### Other Config options
@@ -63,45 +57,45 @@ Before calling `UserVoice.init` you can further customize your configuration.
 * Select the forum to display (defaults to your default forum)
 
 ```
-    config.setForumId(58438);
+config.setForumId(58438);
 ```
 
 * Select the topic to display (defaults to displaying all topics)
 
 ```
-    config.setTopicId(495584);
+config.setTopicId(495584);
 ```
 
 * Identify the user with guid, name, and email
 
 ```
-    config.identifyUser("123", "Test User", "test@example.com");
+config.identifyUser("123", "Test User", "test@example.com");
 ```
 
 * Track user and account traits
 
 ```
-    config.putUserTrait("type", "Account Owner");
-    config.putAccountTrait("id", "1234");
-    config.putAccountTrait("name", "SomeCompany");
-    config.putAccountTrait("ltv", 212.50);
+config.putUserTrait("type", "Account Owner");
+config.putAccountTrait("id", "1234");
+config.putAccountTrait("name", "SomeCompany");
+config.putAccountTrait("ltv", 212.50);
 ```
 
 * Turn off different parts of the SDK
 
 ```
-    config.setShowForum(false);
-    config.setShowContactUs(false);
-    config.setShowPostIdea(false);
-    config.setShowKnowledgeBase(false);
+config.setShowForum(false);
+config.setShowContactUs(false);
+config.setShowPostIdea(false);
+config.setShowKnowledgeBase(false);
 ```
 
 * Set ticket custom field values
 
 ```
-    Map<String, String> customFields = new HashMap<String, String>();
-    customFields.put("My Field", "My Value");
-    config.setCustomFields(customFields);
+Map<String, String> customFields = new HashMap<String, String>();
+customFields.put("My Field", "My Value");
+config.setCustomFields(customFields);
 ```
 
 ### Advanced
@@ -109,14 +103,23 @@ Before calling `UserVoice.init` you can further customize your configuration.
 * Wire up external user ids for admin console Gadgets
 
 ```
-    UserVoice.setExternalId("myapp", "1234");
+UserVoice.setExternalId("myapp", "1234");
 ```
 
 * Track custom events
 
 ```
-    UserVoice.track("myevent");
-    UserVoice.track("myevent", propertyMap);
+UserVoice.track("myevent");
+UserVoice.track("myevent", propertyMap);
+```
+
+### Private sites
+
+The SDK relies on being able to obtain a client key to communicate with the UserVoice API. If you have a public UserVoice site (the default) then it can obtain this key automatically, so you only need to pass your site URL. However, if you turn on site privacy, this key is also private, so you will need to pass it in. You can obtain an API key pair from the mobile settings section of the UserVoice admin console.
+
+```
+Config config = new Config("yoursite.uservoice.com", "API_CLIENT_KEY", "API_CLIENT_SECRET");
+UserVoice.init(config);
 ```
 
 License

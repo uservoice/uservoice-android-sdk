@@ -14,54 +14,55 @@ import com.uservoice.uservoicesdk.UserVoice;
 
 public class MainActivity extends ActionBarActivity {
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
 //		Config config = new Config("yoursite.uservoice.com");
-		Config config = new Config("demo.uservoice.com");
+        Config config = new Config("demo.uservoice.com");
 //		config.setTopicId(9579);
-		UserVoice.init(config, this);
+//        config.setShowKnowledgeBase(false);
+        UserVoice.init(config, this);
 
-		// hack to always show the overflow menu in the action bar
-	    try {
-	        ViewConfiguration viewConfig = ViewConfiguration.get(this);
-	        Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
-	        if(menuKeyField != null) {
-	            menuKeyField.setAccessible(true);
-	            menuKeyField.setBoolean(viewConfig, false);
-	        }
-	    } catch (Exception ex) {
-	        // Ignore
-	    }
-	}
+        // hack to always show the overflow menu in the action bar
+        try {
+            ViewConfiguration viewConfig = ViewConfiguration.get(this);
+            Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+            if (menuKeyField != null) {
+                menuKeyField.setAccessible(true);
+                menuKeyField.setBoolean(viewConfig, false);
+            }
+        } catch (Exception ex) {
+            // Ignore
+        }
+    }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
 
-	public void launchFeedback(MenuItem menuItem) {
-		UserVoice.launchUserVoice(this);
-	}
+    public void launchFeedback(MenuItem menuItem) {
+        UserVoice.launchUserVoice(this);
+    }
 
-	public void launchFeedback(View view) {
-		UserVoice.launchUserVoice(this);
-	}
+    public void launchFeedback(View view) {
+        UserVoice.launchUserVoice(this);
+    }
 
-	public void launchForum(View view) {
-		UserVoice.launchForum(this);
-	}
+    public void launchForum(View view) {
+        UserVoice.launchForum(this);
+    }
 
-	public void launchContactUs(View view) {
-		UserVoice.launchContactUs(this);
-	}
+    public void launchContactUs(View view) {
+        UserVoice.launchContactUs(this);
+    }
 
-	public void launchPostIdea(View view) {
-		UserVoice.launchPostIdea(this);
-	}
+    public void launchPostIdea(View view) {
+        UserVoice.launchPostIdea(this);
+    }
 
 }

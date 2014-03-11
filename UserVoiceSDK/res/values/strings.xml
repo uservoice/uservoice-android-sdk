@@ -109,5 +109,7 @@
     <string name="uv_password_dialog_title">Please enter your password</string>
     <string name="uv_article_browse_question">Was this article helpful?</string>
     <string name="uv_thanks">Thanks!</string>
+    <string name="uv_powered_by_uservoice">Powered by UserVoice</string>
+    <string name="uv_android_sdk">Android SDK</string>
 
 </resources>

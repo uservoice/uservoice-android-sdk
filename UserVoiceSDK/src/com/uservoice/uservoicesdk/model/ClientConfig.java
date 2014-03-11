@@ -2,13 +2,13 @@ package com.uservoice.uservoicesdk.model;
 
 import java.util.List;
 
-import android.content.SharedPreferences;
-import android.util.Log;
-import com.uservoice.uservoicesdk.Session;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.SharedPreferences;
+
+import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.rest.RestTaskCallback;
 

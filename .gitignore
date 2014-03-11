@@ -5,7 +5,9 @@
 out
 .idea/workspace.xml
 .idea/libraries
-.gradle
+.settings
 local.properties
 gradle.properties
 /*/build
+.gradle/
+proguard_logs

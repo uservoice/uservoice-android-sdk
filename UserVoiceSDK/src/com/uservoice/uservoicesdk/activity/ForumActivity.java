@@ -53,6 +53,11 @@ public class ForumActivity extends SearchActivity {
 
             @Override
             public void loadMore() {
+                // Need to notify data set change as initializing flag
+                // will impact count below
+                if (initializing) {
+                    notifyDataSetChanged();
+                }
                 initializing = false;
                 super.loadMore();
             }
@@ -179,7 +184,7 @@ public class ForumActivity extends SearchActivity {
                 } else if (position != 1) {
                     Suggestion suggestion = (Suggestion) getModelAdapter().getItem(position);
                     Session.getInstance().setSuggestion(suggestion);
-                    SuggestionDialogFragment dialog = new SuggestionDialogFragment(suggestion);
+                    SuggestionDialogFragment dialog = new SuggestionDialogFragment(suggestion, null);
                     dialog.show(getSupportFragmentManager(), "SuggestionDialogFragment");
                 }
             }

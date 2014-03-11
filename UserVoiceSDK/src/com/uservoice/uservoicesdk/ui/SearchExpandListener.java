@@ -10,20 +10,20 @@ import com.uservoice.uservoicesdk.activity.SearchActivity;
 public class SearchExpandListener implements MenuItemCompat.OnActionExpandListener {
 	private final SearchActivity searchActivity;
 
-	public SearchExpandListener(SearchActivity searchActivity) {
-		this.searchActivity = searchActivity;
-	}
+    public SearchExpandListener(SearchActivity searchActivity) {
+        this.searchActivity = searchActivity;
+    }
 
-	@Override
-	public boolean onMenuItemActionExpand(MenuItem item) {
-		searchActivity.getSearchAdapter().setSearchActive(true);
-		return true;
-	}
+    @Override
+    public boolean onMenuItemActionExpand(MenuItem item) {
+        searchActivity.getSearchAdapter().setSearchActive(true);
+        return true;
+    }
 
-	@Override
-	public boolean onMenuItemActionCollapse(MenuItem item) {
-		searchActivity.getSearchAdapter().setSearchActive(false);
-		searchActivity.hideSearch();
-		return true;
-	}
+    @Override
+    public boolean onMenuItemActionCollapse(MenuItem item) {
+        searchActivity.getSearchAdapter().setSearchActive(false);
+        searchActivity.hideSearch();
+        return true;
+    }
 }

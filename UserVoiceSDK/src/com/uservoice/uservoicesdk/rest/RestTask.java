@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import android.net.http.AndroidHttpClient;
 import oauth.signpost.OAuthConsumer;
 
 import org.apache.http.HttpEntity;
@@ -28,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.net.Uri;
+import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 
 import com.uservoice.uservoicesdk.Session;
@@ -39,6 +39,7 @@ public class RestTask extends AsyncTask<String, String, RestResult> {
     private RestMethod method;
     private List<BasicNameValuePair> params;
     private RestTaskCallback callback;
+    private HttpUriRequest request;
 
     public RestTask(RestMethod method, String urlPath, Map<String, String> params, RestTaskCallback callback) {
         this(method, urlPath, params == null ? null : paramsToList(params), callback);
@@ -53,8 +54,9 @@ public class RestTask extends AsyncTask<String, String, RestResult> {
 
     @Override
     protected RestResult doInBackground(String... args) {
+        AndroidHttpClient client = null;
         try {
-            HttpUriRequest request = createRequest();
+            request = createRequest();
             if (isCancelled())
                 throw new InterruptedException();
             OAuthConsumer consumer = Session.getInstance().getOAuthConsumer();
@@ -67,27 +69,26 @@ public class RestTask extends AsyncTask<String, String, RestResult> {
             }
             request.setHeader("Accept-Language", Locale.getDefault().getLanguage());
             request.setHeader("API-Client", String.format("uservoice-android-%s", UserVoice.getVersion()));
-            AndroidHttpClient client = AndroidHttpClient.newInstance(String.format("uservoice-android-%s", UserVoice.getVersion()), Session.getInstance().getContext());
-            if (isCancelled()) {
-                client.close();
+            client = AndroidHttpClient.newInstance(String.format("uservoice-android-%s", UserVoice.getVersion()), Session.getInstance().getContext());
+            if (isCancelled())
                 throw new InterruptedException();
-            }
             // TODO it would be nice to find a way to abort the request on cancellation
             HttpResponse response = client.execute(request);
-            if (isCancelled()) {
-                client.close();
+            if (isCancelled())
                 throw new InterruptedException();
-            }
             HttpEntity responseEntity = response.getEntity();
             StatusLine responseStatus = response.getStatusLine();
             int statusCode = responseStatus != null ? responseStatus.getStatusCode() : 0;
             String body = responseEntity != null ? EntityUtils.toString(responseEntity) : null;
-            client.close();
             if (isCancelled())
                 throw new InterruptedException();
             return new RestResult(statusCode, new JSONObject(body));
         } catch (Exception e) {
             return new RestResult(e);
+        } finally {
+            if (client != null) {
+                client.close();
+            }
         }
     }
 
