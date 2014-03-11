@@ -17,6 +17,7 @@ import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.babayaga.Babayaga.Event;
 import com.uservoice.uservoicesdk.flow.SigninManager;
+import com.uservoice.uservoicesdk.flow.SigninCallback;
 import com.uservoice.uservoicesdk.model.Category;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.rest.RestResult;
@@ -108,9 +109,9 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
     @Override
     protected void doSubmit() {
         isPosting = false;
-        SigninManager.signIn(context, emailField.getText().toString(), nameField.getText().toString(), new Runnable() {
+        SigninManager.signIn(context, emailField.getText().toString(), nameField.getText().toString(), new SigninCallback() {
             @Override
-            public void run() {
+            public void onSuccess() {
                 isPosting = true;
                 Category category = categorySelect == null ? null : (Category) categorySelect.getSelectedItem();
                 Suggestion.createSuggestion(Session.getInstance().getForum(), category, textField.getText().toString(), descriptionField.getText().toString(), 1, new DefaultCallback<Suggestion>(context) {

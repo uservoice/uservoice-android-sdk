@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.flow.SigninCallback;
 import com.uservoice.uservoicesdk.flow.SigninManager;
 import com.uservoice.uservoicesdk.model.Comment;
 import com.uservoice.uservoicesdk.model.Suggestion;
@@ -66,9 +67,9 @@ public class CommentDialogFragment extends DialogFragmentBugfixed {
             public void onClick(DialogInterface dialog, int which) {
                 final String text = textField.getText().toString();
                 if (text.trim().length() > 0) {
-                    SigninManager.signIn(getActivity(), emailField.getText().toString(), nameField.getText().toString(), new Runnable() {
+                    SigninManager.signIn(getActivity(), emailField.getText().toString(), nameField.getText().toString(), new SigninCallback() {
                         @Override
-                        public void run() {
+                        public void onSuccess() {
                             Comment.createComment(suggestion, text, new DefaultCallback<Comment>(getActivity()) {
                                 @Override
                                 public void onModel(Comment model) {

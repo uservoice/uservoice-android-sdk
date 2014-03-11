@@ -111,4 +111,5 @@
     <string name="uv_thanks">Obrigado!</string>
     <string name="uv_powered_by_uservoice">Powered by UserVoice</string>
     <string name="uv_android_sdk">Android SDK</string>
+    <string name="uv_msg_bad_email_format">Please enter a valid email address.</string>
 </resources>

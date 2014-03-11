@@ -109,5 +109,6 @@
     <string name="uv_password_dialog_title">Vul je wachtwoord in</string>
     <string name="uv_article_browse_question">Was dit artikel nuttig?</string>
     <string name="uv_thanks">Bedankt!</string>
+    <string name="uv_msg_bad_email_format">Please enter a valid email address.</string>
 
 </resources>

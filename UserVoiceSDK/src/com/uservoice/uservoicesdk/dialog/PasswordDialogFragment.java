@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.flow.SigninCallback;
 import com.uservoice.uservoicesdk.model.AccessToken;
 import com.uservoice.uservoicesdk.model.RequestToken;
 import com.uservoice.uservoicesdk.ui.DefaultCallback;
@@ -19,10 +20,10 @@ import com.uservoice.uservoicesdk.ui.Utils;
 @SuppressLint("ValidFragment")
 public class PasswordDialogFragment extends DialogFragmentBugfixed {
 
-    private final Runnable callback;
+    private final SigninCallback callback;
     private EditText password;
 
-    public PasswordDialogFragment(Runnable callback) {
+    public PasswordDialogFragment(SigninCallback callback) {
         this.callback = callback;
     }
 
@@ -63,7 +64,7 @@ public class PasswordDialogFragment extends DialogFragmentBugfixed {
             @Override
             public void onModel(AccessToken model) {
                 Session.getInstance().setAccessToken(model);
-                callback.run();
+                callback.onSuccess();
             }
         });
     }

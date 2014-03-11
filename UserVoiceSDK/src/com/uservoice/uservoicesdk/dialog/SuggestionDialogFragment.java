@@ -14,6 +14,7 @@ import com.uservoice.uservoicesdk.activity.ForumActivity;
 import com.uservoice.uservoicesdk.activity.InstantAnswersActivity;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.deflection.Deflection;
+import com.uservoice.uservoicesdk.flow.SigninCallback;
 import com.uservoice.uservoicesdk.flow.SigninManager;
 import com.uservoice.uservoicesdk.image.ImageCache;
 import com.uservoice.uservoicesdk.model.Comment;
@@ -68,9 +69,9 @@ public class SuggestionDialogFragment extends DialogFragmentBugfixed {
                     suggestion.unsubscribe(callback);
                 } else {
                     if (Session.getInstance().getEmail() != null) {
-                        SigninManager.signinForSubscribe(getActivity(), Session.getInstance().getEmail(), new Runnable() {
+                        SigninManager.signinForSubscribe(getActivity(), Session.getInstance().getEmail(), new SigninCallback() {
                             @Override
-                            public void run() {
+                            public void onSuccess() {
                                 suggestion.subscribe(callback);
                             }
                         });

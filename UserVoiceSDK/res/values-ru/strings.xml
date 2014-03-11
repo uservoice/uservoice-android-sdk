@@ -111,5 +111,6 @@
     <string name="uv_password_dialog_title">Пожалуйста, укажите свой пароль</string>
     <string name="uv_article_browse_question">Эта статья была полезна?</string>
     <string name="uv_thanks">Спасибо!</string>
+    <string name="uv_msg_bad_email_format">Please enter a valid email address.</string>
 
 </resources>

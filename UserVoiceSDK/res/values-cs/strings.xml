@@ -110,5 +110,6 @@
     <string name="uv_password_dialog_title">Prosím vložte Vaše heslo</string>
     <string name="uv_article_browse_question">Byl tento článek nápomocný?</string>
     <string name="uv_thanks">Díky!</string>
+    <string name="uv_msg_bad_email_format">Please enter a valid email address.</string>
 
 </resources>
