@@ -1,14 +1,14 @@
 package com.uservoice.uservoicesdk.model;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.uservoice.uservoicesdk.babayaga.Babayaga;
+import com.uservoice.uservoicesdk.rest.Callback;
+import com.uservoice.uservoicesdk.rest.RestTaskCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.uservoice.uservoicesdk.rest.Callback;
-import com.uservoice.uservoicesdk.rest.RestTaskCallback;
-import com.uservoice.uservoicesdk.babayaga.Babayaga;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Ticket extends BaseModel {
 
@@ -52,5 +52,4 @@ public class Ticket extends BaseModel {
             }
         });
     }
-
 }

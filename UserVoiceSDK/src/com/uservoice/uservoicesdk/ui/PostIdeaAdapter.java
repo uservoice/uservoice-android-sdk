@@ -1,8 +1,5 @@
 package com.uservoice.uservoicesdk.ui;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -19,6 +16,9 @@ import com.uservoice.uservoicesdk.babayaga.Babayaga.Event;
 import com.uservoice.uservoicesdk.flow.SigninManager;
 import com.uservoice.uservoicesdk.model.Category;
 import com.uservoice.uservoicesdk.model.Suggestion;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PostIdeaAdapter extends InstantAnswersAdapter {
 
@@ -126,5 +126,4 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
     protected String getSubmitString() {
         return context.getString(R.string.uv_submit_idea);
     }
-
 }

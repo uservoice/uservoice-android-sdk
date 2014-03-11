@@ -18,7 +18,7 @@ import com.uservoice.uservoicesdk.dialog.UnhelpfulDialogFragment;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.ui.Utils;
 
-public class ArticleActivity extends BaseActivity implements SearchActivity {
+public class ArticleActivity extends SearchActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,12 +64,12 @@ public class ArticleActivity extends BaseActivity implements SearchActivity {
     }
 
     @Override
-    public boolean onMenuItemSelected(int featureId, MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.uv_action_contact) {
             startActivity(new Intent(this, ContactActivity.class));
             return true;
         }
-        return super.onMenuItemSelected(featureId, item);
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

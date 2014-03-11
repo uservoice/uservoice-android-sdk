@@ -1,11 +1,11 @@
 package com.uservoice.uservoicesdk.image;
 
-import java.io.InputStream;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
+
+import java.io.InputStream;
 
 public class DownloadImageTask extends AsyncTask<Void, Void, Bitmap> {
     private ImageView imageView;
@@ -32,5 +32,4 @@ public class DownloadImageTask extends AsyncTask<Void, Void, Bitmap> {
         ImageCache.getInstance().set(url, bitmap);
         imageView.setImageBitmap(bitmap);
     }
-
 }

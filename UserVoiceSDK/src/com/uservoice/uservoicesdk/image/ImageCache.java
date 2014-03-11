@@ -1,12 +1,12 @@
 package com.uservoice.uservoicesdk.image;
 
+import android.graphics.Bitmap;
+import android.widget.ImageView;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import android.graphics.Bitmap;
-import android.widget.ImageView;
 
 public class ImageCache {
 
@@ -53,5 +53,4 @@ public class ImageCache {
         cache.clear();
         mru.clear();
     }
-
 }

@@ -1,8 +1,8 @@
 task wrapper(type: Wrapper) {
-    gradleVersion = '1.9'
+    gradleVersion = '1.11'
 }
 
 allprojects {
-    version = "0.0.2"
+    version = "1.0.0"
     group = "com.uservoice"
 }

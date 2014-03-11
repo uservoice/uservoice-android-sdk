@@ -67,8 +67,8 @@ public abstract class FragmentListActivity extends BaseActivity {
      * @see Activity#onContentChanged()
      */
     @Override
-    public void onContentChanged() {
-        super.onContentChanged();
+    public void onSupportContentChanged() {
+        super.onSupportContentChanged();
 
         // changed references from com.android.internal.R to android.R.*
         View emptyView = findViewById(android.R.id.empty);

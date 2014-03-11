@@ -1,7 +1,5 @@
 package com.uservoice.uservoicesdk.ui;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +7,8 @@ import android.view.ViewGroup;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.rest.Callback;
+
+import java.util.List;
 
 public abstract class ModelAdapter<T> extends SearchAdapter<T> {
 

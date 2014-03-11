@@ -4,31 +4,32 @@
     <plurals name="uv_comments">
         <item quantity="one">комментарий</item>
         <item quantity="few">комментария</item>
-        <item quantity="other">комментариев</item>
+        <item quantity="many">комментариев</item>
     </plurals>
     <plurals name="uv_subscribers">
         <item quantity="one">подписчик</item>
         <item quantity="few">подписчика</item>
-        <item quantity="other">подписчиков</item>
+        <item quantity="many">подписчиков</item>
     </plurals>
     <plurals name="uv_articles">
         <item quantity="one">статья</item>
         <item quantity="few">статьи</item>
-        <item quantity="other">статей</item>
+        <item quantity="many">статей</item>
     </plurals>
     <plurals name="uv_ideas">
         <item quantity="one">идея</item>
         <item quantity="few">идеи</item>
-        <item quantity="other">идей</item>
+        <item quantity="many">идей</item>
     </plurals>
     <plurals name="uv_people">
         <item quantity="one">человек</item>
         <item quantity="few">человека</item>
-        <item quantity="other">человек</item>
+        <item quantity="many">человек</item>
     </plurals>
     <plurals name="uv_number_of_subscribers_format">
         <item quantity="one">%1$s хочет этого</item>
-        <item quantity="other">%1$s хотят этого</item>
+        <item quantity="few">%1$s хотят этого</item>
+        <item quantity="many">%1$s хотят этого</item>
     </plurals>
 
     <string name="uv_loading">Загружается&#8230;</string>

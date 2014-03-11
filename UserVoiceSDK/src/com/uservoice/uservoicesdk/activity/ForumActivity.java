@@ -1,9 +1,5 @@
 package com.uservoice.uservoicesdk.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
@@ -35,6 +31,10 @@ import com.uservoice.uservoicesdk.ui.PaginationScrollListener;
 import com.uservoice.uservoicesdk.ui.SearchAdapter;
 import com.uservoice.uservoicesdk.ui.SearchExpandListener;
 import com.uservoice.uservoicesdk.ui.SearchQueryListener;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class ForumActivity extends SearchActivity {
 
@@ -211,13 +211,9 @@ public class ForumActivity extends SearchActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.uv_forum, menu);
         MenuItem searchItem = menu.findItem(R.id.uv_menu_search);
-        if (hasActionBar()) {
-            MenuItemCompat.setOnActionExpandListener(searchItem, new SearchExpandListener(this));
-            SearchView search = (SearchView) MenuItemCompat.getActionView(searchItem);
-            search.setOnQueryTextListener(new SearchQueryListener(this));
-        } else {
-            searchItem.setVisible(false);
-        }
+        MenuItemCompat.setOnActionExpandListener(searchItem, new SearchExpandListener(this));
+        SearchView search = (SearchView) MenuItemCompat.getActionView(searchItem);
+        search.setOnQueryTextListener(new SearchQueryListener(this));
         menu.findItem(R.id.uv_new_idea).setVisible(Session.getInstance().getConfig().shouldShowPostIdea());
         return true;
     }

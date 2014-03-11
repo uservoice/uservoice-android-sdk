@@ -1,8 +1,5 @@
 package com.uservoice.uservoicesdk.ui;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
@@ -19,6 +16,9 @@ import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.rest.RestResult;
 import com.uservoice.uservoicesdk.rest.RestTask;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MixedSearchAdapter extends SearchAdapter<BaseModel> implements AdapterView.OnItemClickListener {
 
@@ -149,5 +149,4 @@ public class MixedSearchAdapter extends SearchAdapter<BaseModel> implements Adap
         if (type == SEARCH_RESULT)
             Utils.showModel(context, (BaseModel) getItem(position));
     }
-
 }

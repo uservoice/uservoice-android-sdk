@@ -42,5 +42,4 @@ public class PostIdeaActivity extends InstantAnswersActivity {
     protected int getDiscardDialogMessage() {
         return R.string.uv_msg_confirm_discard_idea;
     }
-
 }
