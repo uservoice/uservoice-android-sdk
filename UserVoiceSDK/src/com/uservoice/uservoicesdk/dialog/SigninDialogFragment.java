@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
+import com.uservoice.uservoicesdk.flow.SigninCallback;
 import com.uservoice.uservoicesdk.model.AccessToken;
 import com.uservoice.uservoicesdk.model.AccessTokenResult;
 import com.uservoice.uservoicesdk.model.RequestToken;
@@ -37,13 +38,13 @@ public class SigninDialogFragment extends DialogFragmentBugfixed {
     private Button forgotPassword;
     private String email;
     private String name;
-    private Runnable callback;
+    private SigninCallback callback;
     private Runnable requestTokenCallback;
 
     public SigninDialogFragment() {
     }
 
-    public SigninDialogFragment(String email, String name, Runnable callback) {
+    public SigninDialogFragment(String email, String name, SigninCallback callback) {
         this.email = email;
         this.name = name;
         this.callback = callback;
@@ -150,7 +151,7 @@ public class SigninDialogFragment extends DialogFragmentBugfixed {
                             Session.getInstance().setAccessToken(activity, model.getAccessToken());
                             Babayaga.track(Babayaga.Event.AUTHENTICATE);
                             dismiss();
-                            callback.run();
+                            callback.onSuccess();
                         }
                     });
                 } else {
@@ -164,7 +165,7 @@ public class SigninDialogFragment extends DialogFragmentBugfixed {
                                     Session.getInstance().setUser(model);
                                     Babayaga.track(Babayaga.Event.AUTHENTICATE);
                                     dismiss();
-                                    callback.run();
+                                    callback.onSuccess();
                                 }
                             });
                         }

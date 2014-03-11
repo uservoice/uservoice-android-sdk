@@ -109,4 +109,5 @@
 	<string name="uv_confirm">Confirmer</string>
 	<string name="uv_msg_confirm_discard_idea">Etes-vous sûr de vouloir abandonner cette idée\u00a0?</string>
 	<string name="uv_msg_confirm_discard_message">Etes-vous sûr de vouloir abandonner ce message\u00a0?</string>
+    <string name="uv_msg_bad_email_format">Please enter a valid email address.</string>
 </resources>
