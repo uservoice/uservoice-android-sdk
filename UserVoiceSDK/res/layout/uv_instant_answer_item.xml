@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:orientation="vertical"
@@ -32,7 +33,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:paddingTop="5dp"
-				android:text="Medium Text"
+                tools:text="Medium Text"
 				android:textAppearance="?android:attr/textAppearanceMedium" />
 
 			<LinearLayout
@@ -45,7 +46,7 @@
 					android:id="@+id/uv_detail"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:text="Small Text"
+                    tools:text="Small Text"
 					android:textSize="12sp"
 					android:textColor="#75778c" />
 
@@ -69,7 +70,7 @@
 						android:id="@+id/uv_suggestion_status"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:text="UNDER REVIEW"
+                        tools:text="UNDER REVIEW"
 						android:textColor="#999999"
 						android:textSize="10sp" />
 				</LinearLayout>

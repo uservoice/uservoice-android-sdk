@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/uv_view_flipper"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent">
 
         <LinearLayout
             android:id="@+id/uv_container"
@@ -17,7 +19,8 @@
             <WebView
                 android:id="@+id/uv_webview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                tools:ignore="WebViewLayout" />
 
             <LinearLayout
                 android:id="@+id/uv_helpful_section"
@@ -46,29 +49,27 @@
                         android:text="@string/uv_article_browse_question"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                    <TableLayout
+                    <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:columnCount="2"
                         android:paddingTop="10dp" >
 
-                        <TableRow>
+                        <Button
+                            android:id="@+id/uv_helpful_button"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/uv_very_yes" />
 
-                            <Button
-                                android:id="@+id/uv_helpful_button"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="@string/uv_very_yes" />
-
-                            <Button
-                                android:id="@+id/uv_unhelpful_button"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="@string/uv_no" />
-                        </TableRow>
-                    </TableLayout>
+                        <Button
+                            android:id="@+id/uv_unhelpful_button"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/uv_no" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

@@ -17,10 +17,6 @@
         <item quantity="one">idea</item>
         <item quantity="other">ideas</item>
     </plurals>
-    <plurals name="uv_people">
-        <item quantity="one">person</item>
-        <item quantity="other">people</item>
-    </plurals>
     <plurals name="uv_number_of_subscribers_format">
         <item quantity="one">%1$s wants this idea</item>
         <item quantity="other">%1$s want this idea</item>
@@ -36,7 +32,6 @@
     <string name="uv_password">Password</string>
     <string name="uv_forgot_password">Forgot password</string>
     <string name="uv_msg_comment_posted">Your comment has been posted</string>
-    <string name="uv_title_idea">Idea</string>
     <string name="uv_posted_by_format">Posted by %1$s on %2$s</string>
     <string name="uv_all_articles">All Articles</string>
     <string name="uv_portal_title">Help</string>
@@ -46,25 +41,20 @@
     <string name="uv_failed_signin_error">Incorrect email or password</string>
     <string name="uv_msg_forgot_password">Forgot password email sent</string>
     <string name="uv_subscribe_dialog_title">Subscribe to this idea</string>
-    <string name="uv_remove_votes">Remove Votes</string>
     <string name="uv_feedback_forum">Feedback Forum</string>
     <string name="uv_knowledge_base">Knowledge Base</string>
     <string name="uv_admin_response_format">Admin response: %1$s</string>
     <string name="uv_post_comment">Post comment</string>
     <string name="uv_next">Next</string>
-    <string name="uv_none_of_these_help">None of these help</string>
     <string name="uv_send_message">Send message</string>
     <string name="uv_your_email_address">Your email address</string>
     <string name="uv_your_name">Your name</string>
     <string name="uv_name_hint">“Anonymous”</string>
     <string name="uv_select_one">Select one</string>
     <string name="uv_value">Value</string>
-    <string name="uv_article">Article</string>
-    <string name="uv_idea">Idea</string>
     <string name="uv_msg_ticket_created">Your message has been sent</string>
     <string name="uv_msg_idea_created">Your idea has been created</string>
     <string name="uv_article_instant_answer_question">Is this article helpful?</string>
-    <string name="uv_suggestion_instant_answer_question">Is this idea helpful?</string>
     <string name="uv_no">No</string>
     <string name="uv_yes">Yes</string>
     <string name="uv_very_yes">Yes!</string>
@@ -78,10 +68,8 @@
     <string name="uv_idea_form_help">When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you\'ll get notified.</string>
     <string name="uv_contact_us">Contact us</string>
     <string name="uv_close">Close</string>
-    <string name="uv_new_comment">New comment</string>
     <string name="uv_error">Error</string>
     <string name="uv_msg_user_identity_validation">Please enter your email address</string>
-    <string name="uv_status_format">Status: %1$s</string>
     <string name="uv_subscribe">Subscribe</string>
     <string name="uv_nevermind">Nevermind</string>
     <string name="uv_msg_subscribe">We\'ll update you as this idea progresses.</string>
@@ -109,8 +97,6 @@
     <string name="uv_password_dialog_title">Please enter your password</string>
     <string name="uv_article_browse_question">Was this article helpful?</string>
     <string name="uv_thanks">Thanks!</string>
-    <string name="uv_powered_by_uservoice">Powered by UserVoice</string>
-    <string name="uv_android_sdk">Android SDK</string>
     <string name="uv_msg_bad_email_format">Please enter a valid email address.</string>
 
 </resources>

@@ -1,6 +1,5 @@
 package com.uservoice.uservoicesdk.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -56,7 +55,6 @@ public class ArticleActivity extends SearchActivity {
     }
 
     @Override
-    @SuppressLint("NewApi")
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.uv_portal, menu);
         setupScopedSearch(menu);

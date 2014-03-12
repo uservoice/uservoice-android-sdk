@@ -48,6 +48,6 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:18.+@aar'
+    compile 'com.android.support:appcompat-v7:19.+@aar'
     compile project(':UserVoiceSDK')
 }

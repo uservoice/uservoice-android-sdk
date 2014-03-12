@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -31,14 +32,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingRight="5dp"
-                    android:text="Evan Hamilton"
+                    tools:text="Evan Hamilton"
                     android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/uv_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Feb 12, 2013"
+                    tools:text="Feb 12, 2013"
                     android:textColor="#999999"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -48,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="2dp"
-                android:text="We are looking into this. Please check back and leave additional comments and we will be in touch!"
+                tools:text="We are looking into this. Please check back and leave additional comments and we will be in touch!"
                 android:textColor="#999999"
                 android:textSize="12sp" />
         </LinearLayout>

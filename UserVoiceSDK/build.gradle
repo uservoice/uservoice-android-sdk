@@ -11,7 +11,7 @@ apply plugin: 'android-library'
 
 repositories {
     mavenCentral()
-    maven { url 'http://dl.bintray.com/populov/maven' }
+    jcenter()
 }
 
 android {
