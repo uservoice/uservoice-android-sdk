@@ -1,6 +1,7 @@
 package com.uservoice.uservoicesdk.ui;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
@@ -273,6 +275,8 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
             state = State.INIT_LOADING;
             notifyDataSetChanged();
             Deflection.setSearchText(query);
+            InputMethodManager imm = (InputMethodManager)context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+            imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
             Article.loadInstantAnswers(query, new DefaultCallback<List<BaseModel>>(context) {
                 @Override
                 public void onModel(List<BaseModel> model) {
