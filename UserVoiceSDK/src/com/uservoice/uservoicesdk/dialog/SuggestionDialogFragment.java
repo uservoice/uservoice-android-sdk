@@ -103,6 +103,8 @@ public class SuggestionDialogFragment extends DialogFragmentBugfixed {
     }
 
     public void suggestionSubscriptionUpdated(Suggestion model) {
+        if (getActivity() == null)
+            return;
         CheckBox checkbox = (CheckBox) headerView.findViewById(R.id.uv_subscribe_checkbox);
         if (suggestion.isSubscribed()) {
             Toast.makeText(context, R.string.uv_msg_subscribe_success, Toast.LENGTH_SHORT).show();
