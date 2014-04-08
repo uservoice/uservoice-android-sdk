@@ -1,0 +1,32 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.8.+'
+    }
+}
+
+apply plugin: 'android-library'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.0.3"
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['res']
+            res.srcDirs = ['res']
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:19.0.1'
+    compile 'commons-codec:commons-codec:1.8'
+    compile 'oauth.signpost:signpost-commonshttp4:1.2.1.2'
+    compile 'oauth.signpost:signpost-core:1.2.1.2'
+}
