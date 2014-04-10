@@ -12,14 +12,22 @@
   <name>UserVoice Android SDK Library</name>
   <dependencies>
     <dependency>
+      <groupId>com.android.support</groupId>
+      <artifactId>support-v4</artifactId>
+      <version>19.0.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>oauth.signpost</groupId>
       <artifactId>signpost-commonshttp4</artifactId>
       <version>1.2.1.2</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>commons-codec</groupId>
       <artifactId>commons-codec</artifactId>
       <version>1.8</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 </project>
