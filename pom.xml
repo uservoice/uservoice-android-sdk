@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.uservoice</groupId>
+  <artifactId>uservoice-android-sdk-parent</artifactId>
+  <version>1.0.1</version>
+  <packaging>pom</packaging>
+  <name>UserVoice Android SDK Library Parent</name>
+  <description>UserVoice for Android allows you to embed UserVoice directly in your Android apps Android applications</description>
+  <url>https://github.com/uservoice/uservoice-android-sdk</url>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>austintaylor</id>
+      <name>Austin Taylor</name>
+      <email>austin.taylor@gmail.com</email>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git@github.com:uservoice/uservoice-android-sdk.git</connection>
+    <developerConnection>scm:git@github.com:uservoice/uservoice-android-sdk.git</developerConnection>
+    <url>scm:git@github.com:uservoice/uservoice-android-sdk.git</url>
+  </scm>
+  <modules>
+    <module>UserVoiceSDK</module>
+    <module>UVDemo</module>
+  </modules>
+  <dependencies>
+    <dependency>
+      <groupId>com.google.android</groupId>
+      <artifactId>android</artifactId>
+      <scope>provided</scope>
+      <version>4.1.1.4</version>
+    </dependency>
+    <dependency>
+      <groupId>com.android.support</groupId>
+      <artifactId>support-v4</artifactId>
+      <version>19.0.1</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <sourceDirectory>${project.basedir}/src</sourceDirectory>
+    <plugins>
+      <plugin>
+        <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+        <artifactId>android-maven-plugin</artifactId>
+        <version>3.8.2</version>
+        <extensions>true</extensions>
+        <configuration>
+          <sdk><platform>17</platform></sdk>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+
