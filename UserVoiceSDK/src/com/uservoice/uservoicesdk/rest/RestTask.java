@@ -29,6 +29,7 @@ import org.json.JSONObject;
 import android.net.Uri;
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.UserVoice;
@@ -67,6 +68,7 @@ public class RestTask extends AsyncTask<String, String, RestResult> {
                 }
                 consumer.sign(request);
             }
+            Log.d("UV", urlPath);
             request.setHeader("Accept-Language", Locale.getDefault().getLanguage());
             request.setHeader("API-Client", String.format("uservoice-android-%s", UserVoice.getVersion()));
             client = AndroidHttpClient.newInstance(String.format("uservoice-android-%s", UserVoice.getVersion()), Session.getInstance().getContext());

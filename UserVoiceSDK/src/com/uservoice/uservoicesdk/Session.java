@@ -148,7 +148,6 @@ public class Session {
 
     public void setClientConfig(ClientConfig clientConfig) {
         this.clientConfig = clientConfig;
-        Babayaga.flush();
     }
 
     public void setExternalId(String scope, String id) {

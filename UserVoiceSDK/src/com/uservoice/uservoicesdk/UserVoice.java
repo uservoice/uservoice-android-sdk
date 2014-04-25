@@ -17,22 +17,18 @@ import com.uservoice.uservoicesdk.ui.DefaultCallback;
 public class UserVoice {
 
     public static void launchUserVoice(Context context) {
-        Babayaga.track(Babayaga.Event.VIEW_CHANNEL);
         context.startActivity(new Intent(context, PortalActivity.class));
     }
 
     public static void launchForum(Context context) {
-        Babayaga.track(Babayaga.Event.VIEW_CHANNEL);
         context.startActivity(new Intent(context, ForumActivity.class));
     }
 
     public static void launchContactUs(Context context) {
-        Babayaga.track(Babayaga.Event.VIEW_CHANNEL);
         context.startActivity(new Intent(context, ContactActivity.class));
     }
 
     public static void launchPostIdea(Context context) {
-        Babayaga.track(Babayaga.Event.VIEW_CHANNEL);
         context.startActivity(new Intent(context, PostIdeaActivity.class));
     }
 
@@ -42,19 +38,6 @@ public class UserVoice {
         Babayaga.setUserTraits(config.getUserTraits());
         Session.getInstance().setContext(context);
         Session.getInstance().setConfig(config);
-
-        // we have to do this preemptively so that Babayaga can send the view_app event
-        ClientConfig.loadClientConfig(new DefaultCallback<ClientConfig>(context) {
-            @Override
-            public void onModel(ClientConfig model) {
-                Session.getInstance().setClientConfig(model);
-            }
-
-            @Override
-            public void onError(RestResult error) {
-                // ignore
-            }
-        });
     }
 
     public static void setExternalId(String scope, String id) {

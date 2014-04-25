@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.uservoice.uservoicesdk.Config;
 import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.model.AccessToken;
 import com.uservoice.uservoicesdk.model.AccessTokenResult;
 import com.uservoice.uservoicesdk.model.BaseModel;
@@ -29,6 +30,10 @@ public class InitManager {
                 @Override
                 public void onModel(ClientConfig model) {
                     Session.getInstance().setClientConfig(model);
+                    // if we are getting the client config, they are launching the ui
+                    // do this here so that we have the subdomain id, so that the channel event works for now
+                    // once babayaga actually supports recording events using the subdomain key, this could be moved back to UserVoice.java
+                    Babayaga.track(Babayaga.Event.VIEW_CHANNEL);
                     loadUser();
                 }
             });

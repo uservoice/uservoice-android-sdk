@@ -16,6 +16,7 @@ public class Babayaga {
 
     static String DOMAIN = "by.uservoice.com";
     public static String CHANNEL = "d";
+    public static String EXTERNAL_CHANNEL = "x";
 
     private static class Track {
         public String event;
@@ -30,7 +31,6 @@ public class Babayaga {
     private static String uvts;
     private static Map<String, Object> traits;
     private static SharedPreferences prefs;
-    private static List<Track> queue = new ArrayList<Track>();
 
     public enum Event {
         VIEW_APP("g"),
@@ -99,19 +99,8 @@ public class Babayaga {
     }
 
     public static void track(String event, Map<String, Object> eventProps) {
-        if (Session.getInstance().getClientConfig() == null) {
-            queue.add(new Track(event, eventProps));
-        } else {
-//            Log.d("UV", "BY flushing: " + event);
-            new BabayagaTask(event, uvts, traits, eventProps).execute();
-        }
-    }
-
-    public static void flush() {
-        for (Track track : queue) {
-            track(track.event, track.eventProps);
-        }
-        queue = new ArrayList<Track>();
+        // Log.d("UV", "BY flushing: " + event);
+        new BabayagaTask(event, uvts, traits, eventProps).execute();
     }
 
     public static void init(Context context) {
