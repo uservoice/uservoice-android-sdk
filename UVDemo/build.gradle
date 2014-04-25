@@ -8,7 +8,7 @@ buildscript {
     }
 }
 
-apply plugin: 'android-library'
+apply plugin: 'android'
 
 repositories {
     mavenCentral()
@@ -30,7 +30,5 @@ android {
 
 dependencies {
     compile 'com.android.support:support-v4:19.0.1'
-    compile 'commons-codec:commons-codec:1.8'
-    compile 'oauth.signpost:signpost-commonshttp4:1.2.1.2'
-    compile 'oauth.signpost:signpost-core:1.2.1.2'
+    compile project(':UserVoiceSDK')
 }
