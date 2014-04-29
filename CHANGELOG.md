@@ -1,5 +1,9 @@
 ## master
 
+## 1.1.0
+
+* Fix a bug that sent way too much traffic to the UserVoice api
+
 ## 1.0.1
 
 * Add portuguese translation
