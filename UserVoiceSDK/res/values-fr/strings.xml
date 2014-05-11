@@ -36,7 +36,7 @@
     <string name="uv_idea_form_title">Poster une idée</string>
     <string name="uv_menu_search">Recherche</string>
     <string name="uv_email_address">Adresse e-mail</string>
-    <string name="uv_email_address_hint">your@email.com (requis)</string>
+    <string name="uv_email_address_hint">votre@email.com (requis)</string>
     <string name="uv_display_name">Nom d\'utilisateur</string>
     <string name="uv_password">Mot de passe</string>
     <string name="uv_forgot_password">Mot de passe oublié</string>
@@ -46,14 +46,14 @@
     <string name="uv_all_articles">Tous les Articles</string>
     <string name="uv_portal_title">Aide</string>
     <string name="uv_network_error">Erreur à la connexion avec Uservoice</string>
-    <string name="uv_signin_dialog_title">Sign in</string>
-    <string name="uv_signin_dialog_ok">Sign in</string>
+    <string name="uv_signin_dialog_title">Connexion</string>
+    <string name="uv_signin_dialog_ok">Connexion</string>
     <string name="uv_failed_signin_error">Email ou mot de passe incorrect</string>
     <string name="uv_msg_forgot_password">Email de récupération envoyé</string>
     <string name="uv_subscribe_dialog_title">Abonnez-vous à cette idée</string>
     <string name="uv_remove_votes">Enlever des votes</string>
-    <string name="uv_feedback_forum">Feedback Forum</string>
-    <string name="uv_knowledge_base">Knowledge Base</string>
+    <string name="uv_feedback_forum">Suggestions</string>
+    <string name="uv_knowledge_base">Base de connaissances</string>
     <string name="uv_admin_response_format">Réponse des administrateurs: %1$s</string>
     <string name="uv_post_comment">Poster commentaire</string>
     <string name="uv_next">Suivant</string>
@@ -109,5 +109,5 @@
 	<string name="uv_confirm">Confirmer</string>
 	<string name="uv_msg_confirm_discard_idea">Etes-vous sûr de vouloir abandonner cette idée\u00a0?</string>
 	<string name="uv_msg_confirm_discard_message">Etes-vous sûr de vouloir abandonner ce message\u00a0?</string>
-    <string name="uv_msg_bad_email_format">Please enter a valid email address.</string>
+    <string name="uv_msg_bad_email_format">S'il vous plait entez une adresse email valide.</string>
 </resources>
