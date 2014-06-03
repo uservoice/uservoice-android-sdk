@@ -22,14 +22,14 @@
     </plurals>
     <plurals name="uv_number_of_subscribers_format">
         <item quantity="one">%1$s želi ovu ideju</item>
-        <item quantity="other">%1$s želi ovu ideju</item>
+        <item quantity="other">%1$s žele ovu ideju</item>
     </plurals>
     <string name="uv_loading">Učitavanje…</string>
     <string name="uv_submit_idea">Pošalji ideju</string>
     <string name="uv_idea_form_title">Pošalji ideju</string>
     <string name="uv_menu_search">Pretraga</string>
     <string name="uv_email_address">Email adresa</string>
-    <string name="uv_email_address_hint">your@email.com (obavezno)</string>
+    <string name="uv_email_address_hint">vaš@email.com (obavezno)</string>
     <string name="uv_display_name">Ime</string>
     <string name="uv_password">Lozinka</string>
     <string name="uv_forgot_password">Zaboravljena lozinka</string>
@@ -54,13 +54,13 @@
     <string name="uv_send_message">Šalji poruku</string>
     <string name="uv_your_email_address">Vaša email adresa</string>
     <string name="uv_your_name">Vaše ime</string>
-    <string name="uv_name_hint">“Anonymous”</string>
+    <string name="uv_name_hint">"Anoniman"</string>
     <string name="uv_select_one">Odaberi</string>
     <string name="uv_value">Vrijednost</string>
     <string name="uv_article">Članak</string>
     <string name="uv_idea">Ideja</string>
     <string name="uv_msg_ticket_created">Vaša poruka je poslana</string>
-    <string name="uv_msg_idea_created">Vaša iedja je kreirana</string>
+    <string name="uv_msg_idea_created">Vaša ideja je kreirana</string>
     <string name="uv_article_instant_answer_question">Da li ovaj članak pomaže?</string>
     <string name="uv_suggestion_instant_answer_question">Da li je ova ideja korisna?</string>
     <string name="uv_no">Ne</string>
@@ -70,15 +70,15 @@
     <string name="uv_unhelpful_article_message_question">Želite li nam poslati poruku?</string>
     <string name="uv_idea_description_heading">Opišite detaljnije svoju ideju</string>
     <string name="uv_category">Kategorija</string>
-    <string name="uv_idea_description_hint">(opcija)</string>
+    <string name="uv_idea_description_hint">(opcionalno)</string>
     <string name="uv_idea_text_heading">Predlažem da…</string>
     <string name="uv_idea_text_hint">Unesite svoju ideju…</string>
-    <string name="uv_idea_form_help">Kad apošaljete ideju u naš forum, ostali će se moći pretplatiti na ideju i kometirati. Ako mi odgovorimo, bit ćete obaviješteni.</string>
+    <string name="uv_idea_form_help">Kada pošaljete ideju u naš forum, ostali će se moći pretplatiti na ideju i komentirati. Ako mi odgovorimo, bit ćete obaviješteni.</string>
     <string name="uv_contact_us">Kontakt</string>
     <string name="uv_close">Zatvori</string>
     <string name="uv_new_comment">Novi komentar</string>
     <string name="uv_error">Greška</string>
-    <string name="uv_msg_user_identity_validation">Unesite svoj email address</string>
+    <string name="uv_msg_user_identity_validation">Unesite svoju email adresu</string>
     <string name="uv_status_format">Status: %1$s</string>
     <string name="uv_subscribe">Pretplati se</string>
     <string name="uv_nevermind">Nema veze</string>
@@ -107,7 +107,7 @@
     <string name="uv_password_dialog_title">Molim upišite lozinku</string>
     <string name="uv_article_browse_question">Da li je ovaj članak pomogao?</string>
     <string name="uv_thanks">Hvala!</string>
-    <string name="uv_powered_by_uservoice">Powered by UserVoice</string>
+    <string name="uv_powered_by_uservoice">Omogućio UserVoice</string>
     <string name="uv_android_sdk">Android SDK</string>
     <string name="uv_msg_bad_email_format">Molim upišite ispravnu email adresu.</string>
 </resources>
