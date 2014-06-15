@@ -4,7 +4,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.9.+'
+        classpath 'com.android.tools.build:gradle:0.11.+'
     }
 }
 
@@ -17,11 +17,9 @@ repositories {
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.3"
+    buildToolsVersion "19.1.0"
 
     defaultConfig {
-        minSdkVersion 8
-        targetSdkVersion 19
         versionName project.version
     }
 
@@ -48,26 +46,28 @@ android {
             runProguard false
         }
         release {
-            runProguard true
+            runProguard false
             signingConfig signingConfigs.release
         }
     }
 }
 
 task askForPasswords << {
-  // Must create String because System.readPassword() returns char[]
-  // (and assigning that below fails silently)
-  def storePw = new String(System.console().readPassword("Keystore password: "))
-  def keyPw  = new String(System.console().readPassword("Key password: "))
+    // Must create String because System.readPassword() returns char[]
+    // (and assigning that below fails silently)
+    if (System.console() == null)
+        return;
+    def storePw = new String(System.console().readPassword("Keystore password: "))
+    def keyPw  = new String(System.console().readPassword("Key password: "))
 
-  android.signingConfigs.release.storePassword = storePw
-  android.signingConfigs.release.keyPassword = keyPw
+    android.signingConfigs.release.storePassword = storePw
+    android.signingConfigs.release.keyPassword = keyPw
 }
 
 tasks.whenTaskAdded { theTask -> 
-  if (theTask.name.equals("packageRelease")) {
-    theTask.dependsOn "askForPasswords"
-  }
+    if (theTask.name.equals("packageRelease")) {
+        theTask.dependsOn "askForPasswords"
+    }
 }
 
 dependencies {

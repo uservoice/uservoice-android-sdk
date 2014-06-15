@@ -5,8 +5,10 @@
 out
 .idea/workspace.xml
 .idea/libraries
+.idea/inspectionProfiles
 .settings
 proguard_logs
+build/*
 */build/*
 .gradle
 local.properties

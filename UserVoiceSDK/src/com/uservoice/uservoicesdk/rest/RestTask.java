@@ -1,14 +1,13 @@
 package com.uservoice.uservoicesdk.rest;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import android.net.Uri;
+import android.net.http.AndroidHttpClient;
+import android.os.AsyncTask;
+import android.util.Log;
 
-import oauth.signpost.OAuthConsumer;
+import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.UserVoice;
+import com.uservoice.uservoicesdk.model.AccessToken;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -26,14 +25,15 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.net.Uri;
-import android.net.http.AndroidHttpClient;
-import android.os.AsyncTask;
-import android.util.Log;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
-import com.uservoice.uservoicesdk.Session;
-import com.uservoice.uservoicesdk.UserVoice;
-import com.uservoice.uservoicesdk.model.AccessToken;
+import oauth.signpost.OAuthConsumer;
 
 public class RestTask extends AsyncTask<String, String, RestResult> {
     private String urlPath;

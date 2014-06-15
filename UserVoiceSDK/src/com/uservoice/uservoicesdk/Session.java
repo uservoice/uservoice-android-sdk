@@ -1,16 +1,9 @@
 package com.uservoice.uservoicesdk;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import oauth.signpost.OAuthConsumer;
-import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.model.AccessToken;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.ClientConfig;
@@ -21,6 +14,13 @@ import com.uservoice.uservoicesdk.model.RequestToken;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.model.Topic;
 import com.uservoice.uservoicesdk.model.User;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import oauth.signpost.OAuthConsumer;
+import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 
 public class Session {
 

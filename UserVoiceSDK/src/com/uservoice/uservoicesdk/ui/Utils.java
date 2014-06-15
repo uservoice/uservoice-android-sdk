@@ -1,22 +1,19 @@
 package com.uservoice.uservoicesdk.ui;
 
-import java.util.Locale;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.FragmentActivity;
 import android.util.TypedValue;
 import android.view.View;
 import android.webkit.WebChromeClient;
-import android.webkit.WebSettings.PluginState;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.graphics.Color;
 
 import com.seppius.i18n.plurals.PluralResources;
 import com.uservoice.uservoicesdk.R;
@@ -28,6 +25,8 @@ import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.BaseModel;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.model.Topic;
+
+import java.util.Locale;
 
 public class Utils {
 
@@ -41,7 +40,6 @@ public class Utils {
         String html = String.format("<html><head><meta charset=\"utf-8\"><link rel=\"stylesheet\" type=\"text/css\" href=\"http://cdn.uservoice.com/stylesheets/vendor/typeset.css\"/><style>%s</style></head><body class=\"typeset\" style=\"font-family: sans-serif; margin: 1em\"><h3>%s</h3>%s</body></html>", styles, article.getTitle(), article.getHtml());
         webView.setWebChromeClient(new WebChromeClient());
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setPluginState(PluginState.ON);
         webView.loadUrl(String.format("data:text/html;charset=utf-8,%s", Uri.encode(html)));
     }
 
