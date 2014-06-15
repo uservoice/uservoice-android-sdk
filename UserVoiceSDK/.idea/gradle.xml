@@ -5,13 +5,7 @@
       <GradleProjectSettings>
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/UVDemo" />
-            <option value="$PROJECT_DIR$/UserVoiceSDK" />
-          </set>
-        </option>
+        <option name="gradleHome" value="/usr/local/Cellar/gradle/1.11/libexec" />
       </GradleProjectSettings>
     </option>
   </component>

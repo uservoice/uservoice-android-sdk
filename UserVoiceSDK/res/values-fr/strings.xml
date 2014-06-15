@@ -21,6 +21,11 @@
         <item quantity="other">idées</item>
     </plurals>
     
+    <plurals name="uv_people">
+        <item quantity="one">personne</item>
+        <item quantity="other">personnes</item>
+    </plurals>
+
     <plurals name="uv_number_of_subscribers_format">
         <item quantity="one">%1$s veut cette idée</item>
         <item quantity="other">%1$s veulent cette idée</item>
@@ -31,39 +36,44 @@
     <string name="uv_idea_form_title">Poster une idée</string>
     <string name="uv_menu_search">Recherche</string>
     <string name="uv_email_address">Adresse e-mail</string>
-    <string name="uv_email_address_hint">your@email.com (requis)</string>
+    <string name="uv_email_address_hint">votre@email.com (requis)</string>
     <string name="uv_display_name">Nom d\'utilisateur</string>
     <string name="uv_password">Mot de passe</string>
     <string name="uv_forgot_password">Mot de passe oublié</string>
     <string name="uv_msg_comment_posted">Votre commentaire a été posté</string>
+    <string name="uv_title_idea">Idée</string>
     <string name="uv_posted_by_format">Posté par %1$s sur %2$s</string>
     <string name="uv_all_articles">Tous les Articles</string>
     <string name="uv_portal_title">Aide</string>
     <string name="uv_network_error">Erreur à la connexion avec Uservoice</string>
-    <string name="uv_signin_dialog_title">Sign in</string>
-    <string name="uv_signin_dialog_ok">Sign in</string>
+    <string name="uv_signin_dialog_title">Connexion</string>
+    <string name="uv_signin_dialog_ok">Connexion</string>
     <string name="uv_failed_signin_error">Email ou mot de passe incorrect</string>
     <string name="uv_msg_forgot_password">Email de récupération envoyé</string>
     <string name="uv_subscribe_dialog_title">Abonnez-vous à cette idée</string>
-    <string name="uv_feedback_forum">Feedback Forum</string>
-    <string name="uv_knowledge_base">Knowledge Base</string>
+    <string name="uv_remove_votes">Enlever des votes</string>
+    <string name="uv_feedback_forum">Suggestions</string>
+    <string name="uv_knowledge_base">Base de connaissances</string>
     <string name="uv_admin_response_format">Réponse des administrateurs: %1$s</string>
     <string name="uv_post_comment">Poster commentaire</string>
     <string name="uv_next">Suivant</string>
+    <string name="uv_none_of_these_help">Aucun n\'aide</string>
     <string name="uv_send_message">Envoyer message</string>
     <string name="uv_your_email_address">Votre adresse email</string>
     <string name="uv_your_name">Votre nom</string>
     <string name="uv_name_hint">“Anonyme”</string>
     <string name="uv_select_one">Sélectionner</string>
     <string name="uv_value">Valeur</string>
+    <string name="uv_article">Article</string>
+    <string name="uv_idea">Idée</string>
     <string name="uv_msg_ticket_created">Votre message a été envoyé</string>
     <string name="uv_msg_idea_created">Votre idée a été créée</string>
     <string name="uv_article_instant_answer_question">Cet article vous a-t-il aidé\u00a0?</string>
+    <string name="uv_suggestion_instant_answer_question">Cette idée vous a-t-elle aidée\u00a0?</string>
     <string name="uv_no">Non</string>
     <string name="uv_yes">Oui</string>
     <string name="uv_very_yes">Oui\u00a0!</string>
     <string name="uv_helpful_article_message_question">Etes-vous sûrs de vouloir envoyer cette question\u00a0?</string>
-    <string name="uv_unhelpful_article_message_question">Would you like to send us a message?</string>
     <string name="uv_idea_description_heading">Détaillez-votre idée</string>
     <string name="uv_category">Catégorie</string>
     <string name="uv_idea_description_hint">(optionnel)</string>
@@ -72,8 +82,10 @@
     <string name="uv_idea_form_help">Lorsque vous postez une idée sur nos forums, d\'autres pourront s\'y abonner et la commenter. Lorsque nous réagirons à votre idée, vous serez notifiés.</string>
     <string name="uv_contact_us">Nous contacter</string>
     <string name="uv_close">Fermer</string>
+    <string name="uv_new_comment">Nouveau commentaire</string>
     <string name="uv_error">Erreur</string>
     <string name="uv_msg_user_identity_validation">Entrez votre adresse mail svp</string>
+    <string name="uv_status_format">Status: %1$s</string>
     <string name="uv_subscribe">S\'abonner</string>
     <string name="uv_nevermind">sans façons</string>
     <string name="uv_msg_subscribe">Nous vous informerons de l\'avancement de cette idée</string>
@@ -97,9 +109,5 @@
 	<string name="uv_confirm">Confirmer</string>
 	<string name="uv_msg_confirm_discard_idea">Etes-vous sûr de vouloir abandonner cette idée\u00a0?</string>
 	<string name="uv_msg_confirm_discard_message">Etes-vous sûr de vouloir abandonner ce message\u00a0?</string>
-    <string name="uv_post_an_idea">Poster une idée</string>
-    <string name="uv_password_dialog_title">Please enter your password</string>
-    <string name="uv_article_browse_question">Was this article helpful?</string>
-    <string name="uv_thanks">Merci!</string>
-    <string name="uv_msg_bad_email_format">Please enter a valid email address.</string>
+    <string name="uv_msg_bad_email_format">S\'il vous plait entez une adresse email valide.</string>
 </resources>

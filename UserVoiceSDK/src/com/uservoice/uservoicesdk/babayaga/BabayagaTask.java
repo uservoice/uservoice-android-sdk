@@ -47,8 +47,17 @@ public class BabayagaTask extends AsyncTask<String, String, Void> {
             if (eventProps != null && !eventProps.isEmpty()) {
                 data.put("e", eventProps);
             }
-            String subdomainId = Session.getInstance().getClientConfig().getSubdomainId();
-            StringBuilder url = new StringBuilder(String.format("https://%s/t/%s/%s/%s", Babayaga.DOMAIN, subdomainId, Babayaga.CHANNEL, event));
+            String subdomain;
+            String route;
+            if (Session.getInstance().getClientConfig() != null) {
+                subdomain = Session.getInstance().getClientConfig().getSubdomainId();
+                route = "t";
+            } else {
+                subdomain = Session.getInstance().getConfig().getSite().split("\\.")[0];
+                route = "t/k";
+            }
+            String channel = event.equals(Babayaga.Event.VIEW_APP) ? Babayaga.EXTERNAL_CHANNEL : Babayaga.CHANNEL;
+            StringBuilder url = new StringBuilder(String.format("https://%s/%s/%s/%s/%s", Babayaga.DOMAIN, route, subdomain, channel, event));
             if (uvts != null) {
                 url.append("/");
                 url.append(uvts);
@@ -64,6 +73,7 @@ public class BabayagaTask extends AsyncTask<String, String, Void> {
                     throw new RuntimeException(e);
                 }
             }
+            Log.d("UV", url.toString());
 
             HttpRequestBase request = new HttpGet();
             request.setURI(new URI(url.toString()));

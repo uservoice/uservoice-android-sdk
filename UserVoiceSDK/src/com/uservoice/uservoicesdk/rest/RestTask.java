@@ -1,12 +1,14 @@
 package com.uservoice.uservoicesdk.rest;
 
-import android.net.Uri;
-import android.net.http.AndroidHttpClient;
-import android.os.AsyncTask;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
-import com.uservoice.uservoicesdk.Session;
-import com.uservoice.uservoicesdk.UserVoice;
-import com.uservoice.uservoicesdk.model.AccessToken;
+import oauth.signpost.OAuthConsumer;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -24,15 +26,14 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import android.net.Uri;
+import android.net.http.AndroidHttpClient;
+import android.os.AsyncTask;
+import android.util.Log;
 
-import oauth.signpost.OAuthConsumer;
+import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.UserVoice;
+import com.uservoice.uservoicesdk.model.AccessToken;
 
 public class RestTask extends AsyncTask<String, String, RestResult> {
     private String urlPath;
@@ -67,6 +68,7 @@ public class RestTask extends AsyncTask<String, String, RestResult> {
                 }
                 consumer.sign(request);
             }
+            Log.d("UV", urlPath);
             request.setHeader("Accept-Language", Locale.getDefault().getLanguage());
             request.setHeader("API-Client", String.format("uservoice-android-%s", UserVoice.getVersion()));
             client = AndroidHttpClient.newInstance(String.format("uservoice-android-%s", UserVoice.getVersion()), Session.getInstance().getContext());
