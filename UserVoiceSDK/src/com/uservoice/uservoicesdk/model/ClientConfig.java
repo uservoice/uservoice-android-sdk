@@ -8,8 +8,10 @@ import org.json.JSONObject;
 
 import android.content.SharedPreferences;
 
+import com.uservoice.uservoicesdk.Config;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.rest.Callback;
+import com.uservoice.uservoicesdk.rest.RestResult;
 import com.uservoice.uservoicesdk.rest.RestTaskCallback;
 
 public class ClientConfig extends BaseModel {
@@ -25,8 +27,14 @@ public class ClientConfig extends BaseModel {
     private String accountName;
 
     public static void loadClientConfig(final Callback<ClientConfig> callback) {
-        String path = Session.getInstance().getConfig().getKey() == null ? "/clients/default.json" : "/client.json";
-        final String cacheKey = String.format("uv-client-%s-%s", Session.getInstance().getConfig().getSite(), Session.getInstance().getConfig().getKey());
+        Config config = Session.getInstance().getConfig();
+        if (config == null) {
+            RestResult restResult = new RestResult(new Exception("Uservoice config not loaded."));
+            callback.onError(restResult);
+            return;
+        }
+        String path = config.getKey() == null ? "/clients/default.json" : "/client.json";
+        final String cacheKey = String.format("uv-client-%s-%s", config.getSite(), config.getKey());
         final SharedPreferences prefs = Session.getInstance().getSharedPreferences();
         // cache the client config and then request it in the background
         ClientConfig clientConfig = load(prefs, cacheKey, "client", ClientConfig.class);
