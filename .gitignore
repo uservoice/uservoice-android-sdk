@@ -8,3 +8,5 @@ out
 proguard_logs
 */build/*
 .gradle
+.idea
+build

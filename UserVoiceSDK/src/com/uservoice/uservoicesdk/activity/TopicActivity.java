@@ -21,7 +21,8 @@ import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.Topic;
 import com.uservoice.uservoicesdk.rest.Callback;
-import com.uservoice.uservoicesdk.ui.LoadAllAdapter;
+import com.uservoice.uservoicesdk.ui.PaginatedAdapter;
+import com.uservoice.uservoicesdk.ui.PaginationScrollListener;
 
 public class TopicActivity extends BaseListActivity implements SearchActivity {
 
@@ -40,7 +41,7 @@ public class TopicActivity extends BaseListActivity implements SearchActivity {
                 public boolean onNavigationItemSelected(int itemPosition, long itemId) {
                     Topic topic = Session.getInstance().getTopics().get(itemPosition);
                     Session.getInstance().setTopic(topic);
-                    ((LoadAllAdapter<Article>) getListAdapter()).reload();
+                    getModelAdapter().reload();
                     return true;
                 }
             });
@@ -49,14 +50,24 @@ public class TopicActivity extends BaseListActivity implements SearchActivity {
 
         setTitle(null);
         getListView().setDivider(null);
-        setListAdapter(new LoadAllAdapter<Article>(this, R.layout.uv_text_item, new ArrayList<Article>()) {
+        setListAdapter(new PaginatedAdapter<Article>(this, R.layout.uv_text_item, new ArrayList<Article>()) {
             @Override
             protected void loadPage(int page, Callback<List<Article>> callback) {
                 Topic topic = Session.getInstance().getTopic();
                 if (topic == Topic.ALL_ARTICLES) {
-                    Article.loadAll(callback);
+                    Article.loadPage(page, callback);
                 } else {
-                    Article.loadForTopic(topic.getId(), callback);
+                    Article.loadPageForTopic(topic.getId(), page, callback);
+                }
+            }
+
+            @Override
+            public int getTotalNumberOfObjects() {
+                Topic topic = Session.getInstance().getTopic();
+                if (topic == Topic.ALL_ARTICLES) {
+                    return -1; // we don't know. keep trying to load more.
+                } else {
+                    return topic.getNumberOfArticles();
                 }
             }
 
@@ -73,6 +84,8 @@ public class TopicActivity extends BaseListActivity implements SearchActivity {
                 }
             }
         });
+
+        getListView().setOnScrollListener(new PaginationScrollListener(getModelAdapter()));
 
         getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -106,5 +119,10 @@ public class TopicActivity extends BaseListActivity implements SearchActivity {
             return true;
         }
         return super.onMenuItemSelected(featureId, item);
+    }
+
+    @SuppressWarnings("unchecked")
+    public PaginatedAdapter<Article> getModelAdapter() {
+        return (PaginatedAdapter<Article>) getListAdapter();
     }
 }

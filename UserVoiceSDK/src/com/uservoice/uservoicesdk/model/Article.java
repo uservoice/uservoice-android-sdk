@@ -18,9 +18,11 @@ public class Article extends BaseModel {
     private String topicName;
     private int weight;
 
-    public static void loadAll(final Callback<List<Article>> callback) {
+    public static void loadPage(int page, final Callback<List<Article>> callback) {
         Map<String, String> params = new HashMap<String, String>();
         params.put("sort", "ordered");
+        params.put("per_page", "50");
+        params.put("page", String.valueOf(page));
         doGet(apiPath("/articles.json"), params, new RestTaskCallback(callback) {
             @Override
             public void onComplete(JSONObject result) throws JSONException {
@@ -29,9 +31,11 @@ public class Article extends BaseModel {
         });
     }
 
-    public static void loadForTopic(int topicId, final Callback<List<Article>> callback) {
+    public static void loadPageForTopic(int topicId, int page, final Callback<List<Article>> callback) {
         Map<String, String> params = new HashMap<String, String>();
         params.put("sort", "ordered");
+        params.put("per_page", "50");
+        params.put("page", String.valueOf(page));
         doGet(apiPath("/topics/%d/articles.json", topicId), params, new RestTaskCallback(callback) {
             @Override
             public void onComplete(JSONObject result) throws JSONException {

@@ -93,14 +93,14 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
         };
 
         if (Session.getInstance().getConfig().getTopicId() != -1) {
-            Article.loadForTopic(Session.getInstance().getConfig().getTopicId(), articlesCallback);
+            Article.loadPageForTopic(Session.getInstance().getConfig().getTopicId(), 1, articlesCallback);
         } else {
             Topic.loadTopics(new DefaultCallback<List<Topic>>(context) {
                 @Override
                 public void onModel(List<Topic> model) {
                     if (model.isEmpty()) {
                         Session.getInstance().setTopics(model);
-                        Article.loadAll(articlesCallback);
+                        Article.loadPage(1, articlesCallback);
                     } else {
                         ArrayList<Topic> topics = new ArrayList<Topic>(model);
                         topics.add(Topic.ALL_ARTICLES);

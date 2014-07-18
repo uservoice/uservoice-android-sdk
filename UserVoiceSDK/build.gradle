@@ -4,7 +4,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.9.+'
+        classpath 'com.android.tools.build:gradle:0.12.+'
     }
 }
 
@@ -16,7 +16,7 @@ repositories {
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.3"
+    buildToolsVersion '19.1.0'
 
     sourceSets {
         main {
@@ -29,7 +29,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:19.0.1'
+    compile 'com.android.support:support-v4:20.+'
     compile 'commons-codec:commons-codec:1.8'
     compile 'oauth.signpost:signpost-commonshttp4:1.2.1.2'
     compile 'oauth.signpost:signpost-core:1.2.1.2'
