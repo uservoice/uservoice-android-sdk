@@ -10,3 +10,4 @@ proguard_logs
 .gradle
 .idea
 build
+local.properties
