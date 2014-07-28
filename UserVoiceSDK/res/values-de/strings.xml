@@ -6,8 +6,8 @@
         <item quantity="other">Kommentare</item>
     </plurals>
     <plurals name="uv_subscribers">
-        <item quantity="one">Abonnet</item>
-        <item quantity="other">Abonnenten</item>
+        <item quantity="one">Person</item>
+        <item quantity="other">Personen</item>
     </plurals>
     <plurals name="uv_articles">
         <item quantity="one">Artikel</item>
@@ -19,18 +19,18 @@
     </plurals>
     <plurals name="uv_people">
         <item quantity="one">Person</item>
-        <item quantity="other">Menschen</item>
+        <item quantity="other">Personen</item>
     </plurals>
     <plurals name="uv_number_of_subscribers_format">
-        <item quantity="one">%1$s will diese Ide</item>
+        <item quantity="one">%1$s will diese Idee</item>
         <item quantity="other">%1$s wollen diese Idee</item>
     </plurals>
 
     <string name="uv_loading">laden&#8230;</string>
-    <string name="uv_submit_idea">Idee einreichen</string>
+    <string name="uv_submit_idea">Idee veröffentlichen</string>
     <string name="uv_idea_form_title">Sende eine Idee</string>
     <string name="uv_menu_search">Suchen</string>
-    <string name="uv_email_address">Email Adresse</string>
+    <string name="uv_email_address">E-Mail Adresse</string>
     <string name="uv_email_address_hint">deine@email.de (benötigt)</string>
     <string name="uv_display_name">Anzeigename</string>
     <string name="uv_password">Passwort</string>
@@ -43,9 +43,9 @@
     <string name="uv_network_error">Es ist ein Problem beim verbinden zu UserVoice aufgetreten</string>
     <string name="uv_signin_dialog_title">Registrieren</string>
     <string name="uv_signin_dialog_ok">Registrieren</string>
-    <string name="uv_failed_signin_error">Falsche Email oder Passwort</string>
-    <string name="uv_msg_forgot_password">Passwort vergessen Email gesendet</string>
-    <string name="uv_subscribe_dialog_title">Diese Idee abonieren</string>
+    <string name="uv_failed_signin_error">E-Mail oder Passwort falsch</string>
+    <string name="uv_msg_forgot_password">Passwort vergessen E-Mail gesendet</string>
+    <string name="uv_subscribe_dialog_title">Diese Idee abonnieren</string>
     <string name="uv_remove_votes">Abstimmungen entfernen</string>
     <string name="uv_feedback_forum">Feedback Forum</string>
     <string name="uv_knowledge_base">Knowledge Base</string>
@@ -54,8 +54,8 @@
     <string name="uv_next">Weiter</string>
     <string name="uv_none_of_these_help">Nichts davon hilft</string>
     <string name="uv_send_message">Nachricht senden</string>
-    <string name="uv_your_email_address">Deine Email Adresse</string>
-    <string name="uv_your_name">Dein Name</string>
+    <string name="uv_your_email_address">E-Mail Adresse</string>
+    <string name="uv_your_name">Name</string>
     <string name="uv_name_hint">“Anonym”</string>
     <string name="uv_select_one">Einen auswählen</string>
     <string name="uv_value">Wert</string>
@@ -68,31 +68,31 @@
     <string name="uv_no">Nein</string>
     <string name="uv_yes">Ja</string>
     <string name="uv_very_yes">Ja!</string>
-    <string name="uv_helpful_article_message_question">Möchtest du immer noch eine Nachricht senden?</string>
+    <string name="uv_helpful_article_message_question">Möchtest du immernoch eine Nachricht senden?</string>
     <string name="uv_unhelpful_article_message_question">Möchtest du uns eine Nachricht schicken?</string>
-    <string name="uv_idea_description_heading">Beschreibe deine Idee ausführlicher</string>
+    <string name="uv_idea_description_heading">Beschreibung (optional)</string>
     <string name="uv_category">Kategorie</string>
-    <string name="uv_idea_description_hint">(optional)</string>
-    <string name="uv_idea_text_heading">Ich empfehle dir&#8230;</string>
-    <string name="uv_idea_text_hint">Gib deine Idee ein&#8230;</string>
-    <string name="uv_idea_form_help">Wenn du eine Idee an unser Forum schreibst, können andere diese abonieren und kommentieren. Wenn wir auf deine Idee antworten, wirst du darüber benachrichtigt.</string>
-    <string name="uv_contact_us">Kontaktiere uns</string>
+    <string name="uv_idea_description_hint">Beschreibe deine Idee</string>
+    <string name="uv_idea_text_heading">Ich schlage folgende Funktion vor&#8230;</string>
+    <string name="uv_idea_text_hint">Gib den Titel für deine Idee ein&#8230;</string>
+    <string name="uv_idea_form_help">Wenn du eine Idee an unser Forum schreibst, können andere diese abonnieren und kommentieren. Wenn wir auf deine Idee antworten, wirst du darüber benachrichtigt.</string>
+    <string name="uv_contact_us">Sende uns eine Nachricht</string>
     <string name="uv_close">Schließen</string>
     <string name="uv_new_comment">Neuer Kommentar</string>
     <string name="uv_error">Fehler</string>
-    <string name="uv_msg_user_identity_validation">Gib bitte deine Email Adresse ein</string>
+    <string name="uv_msg_user_identity_validation">Gib bitte deine E-Mail Adresse ein</string>
     <string name="uv_status_format">Status: %1$s</string>
-    <string name="uv_subscribe">Aboniere</string>
-    <string name="uv_nevermind">Macht nichts</string>
-    <string name="uv_msg_subscribe">Wir halten dich über den Bearbeitungsstand dieser Idee auf den laufenden.</string>
-    <string name="uv_msg_subscribe_success">Du hast diese Idee abonniert.</string>
-    <string name="uv_msg_unsubscribe">Du hast das Abonnement dieser Idee aufgehoben</string>
+    <string name="uv_subscribe">Abonniere</string>
+    <string name="uv_nevermind">abbrechen</string>
+    <string name="uv_msg_subscribe">Wir halten dich zu dieser Idee auf dem laufenden.</string>
+    <string name="uv_msg_subscribe_success">Du hast für diese Idee gestimmt.</string>
+    <string name="uv_msg_unsubscribe">Du stimmst nicht mehr für dieser Idee.</string>
     <string name="uv_msg_custom_fields_validation">Fülle bitte alle benötigten Felder aus.</string>
     <string name="uv_contact_hint">Gib deine Frage oder Feedback ein</string>
     <string name="uv_matching_ideas">Passende Ideen</string>
     <string name="uv_matching_articles">Passende Artikel</string>
     <string name="uv_matching_articles_and_ideas">Passende Artikel und Ideen</string>
-    <string name="uv_post_idea_continue_button">Ich möchte meine Idee immer noch einbringen</string>
+    <string name="uv_post_idea_continue_button">Ich möchte meine Idee immer noch veröffentlichen</string>
     <string name="uv_contact_continue_button">Ich möchte meine Nachricht immer noch senden</string>
     <string name="uv_i_want_this">Ich will das!</string>
     <string name="uv_post_a_comment">Kommentar schreiben</string>
@@ -105,12 +105,12 @@
     <string name="uv_confirm">Bestätigen</string>
     <string name="uv_msg_confirm_discard_idea">Sind Sie sicher, dass Sie Ihre Idee verwerfen wollen?</string>
     <string name="uv_msg_confirm_discard_message">Sind Sie sicher, dass Sie Ihre Nachricht verwerfen wollen?</string>
-    <string name="uv_post_an_idea">Idee einbringen</string>
+    <string name="uv_post_an_idea">Idee veröffentlichen</string>
     <string name="uv_password_dialog_title">Gib bitte dein Passwort ein</string>
     <string name="uv_article_browse_question">War dieser Artikel hilfreich?</string>
     <string name="uv_thanks">Danke!</string>
     <string name="uv_powered_by_uservoice">Powered by UserVoice</string>
     <string name="uv_android_sdk">Android SDK</string>
-    <string name="uv_msg_bad_email_format">Gib bitte eine gültige Email Adresse ein.</string>
+    <string name="uv_msg_bad_email_format">Bitte gib eine gültige E-Mail Adresse ein.</string>
 
 </resources>
