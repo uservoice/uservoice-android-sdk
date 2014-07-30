@@ -13,6 +13,7 @@ public class Config {
     private String email;
     private String name;
     private String guid;
+    private String defaultText;
     private Map<String, String> customFields = new HashMap<String, String>();
     private int topicId = -1;
     private int forumId = -1;
@@ -54,6 +55,12 @@ public class Config {
 
     public String getGuid() {
         return guid;
+    }
+
+    public String getDefaultText() { return defaultText; }
+
+    public void setDefaultText(String defaultText) {
+        this.defaultText = defaultText;
     }
 
     public Map<String, String> getCustomFields() {
