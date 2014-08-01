@@ -1,5 +1,6 @@
 package com.uservoice.uservoicesdk.rest;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class RestResult {
@@ -41,5 +42,13 @@ public class RestResult {
 
     public String getMessage() {
         return String.format("%s -- %s", exception == null ? String.valueOf(statusCode) : exception.getMessage(), object);
+    }
+
+    public String getType() {
+        try {
+            return object.getJSONObject("errors").getString("type");
+        } catch (JSONException e) {
+            return null;
+        }
     }
 }
