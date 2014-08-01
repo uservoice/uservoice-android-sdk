@@ -12,7 +12,6 @@ import android.content.SharedPreferences.Editor;
 
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.model.AccessToken;
-import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.ClientConfig;
 import com.uservoice.uservoicesdk.model.Forum;
 import com.uservoice.uservoicesdk.model.RequestToken;
@@ -46,7 +45,6 @@ public class Session {
     private ClientConfig clientConfig;
     private Forum forum;
     private List<Topic> topics;
-    private List<Article> articles;
     private Map<String, String> externalIds = new HashMap<String, String>();
     private Runnable signinListener;
 
@@ -164,14 +162,6 @@ public class Session {
 
     public List<Topic> getTopics() {
         return topics;
-    }
-
-    public List<Article> getArticles() {
-        return articles;
-    }
-
-    public void setArticles(List<Article> articles) {
-        this.articles = articles;
     }
 
     public void setSignInListener(Runnable runnable) {
