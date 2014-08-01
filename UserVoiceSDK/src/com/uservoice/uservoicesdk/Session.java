@@ -14,11 +14,8 @@ import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.model.AccessToken;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.ClientConfig;
-import com.uservoice.uservoicesdk.model.Comment;
-import com.uservoice.uservoicesdk.model.CustomField;
 import com.uservoice.uservoicesdk.model.Forum;
 import com.uservoice.uservoicesdk.model.RequestToken;
-import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.model.Topic;
 import com.uservoice.uservoicesdk.model.User;
 
@@ -51,11 +48,6 @@ public class Session {
     private List<Topic> topics;
     private List<Article> articles;
     private Map<String, String> externalIds = new HashMap<String, String>();
-    private Suggestion suggestion;
-    private Article article;
-    private Topic topic;
-    private Comment comment;
-    private CustomField customField;
     private Runnable signinListener;
 
     public Context getContext() {
@@ -166,38 +158,6 @@ public class Session {
         this.forum = forum;
     }
 
-    public Suggestion getSuggestion() {
-        return suggestion;
-    }
-
-    public void setSuggestion(Suggestion suggestion) {
-        this.suggestion = suggestion;
-    }
-
-    public Article getArticle() {
-        return article;
-    }
-
-    public void setArticle(Article article) {
-        this.article = article;
-    }
-
-    public Topic getTopic() {
-        return topic;
-    }
-
-    public void setTopic(Topic topic) {
-        this.topic = topic;
-    }
-
-    public Comment getComment() {
-        return comment;
-    }
-
-    public void setComment(Comment comment) {
-        this.comment = comment;
-    }
-
     public void setTopics(List<Topic> topics) {
         this.topics = topics;
     }
@@ -212,14 +172,6 @@ public class Session {
 
     public void setArticles(List<Article> articles) {
         this.articles = articles;
-    }
-
-    public void setCustomField(CustomField customField) {
-        this.customField = customField;
-    }
-
-    public CustomField getCustomField() {
-        return customField;
     }
 
     public void setSignInListener(Runnable runnable) {

@@ -104,8 +104,9 @@ public class Utils {
             SuggestionDialogFragment fragment = new SuggestionDialogFragment((Suggestion) model, deflectingType);
             fragment.show(context.getSupportFragmentManager(), "SuggestionDialogFragment");
         } else if (model instanceof Topic) {
-            Session.getInstance().setTopic((Topic) model);
-            context.startActivity(new Intent(context, TopicActivity.class));
+            Intent intent = new Intent(context, TopicActivity.class);
+            intent.putExtra("topic", (Topic) model);
+            context.startActivity(intent);
         }
     }
 }

@@ -30,6 +30,7 @@ public class TopicActivity extends BaseListActivity implements SearchActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Topic topic = getIntent().getParcelableExtra("topic");
         if (hasActionBar()) {
             ActionBar actionBar = getActionBar();
             actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
@@ -40,12 +41,12 @@ public class TopicActivity extends BaseListActivity implements SearchActivity {
                 @SuppressWarnings("unchecked")
                 public boolean onNavigationItemSelected(int itemPosition, long itemId) {
                     Topic topic = Session.getInstance().getTopics().get(itemPosition);
-                    Session.getInstance().setTopic(topic);
+                    getIntent().putExtra("topic", topic);
                     getModelAdapter().reload();
                     return true;
                 }
             });
-            actionBar.setSelectedNavigationItem(Session.getInstance().getTopics().indexOf(Session.getInstance().getTopic()));
+            actionBar.setSelectedNavigationItem(Session.getInstance().getTopics().indexOf(topic));
         }
 
         setTitle(null);
@@ -53,8 +54,8 @@ public class TopicActivity extends BaseListActivity implements SearchActivity {
         setListAdapter(new PaginatedAdapter<Article>(this, R.layout.uv_text_item, new ArrayList<Article>()) {
             @Override
             protected void loadPage(int page, Callback<List<Article>> callback) {
-                Topic topic = Session.getInstance().getTopic();
-                if (topic == Topic.ALL_ARTICLES) {
+                Topic topic = getIntent().getParcelableExtra("topic");
+                if (topic.getId() == -1) {
                     Article.loadPage(page, callback);
                 } else {
                     Article.loadPageForTopic(topic.getId(), page, callback);
@@ -63,8 +64,8 @@ public class TopicActivity extends BaseListActivity implements SearchActivity {
 
             @Override
             public int getTotalNumberOfObjects() {
-                Topic topic = Session.getInstance().getTopic();
-                if (topic == Topic.ALL_ARTICLES) {
+                Topic topic = getIntent().getParcelableExtra("topic");
+                if (topic.getId() == -1) {
                     return -1; // we don't know. keep trying to load more.
                 } else {
                     return topic.getNumberOfArticles();
@@ -73,10 +74,11 @@ public class TopicActivity extends BaseListActivity implements SearchActivity {
 
             @Override
             protected void customizeLayout(View view, Article model) {
+                Topic topic = getIntent().getParcelableExtra("topic");
                 TextView text = (TextView) view.findViewById(R.id.uv_text);
                 TextView text2 = (TextView) view.findViewById(R.id.uv_text2);
                 text.setText(model.getTitle());
-                if (Session.getInstance().getTopic() == Topic.ALL_ARTICLES && model.getTopicName() != null) {
+                if (topic.getId() == -1 && model.getTopicName() != null) {
                     text2.setVisibility(View.VISIBLE);
                     text2.setText(model.getTopicName());
                 } else {
@@ -97,7 +99,7 @@ public class TopicActivity extends BaseListActivity implements SearchActivity {
             }
         });
 
-        Babayaga.track(Babayaga.Event.VIEW_TOPIC, Session.getInstance().getTopic().getId());
+        Babayaga.track(Babayaga.Event.VIEW_TOPIC, topic.getId());
     }
 
     @Override

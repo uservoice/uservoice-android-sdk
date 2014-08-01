@@ -190,7 +190,6 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
                     startActivity(new Intent(ForumActivity.this, PostIdeaActivity.class));
                 } else if (position != 1) {
                     Suggestion suggestion = (Suggestion) getModelAdapter().getItem(position);
-                    Session.getInstance().setSuggestion(suggestion);
                     SuggestionDialogFragment dialog = new SuggestionDialogFragment(suggestion, null);
                     dialog.show(getSupportFragmentManager(), "SuggestionDialogFragment");
                 }
