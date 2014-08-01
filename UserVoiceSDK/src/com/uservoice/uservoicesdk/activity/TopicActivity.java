@@ -91,8 +91,9 @@ public class TopicActivity extends BaseListActivity implements SearchActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Article article = (Article) getListAdapter().getItem(position);
-                Session.getInstance().setArticle(article);
-                startActivity(new Intent(TopicActivity.this, ArticleActivity.class));
+                Intent intent = new Intent(TopicActivity.this, ArticleActivity.class);
+                intent.putExtra("article", article);
+                startActivity(intent);
             }
         });
 

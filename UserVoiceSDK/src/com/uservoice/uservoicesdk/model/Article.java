@@ -1,5 +1,8 @@
 package com.uservoice.uservoicesdk.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,12 +14,14 @@ import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.rest.RestTask;
 import com.uservoice.uservoicesdk.rest.RestTaskCallback;
 
-public class Article extends BaseModel {
+public class Article extends BaseModel implements Parcelable {
 
     private String title;
     private String html;
     private String topicName;
     private int weight;
+
+    public Article() {}
 
     public static void loadPage(int page, final Callback<List<Article>> callback) {
         Map<String, String> params = new HashMap<String, String>();
@@ -88,5 +93,39 @@ public class Article extends BaseModel {
 
     public int getWeight() {
         return weight;
+    }
+
+    //
+    // Parcelable
+    //
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeInt(id);
+        out.writeString(title);
+        out.writeString(html);
+        out.writeString(topicName);
+        out.writeInt(weight);
+    }
+
+    public static final Parcelable.Creator<Article> CREATOR = new Parcelable.Creator<Article>() {
+        public Article createFromParcel(Parcel in) {
+            return new Article(in);
+        }
+
+        public Article[] newArray(int size) {
+            return new Article[size];
+        }
+    };
+
+    private Article(Parcel in) {
+        id = in.readInt();
+        title = in.readString();
+        html = in.readString();
+        topicName = in.readString();
+        weight = in.readInt();
     }
 }
