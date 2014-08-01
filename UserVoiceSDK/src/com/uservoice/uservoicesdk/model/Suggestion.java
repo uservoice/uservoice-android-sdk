@@ -32,6 +32,7 @@ public class Suggestion extends BaseModel {
     private boolean subscribed;
     private String forumName;
     private int weight;
+    private int rank;
 
     public static void loadSuggestions(Forum forum, int page, final Callback<List<Suggestion>> callback) {
         Map<String, String> params = new HashMap<String, String>();
@@ -130,6 +131,9 @@ public class Suggestion extends BaseModel {
         if (object.has("normalized_weight")) {
             weight = object.getInt("normalized_weight");
         }
+        if (object.has("rank")) {
+            rank = object.getInt("rank");
+        }
     }
 
     public String getForumName() {
@@ -202,6 +206,32 @@ public class Suggestion extends BaseModel {
     
     public int getWeight() {
         return weight;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public String getRankString() {
+        String suffix;
+        if (rank % 100 > 10 && rank % 100 < 14) {
+            suffix = "th";
+        } else {
+            switch (rank % 10) {
+            case 1:
+                suffix = "st";
+                break;
+            case 2:
+                suffix = "nd";
+                break;
+            case 3:
+                suffix = "rd";
+                break;
+            default:
+                suffix = "th";
+            }
+        }
+        return String.valueOf(rank) + suffix;
     }
 
 }

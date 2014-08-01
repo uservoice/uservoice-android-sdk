@@ -21,7 +21,6 @@ public class MainActivity extends Activity {
 
 //		Config config = new Config("yoursite.uservoice.com");
         Config config = new Config("demo.uservoice.com");
-//		config.setTopicId(9579);
 //        config.setShowKnowledgeBase(false);
         UserVoice.init(config, this);
 

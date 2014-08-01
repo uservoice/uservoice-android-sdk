@@ -198,8 +198,12 @@ public class SuggestionDialogFragment extends DialogFragmentBugfixed {
         }
 
         ((TextView) view.findViewById(R.id.uv_comment_count)).setText(Utils.getQuantityString(view, R.plurals.uv_comments, suggestion.getNumberOfComments()).toUpperCase(Locale.getDefault()));
-        ((TextView) view.findViewById(R.id.uv_subscriber_count)).setText(String.format(view.getContext().getResources().getQuantityString(R.plurals.uv_number_of_subscribers_format, suggestion.getNumberOfSubscribers()),
-                Utils.getQuantityString(view, R.plurals.uv_subscribers, suggestion.getNumberOfSubscribers())));
+        if (Session.getInstance().getClientConfig().shouldDisplaySuggestionsByRank()) {
+            ((TextView) view.findViewById(R.id.uv_subscriber_count)).setText(String.format(view.getContext().getResources().getString(R.string.uv_ranked), suggestion.getRankString()));
+        } else {
+            ((TextView) view.findViewById(R.id.uv_subscriber_count)).setText(String.format(view.getContext().getResources().getQuantityString(R.plurals.uv_number_of_subscribers_format, suggestion.getNumberOfSubscribers()),
+                  Utils.getQuantityString(view, R.plurals.uv_subscribers, suggestion.getNumberOfSubscribers())));
+        }
     }
 
 }

@@ -123,7 +123,11 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
                 textView.setText(model.getTitle());
 
                 textView = (TextView) view.findViewById(R.id.uv_subscriber_count);
-                textView.setText(String.valueOf(model.getNumberOfSubscribers()));
+                if (Session.getInstance().getClientConfig().shouldDisplaySuggestionsByRank()) {
+                    textView.setText(model.getRankString());
+                } else {
+                    textView.setText(String.valueOf(model.getNumberOfSubscribers()));
+                }
 
                 textView = (TextView) view.findViewById(R.id.uv_suggestion_status);
                 View colorView = view.findViewById(R.id.uv_suggestion_status_color);
