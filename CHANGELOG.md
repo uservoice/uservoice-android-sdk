@@ -1,5 +1,12 @@
 ## master
 
+## 1.1.1
+
+* Translation updates
+* Fix a bug where the sdk could not be used if an admin email address was passed to identifyUser()
+* Fix a few crash sources related to Activity state
+* Add support for displaying suggestion rank
+
 ## 1.1.0
 
 * Fix a bug that sent way too much traffic to the UserVoice api
