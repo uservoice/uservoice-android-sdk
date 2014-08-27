@@ -1,6 +1,7 @@
 package com.uservoice.uservoicesdk.model;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;
@@ -42,6 +43,16 @@ public class Ticket extends BaseModel {
         if (customFields != null) {
             for (Map.Entry<String, String> entry : customFields.entrySet()) {
                 params.put(String.format("ticket[custom_field_values][%s]", entry.getKey()), entry.getValue());
+            }
+        }
+
+        List<Attachment> attachmentList = getSession().getConfig().getAttachmentList();
+        if (attachmentList != null) {
+            for (int i = 0; i < attachmentList.size(); i++) {
+                Attachment attachment = attachmentList.get(i);
+                params.put(String.format("ticket[attachments][%d][name]", i), attachment.getFileName());
+                params.put(String.format("ticket[attachments][%d][data]", i), attachment.getData());
+                params.put(String.format("ticket[attachments][%d][content_type]", i), attachment.getContentType());
             }
         }
 

@@ -3,11 +3,15 @@
 .metadata
 .DS_Store
 out
-.idea/workspace.xml
 .settings
 proguard_logs
 */build/*
 .gradle
-.idea
 build
 local.properties
+
+# Intellij project files
+*.iml
+*.ipr
+*.iws
+.idea/
