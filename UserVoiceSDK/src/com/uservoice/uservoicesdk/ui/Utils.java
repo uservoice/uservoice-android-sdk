@@ -30,7 +30,7 @@ public class Utils {
 
     @SuppressLint("SetJavaScriptEnabled")
     public static void displayArticle(WebView webView, Article article, Context context) {
-        String styles = "iframe, img { width: 100%; }";
+        String styles = "iframe, img { max-width: 100%; }";
         if (isDarkTheme(context)) {
             webView.setBackgroundColor(Color.BLACK);
             styles += "body { background-color: #000000; color: #F6F6F6; } a { color: #0099FF; }";
