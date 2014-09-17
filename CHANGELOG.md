@@ -1,5 +1,10 @@
 ## master
 
+## 1.1.2
+
+* Add programmatic support for ticket attachments
+* Fix issue with stretched images in knowledgebase articles
+
 ## 1.1.1
 
 * Translation updates

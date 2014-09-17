@@ -10,6 +10,27 @@ buildscript {
 
 apply plugin: 'android-library'
 
+apply plugin: 'maven'
+ 
+uploadArchives {
+    repositories.mavenDeployer {
+        pom.groupId = 'com.uservoice'
+        pom.artifactId = 'uservoice-android-sdk'
+        pom.version = '1.1.2'
+        // Add other pom properties here if you want (developer details / licenses)
+        repository(url: "file:///Users/austin/code/")
+    }
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from 'src', 'res'
+}
+
+artifacts {
+    archives sourcesJar
+}
+
 repositories {
     mavenCentral()
 }
@@ -29,7 +50,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:20.+'
+    compile 'com.android.support:support-v4:19.+'
     compile 'commons-codec:commons-codec:1.8'
     compile 'oauth.signpost:signpost-commonshttp4:1.2.1.2'
     compile 'oauth.signpost:signpost-core:1.2.1.2'
