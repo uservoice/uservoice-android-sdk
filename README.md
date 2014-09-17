@@ -6,42 +6,36 @@ You can try out UserVoice for Android by installing the [UserVoice Help Center a
 
 You will need a UserVoice account (free) for it to connect to. Go to [uservoice.com](https://www.uservoice.com/plans/) to sign up.
 
-### Installation for Eclipse
+### Installation
 
-* File -> Import... -> General -> Existing Projects into Workspace
-  * Select the UserVoiceSDK folder
-  * If you wish, also select the UVDemo project (this is a demo of how to connect to the SDK).
-* Select the project you wish to add UserVoice to
-  * Open project properties -> Android -> Library -> Add...
-  * Select the UserVoiceSDK project as a library
-* Add the following code to initialize the UserVoice SDK
-  * Do this either in Application.onCreate or your root Activity.onCreate
-  * We strongly recommend you do this on app launch so that UserVoice can provide accurate analytics.
-  * You can call UserVoice.init again later if you need to change something about the config.
+The best way to install UserVoice for Android is to use gradle and jcenter. First add jcenter to your list of Maven repositories, if needed.
+
+```
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+```
+
+Then, add the UserVoice SDK as a project dependency.
+
+```
+dependencies {
+    compile 'com.uservoice:uservoice-android-sdk:+'
+}
+```
+
+Add the following code to initialize the UserVoice SDK. This code should run whenever the user launches your app (for metrics purposes), but you also need to make sure that it has been run before trying to launch the UserVoice interface. (If a user navigates directly to one of your apps activities and then launches UserVoice, you want it to be initialized first.)
+
+You can also call UserVoice.init() again with a different config if you need different settings in different contexts.
 
 ```
 Config config = new Config("yoursite.uservoice.com");
 UserVoice.init(config, this);
 ```
 
-* Make sure you include an Internet permission in your AndroidManifest.xml
-
-```
-<uses-permission android:name="android.permission.INTERNET"/>
-```
-
-* Add the following activities to the <application> element in your AndroidManifest.xml
-
-```
-<activity android:name="com.uservoice.uservoicesdk.activity.PortalActivity" />
-<activity android:name="com.uservoice.uservoicesdk.activity.ForumActivity" /> 
-<activity android:name="com.uservoice.uservoicesdk.activity.ArticleActivity" />
-<activity android:name="com.uservoice.uservoicesdk.activity.TopicActivity" />
-<activity android:name="com.uservoice.uservoicesdk.activity.ContactActivity" android:configChanges="orientation|keyboardHidden|screenSize" />
-<activity android:name="com.uservoice.uservoicesdk.activity.PostIdeaActivity" android:configChanges="orientation|keyboardHidden|screenSize" />
-```
-
-* Finally, invoke the UserVoice SDK from your application using one of the following methods.
+Finally, invoke the UserVoice SDK from your application using one of the following methods.
 
 ```
 UserVoice.launchUserVoice(this);    // Show the UserVoice portal
