@@ -4,13 +4,14 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.ViewGroup;
-
 import android.view.WindowManager;
+
 import com.uservoice.uservoicesdk.R;
+import com.uservoice.uservoicesdk.compatibility.FragmentListActivity;
 import com.uservoice.uservoicesdk.flow.InitManager;
 import com.uservoice.uservoicesdk.ui.InstantAnswersAdapter;
 
-public abstract class InstantAnswersActivity extends BaseListActivity {
+public abstract class InstantAnswersActivity extends FragmentListActivity {
 
     private InstantAnswersAdapter adapter;
 

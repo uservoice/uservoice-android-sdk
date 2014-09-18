@@ -8,6 +8,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.uservoice.uservoicesdk.R;
@@ -35,9 +36,8 @@ import com.uservoice.uservoicesdk.ui.SearchAdapter;
 import com.uservoice.uservoicesdk.ui.SearchExpandListener;
 import com.uservoice.uservoicesdk.ui.SearchQueryListener;
 
-public class ForumActivity extends BaseListActivity implements SearchActivity {
+public class ForumActivity extends SearchActivity {
 
-    private List<Suggestion> suggestions;
     private Forum forum;
 
     @Override
@@ -45,7 +45,7 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
         super.onCreate(savedInstanceState);
         setTitle(R.string.uv_feedback_forum);
 
-        suggestions = new ArrayList<Suggestion>();
+        List<Suggestion> suggestions = new ArrayList<Suggestion>();
 
         getListView().setDivider(null);
         setListAdapter(new PaginatedAdapter<Suggestion>(this, R.layout.uv_suggestion_item, suggestions) {
@@ -105,7 +105,7 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
                             text.setText(R.string.uv_post_an_idea);
                             view.findViewById(R.id.uv_divider).setVisibility(View.GONE);
                             view.findViewById(R.id.uv_text2).setVisibility(View.GONE);
-                        } else if (type == 3) {
+                        } else {
                             view = getLayoutInflater().inflate(R.layout.uv_header_item_light, null);
                             TextView text = (TextView) view.findViewById(R.id.uv_header_text);
                             text.setText(R.string.uv_idea_text_heading);
@@ -216,12 +216,13 @@ public class ForumActivity extends BaseListActivity implements SearchActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.uv_forum, menu);
+        MenuItem searchItem = menu.findItem(R.id.uv_menu_search);
         if (hasActionBar()) {
-            menu.findItem(R.id.uv_menu_search).setOnActionExpandListener(new SearchExpandListener(this));
-            SearchView search = (SearchView) menu.findItem(R.id.uv_menu_search).getActionView();
+            MenuItemCompat.setOnActionExpandListener(searchItem, new SearchExpandListener(this));
+            SearchView search = (SearchView) MenuItemCompat.getActionView(searchItem);
             search.setOnQueryTextListener(new SearchQueryListener(this));
         } else {
-            menu.findItem(R.id.uv_menu_search).setVisible(false);
+            searchItem.setVisible(false);
         }
         menu.findItem(R.id.uv_new_idea).setVisible(Session.getInstance().getConfig().shouldShowPostIdea());
         return true;

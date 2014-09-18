@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.ViewFlipper;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.activity.BaseActivity;
@@ -60,33 +61,6 @@ public abstract class FragmentListActivity extends BaseActivity {
         super.onRestoreInstanceState(state);
     }
 
-    /**
-     * Updates the screen state (current list and other views) when the content
-     * changes.
-     *
-     * @see Activity#onContentChanged()
-     */
-    @Override
-    public void onContentChanged() {
-        super.onContentChanged();
-
-        // changed references from com.android.internal.R to android.R.*
-        View emptyView = findViewById(android.R.id.empty);
-        mList = (ListView) findViewById(android.R.id.list);
-
-        if (mList == null) {
-            throw new RuntimeException("Your content must have a ListView whose id attribute is " + "'android.R.id.list'");
-        }
-        if (emptyView != null) {
-            mList.setEmptyView(emptyView);
-        }
-        mList.setOnItemClickListener(mOnClickListener);
-        if (mFinishedStart) {
-            setListAdapter(mAdapter);
-        }
-        mHandler.post(mRequestFocus);
-        mFinishedStart = true;
-    }
 
     /**
      * Provide the cursor for the list view.
@@ -139,10 +113,21 @@ public abstract class FragmentListActivity extends BaseActivity {
     }
 
     private void ensureList() {
-        if (mList != null) {
+        if (mList != null)
             return;
+
+        mList = new ListView(this);
+        mList.setId(android.R.id.list);
+        ViewFlipper viewFlipper = new ViewFlipper(this);
+        viewFlipper.setId(R.id.uv_view_flipper);
+        viewFlipper.addView(mList);
+        setContentView(viewFlipper);
+        mList.setOnItemClickListener(mOnClickListener);
+        if (mFinishedStart) {
+            setListAdapter(mAdapter);
         }
-        setContentView(R.layout.uv_list_content);
+        mHandler.post(mRequestFocus);
+        mFinishedStart = true;
     }
 
     private AdapterView.OnItemClickListener mOnClickListener = new AdapterView.OnItemClickListener() {

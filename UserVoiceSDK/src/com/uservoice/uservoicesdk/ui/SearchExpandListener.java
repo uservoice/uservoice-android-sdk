@@ -1,12 +1,13 @@
 package com.uservoice.uservoicesdk.ui;
 
 import android.annotation.SuppressLint;
+import android.support.v4.view.MenuItemCompat;
 import android.view.MenuItem;
 
 import com.uservoice.uservoicesdk.activity.SearchActivity;
 
 @SuppressLint("NewApi")
-public class SearchExpandListener implements MenuItem.OnActionExpandListener {
+public class SearchExpandListener implements MenuItemCompat.OnActionExpandListener {
     private final SearchActivity searchActivity;
 
     public SearchExpandListener(SearchActivity searchActivity) {

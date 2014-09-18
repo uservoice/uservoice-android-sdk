@@ -1,13 +1,14 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:uv="http://schemas.android.com/apk/res-auto">
     
     <item android:id="@+id/uv_action_search"
-          android:showAsAction="always|collapseActionView"
           android:icon="@android:drawable/ic_menu_search"
           android:title="@string/uv_menu_search"
-          android:actionViewClass="android.widget.SearchView" />
+          uv:showAsAction="always|collapseActionView"
+          uv:actionViewClass="android.support.v7.widget.SearchView" />
 
     <item android:id="@+id/uv_action_contact"
-          android:showAsAction="always"
+          uv:showAsAction="always"
           android:icon="@drawable/uv_contact"
           android:title="@string/uv_contact_us" />
 
