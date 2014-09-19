@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 
+import com.uservoice.uservoicesdk.Config;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
@@ -50,6 +51,7 @@ public class ForumActivity extends SearchActivity {
         getListView().setDivider(null);
         setListAdapter(new PaginatedAdapter<Suggestion>(this, R.layout.uv_suggestion_item, suggestions) {
             boolean initializing = true;
+            List<Integer> staticRows;
 
             @Override
             public void loadMore() {
@@ -60,6 +62,16 @@ public class ForumActivity extends SearchActivity {
                 }
                 initializing = false;
                 super.loadMore();
+            }
+
+            private void computeStaticRows() {
+                if (staticRows == null) {
+                    staticRows = new ArrayList<Integer>();
+                    Config config = Session.getInstance().getConfig();
+                    if (config.shouldShowPostIdea())
+                        staticRows.add(2);
+                    staticRows.add(3);
+                }
             }
 
             @Override
@@ -74,23 +86,24 @@ public class ForumActivity extends SearchActivity {
 
             @Override
             public int getCount() {
-                return super.getCount() + 2 + (initializing ? 1 : 0);
+                computeStaticRows();
+                return super.getCount() + staticRows.size() + (initializing ? 1 : 0);
             }
 
             @Override
             public int getItemViewType(int position) {
-                if (position == 0)
-                    return 2;
-                if (position == 1)
-                    return 3;
-                if (position == 2 && initializing)
+                computeStaticRows();
+                if (position < staticRows.size())
+                    return staticRows.get(position);
+                if (position == staticRows.size() && initializing)
                     return LOADING;
-                return super.getItemViewType(position - 2);
+                return super.getItemViewType(position - staticRows.size());
             }
 
             @Override
             public Object getItem(int position) {
-                return super.getItem(position - 2);
+                computeStaticRows();
+                return super.getItem(position - staticRows.size());
             }
 
             @Override
