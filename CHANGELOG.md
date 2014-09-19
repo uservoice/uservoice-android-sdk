@@ -1,5 +1,9 @@
 ## master
 
+* Pull in appcompat-v7 to provide an ActionBar on older OS versions
+* Fix loading indicator dimensions on older OS versions
+* Unescape html entities in topic and forum names
+
 ## 1.1.2
 
 * Add programmatic support for ticket attachments
