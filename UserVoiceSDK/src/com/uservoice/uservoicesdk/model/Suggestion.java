@@ -107,7 +107,7 @@ public class Suggestion extends BaseModel {
         text = getString(object, "formatted_text");
         createdAt = getDate(object, "created_at");
         forumId = object.getJSONObject("topic").getJSONObject("forum").getInt("id");
-        forumName = object.getJSONObject("topic").getJSONObject("forum").getString("name");
+        forumName = getString(object.getJSONObject("topic").getJSONObject("forum"), "name");
         subscribed = object.has("subscribed") && object.getBoolean("subscribed");
         if (!object.isNull("category"))
             category = deserializeObject(object, "category", Category.class);

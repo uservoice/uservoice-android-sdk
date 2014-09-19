@@ -80,9 +80,9 @@ public class ClientConfig extends BaseModel {
         defaultSort = getString(object.getJSONObject("subdomain"), "default_sort");
         subdomainId = getString(object.getJSONObject("subdomain"), "id");
         accountName = getString(object.getJSONObject("subdomain"), "name");
-        key = object.getString("key");
+        key = getString(object, "key");
         // secret will only be available for the default client
-        secret = object.has("secret") ? object.getString("secret") : null;
+        secret = object.has("secret") ? getString(object, "secret") : null;
     }
 
     @Override

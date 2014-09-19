@@ -22,8 +22,8 @@ public class RequestToken extends BaseModel {
 
     @Override
     public void load(JSONObject object) throws JSONException {
-        key = object.getString("oauth_token");
-        secret = object.getString("oauth_token_secret");
+        key = getString(object, "oauth_token");
+        secret = getString(object, "oauth_token_secret");
     }
 
     public String getKey() {

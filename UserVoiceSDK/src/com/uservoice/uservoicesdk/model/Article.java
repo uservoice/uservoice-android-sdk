@@ -75,7 +75,7 @@ public class Article extends BaseModel implements Parcelable {
         }
         if (!object.isNull("topic")) {
             JSONObject topic = object.getJSONObject("topic");
-            topicName = topic.getString("name");
+            topicName = getString(topic, "name");
         }
     }
 
