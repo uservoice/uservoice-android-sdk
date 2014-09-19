@@ -3,6 +3,7 @@
 * Pull in appcompat-v7 to provide an ActionBar on older OS versions
 * Fix loading indicator dimensions on older OS versions
 * Unescape html entities in topic and forum names
+* Hide post idea item on forum view if post idea is disabled
 
 ## 1.1.2
 
