@@ -269,6 +269,8 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
 
     protected void onButtonTapped() {
         if (state == State.INIT) {
+            if (textField == null)
+                return;
             String query = textField.getText().toString().trim();
             if (query.length() == 0)
                 return;
