@@ -12,16 +12,6 @@ apply plugin: 'android-library'
 
 apply plugin: 'maven'
  
-uploadArchives {
-    repositories.mavenDeployer {
-        pom.groupId = 'com.uservoice'
-        pom.artifactId = 'uservoice-android-sdk'
-        pom.version = '1.1.2'
-        // Add other pom properties here if you want (developer details / licenses)
-        repository(url: "file:///Users/austin/code/")
-    }
-}
-
 task sourcesJar(type: Jar) {
     classifier = 'sources'
     from 'src', 'res'
@@ -70,11 +60,6 @@ dependencies {
 
 // Publish to maven
 apply plugin: 'maven'
-
-task sourcesJar(type: Jar) {
-    classifier 'sources'
-    from android.sourceSets.main.java.sourceFiles
-}
 
 artifacts {
     archives sourcesJar
