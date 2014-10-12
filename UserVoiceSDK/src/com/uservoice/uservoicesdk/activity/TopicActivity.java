@@ -1,5 +1,9 @@
 package com.uservoice.uservoicesdk.activity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -17,50 +21,62 @@ import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.Topic;
 import com.uservoice.uservoicesdk.rest.Callback;
-import com.uservoice.uservoicesdk.ui.LoadAllAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.uservoice.uservoicesdk.ui.PaginatedAdapter;
+import com.uservoice.uservoicesdk.ui.PaginationScrollListener;
 
 public class TopicActivity extends SearchActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        SpinnerAdapter topicAdapter = new ArrayAdapter<Topic>(actionBar.getThemedContext(),
-                android.R.layout.simple_spinner_dropdown_item, Session.getInstance().getTopics());
-        actionBar.setListNavigationCallbacks(topicAdapter, new ActionBar.OnNavigationListener() {
-            @Override
-            @SuppressWarnings("unchecked")
-            public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-                Topic topic = Session.getInstance().getTopics().get(itemPosition);
-                Session.getInstance().setTopic(topic);
-                ((LoadAllAdapter<Article>) getListAdapter()).reload();
-                return true;
-            }
-        });
-        actionBar.setSelectedNavigationItem(Session.getInstance().getTopics().indexOf(Session.getInstance().getTopic()));
+        Topic topic = getIntent().getParcelableExtra("topic");
+        if (hasActionBar()) {
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+            SpinnerAdapter topicAdapter = new ArrayAdapter<Topic>(actionBar.getThemedContext(),
+                    android.R.layout.simple_spinner_dropdown_item, Session.getInstance().getTopics());
+            actionBar.setListNavigationCallbacks(topicAdapter, new ActionBar.OnNavigationListener() {
+                @Override
+                @SuppressWarnings("unchecked")
+                public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+                    Topic topic = Session.getInstance().getTopics().get(itemPosition);
+                    getIntent().putExtra("topic", topic);
+                    getModelAdapter().reload();
+                    return true;
+                }
+            });
+            actionBar.setSelectedNavigationItem(Session.getInstance().getTopics().indexOf(topic));
+        }
 
         setTitle(null);
         getListView().setDivider(null);
-        setListAdapter(new LoadAllAdapter<Article>(this, R.layout.uv_text_item, new ArrayList<Article>()) {
+        setListAdapter(new PaginatedAdapter<Article>(this, R.layout.uv_text_item, new ArrayList<Article>()) {
             @Override
             protected void loadPage(int page, Callback<List<Article>> callback) {
-                Topic topic = Session.getInstance().getTopic();
-                if (topic == Topic.ALL_ARTICLES) {
-                    Article.loadAll(callback);
+                Topic topic = getIntent().getParcelableExtra("topic");
+                if (topic.getId() == -1) {
+                    Article.loadPage(page, callback);
                 } else {
-                    Article.loadForTopic(topic.getId(), callback);
+                    Article.loadPageForTopic(topic.getId(), page, callback);
+                }
+            }
+
+            @Override
+            public int getTotalNumberOfObjects() {
+                Topic topic = getIntent().getParcelableExtra("topic");
+                if (topic.getId() == -1) {
+                    return -1; // we don't know. keep trying to load more.
+                } else {
+                    return topic.getNumberOfArticles();
                 }
             }
 
             @Override
             protected void customizeLayout(View view, Article model) {
+                Topic topic = getIntent().getParcelableExtra("topic");
                 TextView text = (TextView) view.findViewById(R.id.uv_text);
                 TextView text2 = (TextView) view.findViewById(R.id.uv_text2);
                 text.setText(model.getTitle());
-                if (Session.getInstance().getTopic() == Topic.ALL_ARTICLES && model.getTopicName() != null) {
+                if (topic.getId() == -1 && model.getTopicName() != null) {
                     text2.setVisibility(View.VISIBLE);
                     text2.setText(model.getTopicName());
                 } else {
@@ -69,16 +85,19 @@ public class TopicActivity extends SearchActivity {
             }
         });
 
+        getListView().setOnScrollListener(new PaginationScrollListener(getModelAdapter()));
+
         getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Article article = (Article) getListAdapter().getItem(position);
-                Session.getInstance().setArticle(article);
-                startActivity(new Intent(TopicActivity.this, ArticleActivity.class));
+                Intent intent = new Intent(TopicActivity.this, ArticleActivity.class);
+                intent.putExtra("article", article);
+                startActivity(intent);
             }
         });
 
-        Babayaga.track(Babayaga.Event.VIEW_TOPIC, Session.getInstance().getTopic().getId());
+        Babayaga.track(Babayaga.Event.VIEW_TOPIC, topic.getId());
     }
 
     @Override
@@ -101,5 +120,10 @@ public class TopicActivity extends SearchActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("unchecked")
+    public PaginatedAdapter<Article> getModelAdapter() {
+        return (PaginatedAdapter<Article>) getListAdapter();
     }
 }

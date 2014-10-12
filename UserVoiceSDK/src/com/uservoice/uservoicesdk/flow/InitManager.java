@@ -11,6 +11,7 @@ import com.uservoice.uservoicesdk.model.BaseModel;
 import com.uservoice.uservoicesdk.model.ClientConfig;
 import com.uservoice.uservoicesdk.model.RequestToken;
 import com.uservoice.uservoicesdk.model.User;
+import com.uservoice.uservoicesdk.rest.RestResult;
 import com.uservoice.uservoicesdk.ui.DefaultCallback;
 
 public class InitManager {
@@ -61,7 +62,14 @@ public class InitManager {
                                 done();
                             }
 
-                            ;
+                            @Override
+                            public void onError(RestResult error) {
+                                if (error.getType().equals("unauthorized")) {
+                                    done();
+                                } else {
+                                    super.onError(error);
+                                }
+                            }
                         });
                     }
                 });

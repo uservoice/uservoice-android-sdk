@@ -32,6 +32,7 @@ public class Suggestion extends BaseModel {
     private boolean subscribed;
     private String forumName;
     private int weight;
+    private int rank;
 
     public static void loadSuggestions(Forum forum, int page, final Callback<List<Suggestion>> callback) {
         Map<String, String> params = new HashMap<String, String>();
@@ -106,7 +107,7 @@ public class Suggestion extends BaseModel {
         text = getString(object, "formatted_text");
         createdAt = getDate(object, "created_at");
         forumId = object.getJSONObject("topic").getJSONObject("forum").getInt("id");
-        forumName = object.getJSONObject("topic").getJSONObject("forum").getString("name");
+        forumName = getString(object.getJSONObject("topic").getJSONObject("forum"), "name");
         subscribed = object.has("subscribed") && object.getBoolean("subscribed");
         if (!object.isNull("category"))
             category = deserializeObject(object, "category", Category.class);
@@ -129,6 +130,9 @@ public class Suggestion extends BaseModel {
         }
         if (object.has("normalized_weight")) {
             weight = object.getInt("normalized_weight");
+        }
+        if (object.has("rank")) {
+            rank = object.getInt("rank");
         }
     }
 
@@ -202,6 +206,32 @@ public class Suggestion extends BaseModel {
     
     public int getWeight() {
         return weight;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public String getRankString() {
+        String suffix;
+        if (rank % 100 > 10 && rank % 100 < 14) {
+            suffix = "th";
+        } else {
+            switch (rank % 10) {
+            case 1:
+                suffix = "st";
+                break;
+            case 2:
+                suffix = "nd";
+                break;
+            case 3:
+                suffix = "rd";
+                break;
+            default:
+                suffix = "th";
+            }
+        }
+        return String.valueOf(rank) + suffix;
     }
 
 }

@@ -1,7 +1,13 @@
 package com.uservoice.uservoicesdk;
 
+import android.util.Log;
+
+import com.uservoice.uservoicesdk.model.Attachment;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Config {
@@ -19,6 +25,7 @@ public class Config {
     private boolean showContactUs = true;
     private boolean showKnowledgeBase = true;
     private Map<String, Object> userTraits = new HashMap<String, Object>();
+    private List<Attachment> attachmentList = new ArrayList<Attachment>();
 
     public Config(String site) {
         this.site = site;
@@ -78,6 +85,10 @@ public class Config {
 
     public void setForumId(int forumId) {
         this.forumId = forumId;
+    }
+
+    public List<Attachment> getAttachmentList() {
+        return attachmentList;
     }
 
     public boolean shouldShowForum() {
@@ -171,5 +182,11 @@ public class Config {
 
     public Map<String, Object> getUserTraits() {
         return userTraits;
+    }
+
+    public void addAttachment(Attachment attachment) {
+        if (attachment != null) {
+            attachmentList.add(attachment);
+        }
     }
 }

@@ -1,5 +1,8 @@
 package com.uservoice.uservoicesdk.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,16 +14,20 @@ import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.rest.RestTask;
 import com.uservoice.uservoicesdk.rest.RestTaskCallback;
 
-public class Article extends BaseModel {
+public class Article extends BaseModel implements Parcelable {
 
     private String title;
     private String html;
     private String topicName;
     private int weight;
 
-    public static void loadAll(final Callback<List<Article>> callback) {
+    public Article() {}
+
+    public static void loadPage(int page, final Callback<List<Article>> callback) {
         Map<String, String> params = new HashMap<String, String>();
         params.put("sort", "ordered");
+        params.put("per_page", "50");
+        params.put("page", String.valueOf(page));
         doGet(apiPath("/articles.json"), params, new RestTaskCallback(callback) {
             @Override
             public void onComplete(JSONObject result) throws JSONException {
@@ -29,9 +36,11 @@ public class Article extends BaseModel {
         });
     }
 
-    public static void loadForTopic(int topicId, final Callback<List<Article>> callback) {
+    public static void loadPageForTopic(int topicId, int page, final Callback<List<Article>> callback) {
         Map<String, String> params = new HashMap<String, String>();
         params.put("sort", "ordered");
+        params.put("per_page", "50");
+        params.put("page", String.valueOf(page));
         doGet(apiPath("/topics/%d/articles.json", topicId), params, new RestTaskCallback(callback) {
             @Override
             public void onComplete(JSONObject result) throws JSONException {
@@ -66,7 +75,7 @@ public class Article extends BaseModel {
         }
         if (!object.isNull("topic")) {
             JSONObject topic = object.getJSONObject("topic");
-            topicName = topic.getString("name");
+            topicName = getString(topic, "name");
         }
     }
 
@@ -84,5 +93,39 @@ public class Article extends BaseModel {
 
     public int getWeight() {
         return weight;
+    }
+
+    //
+    // Parcelable
+    //
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeInt(id);
+        out.writeString(title);
+        out.writeString(html);
+        out.writeString(topicName);
+        out.writeInt(weight);
+    }
+
+    public static final Parcelable.Creator<Article> CREATOR = new Parcelable.Creator<Article>() {
+        public Article createFromParcel(Parcel in) {
+            return new Article(in);
+        }
+
+        public Article[] newArray(int size) {
+            return new Article[size];
+        }
+    };
+
+    private Article(Parcel in) {
+        id = in.readInt();
+        title = in.readString();
+        html = in.readString();
+        topicName = in.readString();
+        weight = in.readInt();
     }
 }

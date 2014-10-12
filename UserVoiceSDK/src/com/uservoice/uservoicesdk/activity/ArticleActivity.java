@@ -24,7 +24,7 @@ public class ArticleActivity extends SearchActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.uv_article_layout);
-        final Article article = Session.getInstance().getArticle();
+        final Article article = getIntent().getParcelableExtra("article");
         setTitle(article.getTitle());
         WebView webView = (WebView) findViewById(R.id.uv_webview);
         Utils.displayArticle(webView, article, this);

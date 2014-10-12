@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:uv="http://schemas.android.com/apk/res-auto" >
-
+      xmlns:uv="http://schemas.android.com/apk/res-auto">
+    
     <item android:id="@+id/uv_action_search"
           android:icon="@android:drawable/ic_menu_search"
           android:title="@string/uv_menu_search"

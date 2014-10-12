@@ -32,7 +32,7 @@ public class Utils {
 
     @SuppressLint("SetJavaScriptEnabled")
     public static void displayArticle(WebView webView, Article article, Context context) {
-        String styles = "iframe, img { width: 100%; }";
+        String styles = "iframe, img { max-width: 100%; }";
         if (isDarkTheme(context)) {
             webView.setBackgroundColor(Color.BLACK);
             styles += "body { background-color: #000000; color: #F6F6F6; } a { color: #0099FF; }";
@@ -117,8 +117,9 @@ public class Utils {
             SuggestionDialogFragment fragment = new SuggestionDialogFragment((Suggestion) model, deflectingType);
             fragment.show(context.getSupportFragmentManager(), "SuggestionDialogFragment");
         } else if (model instanceof Topic) {
-            Session.getInstance().setTopic((Topic) model);
-            context.startActivity(new Intent(context, TopicActivity.class));
+            Intent intent = new Intent(context, TopicActivity.class);
+            intent.putExtra("topic", (Topic) model);
+            context.startActivity(intent);
         }
     }
 }

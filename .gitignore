@@ -8,7 +8,6 @@ out
 .idea/inspectionProfiles
 .settings
 proguard_logs
-build/*
 */build/*
 .gradle
 local.properties

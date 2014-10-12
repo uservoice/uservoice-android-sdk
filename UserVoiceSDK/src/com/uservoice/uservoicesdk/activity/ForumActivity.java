@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 
+import com.uservoice.uservoicesdk.Config;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
@@ -32,10 +33,6 @@ import com.uservoice.uservoicesdk.ui.SearchAdapter;
 import com.uservoice.uservoicesdk.ui.SearchExpandListener;
 import com.uservoice.uservoicesdk.ui.SearchQueryListener;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
 public class ForumActivity extends SearchActivity {
 
     private Forum forum;
@@ -50,6 +47,7 @@ public class ForumActivity extends SearchActivity {
         getListView().setDivider(null);
         setListAdapter(new PaginatedAdapter<Suggestion>(this, R.layout.uv_suggestion_item, suggestions) {
             boolean initializing = true;
+            List<Integer> staticRows;
 
             @Override
             public void loadMore() {
@@ -60,6 +58,16 @@ public class ForumActivity extends SearchActivity {
                 }
                 initializing = false;
                 super.loadMore();
+            }
+
+            private void computeStaticRows() {
+                if (staticRows == null) {
+                    staticRows = new ArrayList<Integer>();
+                    Config config = Session.getInstance().getConfig();
+                    if (config.shouldShowPostIdea())
+                        staticRows.add(2);
+                    staticRows.add(3);
+                }
             }
 
             @Override
@@ -74,23 +82,24 @@ public class ForumActivity extends SearchActivity {
 
             @Override
             public int getCount() {
-                return super.getCount() + 2 + (initializing ? 1 : 0);
+                computeStaticRows();
+                return super.getCount() + staticRows.size() + (initializing ? 1 : 0);
             }
 
             @Override
             public int getItemViewType(int position) {
-                if (position == 0)
-                    return 2;
-                if (position == 1)
-                    return 3;
-                if (position == 2 && initializing)
+                computeStaticRows();
+                if (position < staticRows.size())
+                    return staticRows.get(position);
+                if (position == staticRows.size() && initializing)
                     return LOADING;
-                return super.getItemViewType(position - 2);
+                return super.getItemViewType(position - staticRows.size());
             }
 
             @Override
             public Object getItem(int position) {
-                return super.getItem(position - 2);
+                computeStaticRows();
+                return super.getItem(position - staticRows.size());
             }
 
             @Override
@@ -123,7 +132,11 @@ public class ForumActivity extends SearchActivity {
                 textView.setText(model.getTitle());
 
                 textView = (TextView) view.findViewById(R.id.uv_subscriber_count);
-                textView.setText(String.valueOf(model.getNumberOfSubscribers()));
+                if (Session.getInstance().getClientConfig().shouldDisplaySuggestionsByRank()) {
+                    textView.setText(model.getRankString());
+                } else {
+                    textView.setText(String.valueOf(model.getNumberOfSubscribers()));
+                }
 
                 textView = (TextView) view.findViewById(R.id.uv_suggestion_status);
                 View colorView = view.findViewById(R.id.uv_suggestion_status_color);
@@ -186,7 +199,6 @@ public class ForumActivity extends SearchActivity {
                     startActivity(new Intent(ForumActivity.this, PostIdeaActivity.class));
                 } else if (position != 1) {
                     Suggestion suggestion = (Suggestion) getModelAdapter().getItem(position);
-                    Session.getInstance().setSuggestion(suggestion);
                     SuggestionDialogFragment dialog = new SuggestionDialogFragment(suggestion, null);
                     dialog.show(getSupportFragmentManager(), "SuggestionDialogFragment");
                 }
@@ -214,9 +226,13 @@ public class ForumActivity extends SearchActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.uv_forum, menu);
         MenuItem searchItem = menu.findItem(R.id.uv_menu_search);
-        MenuItemCompat.setOnActionExpandListener(searchItem, new SearchExpandListener(this));
-        SearchView search = (SearchView) MenuItemCompat.getActionView(searchItem);
-        search.setOnQueryTextListener(new SearchQueryListener(this));
+        if (hasActionBar()) {
+            MenuItemCompat.setOnActionExpandListener(searchItem, new SearchExpandListener(this));
+            SearchView search = (SearchView) MenuItemCompat.getActionView(searchItem);
+            search.setOnQueryTextListener(new SearchQueryListener(this));
+        } else {
+            searchItem.setVisible(false);
+        }
         menu.findItem(R.id.uv_new_idea).setVisible(Session.getInstance().getConfig().shouldShowPostIdea());
         return true;
     }

@@ -61,33 +61,6 @@ public abstract class FragmentListActivity extends BaseActivity {
         super.onRestoreInstanceState(state);
     }
 
-    /**
-     * Updates the screen state (current list and other views) when the content
-     * changes.
-     *
-     * @see Activity#onContentChanged()
-     */
-    @Override
-    public void onSupportContentChanged() {
-        super.onSupportContentChanged();
-
-        // changed references from com.android.internal.R to android.R.*
-        mList = (ListView) findViewById(android.R.id.list);
-
-        if (mList == null)
-            return;
-
-        View emptyView = findViewById(android.R.id.empty);
-        if (emptyView != null)
-            mList.setEmptyView(emptyView);
-
-        mList.setOnItemClickListener(mOnClickListener);
-        if (mFinishedStart) {
-            setListAdapter(mAdapter);
-        }
-        mHandler.post(mRequestFocus);
-        mFinishedStart = true;
-    }
 
     /**
      * Provide the cursor for the list view.
@@ -140,9 +113,9 @@ public abstract class FragmentListActivity extends BaseActivity {
     }
 
     private void ensureList() {
-        if (mList != null) {
+        if (mList != null)
             return;
-        }
+
         mList = new ListView(this);
         mList.setId(android.R.id.list);
         ViewFlipper viewFlipper = new ViewFlipper(this);
@@ -150,8 +123,9 @@ public abstract class FragmentListActivity extends BaseActivity {
         viewFlipper.addView(mList);
         setContentView(viewFlipper);
         mList.setOnItemClickListener(mOnClickListener);
-        if (mFinishedStart)
+        if (mFinishedStart) {
             setListAdapter(mAdapter);
+        }
         mHandler.post(mRequestFocus);
         mFinishedStart = true;
     }

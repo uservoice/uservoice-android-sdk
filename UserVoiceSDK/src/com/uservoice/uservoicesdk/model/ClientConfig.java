@@ -8,8 +8,11 @@ import org.json.JSONObject;
 
 import android.content.SharedPreferences;
 
+import com.uservoice.uservoicesdk.Config;
 import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.UserVoice;
 import com.uservoice.uservoicesdk.rest.Callback;
+import com.uservoice.uservoicesdk.rest.RestResult;
 import com.uservoice.uservoicesdk.rest.RestTaskCallback;
 
 public class ClientConfig extends BaseModel {
@@ -23,10 +26,18 @@ public class ClientConfig extends BaseModel {
     private String key;
     private String secret;
     private String accountName;
+    private boolean displaySuggestionsByRank;
 
     public static void loadClientConfig(final Callback<ClientConfig> callback) {
+        Config config = Session.getInstance().getConfig();
+        if (config == null) {
+            // TODO the config should be stored on disk or something
+            RestResult restResult = new RestResult(new Exception("Uservoice config not loaded."));
+            callback.onError(restResult);
+            return;
+        }
         String path = Session.getInstance().getConfig().getKey() == null ? "/clients/default.json" : "/client.json";
-        final String cacheKey = String.format("uv-client-%s-%s", Session.getInstance().getConfig().getSite(), Session.getInstance().getConfig().getKey());
+        final String cacheKey = String.format("uv-client-%s-%s-%s", UserVoice.getVersion(), Session.getInstance().getConfig().getSite(), Session.getInstance().getConfig().getKey());
         final SharedPreferences prefs = Session.getInstance().getSharedPreferences();
         // cache the client config and then request it in the background
         ClientConfig clientConfig = load(prefs, cacheKey, "client", ClientConfig.class);
@@ -61,14 +72,17 @@ public class ClientConfig extends BaseModel {
         ticketsEnabled = object.getBoolean("tickets_enabled");
         feedbackEnabled = object.getBoolean("feedback_enabled");
         whiteLabel = object.getBoolean("white_label");
+        if (object.has("display_suggestions_by_rank")) {
+            displaySuggestionsByRank = object.getBoolean("display_suggestions_by_rank");
+        }
         defaultForumId = object.getJSONObject("forum").getInt("id");
         customFields = deserializeList(object, "custom_fields", CustomField.class);
         defaultSort = getString(object.getJSONObject("subdomain"), "default_sort");
         subdomainId = getString(object.getJSONObject("subdomain"), "id");
         accountName = getString(object.getJSONObject("subdomain"), "name");
-        key = object.getString("key");
+        key = getString(object, "key");
         // secret will only be available for the default client
-        secret = object.has("secret") ? object.getString("secret") : null;
+        secret = object.has("secret") ? getString(object, "secret") : null;
     }
 
     @Override
@@ -77,6 +91,7 @@ public class ClientConfig extends BaseModel {
         object.put("tickets_enabled", ticketsEnabled);
         object.put("feedback_enabled", feedbackEnabled);
         object.put("white_label", whiteLabel);
+        object.put("display_suggestions_by_rank", displaySuggestionsByRank);
         JSONObject forum = new JSONObject();
         forum.put("id", defaultForumId);
         object.put("forum", forum);
@@ -112,6 +127,10 @@ public class ClientConfig extends BaseModel {
 
     public boolean isWhiteLabel() {
         return whiteLabel;
+    }
+
+    public boolean shouldDisplaySuggestionsByRank() {
+        return displaySuggestionsByRank;
     }
 
     public int getDefaultForumId() {

@@ -27,56 +27,66 @@ public abstract class SearchActivity extends FragmentListActivity {
     }
 
     public void updateScopedSearch(int results, int articleResults, int ideaResults) {
-        allTab.setText(String.format("%s (%d)", getString(R.string.uv_all_results_filter), results));
-        articlesTab.setText(String.format("%s (%d)", getString(R.string.uv_articles_filter), articleResults));
-        ideasTab.setText(String.format("%s (%d)", getString(R.string.uv_ideas_filter), ideaResults));
+        if (hasActionBar()) {
+            allTab.setText(String.format("%s (%d)", getString(R.string.uv_all_results_filter), results));
+            articlesTab.setText(String.format("%s (%d)", getString(R.string.uv_articles_filter), articleResults));
+            ideasTab.setText(String.format("%s (%d)", getString(R.string.uv_ideas_filter), ideaResults));
+        }
     }
 
     public void showSearch() {
         ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.uv_view_flipper);
         viewFlipper.setDisplayedChild(1);
-        if (originalNavigationMode == -1)
-            originalNavigationMode = actionBar.getNavigationMode();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        if (hasActionBar()) {
+            if (originalNavigationMode == -1)
+                originalNavigationMode = actionBar.getNavigationMode();
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        }
     }
 
     public void hideSearch() {
         ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.uv_view_flipper);
         viewFlipper.setDisplayedChild(0);
-        actionBar.setNavigationMode(originalNavigationMode == -1 ? ActionBar.NAVIGATION_MODE_STANDARD : originalNavigationMode);
+        if (hasActionBar()) {
+            actionBar.setNavigationMode(originalNavigationMode == -1 ? ActionBar.NAVIGATION_MODE_STANDARD : originalNavigationMode);
+        }
     }
 
     protected void setupScopedSearch(Menu menu) {
         MenuItem searchItem = menu.findItem(R.id.uv_action_search);
-        MenuItemCompat.setOnActionExpandListener(searchItem, new SearchExpandListener(this));
-        SearchView search = (SearchView) MenuItemCompat.getActionView(searchItem);
-        search.setOnQueryTextListener(new SearchQueryListener(this));
-        searchAdapter = new MixedSearchAdapter(this);
-        ListView searchView = new ListView(this);
-        searchView.setAdapter(searchAdapter);
-        searchView.setOnItemClickListener(searchAdapter);
-        ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.uv_view_flipper);
-        viewFlipper.addView(searchView, 1);
+        if (hasActionBar()) {
+            MenuItemCompat.setOnActionExpandListener(searchItem, new SearchExpandListener(this));
+            SearchView search = (SearchView) MenuItemCompat.getActionView(searchItem);
+            search.setOnQueryTextListener(new SearchQueryListener(this));
+            searchAdapter = new MixedSearchAdapter(this);
+            ListView searchView = new ListView(this);
+            searchView.setAdapter(searchAdapter);
+            searchView.setOnItemClickListener(searchAdapter);
+            ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.uv_view_flipper);
+            viewFlipper.addView(searchView, 1);
 
-        ActionBar.TabListener listener = new ActionBar.TabListener() {
-            @Override
-            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-            }
+            ActionBar.TabListener listener = new ActionBar.TabListener() {
+                @Override
+                public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+                }
 
-            @Override
-            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-                searchAdapter.setScope((Integer) tab.getTag());
-            }
+                @Override
+                public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+                    searchAdapter.setScope((Integer) tab.getTag());
+                }
 
-            @Override
-            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-            }
-        };
-        allTab = actionBar.newTab().setText(getString(R.string.uv_all_results_filter)).setTabListener(listener).setTag(PortalAdapter.SCOPE_ALL);
-        actionBar.addTab(allTab);
-        articlesTab = actionBar.newTab().setText(getString(R.string.uv_articles_filter)).setTabListener(listener).setTag(PortalAdapter.SCOPE_ARTICLES);
-        actionBar.addTab(articlesTab);
-        ideasTab = actionBar.newTab().setText(getString(R.string.uv_ideas_filter)).setTabListener(listener).setTag(PortalAdapter.SCOPE_IDEAS);
-        actionBar.addTab(ideasTab);
+                @Override
+                public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+                }
+            };
+            allTab = actionBar.newTab().setText(getString(R.string.uv_all_results_filter)).setTabListener(listener).setTag(PortalAdapter.SCOPE_ALL);
+            actionBar.addTab(allTab);
+            articlesTab = actionBar.newTab().setText(getString(R.string.uv_articles_filter)).setTabListener(listener).setTag(PortalAdapter.SCOPE_ARTICLES);
+            actionBar.addTab(articlesTab);
+            ideasTab = actionBar.newTab().setText(getString(R.string.uv_ideas_filter)).setTabListener(listener).setTag(PortalAdapter.SCOPE_IDEAS);
+            actionBar.addTab(ideasTab);
+        } else {
+            searchItem.setVisible(false);
+        }
     }
 }

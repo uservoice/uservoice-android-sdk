@@ -73,7 +73,7 @@
     <string name="uv_no">Non</string>
     <string name="uv_yes">Oui</string>
     <string name="uv_very_yes">Oui\u00a0!</string>
-    <string name="uv_helpful_article_message_question">Etes-vous sûrs de vouloir envoyer cette question\u00a0?</string>
+    <string name="uv_helpful_article_message_question">Êtes-vous sûrs de vouloir envoyer cette question\u00a0?</string>
     <string name="uv_idea_description_heading">Détaillez-votre idée</string>
     <string name="uv_category">Catégorie</string>
     <string name="uv_idea_description_hint">(optionnel)</string>
@@ -102,12 +102,12 @@
     <string name="uv_post_a_comment">Poster un commentaire</string>
     <string name="uv_all_results_filter">TOUS</string>
     <string name="uv_articles_filter">ARTICLES</string>
-    <string name="uv_ideas_filter">IDEES</string>
+    <string name="uv_ideas_filter">IDÉES</string>
 	<string name="uv_comment_hint">Entrez votre commentaire</string>
 	<string name="uv_cancel">Annuler</string>
 	<string name="uv_select_none">(aucun)</string>
 	<string name="uv_confirm">Confirmer</string>
-	<string name="uv_msg_confirm_discard_idea">Etes-vous sûr de vouloir abandonner cette idée\u00a0?</string>
-	<string name="uv_msg_confirm_discard_message">Etes-vous sûr de vouloir abandonner ce message\u00a0?</string>
+	<string name="uv_msg_confirm_discard_idea">Êtes-vous sûr de vouloir abandonner cette idée\u00a0?</string>
+	<string name="uv_msg_confirm_discard_message">Êtes-vous sûr de vouloir abandonner ce message\u00a0?</string>
     <string name="uv_msg_bad_email_format">S\'il vous plait entez une adresse email valide.</string>
 </resources>

@@ -8,7 +8,7 @@ import com.uservoice.uservoicesdk.activity.SearchActivity;
 
 @SuppressLint("NewApi")
 public class SearchExpandListener implements MenuItemCompat.OnActionExpandListener {
-	private final SearchActivity searchActivity;
+    private final SearchActivity searchActivity;
 
     public SearchExpandListener(SearchActivity searchActivity) {
         this.searchActivity = searchActivity;
