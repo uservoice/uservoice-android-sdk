@@ -17,10 +17,6 @@
         <item quantity="one">idee</item>
         <item quantity="other">ideeën</item>
     </plurals>
-    <plurals name="uv_people">
-        <item quantity="one">persoon</item>
-        <item quantity="other">mensen</item>
-    </plurals>
     <plurals name="uv_number_of_subscribers_format">
         <item quantity="one">%1$s wil dit idee</item>
         <item quantity="other">%1$s willen dit idee</item>
@@ -36,7 +32,6 @@
     <string name="uv_password">Wachtwoord</string>
     <string name="uv_forgot_password">Wachtwoord vergeten</string>
     <string name="uv_msg_comment_posted">Je reactie is geplaatst</string>
-    <string name="uv_title_idea">Idee</string>
     <string name="uv_posted_by_format">Ingediend door %1$s op %2$s</string>
     <string name="uv_all_articles">Alle Artikelen</string>
     <string name="uv_portal_title">Help</string>
@@ -46,25 +41,20 @@
     <string name="uv_failed_signin_error">Incorrect emailadres of wachtwoord</string>
     <string name="uv_msg_forgot_password">Er is een email naar je verstuurd</string>
     <string name="uv_subscribe_dialog_title">Volg dit idee</string>
-    <string name="uv_remove_votes">Verwijder stemmen</string>
     <string name="uv_feedback_forum">Feedback Forum</string>
     <string name="uv_knowledge_base">Kennisbank</string>
     <string name="uv_admin_response_format">Reactie admin: %1$s</string>
     <string name="uv_post_comment">Plaats reactie</string>
     <string name="uv_next">Volgende</string>
-    <string name="uv_none_of_these_help">Geen van deze helpen</string>
     <string name="uv_send_message">Stuur bericht</string>
     <string name="uv_your_email_address">Je emailadres</string>
     <string name="uv_your_name">Je naam</string>
     <string name="uv_name_hint">“Anoniem”</string>
     <string name="uv_select_one">Selecteer er één</string>
     <string name="uv_value">Waarde</string>
-    <string name="uv_article">Artikel</string>
-    <string name="uv_idea">Idee</string>
     <string name="uv_msg_ticket_created">Je bericht is verstuurd</string>
     <string name="uv_msg_idea_created">Je idee is geplaatst</string>
     <string name="uv_article_instant_answer_question">Was dit artikel nuttig?</string>
-    <string name="uv_suggestion_instant_answer_question">Is dit idee nuttig?</string>
     <string name="uv_no">Nee</string>
     <string name="uv_yes">Ja</string>
     <string name="uv_very_yes">Ja!</string>
@@ -78,10 +68,8 @@
     <string name="uv_idea_form_help">Wanneer je een idee op het forum plaatst, zullen anderen het kunnen volgen en er op kunnen reageren. Wanneer wij reageren op het idee, wordt je hiervan op de hoogte gebracht.</string>
     <string name="uv_contact_us">Neem contact met ons op</string>
     <string name="uv_close">Sluiten</string>
-    <string name="uv_new_comment">Nieuwe reactie</string>
     <string name="uv_error">Fout</string>
     <string name="uv_msg_user_identity_validation">Vul je emailadres in</string>
-    <string name="uv_status_format">Status: %1$s</string>
     <string name="uv_subscribe">Volgen</string>
     <string name="uv_nevermind">Laat maar</string>
     <string name="uv_msg_subscribe">We houden je op de hoogte terwijl dit idee verder wordt behandeld.</string>

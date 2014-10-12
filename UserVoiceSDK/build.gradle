@@ -12,16 +12,6 @@ apply plugin: 'android-library'
 
 apply plugin: 'maven'
  
-uploadArchives {
-    repositories.mavenDeployer {
-        pom.groupId = 'com.uservoice'
-        pom.artifactId = 'uservoice-android-sdk'
-        pom.version = '1.1.2'
-        // Add other pom properties here if you want (developer details / licenses)
-        repository(url: "file:///Users/austin/code/")
-    }
-}
-
 task sourcesJar(type: Jar) {
     classifier = 'sources'
     from 'src', 'res'
@@ -33,11 +23,21 @@ artifacts {
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 android {
     compileSdkVersion 19
     buildToolsVersion '19.1.0'
+
+    defaultConfig {
+        versionName project.version
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_6
+        targetCompatibility = JavaVersion.VERSION_1_6
+    }
 
     sourceSets {
         main {
@@ -50,9 +50,59 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:19.'
+    compile 'com.android.support:support-v4:19.+'
     compile 'com.android.support:appcompat-v7:19.+'
+    compile 'com.seppius.plurals:android-i18n-plurals:1.+@aar'
     compile 'commons-codec:commons-codec:1.8'
     compile 'oauth.signpost:signpost-commonshttp4:1.2.1.2'
     compile 'oauth.signpost:signpost-core:1.2.1.2'
 }
+
+// Publish to maven
+apply plugin: 'maven'
+
+artifacts {
+    archives sourcesJar
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+//            repository(url: "file://$buildDir/mvnRepo/")
+            repository(url: "${bintray_api_base_url}/maven/${bintray_org}/${bintray_repo}/${bintray_package}") {
+                authentication(userName: bintray_username, password: bintray_api_key)
+            }
+            pom.project {
+                name 'UserVoice Android SDK Library'
+                artifactId 'uservoice-android-sdk'
+                packaging 'aar'
+                description 'UserVoice for Android allows you to embed UserVoice directly in your Android apps Android applications'
+                url 'https://github.com/uservoice/uservoice-android-sdk'
+                inceptionYear '2013'
+
+                scm {
+                    url 'scm:git@github.com:uservoice/uservoice-android-sdk.git'
+                    connection 'scm:git@github.com:uservoice/uservoice-android-sdk.git'
+                    developerConnection 'scm:git@github.com:uservoice/uservoice-android-sdk.git'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        distribution 'repo'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'austintaylor'
+                        name 'Austin Taylor'
+                        email 'austin.taylor@gmail.com'
+                    }
+                }
+            }
+        }
+    }
+}
+

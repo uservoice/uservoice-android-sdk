@@ -45,8 +45,8 @@ public class CommentDialogFragment extends DialogFragmentBugfixed {
 
         View email = view.findViewById(R.id.uv_email);
         View name = view.findViewById(R.id.uv_name);
-        final EditText emailField = (EditText) email.findViewById(R.id.uv_text_field);
-        final EditText nameField = (EditText) name.findViewById(R.id.uv_text_field);
+        final EditText emailField = (EditText) email.findViewById(R.id.uv_email_field);
+        final EditText nameField = (EditText) name.findViewById(R.id.uv_name_field);
         if (Session.getInstance().getUser() != null) {
             email.setVisibility(View.GONE);
             name.setVisibility(View.GONE);

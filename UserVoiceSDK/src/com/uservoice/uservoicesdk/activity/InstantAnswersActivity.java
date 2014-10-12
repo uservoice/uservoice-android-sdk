@@ -65,5 +65,4 @@ public abstract class InstantAnswersActivity extends FragmentListActivity {
     protected abstract InstantAnswersAdapter createAdapter();
 
     protected abstract int getDiscardDialogMessage();
-
 }

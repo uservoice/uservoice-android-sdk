@@ -1,8 +1,5 @@
 package com.uservoice.uservoicesdk.ui;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
@@ -25,6 +22,9 @@ import com.uservoice.uservoicesdk.model.BaseModel;
 import com.uservoice.uservoicesdk.model.Forum;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.model.Topic;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterView.OnItemClickListener {
 
@@ -245,7 +245,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
                 textView.setVisibility(View.GONE);
             } else {
                 textView.setVisibility(View.VISIBLE);
-                textView.setText(String.format("%d %s", topic.getNumberOfArticles(), context.getResources().getQuantityString(R.plurals.uv_articles, topic.getNumberOfArticles())));
+                textView.setText(String.format("%d %s", topic.getNumberOfArticles(), Utils.getQuantityString(context.getResources(), R.plurals.uv_articles, topic.getNumberOfArticles())));
             }
         } else if (type == CONTACT) {
             TextView textView = (TextView) view.findViewById(R.id.uv_text);
@@ -308,5 +308,4 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
             Utils.showModel(context, (BaseModel) getItem(position));
         }
     }
-
 }

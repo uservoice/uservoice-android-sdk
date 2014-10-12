@@ -17,7 +17,6 @@ public class BaseActivity extends ActionBarActivity {
     protected ActionBar actionBar;
 
     @Override
-    @SuppressLint("NewApi")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (hasActionBar()) {

@@ -26,7 +26,6 @@ import com.uservoice.uservoicesdk.ui.PaginationScrollListener;
 
 public class TopicActivity extends SearchActivity {
 
-    @SuppressLint({"InlinedApi", "NewApi"})
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 

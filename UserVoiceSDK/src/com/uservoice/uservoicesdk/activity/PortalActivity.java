@@ -42,5 +42,4 @@ public class PortalActivity extends SearchActivity {
     public PortalAdapter getModelAdapter() {
         return (PortalAdapter) getListAdapter();
     }
-
 }

@@ -1,9 +1,7 @@
 package com.uservoice.uvdemo;
 
-import java.lang.reflect.Field;
-
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,7 +10,9 @@ import android.view.ViewConfiguration;
 import com.uservoice.uservoicesdk.Config;
 import com.uservoice.uservoicesdk.UserVoice;
 
-public class MainActivity extends Activity {
+import java.lang.reflect.Field;
+
+public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

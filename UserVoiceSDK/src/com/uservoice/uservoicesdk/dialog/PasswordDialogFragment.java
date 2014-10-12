@@ -68,5 +68,4 @@ public class PasswordDialogFragment extends DialogFragmentBugfixed {
             }
         });
     }
-
 }

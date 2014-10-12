@@ -1,16 +1,5 @@
 package com.uservoice.uservoicesdk.model;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -21,6 +10,17 @@ import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.rest.RestMethod;
 import com.uservoice.uservoicesdk.rest.RestTask;
 import com.uservoice.uservoicesdk.rest.RestTaskCallback;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 
 public class BaseModel {
@@ -199,5 +199,4 @@ public class BaseModel {
         }
         return list;
     }
-
 }

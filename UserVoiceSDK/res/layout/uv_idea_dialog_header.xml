@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -14,7 +15,7 @@
         android:layout_height="wrap_content"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:text="Make the app more Android friendly"
+        tools:text="Make the app more Android friendly"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -24,7 +25,7 @@
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:paddingTop="10dp"
-        android:text="Badges are cool, and we&apos;d like to give them out to our active users."
+        tools:text="Badges are cool, and we&apos;d like to give them out to our active users."
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#999999" />
 
@@ -36,7 +37,7 @@
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:paddingTop="2dp"
-        android:text="Posted by Anonymous on Jul 21, 2011"
+        tools:text="Posted by Anonymous on Jul 21, 2011"
         android:textColor="#999999"
         android:textSize="11sp" />
 
@@ -69,7 +70,7 @@
                 android:id="@+id/uv_subscriber_count"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="12 people want this"
+                tools:text="12 people want this"
                 android:textColor="#999999"
                 android:textSize="11sp" />
         </LinearLayout>
@@ -97,7 +98,7 @@
             android:paddingBottom="2dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:text="admin response: started"
+            tools:text="admin response: started"
             android:textAllCaps="true"
             android:textColor="#8dc13c"
             android:textSize="14sp"
@@ -133,14 +134,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingRight="5dp"
-                        android:text="Evan Hamilton"
+                        tools:text="Evan Hamilton"
                         android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/uv_response_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Feb 12, 2013"
+                        tools:text="Feb 12, 2013"
                         android:textColor="#999999"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -150,7 +151,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="2dp"
-                    android:text="We are looking into this. Please check back and leave additional comments and we will be in touch!"
+                    tools:text="We are looking into this. Please check back and leave additional comments and we will be in touch!"
                     android:textColor="#999999"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -173,7 +174,7 @@
             android:id="@+id/uv_comment_count"
             style="@style/uv_ListSeparatorLight"
             android:paddingLeft="5dp"
-            android:text="14 comments"
+            tools:text="14 comments"
             android:textIsSelectable="false" />
     </LinearLayout>
 
@@ -206,7 +207,8 @@
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
-            android:src="@drawable/uv_comment" />
+            android:src="@drawable/uv_comment"
+            android:contentDescription="@string/uv_post_a_comment" />
     </LinearLayout>
 
     <include layout="@layout/uv_divider" />

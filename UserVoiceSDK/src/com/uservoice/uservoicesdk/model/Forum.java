@@ -1,13 +1,13 @@
 package com.uservoice.uservoicesdk.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.uservoice.uservoicesdk.rest.Callback;
+import com.uservoice.uservoicesdk.rest.RestTaskCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.uservoice.uservoicesdk.rest.Callback;
-import com.uservoice.uservoicesdk.rest.RestTaskCallback;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Forum extends BaseModel {
     private String name;

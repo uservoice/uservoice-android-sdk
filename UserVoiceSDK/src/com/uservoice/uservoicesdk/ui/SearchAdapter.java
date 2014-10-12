@@ -1,14 +1,14 @@
 package com.uservoice.uservoicesdk.ui;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TimerTask;
-
 import android.content.Context;
 import android.widget.BaseAdapter;
 
 import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.rest.RestTask;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TimerTask;
 
 public abstract class SearchAdapter<T> extends BaseAdapter {
 

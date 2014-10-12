@@ -110,5 +110,4 @@ public class SigninManager {
         manager.setPasswordOnly(true);
         manager.signIn();
     }
-
 }

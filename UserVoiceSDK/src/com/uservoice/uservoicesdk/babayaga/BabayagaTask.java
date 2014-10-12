@@ -1,10 +1,12 @@
 package com.uservoice.uservoicesdk.babayaga;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URLEncoder;
-import java.util.Date;
-import java.util.Map;
+import android.net.http.AndroidHttpClient;
+import android.os.AsyncTask;
+import android.util.Base64;
+import android.util.Log;
+
+import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.UserVoice;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -14,13 +16,11 @@ import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
-import android.net.http.AndroidHttpClient;
-import android.os.AsyncTask;
-import android.util.Base64;
-import android.util.Log;
-
-import com.uservoice.uservoicesdk.Session;
-import com.uservoice.uservoicesdk.UserVoice;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URLEncoder;
+import java.util.Date;
+import java.util.Map;
 
 public class BabayagaTask extends AsyncTask<String, String, Void> {
 

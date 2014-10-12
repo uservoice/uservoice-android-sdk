@@ -12,11 +12,16 @@ apply plugin: 'android'
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 android {
     compileSdkVersion 19
     buildToolsVersion '19.1.0'
+
+    defaultConfig {
+        versionName project.version
+    }
 
     sourceSets {
         main {
@@ -37,29 +42,35 @@ android {
     }
 
     buildTypes {
+        debug {
+            runProguard false
+        }
         release {
+            runProguard false
             signingConfig signingConfigs.release
         }
     }
 }
 
 task askForPasswords << {
-  // Must create String because System.readPassword() returns char[]
-  // (and assigning that below fails silently)
-  def storePw = new String(System.console().readPassword("Keystore password: "))
-  def keyPw  = new String(System.console().readPassword("Key password: "))
+    // Must create String because System.readPassword() returns char[]
+    // (and assigning that below fails silently)
+    if (System.console() == null)
+        return;
+    def storePw = new String(System.console().readPassword("Keystore password: "))
+    def keyPw  = new String(System.console().readPassword("Key password: "))
 
-  android.signingConfigs.release.storePassword = storePw
-  android.signingConfigs.release.keyPassword = keyPw
+    android.signingConfigs.release.storePassword = storePw
+    android.signingConfigs.release.keyPassword = keyPw
 }
 
 tasks.whenTaskAdded { theTask -> 
-  if (theTask.name.equals("packageRelease")) {
-    theTask.dependsOn "askForPasswords"
-  }
+    if (theTask.name.equals("packageRelease")) {
+        theTask.dependsOn "askForPasswords"
+    }
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:20.+'
+    compile 'com.android.support:appcompat-v7:19.+@aar'
     compile project(':UserVoiceSDK')
 }

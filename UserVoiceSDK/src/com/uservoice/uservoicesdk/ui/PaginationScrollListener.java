@@ -20,5 +20,4 @@ public class PaginationScrollListener implements AbsListView.OnScrollListener {
             adapter.loadMore();
         }
     }
-
 }

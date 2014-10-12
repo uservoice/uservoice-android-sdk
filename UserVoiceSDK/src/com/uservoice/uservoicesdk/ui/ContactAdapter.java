@@ -1,11 +1,5 @@
 package com.uservoice.uservoicesdk.ui;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +17,12 @@ import com.uservoice.uservoicesdk.babayaga.Babayaga.Event;
 import com.uservoice.uservoicesdk.model.CustomField;
 import com.uservoice.uservoicesdk.model.Ticket;
 import com.uservoice.uservoicesdk.rest.RestResult;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ContactAdapter extends InstantAnswersAdapter {
 
