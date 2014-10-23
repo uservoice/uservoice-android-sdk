@@ -89,8 +89,8 @@
     <string name="uv_subscribe">S\'abonner</string>
     <string name="uv_nevermind">sans façons</string>
     <string name="uv_msg_subscribe">Nous vous informerons de l\'avancement de cette idée</string>
-    <string name="uv_msg_subscribe_success">Vous êtes abonnés.</string>
-    <string name="uv_msg_unsubscribe">Vous n\'êtes plus abonnés à cette idée.</string>
+    <string name="uv_msg_subscribe_success">Vous êtes abonné.</string>
+    <string name="uv_msg_unsubscribe">Vous n\'êtes plus abonné à cette idée.</string>
     <string name="uv_msg_custom_fields_validation">Merci de remplir tous les champs requis.</string>
     <string name="uv_contact_hint">Entrez votre question ou votre retour</string>
     <string name="uv_matching_ideas">Idées correspondantes</string>
