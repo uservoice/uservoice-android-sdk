@@ -26,6 +26,10 @@
         <item quantity="few">человека</item>
         <item quantity="other">человек</item>
     </plurals>
+    <plurals name="uv_number_of_subscribers_format">
+      <item quantity="one">%1$s хочет этого</item>
+      <item quantity="other">%1$s хотят этого</item>
+    </plurals>
 
     <string name="uv_loading">Загружается&#8230;</string>
     <string name="uv_submit_idea">Отправить идею</string>
@@ -96,7 +100,6 @@
     <string name="uv_post_idea_continue_button">Я всё ещё хочу отправить свою идею</string>
     <string name="uv_contact_continue_button">Я всё ещё хочу отправить сообщение</string>
     <string name="uv_i_want_this">Да, я хочу!</string>
-    <string name="uv_number_of_subscribers_format">%1$s хотят этого</string>
     <string name="uv_post_a_comment">Отправить комментарий</string>
     <string name="uv_all_results_filter">ВСЕ</string>
     <string name="uv_articles_filter">СТАТЬИ</string>
