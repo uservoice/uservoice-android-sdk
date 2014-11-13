@@ -1,5 +1,7 @@
 ## master
 
+## 1.2.0
+
 * Pull in appcompat-v7 to provide an ActionBar on older OS versions
 * Fix loading indicator dimensions on older OS versions
 * Unescape html entities in topic and forum names
