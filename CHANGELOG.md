@@ -4,6 +4,9 @@
 * Fix loading indicator dimensions on older OS versions
 * Unescape html entities in topic and forum names
 * Hide post idea item on forum view if post idea is disabled
+* Use a theme separate from the host app
+* Add Spanish translation
+* Bump compileSdkVersion to 21 (Android 5)
 
 ## 1.1.2
 

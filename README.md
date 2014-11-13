@@ -107,6 +107,16 @@ UserVoice.track("myevent");
 UserVoice.track("myevent", propertyMap);
 ```
 
+### Theming
+
+Starting in version 1.2.0 the UserVoice SDK uses its own theme rather than inheriting the theme of the host app, so that the host app's theme won't conflict with it (e.g. if the host app does not use an AppCompat theme, or if it doesn't have an action bar). To customize the appearance of the UserVoice SDK, you need to override its default theme by creating a theme called `UserVoiceTheme` in your own `styles.xml` files. This theme will need to derive from `Theme.AppCompat` from the v7 compatibility library, and include an action bar.
+
+```
+<style name="UserVoiceTheme" parent="Theme.AppCompat.Light">
+    <!-- theme customizations -->
+</style>
+```
+
 ### Private sites
 
 The SDK relies on being able to obtain a client key to communicate with the UserVoice API. If you have a public UserVoice site (the default) then it can obtain this key automatically, so you only need to pass your site URL. However, if you turn on site privacy, this key is also private, so you will need to pass it in. You can obtain an API key pair from the mobile settings section of the UserVoice admin console.
