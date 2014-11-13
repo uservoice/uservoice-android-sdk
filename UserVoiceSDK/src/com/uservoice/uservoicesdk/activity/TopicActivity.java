@@ -33,8 +33,8 @@ public class TopicActivity extends SearchActivity {
         Topic topic = getIntent().getParcelableExtra("topic");
         if (hasActionBar()) {
             actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-            SpinnerAdapter topicAdapter = new ArrayAdapter<Topic>(actionBar.getThemedContext(),
-                    android.R.layout.simple_spinner_dropdown_item, Session.getInstance().getTopics());
+            ArrayAdapter<Topic> topicAdapter = new ArrayAdapter<Topic>(actionBar.getThemedContext(),
+                    R.layout.support_simple_spinner_dropdown_item, Session.getInstance().getTopics());
             actionBar.setListNavigationCallbacks(topicAdapter, new ActionBar.OnNavigationListener() {
                 @Override
                 @SuppressWarnings("unchecked")
@@ -45,7 +45,13 @@ public class TopicActivity extends SearchActivity {
                     return true;
                 }
             });
-            actionBar.setSelectedNavigationItem(Session.getInstance().getTopics().indexOf(topic));
+            topicAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            for (int i=0; i<Session.getInstance().getTopics().size(); i++) {
+                Topic t = Session.getInstance().getTopics().get(i);
+                if (t.getId() == topic.getId()) {
+                    actionBar.setSelectedNavigationItem(i);
+                }
+            }
         }
 
         setTitle(null);
