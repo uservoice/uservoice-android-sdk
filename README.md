@@ -126,6 +126,10 @@ Config config = new Config("yoursite.uservoice.com", "API_CLIENT_KEY", "API_CLIE
 UserVoice.init(config);
 ```
 
+### Kids Apps
+
+The UserVoice Platform, including iOS & Android SDKs, is not COPPA compliant and should not be used in apps marketed at children.
+
 Translations
 ------------
 
