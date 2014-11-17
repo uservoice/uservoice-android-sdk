@@ -53,6 +53,12 @@ dependencies {
     compile 'com.android.support:support-v4:21.'
     compile 'com.android.support:appcompat-v7:21.+'
     compile 'commons-codec:commons-codec:1.8'
-    compile 'oauth.signpost:signpost-commonshttp4:1.2.1.2'
-    compile 'oauth.signpost:signpost-core:1.2.1.2'
+    compile ('oauth.signpost:signpost-commonshttp4:1.2.1.2') {
+        exclude module: 'commons-logging'
+        exclude module: 'httpcore'
+        exclude module: 'httpclient'
+    }
+    compile ('oauth.signpost:signpost-core:1.2.1.2') {
+        exclude module: 'commons-codec'
+    }
 }
