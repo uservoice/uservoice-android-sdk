@@ -22,7 +22,7 @@ public class Session {
 
     private static Session instance;
 
-    public static Session getInstance() {
+    public static synchronized Session getInstance() {
         if (instance == null) {
             instance = new Session();
         }
