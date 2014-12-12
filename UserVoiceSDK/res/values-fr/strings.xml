@@ -33,7 +33,7 @@
 
     <string name="uv_loading">Chargement&#8230;</string>
     <string name="uv_submit_idea">Soumettre une idée</string>
-    <string name="uv_idea_form_title">Poster une idée</string>
+    <string name="uv_idea_form_title">Proposer une idée</string>
     <string name="uv_menu_search">Recherche</string>
     <string name="uv_email_address">Adresse e-mail</string>
     <string name="uv_email_address_hint">votre@email.com (requis)</string>
@@ -110,4 +110,11 @@
 	<string name="uv_msg_confirm_discard_idea">Êtes-vous sûr de vouloir abandonner cette idée\u00a0?</string>
 	<string name="uv_msg_confirm_discard_message">Êtes-vous sûr de vouloir abandonner ce message\u00a0?</string>
     <string name="uv_msg_bad_email_format">S\'il vous plait entez une adresse email valide.</string>
+    <string name="uv_android_sdk">Android SDK</string>
+    <string name="uv_article_browse_question">Cet article était-il utile ?</string>
+    <string name="uv_password_dialog_title">Entrer un mot de passe</string>
+    <string name="uv_post_an_idea">Proposer une idée</string>
+    <string name="uv_powered_by_uservoice">Powered by UserVoice</string>
+    <string name="uv_thanks">Merci !</string>
+    <string name="uv_unhelpful_article_message_question">Souhaitez-vous nous envoyer un message ?</string>
 </resources>
