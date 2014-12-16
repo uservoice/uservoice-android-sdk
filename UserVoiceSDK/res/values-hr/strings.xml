@@ -110,4 +110,5 @@
     <string name="uv_powered_by_uservoice">Omogućio UserVoice</string>
     <string name="uv_android_sdk">Android SDK</string>
     <string name="uv_msg_bad_email_format">Molim upišite ispravnu email adresu.</string>
+    <string name="uv_ranked">Muški %1$s</string>
 </resources>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <plurals name="uv_comments">
         <item quantity="one">Kommentar</item>
         <item quantity="other">Kommentare</item>
@@ -25,8 +24,7 @@
         <item quantity="one">%1$s will diese Idee</item>
         <item quantity="other">%1$s wollen diese Idee</item>
     </plurals>
-
-    <string name="uv_loading">laden&#8230;</string>
+    <string name="uv_loading">laden…</string>
     <string name="uv_submit_idea">Idee veröffentlichen</string>
     <string name="uv_idea_form_title">Sende eine Idee</string>
     <string name="uv_menu_search">Suchen</string>
@@ -73,8 +71,8 @@
     <string name="uv_idea_description_heading">Beschreibung (optional)</string>
     <string name="uv_category">Kategorie</string>
     <string name="uv_idea_description_hint">Beschreibe deine Idee</string>
-    <string name="uv_idea_text_heading">Ich schlage folgende Funktion vor&#8230;</string>
-    <string name="uv_idea_text_hint">Gib den Titel für deine Idee ein&#8230;</string>
+    <string name="uv_idea_text_heading">Ich schlage folgende Funktion vor…</string>
+    <string name="uv_idea_text_hint">Gib den Titel für deine Idee ein…</string>
     <string name="uv_idea_form_help">Wenn du eine Idee an unser Forum schreibst, können andere diese abonnieren und kommentieren. Wenn wir auf deine Idee antworten, wirst du darüber benachrichtigt.</string>
     <string name="uv_contact_us">Sende uns eine Nachricht</string>
     <string name="uv_close">Schließen</string>
@@ -112,5 +110,5 @@
     <string name="uv_powered_by_uservoice">Powered by UserVoice</string>
     <string name="uv_android_sdk">Android SDK</string>
     <string name="uv_msg_bad_email_format">Bitte gib eine gültige E-Mail Adresse ein.</string>
-
+    <string name="uv_ranked">Rang %1$s</string>
 </resources>

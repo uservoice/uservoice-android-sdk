@@ -1,37 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
     <plurals name="uv_comments">
         <item quantity="one">commentaire</item>
         <item quantity="other">commentaires</item>
     </plurals>
-    
     <plurals name="uv_subscribers">
         <item quantity="one">abonné</item>
         <item quantity="other">abonnés</item>
     </plurals>
-    
     <plurals name="uv_articles">
         <item quantity="one">article</item>
         <item quantity="other">articles</item>
     </plurals>
-    
     <plurals name="uv_ideas">
         <item quantity="one">idée</item>
         <item quantity="other">idées</item>
     </plurals>
-    
     <plurals name="uv_people">
         <item quantity="one">personne</item>
         <item quantity="other">personnes</item>
     </plurals>
-
     <plurals name="uv_number_of_subscribers_format">
         <item quantity="one">%1$s veut cette idée</item>
         <item quantity="other">%1$s veulent cette idée</item>
     </plurals>
-
-    <string name="uv_loading">Chargement&#8230;</string>
+    <string name="uv_loading">Chargement…</string>
     <string name="uv_submit_idea">Soumettre une idée</string>
     <string name="uv_idea_form_title">Poster une idée</string>
     <string name="uv_menu_search">Recherche</string>
@@ -77,8 +70,8 @@
     <string name="uv_idea_description_heading">Détaillez-votre idée</string>
     <string name="uv_category">Catégorie</string>
     <string name="uv_idea_description_hint">(optionnel)</string>
-    <string name="uv_idea_text_heading">Je suggère&#8230;</string>
-    <string name="uv_idea_text_hint">Entrez votre idée&#8230;</string>
+    <string name="uv_idea_text_heading">Je suggère…</string>
+    <string name="uv_idea_text_hint">Entrez votre idée…</string>
     <string name="uv_idea_form_help">Lorsque vous postez une idée sur nos forums, d\'autres pourront s\'y abonner et la commenter. Lorsque nous réagirons à votre idée, vous serez notifiés.</string>
     <string name="uv_contact_us">Nous contacter</string>
     <string name="uv_close">Fermer</string>
@@ -103,11 +96,19 @@
     <string name="uv_all_results_filter">TOUS</string>
     <string name="uv_articles_filter">ARTICLES</string>
     <string name="uv_ideas_filter">IDÉES</string>
-	<string name="uv_comment_hint">Entrez votre commentaire</string>
-	<string name="uv_cancel">Annuler</string>
-	<string name="uv_select_none">(aucun)</string>
-	<string name="uv_confirm">Confirmer</string>
-	<string name="uv_msg_confirm_discard_idea">Êtes-vous sûr de vouloir abandonner cette idée\u00a0?</string>
-	<string name="uv_msg_confirm_discard_message">Êtes-vous sûr de vouloir abandonner ce message\u00a0?</string>
+    <string name="uv_comment_hint">Entrez votre commentaire</string>
+    <string name="uv_cancel">Annuler</string>
+    <string name="uv_select_none">(aucun)</string>
+    <string name="uv_confirm">Confirmer</string>
+    <string name="uv_msg_confirm_discard_idea">Êtes-vous sûr de vouloir abandonner cette idée\u00a0?</string>
+    <string name="uv_msg_confirm_discard_message">Êtes-vous sûr de vouloir abandonner ce message\u00a0?</string>
     <string name="uv_msg_bad_email_format">S\'il vous plait entez une adresse email valide.</string>
+    <string name="uv_unhelpful_article_message_question">Voulez-vous nous envoyer un message?</string>
+    <string name="uv_post_an_idea">Publiez une idée</string>
+    <string name="uv_password_dialog_title">Se il vous plaît entrer votre mot de passe</string>
+    <string name="uv_article_browse_question">Cet article a été utile?</string>
+    <string name="uv_thanks">Merci!</string>
+    <string name="uv_powered_by_uservoice">Propulsé par UserVoice</string>
+    <string name="uv_android_sdk">SDK Android</string>
+    <string name="uv_ranked">Classé %1$s</string>
 </resources>

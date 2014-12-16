@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <plurals name="uv_comments">
         <item quantity="one">comentário</item>
         <item quantity="other">comentários</item>
@@ -25,8 +24,7 @@
         <item quantity="one">%1$s quer esta ideia</item>
         <item quantity="other">%1$s querem esta ideia</item>
     </plurals>
-
-    <string name="uv_loading">Carregando&#8230;</string>
+    <string name="uv_loading">Carregando…</string>
     <string name="uv_submit_idea">Enviar ideia</string>
     <string name="uv_idea_form_title">Publicar ideia</string>
     <string name="uv_menu_search">Buscar</string>
@@ -73,8 +71,8 @@
     <string name="uv_idea_description_heading">Descreva sua ideia em detalhes</string>
     <string name="uv_category">Categoria</string>
     <string name="uv_idea_description_hint">(opcional)</string>
-    <string name="uv_idea_text_heading">Sugiro que&#8230;</string>
-    <string name="uv_idea_text_hint">Digite sua ideia&#8230;</string>
+    <string name="uv_idea_text_heading">Sugiro que…</string>
+    <string name="uv_idea_text_hint">Digite sua ideia…</string>
     <string name="uv_idea_form_help">Ao publicar uma ideia em nosso fórum, outras pessoas poderão votar e comentar sobre ela. Quando respondemos a uma ideia, você é avisado.</string>
     <string name="uv_contact_us">Fale conosco</string>
     <string name="uv_close">Fechar</string>
@@ -109,7 +107,8 @@
     <string name="uv_password_dialog_title">Digite sua senha</string>
     <string name="uv_article_browse_question">Este artigo foi útil?</string>
     <string name="uv_thanks">Obrigado!</string>
-    <string name="uv_powered_by_uservoice">Powered by UserVoice</string>
     <string name="uv_android_sdk">Android SDK</string>
-    <string name="uv_msg_bad_email_format">Please enter a valid email address.</string>
+    <string name="uv_ranked">Classificado %1$s</string>
+    <string name="uv_powered_by_uservoice">Powered by UserVoice</string>
+    <string name="uv_msg_bad_email_format">Por favor insira um endereço de e-mail válido.</string>
 </resources>

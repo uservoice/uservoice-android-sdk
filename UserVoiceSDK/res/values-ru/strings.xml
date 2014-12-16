@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <plurals name="uv_comments">
         <item quantity="one">комментарий</item>
         <item quantity="few">комментария</item>
@@ -27,11 +26,10 @@
         <item quantity="other">человек</item>
     </plurals>
     <plurals name="uv_number_of_subscribers_format">
-      <item quantity="one">%1$s хочет этого</item>
-      <item quantity="other">%1$s хотят этого</item>
+        <item quantity="one">%1$s хочет этого</item>
+        <item quantity="other">%1$s хотят этого</item>
     </plurals>
-
-    <string name="uv_loading">Загружается&#8230;</string>
+    <string name="uv_loading">Загружается…</string>
     <string name="uv_submit_idea">Отправить идею</string>
     <string name="uv_idea_form_title">Подать идею</string>
     <string name="uv_menu_search">Искать</string>
@@ -78,8 +76,8 @@
     <string name="uv_idea_description_heading">Опишите свою идею более детально</string>
     <string name="uv_category">Категория</string>
     <string name="uv_idea_description_hint">(не обязательно)</string>
-    <string name="uv_idea_text_heading">Я предлагаю вам&#8230;</string>
-    <string name="uv_idea_text_hint">Напишите свою идею&#8230;</string>
+    <string name="uv_idea_text_heading">Я предлагаю вам…</string>
+    <string name="uv_idea_text_hint">Напишите свою идею…</string>
     <string name="uv_idea_form_help">Когда вы отправите идею на форум, другие люди смогут подписаться на неё и оставлять комментарии. Когда мы ответим на Вашу идею, Вы получите уведомление.</string>
     <string name="uv_contact_us">Свяжитесь с нами</string>
     <string name="uv_close">Закрыть</string>
@@ -114,6 +112,8 @@
     <string name="uv_password_dialog_title">Пожалуйста, укажите свой пароль</string>
     <string name="uv_article_browse_question">Эта статья была полезна?</string>
     <string name="uv_thanks">Спасибо!</string>
-    <string name="uv_msg_bad_email_format">Please enter a valid email address.</string>
-
+    <string name="uv_powered_by_uservoice">Работает на UserVoice</string>
+    <string name="uv_android_sdk">Android SDK</string>
+    <string name="uv_ranked">Занимает %1$s</string>
+    <string name="uv_msg_bad_email_format">Пожалуйста, введите действительный адрес электронной почты.</string>
 </resources>

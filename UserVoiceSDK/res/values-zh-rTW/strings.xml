@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <plurals name="uv_comments">
         <item quantity="one">評論</item>
         <item quantity="other">評論</item>
@@ -25,8 +24,7 @@
         <item quantity="one">%1$s 喜歡這個意見</item>
         <item quantity="other">%1$s 喜歡這個意見</item>
     </plurals>
-
-    <string name="uv_loading">讀取中&#8230;</string>
+    <string name="uv_loading">讀取中…</string>
     <string name="uv_submit_idea">送出意見</string>
     <string name="uv_idea_form_title">張貼意見</string>
     <string name="uv_menu_search">搜尋</string>
@@ -73,8 +71,8 @@
     <string name="uv_idea_description_heading">更詳細地描述你的意見</string>
     <string name="uv_category">分類</string>
     <string name="uv_idea_description_hint">（選填）</string>
-    <string name="uv_idea_text_heading">我建議你&#8230;</string>
-    <string name="uv_idea_text_hint">輸入意見&#8230;</string>
+    <string name="uv_idea_text_heading">我建議你…</string>
+    <string name="uv_idea_text_hint">輸入意見…</string>
     <string name="uv_idea_form_help">當你張貼一則意見到我們的論壇，其他人可以訂閱或者是加入評論。當我們回復此意見時，你會隨即收到通知。</string>
     <string name="uv_contact_us">聯絡我們</string>
     <string name="uv_close">關閉</string>
@@ -109,6 +107,8 @@
     <string name="uv_password_dialog_title">請輸入你的密碼</string>
     <string name="uv_article_browse_question">這篇文章對你有幫助嗎？</string>
     <string name="uv_thanks">謝謝！</string>
-    <string name="uv_msg_bad_email_format">Please enter a valid email address.</string>
-
+    <string name="uv_powered_by_uservoice">本站由UserVoice</string>
+    <string name="uv_android_sdk">Android的SDK</string>
+    <string name="uv_ranked">排名%1$s</string>
+    <string name="uv_msg_bad_email_format">請輸入有效的電子郵件地址。</string>
 </resources>
