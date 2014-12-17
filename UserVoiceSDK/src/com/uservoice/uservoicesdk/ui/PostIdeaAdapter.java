@@ -5,6 +5,8 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.support.v4.app.FragmentActivity;
+import android.text.InputFilter;
+import android.text.InputType;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -76,6 +78,8 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
                 EditText field = (EditText) view.findViewById(R.id.uv_text_field);
                 restoreEnteredText(descriptionField, field, "");
                 descriptionField = field;
+                descriptionField.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+                descriptionField.setMinLines(1);
                 descriptionField.setHint(R.string.uv_idea_description_hint);
             } else if (type == CATEGORY) {
                 view = inflater.inflate(R.layout.uv_select_field_item, null);
@@ -97,9 +101,10 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
         if (type == DESCRIPTION || type == CATEGORY || type == HELP || type == TEXT_HEADING) {
             // just skip the else
         } else if (type == TEXT) {
-            TextView textView = (TextView) view.findViewById(R.id.uv_text);
+            EditText textView = (EditText) view.findViewById(R.id.uv_text);
             textView.setHint(R.string.uv_idea_text_hint);
             textView.setMinLines(1);
+            textView.setFilters(new InputFilter[] { new InputFilter.LengthFilter(140) });
         } else {
             return super.getView(position, view, parent);
         }

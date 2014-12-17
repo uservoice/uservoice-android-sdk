@@ -62,6 +62,10 @@ public abstract class SearchActivity extends FragmentListActivity {
             ListView searchView = new ListView(this);
             searchView.setAdapter(searchAdapter);
             searchView.setOnItemClickListener(searchAdapter);
+
+            // ensure that the viewflipper is set up
+            getListView();
+
             ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.uv_view_flipper);
             viewFlipper.addView(searchView, 1);
 

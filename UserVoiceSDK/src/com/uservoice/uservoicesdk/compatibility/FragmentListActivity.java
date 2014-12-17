@@ -112,7 +112,7 @@ public abstract class FragmentListActivity extends BaseActivity {
         return mAdapter;
     }
 
-    private void ensureList() {
+    private synchronized void ensureList() {
         if (mList != null)
             return;
 
