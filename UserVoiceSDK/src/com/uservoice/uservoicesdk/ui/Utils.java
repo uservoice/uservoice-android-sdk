@@ -32,10 +32,10 @@ public class Utils {
     public static void displayArticle(WebView webView, Article article, Context context) {
         String styles = "iframe, img { max-width: 100%; }";
         if (isDarkTheme(context)) {
-            webView.setBackgroundColor(Color.BLACK);
-            styles += "body { background-color: #000000; color: #F6F6F6; } a { color: #0099FF; }";
+            webView.setBackgroundColor(Color.parseColor("#303030"));
+            styles += "body { background-color: #303030; color: #F6F6F6; } a { color: #0099FF; }";
         }
-        String html = String.format("<html><head><meta charset=\"utf-8\"><link rel=\"stylesheet\" type=\"text/css\" href=\"http://cdn.uservoice.com/stylesheets/vendor/typeset.css\"/><style>%s</style></head><body class=\"typeset\" style=\"font-family: sans-serif; margin: 1em\"><h3>%s</h3>%s</body></html>", styles, article.getTitle(), article.getHtml());
+        String html = String.format("<html><head><meta charset=\"utf-8\"><link rel=\"stylesheet\" type=\"text/css\" href=\"http://cdn.uservoice.com/stylesheets/vendor/typeset.css\"/><style>%s</style></head><body class=\"typeset\" style=\"font-family: sans-serif; margin: 1em\"><h3>%s</h3><br>%s</body></html>", styles, article.getTitle(), article.getHtml());
         webView.setWebChromeClient(new WebChromeClient());
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setPluginState(PluginState.ON);
