@@ -110,5 +110,5 @@
     <string name="uv_powered_by_uservoice">本站由UserVoice</string>
     <string name="uv_android_sdk">Android的SDK</string>
     <string name="uv_ranked">排名%1$s</string>
-    <string name="uv_msg_bad_email_format">請輸入有效的電子郵件地址。</string>
+    <string name="uv_msg_bad_email_format">請輸入有效的 Email 信箱</string>
 </resources>
