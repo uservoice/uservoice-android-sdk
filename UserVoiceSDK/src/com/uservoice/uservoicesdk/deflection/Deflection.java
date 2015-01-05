@@ -31,7 +31,7 @@ public class Deflection {
         params.put("deflecting_type", deflectingType);
         params.put("deflector_id", String.valueOf(deflector.getId()));
         params.put("deflector_type", (deflector instanceof Article) ? "Faq" : "Suggestion");
-        new RestTask(RestMethod.GET, "/clients/omnibox/deflections/upsert.json", params, getCallback()).execute();
+        new RestTask(RestMethod.GET, "/clients/widgets/omnibox/deflections/upsert.json", params, getCallback()).execute();
     }
 
     public static void trackSearchDeflection(List<BaseModel> results, String deflectingType) {
@@ -59,7 +59,7 @@ public class Deflection {
         }
         params.put("faq_results", String.valueOf(articleResults));
         params.put("suggestion_results", String.valueOf(suggestionResults));
-        new RestTask(RestMethod.GET, "/clients/omnibox/deflections/list_view.json", params, getCallback()).execute();
+        new RestTask(RestMethod.GET, "/clients/widgets/omnibox/deflections/list_view.json", params, getCallback()).execute();
     }
 
     public static void setSearchText(String query) {
