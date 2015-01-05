@@ -1,6 +1,7 @@
 package com.uservoice.uservoicesdk.flow;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.uservoice.uservoicesdk.Config;
 import com.uservoice.uservoicesdk.Session;
@@ -82,6 +83,15 @@ public class InitManager {
                         public void onModel(User model) {
                             Session.getInstance().setUser(model);
                             done();
+                        }
+
+                        @Override
+                        public void onError(RestResult error) {
+                            Session.getInstance().setAccessToken(null);
+                            SharedPreferences.Editor edit = Session.getInstance().getSharedPreferences().edit();
+                            edit.remove("access_token");
+                            edit.commit();
+                            loadUser();
                         }
                     });
                 } else {
