@@ -37,6 +37,7 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
     public PostIdeaAdapter(FragmentActivity context) {
         super(context);
         continueButtonMessage = R.string.uv_post_idea_continue_button;
+        deflectingType = "Suggestion";
     }
 
     @Override
@@ -113,11 +114,9 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
 
     @Override
     protected void doSubmit() {
-        isPosting = false;
         SigninManager.signIn(context, emailField.getText().toString(), nameField.getText().toString(), new SigninCallback() {
             @Override
             public void onSuccess() {
-                isPosting = true;
                 Category category = categorySelect == null ? null : (Category) categorySelect.getSelectedItem();
                 Suggestion.createSuggestion(Session.getInstance().getForum(), category, textField.getText().toString(), descriptionField.getText().toString(), 1, new DefaultCallback<Suggestion>(context) {
                     @Override
@@ -133,6 +132,11 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
                         super.onError(error);
                     }
                 });
+            }
+
+            @Override
+            public void onFailure() {
+                isPosting = false;
             }
         });
     }

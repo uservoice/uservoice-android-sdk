@@ -35,6 +35,7 @@ public class ContactAdapter extends InstantAnswersAdapter {
         super(context);
         customFieldValues = new HashMap<String, String>(Session.getInstance().getConfig().getCustomFields());
         continueButtonMessage = R.string.uv_contact_continue_button;
+        deflectingType = "Ticket";
     }
 
     @Override
