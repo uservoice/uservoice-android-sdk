@@ -1,5 +1,14 @@
 ## master
 
+## 1.2.1
+
+* Fix Session to be a real singleton. Thanks to everyone who reported this. It was resulting in some random crashes.
+* Fill in missing translations.
+* Limit idea name to 140 chars, which is what the API will accept.
+* Delete saved access token and retry without it if it is invalid.
+* Fix reporting of instant answers metrics.
+* Store the config in local storage so that if we get evicted from memory, we still have a config.
+
 ## 1.2.0
 
 * Pull in appcompat-v7 to provide an ActionBar on older OS versions
