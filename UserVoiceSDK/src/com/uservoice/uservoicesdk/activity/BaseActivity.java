@@ -6,6 +6,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 
+import com.uservoice.uservoicesdk.Session;
+import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.ui.MixedSearchAdapter;
 
 public class BaseActivity extends ActionBarActivity {
@@ -24,6 +26,8 @@ public class BaseActivity extends ActionBarActivity {
             actionBar = getSupportActionBar();
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+        Session.getInstance().setContext(getApplicationContext());
+        Babayaga.setContext(getApplicationContext());
     }
 
     @Override

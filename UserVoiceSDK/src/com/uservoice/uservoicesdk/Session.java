@@ -6,6 +6,8 @@ import java.util.Map;
 
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
+
+import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -53,6 +55,9 @@ public class Session {
     }
 
     public Config getConfig() {
+        if (config == null && context != null) {
+            config = Config.load(getSharedPreferences(), "config", "config", Config.class);
+        }
         return config;
     }
 
@@ -61,6 +66,8 @@ public class Session {
         if (config.getEmail() != null) {
             persistIdentity(config.getName(), config.getEmail());
         }
+        config.persist(getSharedPreferences(), "config", "config");
+        persistSite();
     }
 
     public void setContext(Context context) {
@@ -96,8 +103,8 @@ public class Session {
 
     public OAuthConsumer getOAuthConsumer() {
         if (oauthConsumer == null) {
-            if (config.getKey() != null)
-                oauthConsumer = new CommonsHttpOAuthConsumer(config.getKey(), config.getSecret());
+            if (getConfig().getKey() != null)
+                oauthConsumer = new CommonsHttpOAuthConsumer(getConfig().getKey(), getConfig().getSecret());
             else if (clientConfig != null)
                 oauthConsumer = new CommonsHttpOAuthConsumer(clientConfig.getKey(), clientConfig.getSecret());
         }
@@ -115,8 +122,20 @@ public class Session {
             signinListener.run();
     }
 
+    protected void persistSite() {
+        Editor edit = context.getSharedPreferences("uv_site", 0).edit();
+        edit.putString("site", config.getSite());
+        edit.commit();
+    }
+
     public SharedPreferences getSharedPreferences() {
-        return context.getSharedPreferences("uv_" + config.getSite().replaceAll("\\W", "_"), 0);
+        String site;
+        if (config != null) {
+            site = config.getSite();
+        } else {
+            site = context.getSharedPreferences("uv_site", 0).getString("site", null);
+        }
+        return context.getSharedPreferences("uv_" + site.replaceAll("\\W", "_"), 0);
     }
 
     public void setAccessToken(AccessToken accessToken) {

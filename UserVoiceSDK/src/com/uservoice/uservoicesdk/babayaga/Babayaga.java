@@ -29,7 +29,6 @@ public class Babayaga {
     }
 
     private static String uvts;
-    private static Map<String, Object> traits;
     private static SharedPreferences prefs;
 
     public enum Event {
@@ -69,10 +68,6 @@ public class Babayaga {
         edit.commit();
     }
 
-    public static void setUserTraits(Map<String, Object> traits) {
-        Babayaga.traits = traits;
-    }
-
     public static void track(Event event) {
         track(event, null);
     }
@@ -100,15 +95,19 @@ public class Babayaga {
 
     public static void track(String event, Map<String, Object> eventProps) {
         // Log.d("UV", "BY flushing: " + event);
-        new BabayagaTask(event, uvts, traits, eventProps).execute();
+        new BabayagaTask(event, uvts, eventProps).execute();
     }
 
     public static void init(Context context) {
+        setContext(context);
+        track(Event.VIEW_APP);
+    }
+
+    public static void setContext(Context context) {
         prefs = context.getSharedPreferences("uv", 0);
         if (prefs.contains("uvts")) {
             uvts = prefs.getString("uvts", null);
         }
-        track(Event.VIEW_APP);
     }
 
     public static String getUvts() {

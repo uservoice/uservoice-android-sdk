@@ -1,6 +1,9 @@
 package com.uservoice.uservoicesdk.model;
 
-public class Attachment {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class Attachment extends BaseModel {
 
     private String fileName;
     private String contentType;
@@ -22,5 +25,19 @@ public class Attachment {
 
     public String getData() {
         return data;
+    }
+
+    @Override
+    public void save(JSONObject object) throws JSONException {
+        object.put("fileName", fileName);
+        object.put("contentType", contentType);
+        object.put("data", data);
+    }
+
+    @Override
+    public void load(JSONObject object) throws JSONException {
+        fileName = getString(object, "fileName");
+        contentType = getString(object, "contentType");
+        data = getString(object, "data");
     }
 }

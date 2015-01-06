@@ -25,14 +25,12 @@ import com.uservoice.uservoicesdk.UserVoice;
 public class BabayagaTask extends AsyncTask<String, String, Void> {
 
     private final String event;
-    private final Map<String, Object> traits;
     private final Map<String, Object> eventProps;
     private final String uvts;
 
-    public BabayagaTask(String event, String uvts, Map<String, Object> traits, Map<String, Object> eventProps) {
+    public BabayagaTask(String event, String uvts, Map<String, Object> eventProps) {
         this.event = event;
         this.uvts = uvts;
-        this.traits = traits;
         this.eventProps = eventProps;
     }
 
@@ -41,6 +39,7 @@ public class BabayagaTask extends AsyncTask<String, String, Void> {
         AndroidHttpClient client = null;
         try {
             JSONObject data = new JSONObject();
+            Map<String, Object> traits = Session.getInstance().getConfig().getUserTraits();
             if (traits != null && !traits.isEmpty()) {
                 data.put("u", new JSONObject(traits));
             }

@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -68,6 +70,65 @@ public class BaseModel {
 
     protected String getHtml(JSONObject object, String key) throws JSONException {
         return object.isNull(key) ? null : object.getString(key);
+    }
+
+    protected Map<String, String> deserializeStringMap(JSONObject object) throws JSONException {
+        Iterator<String> keyIter = object.keys();
+        Map<String, String> map = new HashMap<String,String>(object.length());
+        while (keyIter.hasNext()) {
+            String fieldKey = keyIter.next();
+            String value = object.getString(fieldKey);
+            map.put(fieldKey, value);
+        }
+        return map;
+    }
+
+    protected JSONObject serializeStringMap(Map<String, String> map) throws JSONException {
+        JSONObject object = new JSONObject();
+        for (String key : map.keySet()) {
+            object.put(key, map.get(key));
+        }
+        return object;
+    }
+
+    protected Map<String, Object> deserializeMap(JSONObject object) throws JSONException {
+        Iterator<String> keyIter = object.keys();
+        Map<String, Object> map = new HashMap<String, Object>(object.length());
+        while (keyIter.hasNext()) {
+            String fieldKey = keyIter.next();
+            Object value = object.get(fieldKey);
+            if (value instanceof JSONObject) {
+                value = deserializeMap((JSONObject) value);
+            }
+            map.put(fieldKey, value);
+        }
+        return map;
+    }
+
+    protected JSONObject serializeMap(Map<String, Object> map) throws JSONException {
+        JSONObject object = new JSONObject();
+        for (String key : map.keySet()) {
+            Object value = map.get(key);
+            if (value instanceof Map) {
+                value = serializeMap((Map<String, Object>) value);
+            }
+            object.put(key, value);
+        }
+        return object;
+    }
+
+    protected <T extends BaseModel> JSONArray serializeList(List<T> list) throws JSONException {
+        JSONArray array = new JSONArray();
+        for (T object : list) {
+            array.put(serializeObject(object));
+        }
+        return array;
+    }
+
+    protected <T extends BaseModel> JSONObject serializeObject(T object) throws JSONException {
+        JSONObject obj = new JSONObject();
+        object.save(obj);
+        return obj;
     }
 
     @SuppressLint("SimpleDateFormat")

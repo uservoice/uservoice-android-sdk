@@ -1,16 +1,23 @@
 package com.uservoice.uservoicesdk;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.uservoice.uservoicesdk.model.Attachment;
+import com.uservoice.uservoicesdk.model.BaseModel;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class Config {
+public class Config extends BaseModel {
     private String site;
     private String key;
     private String secret;
@@ -26,6 +33,8 @@ public class Config {
     private boolean showKnowledgeBase = true;
     private Map<String, Object> userTraits = new HashMap<String, Object>();
     private List<Attachment> attachmentList = new ArrayList<Attachment>();
+
+    public Config() {}
 
     public Config(String site) {
         this.site = site;
@@ -188,5 +197,43 @@ public class Config {
         if (attachment != null) {
             attachmentList.add(attachment);
         }
+    }
+
+    @Override
+    public void save(JSONObject object) throws JSONException {
+        object.put("site", site);
+        object.put("key", key);
+        object.put("secret", secret);
+        object.put("email", email);
+        object.put("name", name);
+        object.put("guid", guid);
+        object.put("customFields", serializeStringMap(customFields));
+        object.put("topicId", topicId);
+        object.put("forumId", forumId);
+        object.put("showForum", showForum);
+        object.put("showPostIdea", showPostIdea);
+        object.put("showContactUs", showContactUs);
+        object.put("showKnowledgeBase", showKnowledgeBase);
+        object.put("userTraits", serializeMap(userTraits));
+        object.put("attachmentList", serializeList(attachmentList));
+    }
+
+    @Override
+    public void load(JSONObject object) throws JSONException {
+        site = getString(object, "site");
+        key = getString(object, "key");
+        secret = getString(object, "secret");
+        email = getString(object, "email");
+        name = getString(object, "name");
+        guid = getString(object, "guid");
+        customFields = deserializeStringMap(object.getJSONObject("customFields"));
+        topicId = object.getInt("topicId");
+        forumId = object.getInt("forumId");
+        showForum = object.getBoolean("showForum");
+        showPostIdea = object.getBoolean("showPostIdea");
+        showContactUs = object.getBoolean("showContactUs");
+        showKnowledgeBase = object.getBoolean("showKnowledgeBase");
+        userTraits = deserializeMap(object.getJSONObject("userTraits"));
+        attachmentList = deserializeList(object, "attachmentList", Attachment.class);
     }
 }
