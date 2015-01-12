@@ -1,5 +1,9 @@
 ## master
 
+## 1.2.2
+
+* Fix a regression that broke article browsing
+
 ## 1.2.1
 
 * Fix Session to be a real singleton. Thanks to everyone who reported this. It was resulting in some random crashes.
