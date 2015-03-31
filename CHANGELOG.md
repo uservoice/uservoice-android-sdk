@@ -1,5 +1,9 @@
 ## master
 
+## 1.2.3
+
+* Add localizations
+
 ## 1.2.2
 
 * Fix a regression that broke article browsing
