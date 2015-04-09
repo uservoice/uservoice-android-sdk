@@ -13,6 +13,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
+import com.uservoice.uservoicesdk.flow.SigninManager;
 import com.uservoice.uservoicesdk.model.AccessToken;
 import com.uservoice.uservoicesdk.model.ClientConfig;
 import com.uservoice.uservoicesdk.model.Forum;
@@ -63,9 +64,7 @@ public class Session {
 
     public void setConfig(Config config) {
         this.config = config;
-        if (config.getEmail() != null) {
-            persistIdentity(config.getName(), config.getEmail());
-        }
+        persistIdentity(config.getName(), config.getEmail());
         config.persist(getSharedPreferences(), "config", "config");
         persistSite();
     }
@@ -77,7 +76,9 @@ public class Session {
     public void persistIdentity(String name, String email) {
         Editor edit = getSharedPreferences().edit();
         edit.putString("user_name", name);
-        edit.putString("user_email", email);
+        if (SigninManager.isValidEmail(email)) {
+            edit.putString("user_email", email);
+        }
         edit.commit();
     }
 
