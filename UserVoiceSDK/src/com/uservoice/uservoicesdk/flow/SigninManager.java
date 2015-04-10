@@ -2,6 +2,7 @@ package com.uservoice.uservoicesdk.flow;
 
 import android.support.v4.app.FragmentActivity;
 
+import android.text.TextUtils;
 import android.widget.Toast;
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
@@ -25,7 +26,7 @@ public class SigninManager {
     private String name;
     private final FragmentActivity activity;
     private boolean passwordOnly;
-    private Pattern emailFormat = Pattern.compile("\\A(\\w[-+.\\w!\\#\\$%&'\\*\\+\\-/=\\?\\^_`\\{\\|\\}~]*@([-\\w]*\\.)+[a-zA-Z]{2,9})\\z");
+    private static Pattern emailFormat = Pattern.compile("\\A(\\w[-+.\\w!\\#\\$%&'\\*\\+\\-/=\\?\\^_`\\{\\|\\}~]*@([-\\w]*\\.)+[a-zA-Z]{2,9})\\z");
 
     public static void signIn(FragmentActivity activity, SigninCallback callback) {
         new SigninManager(activity, null, null, callback).signIn();
@@ -33,6 +34,10 @@ public class SigninManager {
 
     public static void signIn(FragmentActivity activity, String email, String name, SigninCallback callback) {
         new SigninManager(activity, email, name, callback).signIn();
+    }
+
+    public static boolean isValidEmail(String email) {
+        return !TextUtils.isEmpty(email) && emailFormat.matcher(email).matches();
     }
 
     private SigninManager(FragmentActivity activity, String email, String name, SigninCallback callback) {
@@ -49,7 +54,7 @@ public class SigninManager {
         } else if (Session.getInstance().getAccessToken() != null) {
             // If we have an access token but no user, they have signed in in this session. Don't prompt again.
             callback.onSuccess();
-        } else if (email != null && !emailFormat.matcher(email).matches()) {
+        } else if (!isValidEmail(email)) {
             Toast.makeText(activity, R.string.uv_msg_bad_email_format, Toast.LENGTH_SHORT).show();
             callback.onFailure();
         } else {

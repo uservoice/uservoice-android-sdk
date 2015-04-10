@@ -2,7 +2,6 @@ package com.uservoice.uservoicesdk.ui;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
@@ -20,10 +19,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.uservoice.uservoicesdk.R;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.deflection.Deflection;
+import com.uservoice.uservoicesdk.flow.SigninManager;
 import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.BaseModel;
 import com.uservoice.uservoicesdk.model.Suggestion;
@@ -298,11 +299,8 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
         } else if (state == State.DETAILS) {
             String name = nameField.getText().toString();
             String email = emailField.getText().toString();
-            if (email.length() == 0) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle(R.string.uv_error);
-                builder.setMessage(R.string.uv_msg_user_identity_validation);
-                builder.create().show();
+            if (!SigninManager.isValidEmail(email)) {
+                Toast.makeText(context, R.string.uv_msg_bad_email_format, Toast.LENGTH_SHORT).show();
             } else if (!isPosting) {
                 isPosting = true;
                 Session.getInstance().persistIdentity(name, email);
