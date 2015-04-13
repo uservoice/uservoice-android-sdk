@@ -26,6 +26,7 @@ public class Article extends BaseModel implements Parcelable {
     public static void loadPage(int page, final Callback<List<Article>> callback) {
         Map<String, String> params = new HashMap<String, String>();
         params.put("sort", "ordered");
+        params.put("filter", "published");
         params.put("per_page", "50");
         params.put("page", String.valueOf(page));
         doGet(apiPath("/articles.json"), params, new RestTaskCallback(callback) {
@@ -39,6 +40,7 @@ public class Article extends BaseModel implements Parcelable {
     public static void loadPageForTopic(int topicId, int page, final Callback<List<Article>> callback) {
         Map<String, String> params = new HashMap<String, String>();
         params.put("sort", "ordered");
+        params.put("filter", "published");
         params.put("per_page", "50");
         params.put("page", String.valueOf(page));
         doGet(apiPath("/topics/%d/articles.json", topicId), params, new RestTaskCallback(callback) {
