@@ -1,5 +1,9 @@
 ## master
 
+## 1.2.4
+
+* Always check that emails are valid
+
 ## 1.2.3
 
 * Add localizations
