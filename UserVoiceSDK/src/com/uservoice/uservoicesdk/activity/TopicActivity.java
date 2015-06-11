@@ -108,6 +108,16 @@ public class TopicActivity extends SearchActivity {
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem item = menu.findItem(R.id.uv_action_contact);
+        if (!Session.getInstance().getConfig().shouldShowContactUs()) {
+            item.setVisible(false);
+        }
+        super.onPrepareOptionsMenu(menu);
+        return true;
+    }
+
+    @Override
     public void hideSearch() {
         super.hideSearch();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);

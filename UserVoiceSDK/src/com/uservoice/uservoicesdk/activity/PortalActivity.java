@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.uservoice.uservoicesdk.R;
+import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.ui.PortalAdapter;
 
@@ -21,6 +22,16 @@ public class PortalActivity extends SearchActivity {
         getListView().setOnItemClickListener(getModelAdapter());
 
         Babayaga.track(Babayaga.Event.VIEW_KB);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem item = menu.findItem(R.id.uv_action_contact);
+        if (!Session.getInstance().getConfig().shouldShowContactUs()) {
+            item.setVisible(false);
+        }
+        super.onPrepareOptionsMenu(menu);
+        return true;
     }
 
     @Override

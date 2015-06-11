@@ -70,6 +70,16 @@ public class ArticleActivity extends SearchActivity {
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem item = menu.findItem(R.id.uv_action_contact);
+        if (!Session.getInstance().getConfig().shouldShowContactUs()) {
+            item.setVisible(false);
+        }
+        super.onPrepareOptionsMenu(menu);
+        return true;
+    }
+
+    @Override
     @SuppressLint("NewApi")
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.uv_portal, menu);
