@@ -44,6 +44,24 @@ UserVoice.launchContactUs(this);    // Show the contact form
 UserVoice.launchPostIdea(this);     // Show the idea form
 ```
 
+### Using with proguard
+
+You need to exclude some dependencies to avoid problems with `org.apache.http`. A ``-dontwarn` statement in the proguard file is not enough (see issue [#147](https://github.com/uservoice/uservoice-android-sdk/issues/147)), you will have to modify your `build.gradle` as follows:
+
+```
+compile ('com.uservoice:uservoice-android-sdk:1.2.+') {
+    exclude module: 'commons-logging'
+    exclude module: 'httpcore'
+    exclude module: 'httpclient'
+}
+```
+
+Also, to avoid crashes on some devices, add the following to your proguard file:
+
+```
+-keep class android.support.v7.widget.SearchView { *; }
+```
+
 ### Other Config options
 
 Before calling `UserVoice.init` you can further customize your configuration.
