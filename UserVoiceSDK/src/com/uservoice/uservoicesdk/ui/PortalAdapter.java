@@ -66,11 +66,11 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
     }
 
     private boolean shouldShowArticles() {
-        return Session.getInstance().getConfig().getTopicId() != -1 || (getTopics() != null && getTopics().isEmpty());
+        return Session.getInstance().getConfig(context).getTopicId() != -1 || (getTopics() != null && getTopics().isEmpty());
     }
 
     private void loadForum() {
-        Forum.loadForum(Session.getInstance().getConfig().getForumId(), new DefaultCallback<Forum>(context) {
+        Forum.loadForum(context, Session.getInstance().getConfig(context).getForumId(), new DefaultCallback<Forum>(context) {
             @Override
             public void onModel(Forum model) {
                 Session.getInstance().setForum(model);
@@ -89,18 +89,18 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
             }
         };
 
-        if (Session.getInstance().getConfig().getTopicId() != -1) {
-            Article.loadPageForTopic(Session.getInstance().getConfig().getTopicId(), 1, articlesCallback);
+        if (Session.getInstance().getConfig(context).getTopicId() != -1) {
+            Article.loadPageForTopic(context, Session.getInstance().getConfig(context).getTopicId(), 1, articlesCallback);
         } else {
-            Topic.loadTopics(new DefaultCallback<List<Topic>>(context) {
+            Topic.loadTopics(context, new DefaultCallback<List<Topic>>(context) {
                 @Override
                 public void onModel(List<Topic> model) {
                     if (model.isEmpty()) {
                         Session.getInstance().setTopics(model);
-                        Article.loadPage(1, articlesCallback);
+                        Article.loadPage(context, 1, articlesCallback);
                     } else {
                         ArrayList<Topic> topics = new ArrayList<Topic>(model);
-                        topics.add(Topic.ALL_ARTICLES);
+                        topics.add(Topic.allArticlesTopic(context));
                         Session.getInstance().setTopics(topics);
                         notifyDataSetChanged();
                     }
@@ -112,7 +112,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
     private void computeStaticRows() {
         if (staticRows == null) {
             staticRows = new ArrayList<Integer>();
-            Config config = Session.getInstance().getConfig();
+            Config config = Session.getInstance().getConfig(context);
             if (config.shouldShowContactUs())
                 staticRows.add(CONTACT);
             if (config.shouldShowForum())
@@ -129,7 +129,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
         } else {
             computeStaticRows();
             int rows = staticRows.size();
-            if (Session.getInstance().getConfig().shouldShowKnowledgeBase()) {
+            if (Session.getInstance().getConfig(context).shouldShowKnowledgeBase()) {
                 if (getTopics() == null || (shouldShowArticles() && articles == null)) {
                     rows += 1;
                 } else {
@@ -241,7 +241,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
             TextView textView = (TextView) view.findViewById(R.id.uv_text);
             textView.setText(topic.getName());
             textView = (TextView) view.findViewById(R.id.uv_text2);
-            if (topic == Topic.ALL_ARTICLES) {
+            if (topic.getId() == -1) {
                 textView.setVisibility(View.GONE);
             } else {
                 textView.setVisibility(View.VISIBLE);
@@ -285,7 +285,7 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
                 return LOADING;
             return type;
         }
-        if (Session.getInstance().getConfig().shouldShowKnowledgeBase()) {
+        if (Session.getInstance().getConfig(context).shouldShowKnowledgeBase()) {
 	        if (getTopics() == null || (shouldShowArticles() && articles == null)) {
 	        	if (position - staticRows.size() == 0)
 	        		return LOADING;

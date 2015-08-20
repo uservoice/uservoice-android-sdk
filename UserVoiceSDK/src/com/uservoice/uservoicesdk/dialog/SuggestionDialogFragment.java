@@ -61,18 +61,18 @@ public class SuggestionDialogFragment extends DialogFragmentBugfixed {
                     @Override
                     public void onModel(Suggestion model) {
                         if (getActivity() instanceof InstantAnswersActivity)
-                            Deflection.trackDeflection("subscribed", deflectingType, model);
+                            Deflection.trackDeflection(getActivity(), "subscribed", deflectingType, model);
                         suggestionSubscriptionUpdated(model);
                     }
                 };
                 if (suggestion.isSubscribed()) {
-                    suggestion.unsubscribe(callback);
+                    suggestion.unsubscribe(getActivity(), callback);
                 } else {
-                    if (Session.getInstance().getEmail() != null) {
-                        SigninManager.signinForSubscribe(getActivity(), Session.getInstance().getEmail(), new SigninCallback() {
+                    if (Session.getInstance().getEmail(getActivity()) != null) {
+                        SigninManager.signinForSubscribe(getActivity(), Session.getInstance().getEmail(getActivity()), new SigninCallback() {
                             @Override
                             public void onSuccess() {
-                                suggestion.subscribe(callback);
+                                suggestion.subscribe(getActivity(), callback);
                             }
                         });
                     } else {
@@ -98,7 +98,7 @@ public class SuggestionDialogFragment extends DialogFragmentBugfixed {
         listView.setOnScrollListener(new PaginationScrollListener(adapter));
         builder.setView(view);
         builder.setNegativeButton(R.string.uv_close, null);
-        Babayaga.track(Babayaga.Event.VIEW_IDEA, suggestion.getId());
+        Babayaga.track(getActivity(), Babayaga.Event.VIEW_IDEA, suggestion.getId());
         return builder.create();
     }
 
@@ -147,7 +147,7 @@ public class SuggestionDialogFragment extends DialogFragmentBugfixed {
 
             @Override
             protected void loadPage(int page, Callback<List<Comment>> callback) {
-                Comment.loadComments(suggestion, page, callback);
+                Comment.loadComments(getActivity(), suggestion, page, callback);
             }
         };
     }

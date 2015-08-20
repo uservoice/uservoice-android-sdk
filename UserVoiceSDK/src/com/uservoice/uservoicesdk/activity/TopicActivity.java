@@ -61,9 +61,9 @@ public class TopicActivity extends SearchActivity {
             protected void loadPage(int page, Callback<List<Article>> callback) {
                 Topic topic = getIntent().getParcelableExtra("topic");
                 if (topic.getId() == -1) {
-                    Article.loadPage(page, callback);
+                    Article.loadPage(TopicActivity.this, page, callback);
                 } else {
-                    Article.loadPageForTopic(topic.getId(), page, callback);
+                    Article.loadPageForTopic(TopicActivity.this, topic.getId(), page, callback);
                 }
             }
 
@@ -104,13 +104,13 @@ public class TopicActivity extends SearchActivity {
             }
         });
 
-        Babayaga.track(Babayaga.Event.VIEW_TOPIC, topic.getId());
+        Babayaga.track(this, Babayaga.Event.VIEW_TOPIC, topic.getId());
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem item = menu.findItem(R.id.uv_action_contact);
-        if (!Session.getInstance().getConfig().shouldShowContactUs()) {
+        if (!Session.getInstance().getConfig(this).shouldShowContactUs()) {
             item.setVisible(false);
         }
         super.onPrepareOptionsMenu(menu);

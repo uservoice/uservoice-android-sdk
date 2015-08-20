@@ -28,14 +28,14 @@ public class InitManager {
 
     public void init() {
         if (Session.getInstance().getClientConfig() == null) {
-            ClientConfig.loadClientConfig(new DefaultCallback<ClientConfig>(context) {
+            ClientConfig.loadClientConfig(context, new DefaultCallback<ClientConfig>(context) {
                 @Override
                 public void onModel(ClientConfig model) {
                     Session.getInstance().setClientConfig(model);
                     // if we are getting the client config, they are launching the ui
                     // do this here so that we have the subdomain id, so that the channel event works for now
                     // once babayaga actually supports recording events using the subdomain key, this could be moved back to UserVoice.java
-                    Babayaga.track(Babayaga.Event.VIEW_CHANNEL);
+                    Babayaga.track(context, Babayaga.Event.VIEW_CHANNEL);
                     loadUser();
                 }
             });
@@ -47,19 +47,19 @@ public class InitManager {
     private void loadUser() {
         if (Session.getInstance().getUser() == null) {
             if (shouldSignIn()) {
-                RequestToken.getRequestToken(new DefaultCallback<RequestToken>(context) {
+                RequestToken.getRequestToken(context, new DefaultCallback<RequestToken>(context) {
                     @Override
                     public void onModel(RequestToken model) {
                         if (canceled)
                             return;
                         Session.getInstance().setRequestToken(model);
-                        Config config = Session.getInstance().getConfig();
-                        User.findOrCreate(config.getEmail(), config.getName(), config.getGuid(), new DefaultCallback<AccessTokenResult<User>>(context) {
+                        Config config = Session.getInstance().getConfig(context);
+                        User.findOrCreate(context, config.getEmail(), config.getName(), config.getGuid(), new DefaultCallback<AccessTokenResult<User>>(context) {
                             public void onModel(AccessTokenResult<User> model) {
                                 if (canceled)
                                     return;
                                 Session.getInstance().setAccessToken(context, model.getAccessToken());
-                                Session.getInstance().setUser(model.getModel());
+                                Session.getInstance().setUser(context, model.getModel());
                                 done();
                             }
 
@@ -75,20 +75,20 @@ public class InitManager {
                     }
                 });
             } else {
-                AccessToken accessToken = BaseModel.load(Session.getInstance().getSharedPreferences(), "access_token", "access_token", AccessToken.class);
+                AccessToken accessToken = BaseModel.load(Session.getInstance().getSharedPreferences(context), "access_token", "access_token", AccessToken.class);
                 if (accessToken != null) {
                     Session.getInstance().setAccessToken(accessToken);
-                    User.loadCurrentUser(new DefaultCallback<User>(context) {
+                    User.loadCurrentUser(context, new DefaultCallback<User>(context) {
                         @Override
                         public void onModel(User model) {
-                            Session.getInstance().setUser(model);
+                            Session.getInstance().setUser(context, model);
                             done();
                         }
 
                         @Override
                         public void onError(RestResult error) {
                             Session.getInstance().setAccessToken(null);
-                            SharedPreferences.Editor edit = Session.getInstance().getSharedPreferences().edit();
+                            SharedPreferences.Editor edit = Session.getInstance().getSharedPreferences(context).edit();
                             edit.remove("access_token");
                             edit.commit();
                             loadUser();
@@ -104,7 +104,7 @@ public class InitManager {
     }
 
     private boolean shouldSignIn() {
-        Config config = Session.getInstance().getConfig();
+        Config config = Session.getInstance().getConfig(context);
         return config.getEmail() != null;
     }
 

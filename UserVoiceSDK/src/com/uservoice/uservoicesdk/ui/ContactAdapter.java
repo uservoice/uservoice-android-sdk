@@ -33,7 +33,7 @@ public class ContactAdapter extends InstantAnswersAdapter {
 
     public ContactAdapter(FragmentActivity context) {
         super(context);
-        customFieldValues = new HashMap<String, String>(Session.getInstance().getConfig().getCustomFields());
+        customFieldValues = new HashMap<String, String>(Session.getInstance().getConfig(context).getCustomFields());
         continueButtonMessage = R.string.uv_contact_continue_button;
         deflectingType = "Ticket";
     }
@@ -139,10 +139,10 @@ public class ContactAdapter extends InstantAnswersAdapter {
     @Override
     protected void doSubmit() {
         if (validateCustomFields()) {
-            Ticket.createTicket(textField.getText().toString(), emailField.getText().toString(), nameField.getText().toString(), customFieldValues, new DefaultCallback<Ticket>(context) {
+            Ticket.createTicket(context, textField.getText().toString(), emailField.getText().toString(), nameField.getText().toString(), customFieldValues, new DefaultCallback<Ticket>(context) {
                 @Override
                 public void onModel(Ticket model) {
-                    Babayaga.track(Event.SUBMIT_TICKET);
+                    Babayaga.track(context, Event.SUBMIT_TICKET);
                     Toast.makeText(context, R.string.uv_msg_ticket_created, Toast.LENGTH_SHORT).show();
                     context.finish();
                 }

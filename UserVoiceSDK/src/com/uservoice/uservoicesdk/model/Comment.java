@@ -1,5 +1,7 @@
 package com.uservoice.uservoicesdk.model;
 
+import android.content.Context;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -18,10 +20,10 @@ public class Comment extends BaseModel {
     private String avatarUrl;
     private Date createdAt;
 
-    public static void loadComments(Suggestion suggestion, int page, final Callback<List<Comment>> callback) {
+    public static void loadComments(Context context, Suggestion suggestion, int page, final Callback<List<Comment>> callback) {
         Map<String, String> params = new HashMap<String, String>();
         params.put("page", String.valueOf(page));
-        doGet(apiPath("/forums/%d/suggestions/%d/comments.json", suggestion.getForumId(), suggestion.getId()), params, new RestTaskCallback(callback) {
+        doGet(context, apiPath("/forums/%d/suggestions/%d/comments.json", suggestion.getForumId(), suggestion.getId()), params, new RestTaskCallback(callback) {
             @Override
             public void onComplete(JSONObject object) throws JSONException {
                 callback.onModel(deserializeList(object, "comments", Comment.class));
@@ -29,13 +31,13 @@ public class Comment extends BaseModel {
         });
     }
 
-    public static void createComment(final Suggestion suggestion, String text, final Callback<Comment> callback) {
+    public static void createComment(final Context context, final Suggestion suggestion, String text, final Callback<Comment> callback) {
         Map<String, String> params = new HashMap<String, String>();
         params.put("comment[text]", text);
-        doPost(apiPath("/forums/%d/suggestions/%d/comments.json", suggestion.getForumId(), suggestion.getId()), params, new RestTaskCallback(callback) {
+        doPost(context, apiPath("/forums/%d/suggestions/%d/comments.json", suggestion.getForumId(), suggestion.getId()), params, new RestTaskCallback(callback) {
             @Override
             public void onComplete(JSONObject object) throws JSONException {
-                Babayaga.track(Babayaga.Event.COMMENT_IDEA, suggestion.getId());
+                Babayaga.track(context, Babayaga.Event.COMMENT_IDEA, suggestion.getId());
                 callback.onModel(deserializeObject(object, "comment", Comment.class));
             }
         });

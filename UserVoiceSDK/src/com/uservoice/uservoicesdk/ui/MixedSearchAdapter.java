@@ -103,7 +103,7 @@ public class MixedSearchAdapter extends SearchAdapter<BaseModel> implements Adap
     @Override
     protected RestTask search(final String query, final Callback<List<BaseModel>> callback) {
         currentQuery = query;
-        return Article.loadInstantAnswers(query, new Callback<List<BaseModel>>() {
+        return Article.loadInstantAnswers(context, query, new Callback<List<BaseModel>>() {
             @Override
             public void onModel(List<BaseModel> list) {
                 List<Article> articles = new ArrayList<Article>();
@@ -114,8 +114,8 @@ public class MixedSearchAdapter extends SearchAdapter<BaseModel> implements Adap
                     else if (model instanceof Suggestion)
                         suggestions.add((Suggestion) model);
                 }
-                Babayaga.track(Babayaga.Event.SEARCH_ARTICLES, query, articles);
-                Babayaga.track(Babayaga.Event.SEARCH_IDEAS, query, suggestions);
+                Babayaga.track(context, Babayaga.Event.SEARCH_ARTICLES, query, articles);
+                Babayaga.track(context, Babayaga.Event.SEARCH_IDEAS, query, suggestions);
                 callback.onModel(list);
             }
 

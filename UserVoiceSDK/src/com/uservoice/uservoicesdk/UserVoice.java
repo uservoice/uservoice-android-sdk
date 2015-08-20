@@ -34,8 +34,7 @@ public class UserVoice {
 
     public static void init(Config config, Context context) {
         Session.reset();
-        Session.getInstance().setContext(context);
-        Session.getInstance().setConfig(config);
+        Session.getInstance().init(context, config);
         Babayaga.init(context);
     }
 
@@ -43,12 +42,12 @@ public class UserVoice {
         Session.getInstance().setExternalId(scope, id);
     }
 
-    public static void track(String event, Map<String, Object> properties) {
-        Babayaga.track(event, properties);
+    public static void track(Context context, String event, Map<String, Object> properties) {
+        Babayaga.track(context, event, properties);
     }
 
-    public static void track(String event) {
-        track(event, null);
+    public static void track(Context context, String event) {
+        track(context, event, null);
     }
 
     public static String getVersion() {

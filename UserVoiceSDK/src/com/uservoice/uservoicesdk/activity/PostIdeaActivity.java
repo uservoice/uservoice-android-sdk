@@ -16,7 +16,7 @@ public class PostIdeaActivity extends InstantAnswersActivity {
         if (Session.getInstance().getForum() != null) {
             super.onInitialize();
         } else {
-            Forum.loadForum(Session.getInstance().getConfig().getForumId(), new DefaultCallback<Forum>(this) {
+            Forum.loadForum(this, Session.getInstance().getConfig(this).getForumId(), new DefaultCallback<Forum>(this) {
                 @Override
                 public void onModel(Forum model) {
                     Session.getInstance().setForum(model);

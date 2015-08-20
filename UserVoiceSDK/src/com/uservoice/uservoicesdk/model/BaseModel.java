@@ -14,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.text.Html;
@@ -146,8 +147,8 @@ public class BaseModel {
         return Session.getInstance();
     }
 
-    protected static Config getConfig() {
-        return getSession().getConfig();
+    protected static Config getConfig(Context context) {
+        return getSession().getConfig(context);
     }
 
     protected static ClientConfig getClientConfig() {
@@ -158,42 +159,42 @@ public class BaseModel {
         return "/api/v1" + String.format(path, args);
     }
 
-    protected static RestTask doGet(String path, RestTaskCallback callback) {
-        return doGet(path, null, callback);
+    protected static RestTask doGet(Context context, String path, RestTaskCallback callback) {
+        return doGet(context, path, null, callback);
     }
 
-    protected static RestTask doPost(String path, RestTaskCallback callback) {
-        return doPost(path, null, callback);
+    protected static RestTask doPost(Context context, String path, RestTaskCallback callback) {
+        return doPost(context, path, null, callback);
     }
 
-    protected static RestTask doDelete(String path, RestTaskCallback callback) {
-        return doDelete(path, null, callback);
+    protected static RestTask doDelete(Context context, String path, RestTaskCallback callback) {
+        return doDelete(context, path, null, callback);
     }
 
-    protected static RestTask doPut(String path, RestTaskCallback callback) {
-        return doPut(path, null, callback);
+    protected static RestTask doPut(Context context, String path, RestTaskCallback callback) {
+        return doPut(context, path, null, callback);
     }
 
-    protected static RestTask doGet(String path, Map<String, String> params, RestTaskCallback callback) {
-        RestTask task = new RestTask(RestMethod.GET, path, params, callback);
+    protected static RestTask doGet(Context context, String path, Map<String, String> params, RestTaskCallback callback) {
+        RestTask task = new RestTask(context, RestMethod.GET, path, params, callback);
         task.execute();
         return task;
     }
 
-    protected static RestTask doPost(String path, Map<String, String> params, RestTaskCallback callback) {
-        RestTask task = new RestTask(RestMethod.POST, path, params, callback);
+    protected static RestTask doPost(Context context, String path, Map<String, String> params, RestTaskCallback callback) {
+        RestTask task = new RestTask(context, RestMethod.POST, path, params, callback);
         task.execute();
         return task;
     }
 
-    protected static RestTask doDelete(String path, Map<String, String> params, RestTaskCallback callback) {
-        RestTask task = new RestTask(RestMethod.DELETE, path, params, callback);
+    protected static RestTask doDelete(Context context, String path, Map<String, String> params, RestTaskCallback callback) {
+        RestTask task = new RestTask(context, RestMethod.DELETE, path, params, callback);
         task.execute();
         return task;
     }
 
-    protected static RestTask doPut(String path, Map<String, String> params, RestTaskCallback callback) {
-        RestTask task = new RestTask(RestMethod.PUT, path, params, callback);
+    protected static RestTask doPut(Context context, String path, Map<String, String> params, RestTaskCallback callback) {
+        RestTask task = new RestTask(context, RestMethod.PUT, path, params, callback);
         task.execute();
         return task;
     }

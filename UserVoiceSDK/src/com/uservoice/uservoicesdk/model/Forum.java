@@ -1,5 +1,7 @@
 package com.uservoice.uservoicesdk.model;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +17,8 @@ public class Forum extends BaseModel {
     private int numberOfOpenSuggestions;
     private List<Category> categories;
 
-    public static void loadForum(int forumId, final Callback<Forum> callback) {
-        doGet(apiPath("/forums/%d.json", forumId), new RestTaskCallback(callback) {
+    public static void loadForum(Context context, int forumId, final Callback<Forum> callback) {
+        doGet(context, apiPath("/forums/%d.json", forumId), new RestTaskCallback(callback) {
             @Override
             public void onComplete(JSONObject object) throws JSONException {
                 callback.onModel(deserializeObject(object, "forum", Forum.class));

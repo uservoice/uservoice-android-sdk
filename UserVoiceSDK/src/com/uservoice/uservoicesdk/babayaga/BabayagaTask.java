@@ -14,6 +14,7 @@ import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.util.Base64;
@@ -27,11 +28,13 @@ public class BabayagaTask extends AsyncTask<String, String, Void> {
     private final String event;
     private final Map<String, Object> eventProps;
     private final String uvts;
+    private final Context context;
 
-    public BabayagaTask(String event, String uvts, Map<String, Object> eventProps) {
+    public BabayagaTask(Context context, String event, String uvts, Map<String, Object> eventProps) {
         this.event = event;
         this.uvts = uvts;
         this.eventProps = eventProps;
+        this.context = context.getApplicationContext();
     }
 
     @Override
@@ -39,7 +42,7 @@ public class BabayagaTask extends AsyncTask<String, String, Void> {
         AndroidHttpClient client = null;
         try {
             JSONObject data = new JSONObject();
-            Map<String, Object> traits = Session.getInstance().getConfig().getUserTraits();
+            Map<String, Object> traits = Session.getInstance().getConfig(context).getUserTraits();
             if (traits != null && !traits.isEmpty()) {
                 data.put("u", new JSONObject(traits));
             }
@@ -52,7 +55,7 @@ public class BabayagaTask extends AsyncTask<String, String, Void> {
                 subdomain = Session.getInstance().getClientConfig().getSubdomainId();
                 route = "t";
             } else {
-                subdomain = Session.getInstance().getConfig().getSite().split("\\.")[0];
+                subdomain = Session.getInstance().getConfig(context).getSite().split("\\.")[0];
                 route = "t/k";
             }
             String channel = event.equals(Babayaga.Event.VIEW_APP) ? Babayaga.EXTERNAL_CHANNEL : Babayaga.CHANNEL;
@@ -76,7 +79,7 @@ public class BabayagaTask extends AsyncTask<String, String, Void> {
 
             HttpRequestBase request = new HttpGet();
             request.setURI(new URI(url.toString()));
-            client = AndroidHttpClient.newInstance(String.format("uservoice-android-%s", UserVoice.getVersion()), Session.getInstance().getContext());
+            client = AndroidHttpClient.newInstance(String.format("uservoice-android-%s", UserVoice.getVersion()), context);
             HttpResponse response = client.execute(request);
             HttpEntity responseEntity = response.getEntity();
             StatusLine responseStatus = response.getStatusLine();

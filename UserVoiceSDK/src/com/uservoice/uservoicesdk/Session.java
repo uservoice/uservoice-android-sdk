@@ -7,12 +7,10 @@ import java.util.Map;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.flow.SigninManager;
 import com.uservoice.uservoicesdk.model.AccessToken;
 import com.uservoice.uservoicesdk.model.ClientConfig;
@@ -39,7 +37,6 @@ public class Session {
     private Session() {
     }
 
-    private Context context;
     private Config config;
     private OAuthConsumer oauthConsumer;
     private RequestToken requestToken;
@@ -48,33 +45,25 @@ public class Session {
     private ClientConfig clientConfig;
     private Forum forum;
     private List<Topic> topics;
-    private Map<String, String> externalIds = new HashMap<String, String>();
+    private Map<String, String> externalIds = new HashMap<>();
     private Runnable signinListener;
 
-    public Context getContext() {
-        return context;
-    }
-
-    public Config getConfig() {
+    public Config getConfig(Context context) {
         if (config == null && context != null) {
-            config = Config.load(getSharedPreferences(), "config", "config", Config.class);
+            config = Config.load(getSharedPreferences(context), "config", "config", Config.class);
         }
         return config;
     }
 
-    public void setConfig(Config config) {
+    public void init(Context context, Config config) {
         this.config = config;
-        persistIdentity(config.getName(), config.getEmail());
-        config.persist(getSharedPreferences(), "config", "config");
-        persistSite();
+        persistIdentity(context, config.getName(), config.getEmail());
+        config.persist(getSharedPreferences(context), "config", "config");
+        persistSite(context);
     }
 
-    public void setContext(Context context) {
-        this.context = context;
-    }
-
-    public void persistIdentity(String name, String email) {
-        Editor edit = getSharedPreferences().edit();
+    public void persistIdentity(Context context, String name, String email) {
+        Editor edit = getSharedPreferences(context).edit();
         edit.putString("user_name", name);
         if (SigninManager.isValidEmail(email)) {
             edit.putString("user_email", email);
@@ -82,16 +71,16 @@ public class Session {
         edit.commit();
     }
 
-    public String getName() {
+    public String getName(Context context) {
         if (user != null)
             return user.getName();
-        return getSharedPreferences().getString("user_name", null);
+        return getSharedPreferences(context).getString("user_name", null);
     }
 
-    public String getEmail() {
+    public String getEmail(Context context) {
         if (user != null)
             return user.getEmail();
-        return getSharedPreferences().getString("user_email", null);
+        return getSharedPreferences(context).getString("user_email", null);
     }
 
     public RequestToken getRequestToken() {
@@ -102,10 +91,10 @@ public class Session {
         this.requestToken = requestToken;
     }
 
-    public OAuthConsumer getOAuthConsumer() {
+    public OAuthConsumer getOAuthConsumer(Context context) {
         if (oauthConsumer == null) {
-            if (getConfig().getKey() != null)
-                oauthConsumer = new CommonsHttpOAuthConsumer(getConfig().getKey(), getConfig().getSecret());
+            if (getConfig(context).getKey() != null)
+                oauthConsumer = new CommonsHttpOAuthConsumer(getConfig(context).getKey(), getConfig(context).getSecret());
             else if (clientConfig != null)
                 oauthConsumer = new CommonsHttpOAuthConsumer(clientConfig.getKey(), clientConfig.getSecret());
         }
@@ -118,24 +107,26 @@ public class Session {
 
     public void setAccessToken(Context context, AccessToken accessToken) {
         this.accessToken = accessToken;
-        accessToken.persist(getSharedPreferences(), "access_token", "access_token");
+        accessToken.persist(getSharedPreferences(context), "access_token", "access_token");
         if (signinListener != null)
             signinListener.run();
     }
 
-    protected void persistSite() {
+    protected void persistSite(Context context) {
         Editor edit = context.getSharedPreferences("uv_site", 0).edit();
         edit.putString("site", config.getSite());
         edit.commit();
     }
 
-    public SharedPreferences getSharedPreferences() {
+    public SharedPreferences getSharedPreferences(Context context) {
         String site;
         if (config != null) {
             site = config.getSite();
         } else {
             site = context.getSharedPreferences("uv_site", 0).getString("site", null);
         }
+        // TODO It is possible the site could be null.
+        // We should have a checked UserVoiceCouldNotBeInitializedException that will inform the controller to dismiss itself
         return context.getSharedPreferences("uv_" + site.replaceAll("\\W", "_"), 0);
     }
 
@@ -147,9 +138,9 @@ public class Session {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Context context, User user) {
         this.user = user;
-        persistIdentity(user.getName(), user.getEmail());
+        persistIdentity(context, user.getName(), user.getEmail());
     }
 
     public ClientConfig getClientConfig() {

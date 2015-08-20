@@ -44,7 +44,7 @@ public class PasswordDialogFragment extends DialogFragmentBugfixed {
                 if (Session.getInstance().getRequestToken() != null) {
                     authorize();
                 } else {
-                    RequestToken.getRequestToken(new DefaultCallback<RequestToken>(getActivity()) {
+                    RequestToken.getRequestToken(getActivity(), new DefaultCallback<RequestToken>(getActivity()) {
                         @Override
                         public void onModel(RequestToken model) {
                             Session.getInstance().setRequestToken(model);
@@ -60,7 +60,7 @@ public class PasswordDialogFragment extends DialogFragmentBugfixed {
     }
 
     private void authorize() {
-        AccessToken.authorize(Session.getInstance().getEmail(), password.getText().toString(), new DefaultCallback<AccessToken>(getActivity()) {
+        AccessToken.authorize(getActivity(), Session.getInstance().getEmail(getActivity()), password.getText().toString(), new DefaultCallback<AccessToken>(getActivity()) {
             @Override
             public void onModel(AccessToken model) {
                 Session.getInstance().setAccessToken(model);

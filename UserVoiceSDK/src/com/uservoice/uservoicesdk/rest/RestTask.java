@@ -26,6 +26,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.net.Uri;
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
@@ -40,13 +41,14 @@ public class RestTask extends AsyncTask<String, String, RestResult> {
     private RestMethod method;
     private List<BasicNameValuePair> params;
     private RestTaskCallback callback;
-    private HttpUriRequest request;
+    private Context context;
 
-    public RestTask(RestMethod method, String urlPath, Map<String, String> params, RestTaskCallback callback) {
-        this(method, urlPath, params == null ? null : paramsToList(params), callback);
+    public RestTask(Context context, RestMethod method, String urlPath, Map<String, String> params, RestTaskCallback callback) {
+        this(context, method, urlPath, params == null ? null : paramsToList(params), callback);
     }
 
-    public RestTask(RestMethod method, String urlPath, List<BasicNameValuePair> params, RestTaskCallback callback) {
+    public RestTask(Context context, RestMethod method, String urlPath, List<BasicNameValuePair> params, RestTaskCallback callback) {
+        this.context = context.getApplicationContext();
         this.method = method;
         this.urlPath = urlPath;
         this.callback = callback;
@@ -57,10 +59,10 @@ public class RestTask extends AsyncTask<String, String, RestResult> {
     protected RestResult doInBackground(String... args) {
         AndroidHttpClient client = null;
         try {
-            request = createRequest();
+            HttpUriRequest request = createRequest();
             if (isCancelled())
                 throw new InterruptedException();
-            OAuthConsumer consumer = Session.getInstance().getOAuthConsumer();
+            OAuthConsumer consumer = Session.getInstance().getOAuthConsumer(context);
             if (consumer != null) {
                 AccessToken accessToken = Session.getInstance().getAccessToken();
                 if (accessToken != null) {
@@ -71,7 +73,7 @@ public class RestTask extends AsyncTask<String, String, RestResult> {
             Log.d("UV", urlPath);
             request.setHeader("Accept-Language", Locale.getDefault().getLanguage());
             request.setHeader("API-Client", String.format("uservoice-android-%s", UserVoice.getVersion()));
-            client = AndroidHttpClient.newInstance(String.format("uservoice-android-%s", UserVoice.getVersion()), Session.getInstance().getContext());
+            client = AndroidHttpClient.newInstance(String.format("uservoice-android-%s", UserVoice.getVersion()), context);
             if (isCancelled())
                 throw new InterruptedException();
             // TODO it would be nice to find a way to abort the request on cancellation
@@ -95,7 +97,7 @@ public class RestTask extends AsyncTask<String, String, RestResult> {
     }
 
     private HttpUriRequest createRequest() throws URISyntaxException, UnsupportedEncodingException {
-        String host = Session.getInstance().getConfig().getSite();
+        String host = Session.getInstance().getConfig(context).getSite();
         Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme(host.contains(".us.com") ? "http" : "https");
         uriBuilder.encodedAuthority(host);
@@ -145,7 +147,7 @@ public class RestTask extends AsyncTask<String, String, RestResult> {
     }
 
     public static List<BasicNameValuePair> paramsToList(Map<String, String> params) {
-        ArrayList<BasicNameValuePair> formList = new ArrayList<BasicNameValuePair>(params.size());
+        ArrayList<BasicNameValuePair> formList = new ArrayList<>(params.size());
         for (String key : params.keySet()) {
             String value = params.get(key);
             if (value != null)

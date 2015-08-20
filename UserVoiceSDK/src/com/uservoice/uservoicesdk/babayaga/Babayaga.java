@@ -68,11 +68,11 @@ public class Babayaga {
         edit.commit();
     }
 
-    public static void track(Event event) {
-        track(event, null);
+    public static void track(Context context, Event event) {
+        track(context, event, null);
     }
 
-    public static void track(Event event, String searchText, List<? extends BaseModel> results) {
+    public static void track(Context context, Event event, String searchText, List<? extends BaseModel> results) {
         Map<String, Object> props = new HashMap<String, Object>();
         List<Integer> ids = new ArrayList<Integer>(results.size());
         for (BaseModel model : results) {
@@ -80,34 +80,30 @@ public class Babayaga {
         }
         props.put("ids", ids);
         props.put("text", searchText);
-        track(event, props);
+        track(context, event, props);
     }
 
-    public static void track(Event event, int id) {
+    public static void track(Context context, Event event, int id) {
         Map<String, Object> props = new HashMap<String, Object>();
         props.put("id", id);
-        track(event, props);
+        track(context, event, props);
     }
 
-    public static void track(Event event, Map<String, Object> eventProps) {
-        track(event.getCode(), eventProps);
+    public static void track(Context context, Event event, Map<String, Object> eventProps) {
+        track(context, event.getCode(), eventProps);
     }
 
-    public static void track(String event, Map<String, Object> eventProps) {
+    public static void track(Context context, String event, Map<String, Object> eventProps) {
         // Log.d("UV", "BY flushing: " + event);
-        new BabayagaTask(event, uvts, eventProps).execute();
+        new BabayagaTask(context, event, uvts, eventProps).execute();
     }
 
     public static void init(Context context) {
-        setContext(context);
-        track(Event.VIEW_APP);
-    }
-
-    public static void setContext(Context context) {
         prefs = context.getSharedPreferences("uv", 0);
         if (prefs.contains("uvts")) {
             uvts = prefs.getString("uvts", null);
         }
+        track(context, Event.VIEW_APP);
     }
 
     public static String getUvts() {

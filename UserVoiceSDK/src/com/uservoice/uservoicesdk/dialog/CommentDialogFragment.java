@@ -51,9 +51,9 @@ public class CommentDialogFragment extends DialogFragmentBugfixed {
             email.setVisibility(View.GONE);
             name.setVisibility(View.GONE);
         } else {
-            emailField.setText(Session.getInstance().getEmail());
+            emailField.setText(Session.getInstance().getEmail(getActivity()));
             ((TextView) email.findViewById(R.id.uv_header_text)).setText(R.string.uv_your_email_address);
-            nameField.setText(Session.getInstance().getName());
+            nameField.setText(Session.getInstance().getName(getActivity()));
             ((TextView) name.findViewById(R.id.uv_header_text)).setText(R.string.uv_your_name);
         }
 
@@ -70,7 +70,7 @@ public class CommentDialogFragment extends DialogFragmentBugfixed {
                     SigninManager.signIn(getActivity(), emailField.getText().toString(), nameField.getText().toString(), new SigninCallback() {
                         @Override
                         public void onSuccess() {
-                            Comment.createComment(suggestion, text, new DefaultCallback<Comment>(getActivity()) {
+                            Comment.createComment(context, suggestion, text, new DefaultCallback<Comment>(getActivity()) {
                                 @Override
                                 public void onModel(Comment model) {
                                     Toast.makeText(context, R.string.uv_msg_comment_posted, Toast.LENGTH_SHORT).show();

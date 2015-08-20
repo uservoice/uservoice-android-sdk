@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.uservoice.uservoicesdk.Config;
@@ -28,24 +29,24 @@ public class ClientConfig extends BaseModel {
     private String accountName;
     private boolean displaySuggestionsByRank;
 
-    public static void loadClientConfig(final Callback<ClientConfig> callback) {
-        Config config = Session.getInstance().getConfig();
+    public static void loadClientConfig(Context context, final Callback<ClientConfig> callback) {
+        Config config = Session.getInstance().getConfig(context);
         if (config == null) {
             // TODO the config should be stored on disk or something
             RestResult restResult = new RestResult(new Exception("Uservoice config not loaded."));
             callback.onError(restResult);
             return;
         }
-        String path = Session.getInstance().getConfig().getKey() == null ? "/clients/default.json" : "/client.json";
-        final String cacheKey = String.format("uv-client-%s-%s-%s", UserVoice.getVersion(), Session.getInstance().getConfig().getSite(), Session.getInstance().getConfig().getKey());
-        final SharedPreferences prefs = Session.getInstance().getSharedPreferences();
+        String path = Session.getInstance().getConfig(context).getKey() == null ? "/clients/default.json" : "/client.json";
+        final String cacheKey = String.format("uv-client-%s-%s-%s", UserVoice.getVersion(), Session.getInstance().getConfig(context).getSite(), Session.getInstance().getConfig(context).getKey());
+        final SharedPreferences prefs = Session.getInstance().getSharedPreferences(context);
         // cache the client config and then request it in the background
         ClientConfig clientConfig = load(prefs, cacheKey, "client", ClientConfig.class);
         if (clientConfig != null) {
 //            Log.d("UV", "client config from cache");
             callback.onModel(clientConfig);
             // background refresh
-            doGet(apiPath(path), new RestTaskCallback(callback) {
+            doGet(context, apiPath(path), new RestTaskCallback(callback) {
                 @Override
                 public void onComplete(JSONObject result) throws JSONException {
                     ClientConfig clientConfig = deserializeObject(result, "client", ClientConfig.class);
@@ -55,7 +56,7 @@ public class ClientConfig extends BaseModel {
             });
         } else {
 //            Log.d("UV", "loading client config");
-            doGet(apiPath(path), new RestTaskCallback(callback) {
+            doGet(context, apiPath(path), new RestTaskCallback(callback) {
                 @Override
                 public void onComplete(JSONObject result) throws JSONException {
                     ClientConfig clientConfig = deserializeObject(result, "client", ClientConfig.class);

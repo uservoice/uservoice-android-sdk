@@ -21,13 +21,13 @@ public class PortalActivity extends SearchActivity {
         setListAdapter(new PortalAdapter(this));
         getListView().setOnItemClickListener(getModelAdapter());
 
-        Babayaga.track(Babayaga.Event.VIEW_KB);
+        Babayaga.track(this, Babayaga.Event.VIEW_KB);
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem item = menu.findItem(R.id.uv_action_contact);
-        if (!Session.getInstance().getConfig().shouldShowContactUs()) {
+        if (!Session.getInstance().getConfig(this).shouldShowContactUs()) {
             item.setVisible(false);
         }
         super.onPrepareOptionsMenu(menu);

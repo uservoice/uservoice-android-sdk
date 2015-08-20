@@ -26,8 +26,6 @@ public class BaseActivity extends ActionBarActivity {
             actionBar = getSupportActionBar();
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        Session.getInstance().setContext(getApplicationContext());
-        Babayaga.setContext(getApplicationContext());
     }
 
     @Override

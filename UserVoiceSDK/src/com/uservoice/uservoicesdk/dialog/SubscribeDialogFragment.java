@@ -43,7 +43,7 @@ public class SubscribeDialogFragment extends DialogFragmentBugfixed {
         }
         View view = getActivity().getLayoutInflater().inflate(R.layout.uv_subscribe_dialog, null);
         final EditText emailField = (EditText) view.findViewById(R.id.uv_email);
-        emailField.setText(Session.getInstance().getEmail());
+        emailField.setText(Session.getInstance().getEmail(getActivity()));
         builder.setView(view);
         builder.setNegativeButton(R.string.uv_nevermind, null);
         builder.setPositiveButton(R.string.uv_subscribe, null);
@@ -61,17 +61,17 @@ public class SubscribeDialogFragment extends DialogFragmentBugfixed {
                     public void onClick(View v) {
                         String email = emailField.getText().toString();
                         if (!SigninManager.isValidEmail(email)) {
-                            Toast.makeText(SubscribeDialogFragment.this.getActivity(), R.string.uv_msg_bad_email_format, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), R.string.uv_msg_bad_email_format, Toast.LENGTH_SHORT).show();
                         } else {
-                            Session.getInstance().persistIdentity(Session.getInstance().getName(), email);
-                            SigninManager.signinForSubscribe(getActivity(), Session.getInstance().getEmail(), new SigninCallback() {
+                            Session.getInstance().persistIdentity(getActivity(), Session.getInstance().getName(getActivity()), email);
+                            SigninManager.signinForSubscribe(getActivity(), Session.getInstance().getEmail(getActivity()), new SigninCallback() {
                                 @Override
                                 public void onSuccess() {
-                                    suggestion.subscribe(new DefaultCallback<Suggestion>(getActivity()) {
+                                    suggestion.subscribe(getActivity(), new DefaultCallback<Suggestion>(getActivity()) {
                                         @Override
                                         public void onModel(Suggestion model) {
                                             if (getActivity() instanceof InstantAnswersActivity)
-                                                Deflection.trackDeflection("subscribed", deflectingType, model);
+                                                Deflection.trackDeflection(getActivity(), "subscribed", deflectingType, model);
                                             suggestionDialog.suggestionSubscriptionUpdated(model);
                                             dialog.dismiss();
                                         }

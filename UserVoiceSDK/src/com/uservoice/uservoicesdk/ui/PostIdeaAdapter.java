@@ -118,10 +118,10 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
             @Override
             public void onSuccess() {
                 Category category = categorySelect == null ? null : (Category) categorySelect.getSelectedItem();
-                Suggestion.createSuggestion(Session.getInstance().getForum(), category, textField.getText().toString(), descriptionField.getText().toString(), 1, new DefaultCallback<Suggestion>(context) {
+                Suggestion.createSuggestion(context, Session.getInstance().getForum(), category, textField.getText().toString(), descriptionField.getText().toString(), 1, new DefaultCallback<Suggestion>(context) {
                     @Override
                     public void onModel(Suggestion model) {
-                        Babayaga.track(Event.SUBMIT_IDEA);
+                        Babayaga.track(context, Event.SUBMIT_IDEA);
                         Toast.makeText(context, R.string.uv_msg_idea_created, Toast.LENGTH_SHORT).show();
                         context.finish();
                     }

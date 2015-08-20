@@ -1,5 +1,6 @@
 package com.uservoice.uservoicesdk.model;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -23,13 +24,13 @@ public class Article extends BaseModel implements Parcelable {
 
     public Article() {}
 
-    public static void loadPage(int page, final Callback<List<Article>> callback) {
+    public static void loadPage(Context context, int page, final Callback<List<Article>> callback) {
         Map<String, String> params = new HashMap<String, String>();
         params.put("sort", "ordered");
         params.put("filter", "published");
         params.put("per_page", "50");
         params.put("page", String.valueOf(page));
-        doGet(apiPath("/articles.json"), params, new RestTaskCallback(callback) {
+        doGet(context, apiPath("/articles.json"), params, new RestTaskCallback(callback) {
             @Override
             public void onComplete(JSONObject result) throws JSONException {
                 callback.onModel(deserializeList(result, "articles", Article.class));
@@ -37,13 +38,13 @@ public class Article extends BaseModel implements Parcelable {
         });
     }
 
-    public static void loadPageForTopic(int topicId, int page, final Callback<List<Article>> callback) {
+    public static void loadPageForTopic(Context context, int topicId, int page, final Callback<List<Article>> callback) {
         Map<String, String> params = new HashMap<String, String>();
         params.put("sort", "ordered");
         params.put("filter", "published");
         params.put("per_page", "50");
         params.put("page", String.valueOf(page));
-        doGet(apiPath("/topics/%d/articles.json", topicId), params, new RestTaskCallback(callback) {
+        doGet(context, apiPath("/topics/%d/articles.json", topicId), params, new RestTaskCallback(callback) {
             @Override
             public void onComplete(JSONObject result) throws JSONException {
                 callback.onModel(deserializeList(result, "articles", Article.class));
@@ -51,15 +52,15 @@ public class Article extends BaseModel implements Parcelable {
         });
     }
 
-    public static RestTask loadInstantAnswers(String query, final Callback<List<BaseModel>> callback) {
-        Map<String, String> params = new HashMap<String, String>();
+    public static RestTask loadInstantAnswers(Context context, String query, final Callback<List<BaseModel>> callback) {
+        Map<String, String> params = new HashMap<>();
         params.put("per_page", "3");
-        params.put("forum_id", String.valueOf(getConfig().getForumId()));
+        params.put("forum_id", String.valueOf(getConfig(context).getForumId()));
         params.put("query", query);
-        if (getConfig().getTopicId() != -1) {
-            params.put("topic_id", String.valueOf(getConfig().getTopicId()));
+        if (getConfig(context).getTopicId() != -1) {
+            params.put("topic_id", String.valueOf(getConfig(context).getTopicId()));
         }
-        return doGet(apiPath("/instant_answers/search.json"), params, new RestTaskCallback(callback) {
+        return doGet(context, apiPath("/instant_answers/search.json"), params, new RestTaskCallback(callback) {
             @Override
             public void onComplete(JSONObject result) throws JSONException {
                 callback.onModel(deserializeHeterogenousList(result, "instant_answers"));

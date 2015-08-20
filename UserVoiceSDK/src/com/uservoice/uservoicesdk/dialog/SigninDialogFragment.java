@@ -52,7 +52,7 @@ public class SigninDialogFragment extends DialogFragmentBugfixed {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        RequestToken.getRequestToken(new DefaultCallback<RequestToken>(getActivity()) {
+        RequestToken.getRequestToken(getActivity(), new DefaultCallback<RequestToken>(getActivity()) {
             @Override
             public void onModel(RequestToken requestToken) {
                 Session.getInstance().setRequestToken(requestToken);
@@ -121,7 +121,7 @@ public class SigninDialogFragment extends DialogFragmentBugfixed {
     }
 
     private void discoverUser() {
-        User.discover(emailField.getText().toString(), new Callback<User>() {
+        User.discover(getActivity(), emailField.getText().toString(), new Callback<User>() {
             @Override
             public void onModel(User model) {
                 passwordFields.setVisibility(View.VISIBLE);
@@ -144,26 +144,26 @@ public class SigninDialogFragment extends DialogFragmentBugfixed {
             @Override
             public void run() {
                 if (nameField.getVisibility() == View.VISIBLE) {
-                    User.findOrCreate(emailField.getText().toString(), nameField.getText().toString(), new DefaultCallback<AccessTokenResult<User>>(getActivity()) {
+                    User.findOrCreate(activity, emailField.getText().toString(), nameField.getText().toString(), new DefaultCallback<AccessTokenResult<User>>(getActivity()) {
                         @Override
                         public void onModel(AccessTokenResult<User> model) {
-                            Session.getInstance().setUser(model.getModel());
+                            Session.getInstance().setUser(activity, model.getModel());
                             Session.getInstance().setAccessToken(activity, model.getAccessToken());
-                            Babayaga.track(Babayaga.Event.AUTHENTICATE);
+                            Babayaga.track(activity, Babayaga.Event.AUTHENTICATE);
                             dismiss();
                             callback.onSuccess();
                         }
                     });
                 } else {
-                    AccessToken.authorize(emailField.getText().toString(), passwordField.getText().toString(), new Callback<AccessToken>() {
+                    AccessToken.authorize(activity, emailField.getText().toString(), passwordField.getText().toString(), new Callback<AccessToken>() {
                         @Override
                         public void onModel(AccessToken accessToken) {
                             Session.getInstance().setAccessToken(activity, accessToken);
-                            User.loadCurrentUser(new DefaultCallback<User>(getActivity()) {
+                            User.loadCurrentUser(activity, new DefaultCallback<User>(getActivity()) {
                                 @Override
                                 public void onModel(User model) {
-                                    Session.getInstance().setUser(model);
-                                    Babayaga.track(Babayaga.Event.AUTHENTICATE);
+                                    Session.getInstance().setUser(activity, model);
+                                    Babayaga.track(activity, Babayaga.Event.AUTHENTICATE);
                                     dismiss();
                                     callback.onSuccess();
                                 }
@@ -187,7 +187,7 @@ public class SigninDialogFragment extends DialogFragmentBugfixed {
 
     private void sendForgotPassword() {
         final Activity activity = getActivity();
-        User.sendForgotPassword(emailField.getText().toString(), new DefaultCallback<User>(getActivity()) {
+        User.sendForgotPassword(getActivity(), emailField.getText().toString(), new DefaultCallback<User>(getActivity()) {
             @Override
             public void onModel(User model) {
                 Toast.makeText(activity, R.string.uv_msg_forgot_password, Toast.LENGTH_SHORT).show();

@@ -47,7 +47,7 @@ public class ArticleActivity extends SearchActivity {
         findViewById(R.id.uv_helpful_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Babayaga.track(Babayaga.Event.VOTE_ARTICLE, article.getId());
+                Babayaga.track(ArticleActivity.this, Babayaga.Event.VOTE_ARTICLE, article.getId());
                 Toast.makeText(ArticleActivity.this, R.string.uv_thanks, Toast.LENGTH_SHORT).show();
             }
         });
@@ -59,7 +59,7 @@ public class ArticleActivity extends SearchActivity {
             }
         });
 
-        Babayaga.track(Babayaga.Event.VIEW_ARTICLE, article.getId());
+        Babayaga.track(this, Babayaga.Event.VIEW_ARTICLE, article.getId());
     }
 
     @Override
@@ -72,7 +72,7 @@ public class ArticleActivity extends SearchActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem item = menu.findItem(R.id.uv_action_contact);
-        if (!Session.getInstance().getConfig().shouldShowContactUs()) {
+        if (!Session.getInstance().getConfig(this).shouldShowContactUs()) {
             item.setVisible(false);
         }
         super.onPrepareOptionsMenu(menu);

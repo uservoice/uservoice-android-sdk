@@ -58,10 +58,10 @@ public class SigninManager {
             Toast.makeText(activity, R.string.uv_msg_bad_email_format, Toast.LENGTH_SHORT).show();
             callback.onFailure();
         } else {
-            email = email == null ? Session.getInstance().getEmail() : email;
-            name = name == null ? Session.getInstance().getName() : name;
+            email = email == null ? Session.getInstance().getEmail(activity) : email;
+            name = name == null ? Session.getInstance().getName(activity) : name;
             if (email != null) {
-                User.discover(email, new Callback<User>() {
+                User.discover(activity, email, new Callback<User>() {
                     @Override
                     public void onModel(User model) {
                         promptToSignIn();
@@ -79,16 +79,16 @@ public class SigninManager {
     }
 
     private void createUser() {
-        RequestToken.getRequestToken(new DefaultCallback<RequestToken>(activity) {
+        RequestToken.getRequestToken(activity, new DefaultCallback<RequestToken>(activity) {
             @Override
             public void onModel(RequestToken model) {
                 Session.getInstance().setRequestToken(model);
-                User.findOrCreate(email, name, new DefaultCallback<AccessTokenResult<User>>(activity) {
+                User.findOrCreate(activity, email, name, new DefaultCallback<AccessTokenResult<User>>(activity) {
                     @Override
                     public void onModel(AccessTokenResult<User> model) {
-                        Session.getInstance().setUser(model.getModel());
+                        Session.getInstance().setUser(activity, model.getModel());
                         Session.getInstance().setAccessToken(activity, model.getAccessToken());
-                        Babayaga.track(Babayaga.Event.IDENTIFY);
+                        Babayaga.track(activity, Babayaga.Event.IDENTIFY);
                         callback.onSuccess();
                     }
                 });
@@ -111,7 +111,7 @@ public class SigninManager {
     }
 
     public static void signinForSubscribe(FragmentActivity activity, String email, SigninCallback callback) {
-        SigninManager manager = new SigninManager(activity, email, Session.getInstance().getName(), callback);
+        SigninManager manager = new SigninManager(activity, email, Session.getInstance().getName(activity), callback);
         manager.setPasswordOnly(true);
         manager.signIn();
     }

@@ -67,7 +67,7 @@ public class ForumActivity extends SearchActivity {
             private void computeStaticRows() {
                 if (staticRows == null) {
                     staticRows = new ArrayList<Integer>();
-                    Config config = Session.getInstance().getConfig();
+                    Config config = Session.getInstance().getConfig(ForumActivity.this);
                     if (config.shouldShowPostIdea())
                         staticRows.add(2);
                     staticRows.add(3);
@@ -159,7 +159,7 @@ public class ForumActivity extends SearchActivity {
 
             @Override
             public void loadPage(int page, Callback<List<Suggestion>> callback) {
-                Suggestion.loadSuggestions(forum, page, callback);
+                Suggestion.loadSuggestions(ForumActivity.this, forum, page, callback);
             }
 
             @Override
@@ -167,11 +167,11 @@ public class ForumActivity extends SearchActivity {
                 if (forum == null) {
                     return null;
                 }
-                return Suggestion.searchSuggestions(forum, query, new Callback<List<Suggestion>>() {
+                return Suggestion.searchSuggestions(ForumActivity.this, forum, query, new Callback<List<Suggestion>>() {
 
                     @Override
                     public void onModel(List<Suggestion> model) {
-                        Babayaga.track(Babayaga.Event.SEARCH_IDEAS, query, model);
+                        Babayaga.track(ForumActivity.this, Babayaga.Event.SEARCH_IDEAS, query, model);
                         callback.onModel(model);
                     }
 
@@ -237,7 +237,7 @@ public class ForumActivity extends SearchActivity {
         } else {
             searchItem.setVisible(false);
         }
-        menu.findItem(R.id.uv_new_idea).setVisible(Session.getInstance().getConfig().shouldShowPostIdea());
+        menu.findItem(R.id.uv_new_idea).setVisible(Session.getInstance().getConfig(this).shouldShowPostIdea());
         return true;
     }
 
@@ -259,12 +259,12 @@ public class ForumActivity extends SearchActivity {
     private void loadForum() {
         if (Session.getInstance().getForum() != null) {
             forum = Session.getInstance().getForum();
-            Babayaga.track(Babayaga.Event.VIEW_FORUM, forum.getId());
+            Babayaga.track(this, Babayaga.Event.VIEW_FORUM, forum.getId());
             setTitle(forum.getName());
             getModelAdapter().loadMore();
             return;
         }
-        Forum.loadForum(Session.getInstance().getConfig().getForumId(), new DefaultCallback<Forum>(this) {
+        Forum.loadForum(this, Session.getInstance().getConfig(this).getForumId(), new DefaultCallback<Forum>(this) {
             @Override
             public void onModel(Forum model) {
                 Session.getInstance().setForum(model);

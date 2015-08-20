@@ -8,6 +8,7 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.uservoice.uservoicesdk.Session;
@@ -25,16 +26,16 @@ public class Deflection {
     private static int interactionIdentifier = Integer.parseInt(String.valueOf(new Date().getTime()).substring(4));
     private static String searchText;
 
-    public static void trackDeflection(String kind, String deflectingType, BaseModel deflector) {
+    public static void trackDeflection(Context context, String kind, String deflectingType, BaseModel deflector) {
         Map<String, String> params = deflectionParams();
         params.put("kind", kind);
         params.put("deflecting_type", deflectingType);
         params.put("deflector_id", String.valueOf(deflector.getId()));
         params.put("deflector_type", (deflector instanceof Article) ? "Faq" : "Suggestion");
-        new RestTask(RestMethod.GET, "/clients/widgets/omnibox/deflections/upsert.json", params, getCallback()).execute();
+        new RestTask(context, RestMethod.GET, "/clients/widgets/omnibox/deflections/upsert.json", params, getCallback()).execute();
     }
 
-    public static void trackSearchDeflection(List<BaseModel> results, String deflectingType) {
+    public static void trackSearchDeflection(Context context, List<BaseModel> results, String deflectingType) {
         Map<String, String> params = deflectionParams();
         params.put("kind", "list");
         params.put("deflecting_type", deflectingType);
@@ -59,7 +60,7 @@ public class Deflection {
         }
         params.put("faq_results", String.valueOf(articleResults));
         params.put("suggestion_results", String.valueOf(suggestionResults));
-        new RestTask(RestMethod.GET, "/clients/widgets/omnibox/deflections/list_view.json", params, getCallback()).execute();
+        new RestTask(context, RestMethod.GET, "/clients/widgets/omnibox/deflections/list_view.json", params, getCallback()).execute();
     }
 
     public static void setSearchText(String query) {

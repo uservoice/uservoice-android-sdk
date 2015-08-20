@@ -1,5 +1,6 @@
 package com.uservoice.uservoicesdk.model;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -23,15 +24,17 @@ public class Topic extends BaseModel implements Parcelable {
 
     public Topic() {}
 
-    public static Topic ALL_ARTICLES = new Topic() {{
-        this.name = Session.getInstance().getContext().getString(R.string.uv_all_articles);
-        this.id = -1;
-    }};
+    public static Topic allArticlesTopic(Context context) {
+        Topic allArticles = new Topic();
+        allArticles.name = context.getString(R.string.uv_all_articles);
+        allArticles.id = -1;
+        return allArticles;
+    }
 
-    public static void loadTopics(final Callback<List<Topic>> callback) {
+    public static void loadTopics(Context context, final Callback<List<Topic>> callback) {
         Map<String, String> params = new HashMap<String, String>();
         params.put("per_page", "100");
-        doGet(apiPath("/topics.json"), params, new RestTaskCallback(callback) {
+        doGet(context, apiPath("/topics.json"), params, new RestTaskCallback(callback) {
             @Override
             public void onComplete(JSONObject object) throws JSONException {
                 List<Topic> allTopics = deserializeList(object, "topics", Topic.class);
@@ -45,8 +48,8 @@ public class Topic extends BaseModel implements Parcelable {
         });
     }
 
-    public static void loadTopic(int topicId, final Callback<Topic> callback) {
-        doGet(apiPath("/topics/%d.json", topicId), new RestTaskCallback(callback) {
+    public static void loadTopic(Context context, int topicId, final Callback<Topic> callback) {
+        doGet(context, apiPath("/topics/%d.json", topicId), new RestTaskCallback(callback) {
             @Override
             public void onComplete(JSONObject object) throws JSONException {
                 callback.onModel(deserializeObject(object, "topic", Topic.class));
