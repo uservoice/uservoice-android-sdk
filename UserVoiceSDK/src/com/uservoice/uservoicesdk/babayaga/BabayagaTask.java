@@ -1,25 +1,20 @@
 package com.uservoice.uservoicesdk.babayaga;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URI;
 import java.net.URLEncoder;
 import java.util.Date;
 import java.util.Map;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import android.content.Context;
-import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
 
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.UserVoice;
 
@@ -39,7 +34,6 @@ public class BabayagaTask extends AsyncTask<String, String, Void> {
 
     @Override
     protected Void doInBackground(String... args) {
-        AndroidHttpClient client = null;
         try {
             JSONObject data = new JSONObject();
             Map<String, Object> traits = Session.getInstance().getConfig(context).getUserTraits();
@@ -58,7 +52,7 @@ public class BabayagaTask extends AsyncTask<String, String, Void> {
                 subdomain = Session.getInstance().getConfig(context).getSite().split("\\.")[0];
                 route = "t/k";
             }
-            String channel = event.equals(Babayaga.Event.VIEW_APP) ? Babayaga.EXTERNAL_CHANNEL : Babayaga.CHANNEL;
+            String channel = event.equals(Babayaga.Event.VIEW_APP.toString()) ? Babayaga.EXTERNAL_CHANNEL : Babayaga.CHANNEL;
             StringBuilder url = new StringBuilder(String.format("https://%s/%s/%s/%s/%s", Babayaga.DOMAIN, route, subdomain, channel, event));
             if (uvts != null) {
                 url.append("/");
@@ -77,17 +71,19 @@ public class BabayagaTask extends AsyncTask<String, String, Void> {
             }
             Log.d("UV", url.toString());
 
-            HttpRequestBase request = new HttpGet();
-            request.setURI(new URI(url.toString()));
-            client = AndroidHttpClient.newInstance(String.format("uservoice-android-%s", UserVoice.getVersion()), context);
-            HttpResponse response = client.execute(request);
-            HttpEntity responseEntity = response.getEntity();
-            StatusLine responseStatus = response.getStatusLine();
-            int statusCode = responseStatus != null ? responseStatus.getStatusCode() : 0;
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .get()
+                    .url(url.toString())
+                    .addHeader("User-Agent", String.format("uservoice-android-%s", UserVoice.getVersion()))
+                    .build();
+
+            Response response = client.newCall(request).execute();
+            int statusCode = response.code();
             if (statusCode != 200)
                 return null;
-            String body = responseEntity != null ? EntityUtils.toString(responseEntity) : null;
-            if (body != null && body.length() > 0) {
+            String body = response.body().string();
+            if (body.length() > 0) {
                 String payload = body.substring(2, body.length() - 2);
                 JSONObject responseData = new JSONObject(payload);
                 String uvts = responseData.getString("uvts");
@@ -96,10 +92,6 @@ public class BabayagaTask extends AsyncTask<String, String, Void> {
         } catch (Exception e) {
             e.printStackTrace();
             Log.e("UV", String.format("%s: %s", e.getClass().getName(), e.getMessage()));
-        } finally {
-            if (client != null) {
-                client.close();
-            }
         }
         return null;
     }
