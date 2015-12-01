@@ -23,8 +23,9 @@ public class Ticket extends BaseModel {
         Map<String, String> params = new HashMap<String, String>();
         params.put("ticket[message]", message);
 
-        if (email != null)
+        if ((email != null) && (isValidEmail(email))){
             params.put("email", email);
+        }
 
         if (name != null)
             params.put("display_name", name);
@@ -64,6 +65,13 @@ public class Ticket extends BaseModel {
                 callback.onModel(deserializeObject(result, "ticket", Ticket.class));
             }
         });
+    }
+
+    private final static boolean isValidEmail(CharSequence target) {
+        if (target == null)
+            return false;
+
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 
 }
