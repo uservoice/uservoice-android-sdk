@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../UVDemo/UVDemo.iml" filepath="$PROJECT_DIR$/../UVDemo/UVDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/UserVoiceSDK.iml" filepath="$PROJECT_DIR$/UserVoiceSDK.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../uservoice-android-sdk.iml" filepath="$PROJECT_DIR$/../uservoice-android-sdk.iml" />
     </modules>
   </component>
 </project>
-
