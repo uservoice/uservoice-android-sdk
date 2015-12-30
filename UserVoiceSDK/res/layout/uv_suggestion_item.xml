@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:src="@drawable/uv_heart" />
+                android:src="@drawable/ic_heart_24dp" />
 
             <TextView
                 android:id="@+id/uv_subscriber_count"

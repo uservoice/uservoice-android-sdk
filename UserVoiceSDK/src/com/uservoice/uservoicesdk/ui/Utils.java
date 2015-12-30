@@ -1,10 +1,9 @@
 package com.uservoice.uservoicesdk.ui;
 
-import java.util.Locale;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.util.TypedValue;
@@ -14,10 +13,8 @@ import android.webkit.WebSettings.PluginState;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.graphics.Color;
 
 import com.uservoice.uservoicesdk.R;
-import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.activity.TopicActivity;
 import com.uservoice.uservoicesdk.dialog.ArticleDialogFragment;
 import com.uservoice.uservoicesdk.dialog.SuggestionDialogFragment;
@@ -25,6 +22,8 @@ import com.uservoice.uservoicesdk.model.Article;
 import com.uservoice.uservoicesdk.model.BaseModel;
 import com.uservoice.uservoicesdk.model.Suggestion;
 import com.uservoice.uservoicesdk.model.Topic;
+
+import java.util.Locale;
 
 public class Utils {
 
@@ -62,7 +61,7 @@ public class Utils {
         ImageView image = (ImageView) view.findViewById(R.id.uv_icon);
         if (model instanceof Article) {
             Article article = (Article) model;
-            image.setImageResource(R.drawable.uv_article);
+            image.setImageResource(R.drawable.ic_article_24dp);
             title.setText(article.getTitle());
             if (article.getTopicName() != null) {
                 detail.setVisibility(View.VISIBLE);
@@ -73,7 +72,7 @@ public class Utils {
             suggestionDetails.setVisibility(View.GONE);
         } else if (model instanceof Suggestion) {
             Suggestion suggestion = (Suggestion) model;
-            image.setImageResource(R.drawable.uv_idea);
+            image.setImageResource(R.drawable.ic_idea_24dp);
             title.setText(suggestion.getTitle());
             detail.setVisibility(View.VISIBLE);
             detail.setText(suggestion.getForumName());

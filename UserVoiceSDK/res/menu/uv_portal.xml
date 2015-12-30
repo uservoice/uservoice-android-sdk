@@ -2,14 +2,14 @@
       xmlns:uv="http://schemas.android.com/apk/res-auto">
     
     <item android:id="@+id/uv_action_search"
-          android:icon="@android:drawable/ic_menu_search"
+          android:icon="@drawable/ic_search_24dp"
           android:title="@string/uv_menu_search"
           uv:showAsAction="always|collapseActionView"
           uv:actionViewClass="android.support.v7.widget.SearchView" />
 
     <item android:id="@+id/uv_action_contact"
           uv:showAsAction="always"
-          android:icon="@drawable/uv_contact"
+          android:icon="@drawable/ic_contact_24dp"
           android:title="@string/uv_contact_us" />
 
 </menu>
