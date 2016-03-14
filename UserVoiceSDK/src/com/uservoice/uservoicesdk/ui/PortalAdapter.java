@@ -70,13 +70,16 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
     }
 
     private void loadForum() {
-        Forum.loadForum(context, Session.getInstance().getConfig(context).getForumId(), new DefaultCallback<Forum>(context) {
-            @Override
-            public void onModel(Forum model) {
-                Session.getInstance().setForum(model);
-                notifyDataSetChanged();
-            }
-        });
+        Config config = Session.getInstance().getConfig(context);
+        if (config.shouldShowForum() || config.shouldShowPostIdea()) {
+            Forum.loadForum(context, Session.getInstance().getConfig(context).getForumId(), new DefaultCallback<Forum>(context) {
+                @Override
+                public void onModel(Forum model) {
+                    Session.getInstance().setForum(model);
+                    notifyDataSetChanged();
+                }
+            });
+        }
     }
 
     private void loadTopics() {

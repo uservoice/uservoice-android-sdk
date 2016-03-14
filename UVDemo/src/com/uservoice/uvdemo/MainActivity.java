@@ -19,9 +19,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//		Config config = new Config("yoursite.uservoice.com");
         Config config = new Config("demo.uservoice.com");
-//        config.setShowKnowledgeBase(false);
         UserVoice.init(config, this);
 
         // hack to always show the overflow menu in the action bar

@@ -75,7 +75,10 @@ public class OkRequestAdapter implements HttpRequest {
 
     @Override
     public String getContentType() {
-        return "application/json";
+        if (request.body() != null) {
+            return request.body().contentType().toString();
+        }
+        return null;
     }
 
     @Override

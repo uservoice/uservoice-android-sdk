@@ -17,7 +17,6 @@ repositories {
 android {
     compileSdkVersion 21
     buildToolsVersion '21.0.2'
-
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -26,7 +25,6 @@ android {
             res.srcDirs = ['res']
         }
     }
-
     signingConfigs {
         release {
             storeFile file("../demo.keystore")
@@ -35,12 +33,19 @@ android {
             keyPassword ""
         }
     }
-
     buildTypes {
         release {
             signingConfig signingConfigs.release
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        proguard {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            debuggable true
         }
     }
 }

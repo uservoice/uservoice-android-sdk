@@ -62,6 +62,9 @@ public class RestTask extends AsyncTask<String, String, RestResult> {
                 throw new InterruptedException();
             int statusCode = response.code();
             String body = response.body().string();
+            if (statusCode >= 400) {
+                Log.d("UV", body);
+            }
             if (isCancelled())
                 throw new InterruptedException();
             return new RestResult(statusCode, new JSONObject(body));
