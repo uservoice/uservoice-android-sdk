@@ -51,6 +51,6 @@ public class UserVoice {
     }
 
     public static String getVersion() {
-        return "1.2.4";
+        return "1.2.5";
     }
 }

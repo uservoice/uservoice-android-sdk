@@ -1,5 +1,12 @@
 ## master
 
+## 1.2.5
+
+* Add af localization
+* Add proguard config
+* Fix context leak
+* Switch to okhttp
+
 ## 1.2.4
 
 * Always check that emails are valid
