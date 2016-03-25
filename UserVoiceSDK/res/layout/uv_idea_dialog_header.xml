@@ -206,7 +206,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
-            android:src="@drawable/uv_comment" />
+            android:src="@drawable/ic_comment_24dp" />
     </LinearLayout>
 
     <include layout="@layout/uv_divider" />

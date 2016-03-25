@@ -10,6 +10,6 @@
     
     <item android:id="@+id/uv_new_idea"
           android:title="@string/uv_submit_idea"
-          android:icon="@drawable/uv_add"
+          android:icon="@drawable/ic_add_24dp"
           uv:showAsAction="ifRoom" />
 </menu>
