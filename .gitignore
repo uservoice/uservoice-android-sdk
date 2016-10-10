@@ -15,3 +15,8 @@ local.properties
 *.ipr
 *.iws
 .idea/
+
+# Gradle stuff
+gradlew
+gradlew.bat
+gradle/
