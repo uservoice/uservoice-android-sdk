@@ -4,19 +4,19 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.1.0'
+        classpath 'com.android.tools.build:gradle:2.2.1'
     }
 }
 
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 
 repositories {
     mavenCentral()
 }
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion '21.0.2'
+    compileSdkVersion 24
+    buildToolsVersion '24.0.3'
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -67,6 +67,6 @@ tasks.whenTaskAdded { theTask ->
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:20.+'
+    compile 'com.android.support:support-core-utils:24.2.1'
     compile project(':UserVoiceSDK')
 }
