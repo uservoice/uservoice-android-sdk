@@ -4,7 +4,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.0'
+        classpath 'com.android.tools.build:gradle:2.2.1'
     }
 }
 
@@ -67,7 +67,6 @@ tasks.whenTaskAdded { theTask ->
 }
 
 dependencies {
-    // compile 'com.android.support:support-v4:21.+'
     compile 'com.android.support:support-core-utils:24.2.1'
     compile project(':UserVoiceSDK')
 }
