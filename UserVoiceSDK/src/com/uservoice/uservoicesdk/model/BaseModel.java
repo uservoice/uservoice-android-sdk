@@ -7,7 +7,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -135,9 +137,9 @@ public class BaseModel {
     @SuppressLint("SimpleDateFormat")
     protected Date getDate(JSONObject object, String key) throws JSONException {
         String dateString = getString(object, key);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss Z");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.US);
         try {
-            return format.parse(dateString);
+            return format.parse(dateString.replaceAll("Z$", "+0000"));
         } catch (ParseException e1) {
             throw new JSONException("Could not parse date: " + dateString);
         }
