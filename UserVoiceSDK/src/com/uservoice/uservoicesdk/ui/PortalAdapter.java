@@ -127,6 +127,8 @@ public class PortalAdapter extends SearchAdapter<BaseModel> implements AdapterVi
 
     @Override
     public int getCount() {
+    	if (Session.getInstance().getClientConfig() == null) return 0;
+    	
         if (!configLoaded) {
             return 1;
         } else {
