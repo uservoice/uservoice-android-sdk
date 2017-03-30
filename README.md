@@ -102,12 +102,12 @@ config.setShowPostIdea(false);
 config.setShowKnowledgeBase(false);
 ```
 
-* Set ticket custom field values
+* Set ticket field values
 
 ```
-Map<String, String> customFields = new HashMap<String, String>();
-customFields.put("My Field", "My Value");
-config.setCustomFields(customFields);
+Map<String, String> ticketFields = new HashMap<String, String>();
+ticketFields.put("My Field", "My Value");
+config.setCustomFields(ticketFields);
 ```
 
 ### Advanced
@@ -116,13 +116,6 @@ config.setCustomFields(customFields);
 
 ```
 UserVoice.setExternalId("myapp", "1234");
-```
-
-* Track custom events
-
-```
-UserVoice.track("myevent");
-UserVoice.track("myevent", propertyMap);
 ```
 
 ### Theming
