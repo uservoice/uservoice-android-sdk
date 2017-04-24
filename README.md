@@ -1,5 +1,9 @@
 ## UserVoice Android SDK
 
+In this article, we will walk you through your options for setting up the [insert type] SDK.
+If you need features not outlined in this article, please share them as feature requests on our feedback forum [here](https://feedback.uservoice.com/forums/64513-developer-api-sdks/category/162129-mobile-sdks-any).
+That is the best channel for requesting additional functionality.
+
 The UserVoice Android SDK allows you to integrate a native UserVoice experience directly in your Android apps.
 
 You can try out UserVoice for Android by installing the [UserVoice Help Center app](http://sdk-downloads.uservoice.com/android/HelpCenter.apk) on your device.
