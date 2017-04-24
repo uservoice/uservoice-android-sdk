@@ -1,6 +1,6 @@
 ## UserVoice Android SDK
 
-In this article, we will walk you through your options for setting up the [insert type] SDK.
+In this article, we will walk you through your options for setting up the Android SDK.
 If you need features not outlined in this article, please share them as feature requests on our feedback forum [here](https://feedback.uservoice.com/forums/64513-developer-api-sdks/category/162129-mobile-sdks-any).
 That is the best channel for requesting additional functionality.
 
