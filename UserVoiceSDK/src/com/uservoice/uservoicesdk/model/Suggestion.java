@@ -2,18 +2,18 @@ package com.uservoice.uservoicesdk.model;
 
 import android.content.Context;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.rest.Callback;
 import com.uservoice.uservoicesdk.rest.RestTask;
 import com.uservoice.uservoicesdk.rest.RestTaskCallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Suggestion extends BaseModel {
 
@@ -126,9 +126,11 @@ public class Suggestion extends BaseModel {
             JSONObject response = object.getJSONObject("response");
             adminResponseText = getString(response, "formatted_text");
             adminResponseCreatedAt = getDate(response, "created_at");
-            JSONObject responseUser = response.getJSONObject("creator");
-            adminResponseUserName = getString(responseUser, "name");
-            adminResponseAvatarUrl = getString(responseUser, "avatar_url");
+            if (response.has("creator")) {
+                JSONObject responseUser = response.getJSONObject("creator");
+                adminResponseUserName = getString(responseUser, "name");
+                adminResponseAvatarUrl = getString(responseUser, "avatar_url");
+            }
         }
         if (object.has("normalized_weight")) {
             weight = object.getInt("normalized_weight");

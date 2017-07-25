@@ -1,17 +1,17 @@
 buildscript {
     repositories {
         mavenCentral()
+        jcenter()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.1'
+        classpath 'com.android.tools.build:gradle:2.2.3'
     }
 }
 
 apply plugin: 'com.android.library'
-
 apply plugin: 'maven'
- 
+version = '1.2.6'
 uploadArchives {
     repositories.mavenDeployer {
         pom.groupId = 'com.uservoice'
@@ -56,3 +56,21 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'oauth.signpost:signpost-core:1.2.1.2'
 }
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "https://dev.ifactornotifi.com/nexus/content/repositories/releases") {
+                authentication(userName: nexus_username, password: nexus_password)
+            }
+            snapshotRepository(url: "https://dev.ifactornotifi.com/nexus/content/repositories/snapshots"){
+                authentication(userName: nexus_username, password: nexus_password)
+            }
+            pom.version = version
+            pom.artifactId = "uservoice"
+            pom.groupId = "com.kubra.mobile-android"
+        }
+    }
+}
+
+
