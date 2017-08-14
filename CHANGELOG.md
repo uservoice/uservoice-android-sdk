@@ -1,5 +1,8 @@
 ## master
 
+## 1.2.6
+* Update for SDK 26
+
 ## 1.2.5
 
 * Add af localization
