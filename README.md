@@ -99,12 +99,12 @@ config.setShowContactUs(false);
 config.setShowPostIdea(false);
 config.setShowKnowledgeBase(false);
 
+```
 * Select the topic to display (defaults to displaying all topics) 
 **NOTE: you must have ticketing features enabled to do this. Doing so without ticketing will crash the application**
 
 ```
 config.setTopicId(495584);
-```
 
 ```
 
