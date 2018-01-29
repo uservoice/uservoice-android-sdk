@@ -99,7 +99,8 @@ config.setShowContactUs(false);
 config.setShowPostIdea(false);
 config.setShowKnowledgeBase(false);
 
-* Select the topic to display (defaults to displaying all topics) **NOTE: you must have ticketing features enabled to do this. Doing so without ticketing will crash the application**
+* Select the topic to display (defaults to displaying all topics) 
+**NOTE: you must have ticketing features enabled to do this. Doing so without ticketing will crash the application**
 
 ```
 config.setTopicId(495584);
@@ -107,7 +108,8 @@ config.setTopicId(495584);
 
 ```
 
-* Set ticket field values **NOTE: you must have ticketing features enabled to do this. Doing so without ticketing will crash the application**
+* Set ticket field values 
+**NOTE: you must have ticketing features enabled to do this. Doing so without ticketing will crash the application**
 
 ```
 Map<String, String> ticketFields = new HashMap<String, String>();
