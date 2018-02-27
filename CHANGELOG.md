@@ -1,5 +1,8 @@
 ## master
 
+## 1.2.7
+* Update okhttp to 3.10.0 (fixes "Expected ':status' header not present" error)
+
 ## 1.2.6
 * Update for SDK 26
 
