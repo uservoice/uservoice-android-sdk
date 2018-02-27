@@ -15,10 +15,10 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.squareup.okhttp.FormEncodingBuilder;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import com.uservoice.uservoicesdk.Session;
 import com.uservoice.uservoicesdk.UserVoice;
 import com.uservoice.uservoicesdk.model.AccessToken;
@@ -120,7 +120,7 @@ public class RestTask extends AsyncTask<String, String, RestResult> {
 
     private void addParamsToBody(Request.Builder builder) throws UnsupportedEncodingException, URISyntaxException {
         if (params != null) {
-            FormEncodingBuilder paramsBuilder = new FormEncodingBuilder();
+            FormBody.Builder paramsBuilder = new FormBody.Builder();
             for (Map.Entry<String,String> param : params.entrySet()) {
                 paramsBuilder.add(param.getKey(), param.getValue());
             }
