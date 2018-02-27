@@ -6,3 +6,8 @@ allprojects {
         }
     }
 }
+buildscript {
+    repositories {
+        google()
+    }
+}

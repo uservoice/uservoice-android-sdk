@@ -2,8 +2,8 @@ package com.uservoice.uservoicesdk.rest;
 
 import android.util.Log;
 
-import com.squareup.okhttp.Headers;
-import com.squareup.okhttp.Request;
+import okhttp3.Headers;
+import okhttp3.Request;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -29,7 +29,7 @@ public class OkRequestAdapter implements HttpRequest {
 
     @Override
     public String getRequestUrl() {
-        return request.urlString();
+        return request.url().toString();
     }
 
     @Override
