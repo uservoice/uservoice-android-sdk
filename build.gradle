@@ -1,6 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 allprojects {
     repositories {
+        jcenter()
         maven {
             url "https://maven.google.com"
         }
@@ -13,6 +14,7 @@ allprojects {
 buildscript {
     repositories {
         google()
+        jcenter()
         maven {
             url 'https://maven.google.com/'
             name 'Google'
