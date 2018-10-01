@@ -49,8 +49,15 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
     protected List<Integer> getDetailRows() {
         List<Integer> rows = new ArrayList<Integer>();
         rows.add(DESCRIPTION);
-        if (Session.getInstance().getForum().getCategories().size() > 0)
+
+        // The data for the forum, and categories is asynchronous and may not have
+        // been loaded yet, so be careful and only show the CATEGORY row if the data
+        // is available.
+        if (Session.getInstance().getForum() != null &&
+                Session.getInstance().getForum().getCategories() != null &&
+                Session.getInstance().getForum().getCategories().size() > 0)
             rows.add(CATEGORY);
+
         rows.add(SPACE);
         rows.add(EMAIL_FIELD);
         rows.add(NAME_FIELD);
@@ -105,7 +112,7 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
             EditText textView = (EditText) view.findViewById(R.id.uv_text);
             textView.setHint(R.string.uv_idea_text_hint);
             textView.setMinLines(1);
-            textView.setFilters(new InputFilter[] { new InputFilter.LengthFilter(140) });
+            textView.setFilters(new InputFilter[]{new InputFilter.LengthFilter(140)});
         } else {
             return super.getView(position, view, parent);
         }

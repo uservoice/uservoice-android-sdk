@@ -1,11 +1,15 @@
 buildscript {
     repositories {
-        mavenCentral()
         jcenter()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+        mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.2.0'
     }
 }
 
@@ -17,7 +21,7 @@ uploadArchives {
     repositories.mavenDeployer {
         pom.groupId = 'com.uservoice'
         pom.artifactId = 'uservoice-android-sdk'
-        pom.version = '1.2.7'
+        pom.version = '1.2.8'
         // Add other pom properties here if you want (developer details / licenses)
         repository(url: "file:///Users/austin/tmp/")
     }
@@ -37,8 +41,7 @@ repositories {
 }
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 28
 
     sourceSets {
         main {
@@ -51,9 +54,8 @@ android {
 }
 
 dependencies {
-    // compile 'com.android.support:support-v4:21.+'
-    compile 'com.android.support:support-core-utils:26.1.0'
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    compile 'com.squareup.okhttp3:okhttp:3.10.0'
-    compile 'oauth.signpost:signpost-core:1.2.1.2'
+    implementation 'com.android.support:support-core-utils:28.0.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    implementation 'oauth.signpost:signpost-core:1.2.1.2'
 }

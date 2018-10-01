@@ -1,24 +1,31 @@
 buildscript {
     repositories {
-        mavenCentral()
         jcenter()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+        mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.2.0'
     }
 }
 
 apply plugin: 'com.android.application'
 
 repositories {
+    maven {
+        url 'https://maven.google.com/'
+        name 'Google'
+    }
     mavenCentral()
     google()
 }
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 28
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -69,6 +76,6 @@ tasks.whenTaskAdded { theTask ->
 }
 
 dependencies {
-    compile 'com.android.support:support-core-utils:26.1.0'
-    compile project(':UserVoiceSDK')
+    implementation 'com.android.support:support-core-utils:28.0.0'
+    implementation project(':UserVoiceSDK')
 }
