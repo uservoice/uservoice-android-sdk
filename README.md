@@ -1,14 +1,17 @@
+# DEPRECATED
+
+[![deprecated](http://badges.github.io/stability-badges/dist/deprecated.svg)](http://github.com/badges/stability-badges)
+
+This module is no longer maintained by UserVoice, [please consider using our API](https://developer.uservoice.com/docs/api/v2/reference/)
+
+We are encouraging the community to take the ownership of this module.
+Please open an issue if you are willing to become the new maintainer.
+
+---
+
 ## UserVoice Android SDK
 
-In this article, we will walk you through your options for setting up the Android SDK.
-If you need features not outlined in this article, please share them as feature requests on our feedback forum [here](https://feedback.uservoice.com/forums/64513-developer-api-sdks/category/162129-mobile-sdks-any).
-That is the best channel for requesting additional functionality.
-
 The UserVoice Android SDK allows you to integrate a native UserVoice experience directly in your Android apps.
-
-You can try out UserVoice for Android by installing the [UserVoice Help Center app](http://sdk-downloads.uservoice.com/android/HelpCenter.apk) on your device.
-
-You will need a UserVoice account (free) for it to connect to. Go to [uservoice.com](https://www.uservoice.com/plans/) to sign up.
 
 ### Installation
 
@@ -179,27 +182,3 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-
-### Reporting Issues
-
-If you are finding an issue, first make sure you are using the latest version of the SDK:
-
-Latest Android SDK version here: https://github.com/uservoice/uservoice-android-sdk/releases
-
-If you are on the latest version, you need to file an issue on our [github issues page](https://github.com/uservoice/uservoice-android-sdk/issues) with the following information:
-
-* What behavior are you currently seeing? (ie. response, error, screen)
-
-* What behavior did you expect to see?
-
-Our engineers have requested example code from your team, which they can download example, run, and plainly see the resulting problem.  
-
-To do this, they will need:
-
-* The minimum amount of code required to demonstrate the problem using a [secret gist](gist.github.com).  
-* Isolate the problem to the few lines that call the SDK, plus the minimum boilerplate necessary to compile and run the example.
-* If we will need example secrets or a test account, make that clear in the code or accompanying explanation.
-
-Once filed, you can also reach out to our support team at questions@uservoice.com
-
-
