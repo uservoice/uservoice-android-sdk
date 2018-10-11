@@ -122,7 +122,9 @@ public class RestTask extends AsyncTask<String, String, RestResult> {
         if (params != null) {
             FormBody.Builder paramsBuilder = new FormBody.Builder();
             for (Map.Entry<String,String> param : params.entrySet()) {
-                paramsBuilder.add(param.getKey(), param.getValue());
+                if (param.getValue() != null) {
+                    paramsBuilder.add(param.getKey(), param.getValue());
+                }
             }
             builder.method(method.toString(), paramsBuilder.build());
         }
