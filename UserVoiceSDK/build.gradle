@@ -21,7 +21,7 @@ uploadArchives {
     repositories.mavenDeployer {
         pom.groupId = 'com.uservoice'
         pom.artifactId = 'uservoice-android-sdk'
-        pom.version = '1.2.8'
+        pom.version = '1.2.9'
         // Add other pom properties here if you want (developer details / licenses)
         repository(url: "file:///Users/austin/tmp/")
     }
