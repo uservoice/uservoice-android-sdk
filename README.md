@@ -1,14 +1,3 @@
-# DEPRECATED
-
-[![deprecated](http://badges.github.io/stability-badges/dist/deprecated.svg)](http://github.com/badges/stability-badges)
-
-This module is no longer maintained by UserVoice, [please consider using our API](https://developer.uservoice.com/docs/api/v2/reference/)
-
-We are encouraging the community to take the ownership of this module.
-Please open an issue if you are willing to become the new maintainer.
-
----
-
 ## UserVoice Android SDK
 
 The UserVoice Android SDK allows you to integrate a native UserVoice experience directly in your Android apps.
