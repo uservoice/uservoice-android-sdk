@@ -57,6 +57,10 @@ android {
             debuggable true
         }
     }
+    defaultConfig {
+        targetSdkVersion 26
+        minSdkVersion 14
+    }
 }
 
 task askForPasswords << {
