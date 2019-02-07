@@ -51,6 +51,10 @@ android {
             res.srcDirs = ['res']
         }
     }
+    defaultConfig {
+        targetSdkVersion 26
+        minSdkVersion 14
+    }
 }
 
 dependencies {
