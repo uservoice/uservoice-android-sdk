@@ -6,10 +6,11 @@ buildscript {
             name 'Google'
         }
         mavenCentral()
+        google()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0'
+        classpath 'com.android.tools.build:gradle:3.3.2'
     }
 }
 
@@ -56,6 +57,10 @@ android {
         debug {
             debuggable true
         }
+    }
+    defaultConfig {
+        minSdkVersion 17
+        targetSdkVersion 26
     }
 }
 

@@ -226,12 +226,14 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
                 emailField = field;
                 field.setHint(R.string.uv_email_address_hint);
                 field.setInputType(EditorInfo.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+                title.setLabelFor(emailField.getId());
             } else if (type == NAME_FIELD) {
                 title.setText(R.string.uv_your_name);
                 restoreEnteredText(nameField, field, Session.getInstance().getName(context));
                 nameField = field;
                 field.setHint(R.string.uv_name_hint);
                 field.setInputType(EditorInfo.TYPE_TEXT_VARIATION_PERSON_NAME);
+                title.setLabelFor(nameField.getId());
             }
         } else if (type == HEADING) {
             TextView textView = (TextView) view.findViewById(R.id.uv_header_text);
