@@ -1,5 +1,8 @@
 ## master
 
+## 1.2.10
+* Fix accessibility issues with TalkBack
+
 ## 1.2.7
 * Update okhttp to 3.10.0 (fixes "Expected ':status' header not present" error)
 
