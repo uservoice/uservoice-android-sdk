@@ -7,12 +7,12 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <application>
-      <activity android:name="com.uservoice.uservoicesdk.activity.PortalActivity" android:theme="@style/UserVoiceTheme" />
-      <activity android:name="com.uservoice.uservoicesdk.activity.ForumActivity" android:theme="@style/UserVoiceTheme" />
-      <activity android:name="com.uservoice.uservoicesdk.activity.ArticleActivity" android:theme="@style/UserVoiceTheme" />
-      <activity android:name="com.uservoice.uservoicesdk.activity.TopicActivity" android:theme="@style/UserVoiceTheme" />
-      <activity android:name="com.uservoice.uservoicesdk.activity.ContactActivity" android:theme="@style/UserVoiceTheme" android:configChanges="orientation|keyboardHidden|screenSize" />
-      <activity android:name="com.uservoice.uservoicesdk.activity.PostIdeaActivity" android:theme="@style/UserVoiceTheme" android:configChanges="orientation|keyboardHidden|screenSize" />
+      <activity android:name="com.uservoice.uservoicesdk.activity.PortalActivity" android:theme="@style/UserVoiceTheme" android:label="@string/uv_portal_title" />
+      <activity android:name="com.uservoice.uservoicesdk.activity.ForumActivity" android:theme="@style/UserVoiceTheme" android:label="@string/uv_feedback_forum" />
+      <activity android:name="com.uservoice.uservoicesdk.activity.ArticleActivity" android:theme="@style/UserVoiceTheme" android:label="@string/uv_all_articles" />
+      <activity android:name="com.uservoice.uservoicesdk.activity.TopicActivity" android:theme="@style/UserVoiceTheme" android:label="@string/uv_portal_title" />
+      <activity android:name="com.uservoice.uservoicesdk.activity.ContactActivity" android:theme="@style/UserVoiceTheme" android:configChanges="orientation|keyboardHidden|screenSize" android:label="@string/uv_contact_us" />
+      <activity android:name="com.uservoice.uservoicesdk.activity.PostIdeaActivity" android:theme="@style/UserVoiceTheme" android:configChanges="orientation|keyboardHidden|screenSize" android:label="@string/uv_idea_form_title" />
     </application>
 
 </manifest>
