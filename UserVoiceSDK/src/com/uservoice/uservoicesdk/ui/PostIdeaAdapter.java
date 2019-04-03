@@ -89,12 +89,14 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
                 descriptionField.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
                 descriptionField.setMinLines(1);
                 descriptionField.setHint(R.string.uv_idea_description_hint);
+                title.setLabelFor(descriptionField.getId());
             } else if (type == CATEGORY) {
                 view = inflater.inflate(R.layout.uv_select_field_item, null);
                 TextView title = (TextView) view.findViewById(R.id.uv_header_text);
                 categorySelect = (Spinner) view.findViewById(R.id.uv_select_field);
                 categorySelect.setAdapter(new SpinnerAdapter<Category>(context, Session.getInstance().getForum().getCategories()));
                 title.setText(R.string.uv_category);
+                title.setLabelFor(categorySelect.getId());
             } else if (type == HELP) {
                 view = inflater.inflate(R.layout.uv_idea_help_item, null);
             } else if (type == TEXT_HEADING) {
@@ -151,6 +153,14 @@ public class PostIdeaAdapter extends InstantAnswersAdapter {
     @Override
     protected String getSubmitString() {
         return context.getString(R.string.uv_submit_idea);
+    }
+
+    @Override
+    public void onChildViewAdded(View parent, View child) {
+        if (state == State.DETAILS && descriptionField != null)
+            descriptionField.requestFocus();
+        else
+            super.onChildViewAdded(parent, child);
     }
 
 }

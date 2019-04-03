@@ -6,22 +6,16 @@
 
     <include layout="@layout/uv_header_item" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp" >
-
         <EditText
             android:id="@+id/uv_text_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:ems="10" >
 
             <requestFocus />
         </EditText>
-    </LinearLayout>
 
 </LinearLayout>
