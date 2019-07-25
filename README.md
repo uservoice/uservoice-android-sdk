@@ -1,3 +1,5 @@
+:no_entry: [DEPRECATED] This repository is no longer actively maintained. You may fork the project but we are no longer accepting pull requests or new issues. You may reach out to support@uservoice.com with questions.
+
 ## UserVoice Android SDK
 
 The UserVoice Android SDK allows you to integrate a native UserVoice experience directly in your Android apps.
