@@ -44,7 +44,7 @@ UserVoice.launchPostIdea(this);     // Show the idea form
 
 ### Using with proguard
 
-You need to exclude some dependencies to avoid problems with `org.apache.http`. A ``-dontwarn` statement in the proguard file is not enough (see issue [#147](https://github.com/uservoice/uservoice-android-sdk/issues/147)), you will have to modify your `build.gradle` as follows:
+You need to exclude some dependencies to avoid problems with `org.apache.http`. A `-dontwarn` statement in the proguard file is not enough (see issue [#147](https://github.com/uservoice/uservoice-android-sdk/issues/147)), you will have to modify your `build.gradle` as follows:
 
 ```
 compile ('com.uservoice:uservoice-android-sdk:1.2.+') {
