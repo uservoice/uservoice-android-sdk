@@ -173,7 +173,8 @@ public abstract class InstantAnswersAdapter extends BaseAdapter implements ViewG
             } else if (type == TEXT) {
                 view = inflater.inflate(R.layout.uv_contact_text_item, null);
                 EditText field = (EditText) view.findViewById(R.id.uv_text);
-                restoreEnteredText(textField, field, "");
+                String defaultText = Session.getInstance().getConfig().getDefaultText();
+                restoreEnteredText(textField, field, defaultText);
                 textField = field;
                 textField.addTextChangedListener(new TextWatcher() {
                     @Override
